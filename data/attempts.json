@@ -4031,6 +4031,44 @@
         "examples/from-dexpi-xml/README.md",
         "docs/STATUS.md"
       ]
+    },
+    {
+      "id": "A268",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Add explicit complete policy-filtered XML source capture while preserving the Native-only default, original-handle provenance and prewrite safety (N086/N098/N099).",
+      "hypothesis": "Structured source occurrences and admitted Native assignments can remain inspectable without inventing placement, source authority or a provenance mapping from equal values, and without imposing capture work on existing callers.",
+      "evidence": "Independent exact private current-base receiving passes110 unit methods0skip,10740 explicit checks,54 realCLI calls, complete Native27/source27 raw artifacts with0strips,296 guardAPI sessions/148 matched cases, and raw/mapping/identity/scope/prewrite/snapshot controls. Original56Native test bodies stay exact; source38/fold1 enable capture explicitly,11mode controls are new. Receiver archive-CRLF and old-init-wrapper expectation failures are preserved as receiving issues, not product failures. Public saved training XML and source-bearing model reproduce offline; full public release checks are separate. Current public Native-default matrix refresh actually reruns13cells;82complete objects and all substantive values/diagnostics remain exact,64pass23fail8na. Static source-backend dependency is not Source-enabled accuracy coverage.",
+      "runs": "Offline software/preservation checks on exposed public and synthetic development fixtures; no model call, new heldout family or company trial.",
+      "verdict": "kept",
+      "why": "Default conversion stays byte-compatible and performs no capture/backend import. Explicit capture retains the complete admitted packet with unmapped occurrences and exact origin/type/preflight refusals. Original XML/presentation/text payload and company acceptance remain separate.",
+      "source": [
+        "docs/JOURNAL.md#127-preserve-structured-source-evidence-only-when-explicitly-requested",
+        "examples/from-dexpi-xml/README.md",
+        "scripts/dexpi_reader.py",
+        "scripts/source_evidence.py",
+        "scripts/test_source_capture_mode.py",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "A269",
+      "function": "intake_and_reuse",
+      "date": "2026-10-31",
+      "change": "Add an explicitly selected local Native/evidence/manifest handoff and a portable, offline fixture/test cohort (N097).",
+      "hypothesis": "Another reviewer or receiving system can inspect the complete captured evidence and Native projection through explicit byte bindings and qualified metadata without source discovery, a private cache or a shared governance service.",
+      "evidence": "Immutable e6ef utility/source465e validate complete typed/order evidence, strictJSON/role bindings, cap+1 acquisition and2MiB briefs/lateprefixes. New portable15method cohort plus independent2678functional/97reporting assertions pass; one nativeWindows symlink privilege check remains explicitly unavailable while actualjunction escape is exercised separately. Old105+independent36 harnesses replay unchanged on adopted dependencies:141groups/1292assertions/94realCLI+6inprocess export vectors. Three public worked role artifacts and all three encoded export/inspect briefs match independently frozen pre-run expectations. Earlier attribute-CRLF/archive-base/hidden-notice/broadOSError and reviewer-reporting failures remain preserved. Current public full cached-data runner exits70/70scripts zero with5Windows unittest case skips,3platform notices and0additional notices; all public inputs stay raw-identical during the605.482-second observation. No complete-runtime or capacity claim follows.",
+      "runs": "Offline prototype export/receiving/Git/encoding/fault controls; no model call, actual company transfer, operator review or scale benchmark.",
+      "verdict": "kept",
+      "why": "Keep a complete evidence packet with a lightweight Native projection and an explicit manifest. Public tests use committed attributed fixtures and caller temporary storage; private D/env selectors remain historical-only. Ongoing identity/access/review/decisions, publication and execution stay with company systems.",
+      "source": [
+        "docs/JOURNAL.md#128-make-the-local-handoff-reproducible-without-a-private-cache",
+        "examples/source-handoff/README.md",
+        "scripts/source_handoff.py",
+        "scripts/test_source_handoff.py",
+        "NOTICE.md",
+        "docs/WORKFLOWS.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4951,13 +4989,15 @@
     {
       "id": "N086",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Expose exact XML identity and GenericAttribute retention/loss dispositions, including unattached source records, without inventing process streams, instrument placement or loop membership.",
-      "why_not_yet": "Existing I01 vendor/reference diagnosis separates an unplaced instrument and an instrument-ended segment from supported-item omission. Current reader reports aggregate losses; exact orphan identity/value traceability needs an independently reviewed source-admission contract and candidate. No new fidelity score, source-owner approval or historical row-7 pass is claimed.",
+      "why_not_yet": "Completed A268 for explicit policy-filtered structured XML capture and admitted Native mapping observability. Default Native interpretation remains unchanged; text/presentation exclusions, plant truth, source-owner acceptance and Native placement accuracy stay separate.",
       "source": [
         "docs/JOURNAL.md#118-keep-machine-specific-record-review-open-and-make-the-receiving-packet-current",
         "docs/STATUS.md",
-        "examples/from-dexpi-xml/README.md"
+        "examples/from-dexpi-xml/README.md",
+        "docs/JOURNAL.md#127-preserve-structured-source-evidence-only-when-explicitly-requested",
+        "scripts/source_evidence.py"
       ]
     },
     {
@@ -5106,6 +5146,39 @@
         "scripts/dexpi_reader.py",
         "scripts/test_dexpi_reader.py",
         "examples/from-dexpi-xml/README.md",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N097",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Keep a converted model and its complete captured source evidence in an explicitly selected portable local handoff.",
+      "why_not_yet": "Completed A269 with separate Native/evidence/manifest roles, strict inspection, bounded briefs, attributed offline fixtures and portable tests. Company release/authentication, atomicity, live connectors and source-aware graph/context/MCP consumers remain outside this local tool.",
+      "source": [
+        "docs/JOURNAL.md#128-make-the-local-handoff-reproducible-without-a-private-cache",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N098",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Require exact original source handles, builtin types and admitted fields without foreign equality/hash/string callbacks.",
+      "why_not_yet": "Completed A268 in the captured-source boundary with identity-safe source handles, QName/profile/domain checks and independent95refusal scenarios/zero callbacks. This is a programmatic input boundary, not company authorization.",
+      "source": [
+        "docs/JOURNAL.md#127-preserve-structured-source-evidence-only-when-explicitly-requested",
+        "docs/STATUS.md"
+      ]
+    },
+    {
+      "id": "N099",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Refuse canonical encoding failures before changing Native values or source-mapping generations.",
+      "why_not_yet": "Completed A268 with UTF-8/key/integer-domain preflight and independent93refusal controls; original mutation-before-encoding failures are preserved. No general transaction, rollback or concurrent-writer claim.",
+      "source": [
+        "docs/JOURNAL.md#127-preserve-structured-source-evidence-only-when-explicitly-requested",
         "docs/STATUS.md"
       ]
     }

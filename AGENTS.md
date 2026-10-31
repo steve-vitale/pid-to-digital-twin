@@ -45,6 +45,10 @@ Then, if `pip install -r requirements.txt` is acceptable in your environment:
 python scripts/run_tests.py         # the same suite CI runs
 ```
 
+The full suite includes a temporary OPC UA replay test service and client on `127.0.0.1` using an ephemeral
+port. `--source-only` excludes that replay test; `--check-prerequisites` runs no tests. This local test does not
+connect to plant equipment or an Ignition gateway.
+
 `check_claims.py` prints one row per claim: its named publication, stated value, evidence value and evidence file.
 It checks that each registered claim in `docs/RESULTS.md` matches the committed results files. It does not re-run
 models or re-score predictions, so a pass means "the published claims match the results files", not "the results were

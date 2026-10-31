@@ -43,3 +43,14 @@ data/bayer_rt/process_model.json text eol=lf
 data/bayer_rt/pid_layout.json text eol=lf
 data/te_process_model.json text eol=lf
 data/te_pid_layout.json text eol=lf
+
+# The optional handoff seed and expected identities bind exact original/adapted bytes.
+/examples/source-handoff/fixture/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/examples/source-handoff/worked/native.model.json -text
+/examples/source-handoff/worked/source.evidence.json -text
+/examples/source-handoff/worked/handoff.manifest.json -text
+# These accepted method bytes are hashed into handoff provenance on every OS.
+/scripts/source_handoff.py text eol=lf
+/scripts/source_evidence.py text eol=lf
+/scripts/test_source_handoff.py text eol=lf
+/.gitattributes text eol=lf

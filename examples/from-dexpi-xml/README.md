@@ -35,6 +35,42 @@ The reader writes `unit-47.model.json`, `unit-47.report.json` and `unit-47.repor
 - `--compare-key DIR`: compare against an answer key `scripts/adapt_dexpi.py build` wrote for the same sheet id.
 - `--attribution TEXT`: carried in `meta.attribution`.
 
+### Optional: capture structured source evidence
+
+The default remains the existing Native process model and reports, without a source-evidence packet or capture
+work. To retain structured XML evidence as well, opt in explicitly:
+
+```sh
+python -S scripts/dexpi_reader.py --xml my_pid.xml --out my-captured-model --sheet-id unit-47 --capture-source
+```
+
+This adds a `source_evidence` packet to the model and a coverage summary to the JSON and readable reports.
+It retains every eligible structured element and attribute under the capture policy, including unknown eligible
+elements, expanded XML names, parsed attribute values and occurrence order. Explicit mappings identify the
+retained occurrences that supplied supported Native fields; retained but unmapped occurrences stay in the
+packet. The report separates retained/excluded element and attribute counts from mapped/unmapped counts.
+Retention does not mean the reader interpreted the content: composite fields, `line_layers`, reports and PNG
+predictions do not acquire source mappings through this packet.
+
+“Complete” means the complete captured, policy-filtered packet. Shape catalogues, drawing/title-block content
+and specified presentation/geometry subtrees are outside its scope; the named-person field policy also excludes content.
+XML text/tail payloads are omitted: their presence is counted, not their contents retained. Keep the unchanged
+original XML and any images separately. This is not an XML round trip, a general PII detector or verification
+of installed equipment. The Native interpretation and its limitations still apply.
+
+For a company-scoped source identity, optionally add `--source-document-id "site-a/process/drawing-47"`.
+It requires `--capture-source`; supplying the ID alone refuses rather than enabling capture. Without it, the
+identity defaults to the original XML's SHA-256 URN. These revision-bound occurrence IDs are provenance, not
+engineering asset IDs or permission to merge equally named equipment across departments or sites. Python
+callers opt in with `Reader(..., capture_source=True)` or `run(..., capture_source=True)`; the optional
+`source_document_id` argument likewise requires capture.
+
+Keep the embedded packet when useful, or follow the optional [local source handoff](../source-handoff/README.md)
+to separate it into a Native model, complete evidence packet and hash-bound manifest for explicit inspection.
+That utility requires an already captured model and never captures sources itself. Existing graph, context and
+MCP routes do not consume or expose this packet; they continue to use their documented Native fields. Use the
+company-managed receiving system for continuing identity, access, ownership, review and decisions.
+
 A file that is not well-formed XML, whose root is not `<PlantModel>`, or that reuses an element ID is refused with
 a message and exit code 2; nothing is written. Duplicate-ID errors report the number of distinct duplicate
 identifiers without echoing their values. A pipe segment whose `Connection` names an ID the file does not
@@ -117,6 +153,9 @@ one tee on the pump discharge, which the key links pairwise because it is undire
 drawn direction (both fed from P4712).
 
 ## What is kept
+
+This section and the changes below describe the Native interpretation. Optional structured-source retention
+has the separate scope described above.
 
 - **Eligible GenericAttributes** of an item, its parts and its connection points, as `{value, uom, source}` under the
   item, keyed by the DEXPI name (a part's attribute is prefixed with the part's XML ID). On C01: pump P4711's

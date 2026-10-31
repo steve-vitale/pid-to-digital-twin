@@ -1,0 +1,4739 @@
+{
+ "meta": {
+  "model_id": "reference",
+  "title": "DEXPI XML I01V01-VER.EX01.xml",
+  "source_document": "DEXPI XML file I01V01-VER.EX01.xml, SHA-256 cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+  "model_kind": "dexpi_import",
+  "converted_by": "scripts/dexpi_reader.py (no model; every item cites its XML element ID)",
+  "dexpi_file": {
+   "SchemaVersion": "4.0.1",
+   "OriginatingSystem": "DEXPI",
+   "Date": "2016-08-31",
+   "Time": "10:00:00+02:00",
+   "Is3D": "no",
+   "Units": "mm",
+   "Discipline": "PID"
+  },
+  "drawing": {},
+  "plant_structure": [],
+  "not_a_drawing_of_record": "Converted from an exported file. Nothing here is verified by anyone; units of instruments and valves are inferred through the piping (unit_basis)."
+ },
+ "units": [
+  {
+   "id": "T01",
+   "name": "Tank",
+   "type": "tank",
+   "type_basis": "exact",
+   "dexpi_class": "Tank",
+   "dexpi_id": "T01",
+   "id_basis": "TagName XML attribute",
+   "source": "DEXPI XML T01 (Tank)",
+   "TagNamePrefixAssignmentClass": {
+    "value": "T",
+    "source": "DEXPI XML T01 GenericAttribute TagNamePrefixAssignmentClass"
+   },
+   "TagNameSequenceNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML T01 GenericAttribute TagNameSequenceNumberAssignmentClass"
+   },
+   "T01_N3:dexpi_class": {
+    "value": "Nozzle",
+    "source": "DEXPI XML T01_N3 <Nozzle>"
+   }
+  }
+ ],
+ "streams": [
+  {
+   "id": "PNS1",
+   "name": "Line PNS1: T01 to BL",
+   "from": "T01",
+   "to": "BL",
+   "dexpi_id": "PNS1",
+   "dexpi_class": "PipingNetworkSystem",
+   "source": "DEXPI XML PNS1 (PipingNetworkSystem), segments PNS1_S1",
+   "from_item": "T01_N3",
+   "to_item": "PNS1_S1_C1",
+   "to_end": "closed end at PNS1_S1_C1: the line stops here; BL stands in because a stream needs two ends",
+   "PNS1_S1:dexpi_class": {
+    "value": "PipingNetworkSegment",
+    "source": "DEXPI XML PNS1_S1 <PipingNetworkSegment>"
+   },
+   "PNS1_S1_C1:dexpi_class": {
+    "value": "BlindFlange",
+    "source": "DEXPI XML PNS1_S1_C1 <PipingComponent>"
+   }
+  }
+ ],
+ "instruments": [
+  {
+   "tag": "LI-01",
+   "unit": "T01",
+   "variable": "level",
+   "uom": "",
+   "description": "LI-01: level, indicate (central location)",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "dexpi_id": "PIF01",
+   "tag_basis": "category + functions + number attributes",
+   "unit_basis": "first unit upstream through the piping from PNS1_S1_C1 (1 step(s), via T01_N3)",
+   "source": "DEXPI XML PIF01 (ProcessInstrumentationFunction)",
+   "location": "PNS1_S1_C1",
+   "stream": "PNS1",
+   "ProcessInstrumentationFunctionNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionNumberAssignmentClass"
+   },
+   "LocationSpecialization": {
+    "value": "CentralLocation",
+    "source": "DEXPI XML PIF01 GenericAttribute LocationSpecialization"
+   },
+   "ProcessInstrumentationFunctionCategoryAssignmentClass": {
+    "value": "L",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionCategoryAssignmentClass"
+   },
+   "ProcessInstrumentationFunctionModifierAssignmentClass": {
+    "value": "I",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionModifierAssignmentClass"
+   },
+   "PIF01_PSGF01:dexpi_class": {
+    "value": "ProcessSignalGeneratingFunction",
+    "source": "DEXPI XML PIF01_PSGF01 <ProcessSignalGeneratingFunction>"
+   },
+   "PIF01_IF1:dexpi_class": {
+    "value": "SignalConveyingFunction",
+    "source": "DEXPI XML PIF01_IF1 <InformationFlow>"
+   },
+   "ILF01:dexpi_class": {
+    "value": "InstrumentationLoopFunction",
+    "source": "DEXPI XML ILF01 <InstrumentationLoopFunction>"
+   },
+   "ILF01:InstrumentationLoopFunctionNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML ILF01 GenericAttribute InstrumentationLoopFunctionNumberAssignmentClass"
+   }
+  }
+ ],
+ "final_elements": [],
+ "controllers": [],
+ "manual_valves": [],
+ "relief_devices": [],
+ "line_layers": {
+  "schema": "line-layers-2",
+  "method": "scripts/dexpi_reader.py from the XML's piping topology",
+  "definitions": {
+   "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between; or two items drawn against each other with nothing between (touching: no line is drawn, so the segment is on no line network unless both ends already share one)",
+   "junction": "a point where three or more drawn line arms meet. junction_kind says which: pipe_tee (three or more pipe arms: a tee or branch), instrument_tap (an instrument line meets a pipe that carries on through it: the tap sits on the pipe segment named by on_segment and does not split it), marked_crossing (a 4-arm crossing the drawing marks connected with a dot), instrument_line_junction (instrument lines meeting away from a pipe)",
+   "instrument_connection": "a drawn line that joins an instrument (its bubble) to a pipe at a tap, to an item, or to another instrument line: a leader, impulse or signal line, not a process pipe",
+   "actuated_by": "a valve and the actuator drawn stacked on it (a small symbol beside the valve box, joined only by a short stem): the stem is part of the valve, not a pipe",
+   "nozzle_of": "a nozzle mark (N1, N2...) and the vessel it sits on: the short stub between them is part of the vessel, not a pipe",
+   "line_network": "drawn lines that touch one another outside the item boxes, through bends, junctions or crossings, as the tracer joins them (its network). Lines that meet only at an item's edge can be joined: such a network names that item in joined_only_at",
+   "network_pair": "the tracer's pairwise link: both items are on the same line network (not pipe adjacency)"
+  },
+  "networks": [],
+  "junctions": [],
+  "segments": [],
+  "tees_passed_through": 0,
+  "note": "pipe items only: units (through their nozzles), valves and the battery limit (off-page connectors and open ends). Instruments are joined to the piping by measuring lines, which are not pipes; their place is in sits_on and measures."
+ },
+ "source_evidence": {
+  "schema": "xml-source-evidence-1",
+  "required_capabilities": [
+   "source-record-1"
+  ],
+  "document": {
+   "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+   "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+   "raw_size_bytes": 6144,
+   "root_name": {
+    "namespace_uri": "",
+    "local_name": "PlantModel"
+   }
+  },
+  "policy": {
+   "id": "named-fields-xml-1",
+   "version": 1,
+   "person_pattern": "(Approver|Checker|Creator|Designer|Drafter|Editor|Reviewer|Owner)Name",
+   "flags": "IGNORECASE",
+   "designation": "any-expanded-local-Name-case-insensitive",
+   "role_names": "exact-unqualified-only",
+   "scope_exclusions": {
+    "ShapeCatalogue": "shape-catalogue",
+    "Drawing": "drawing-titleblock",
+    "Text": "presentation-text",
+    "Extent": "geometry-extent",
+    "Position": "geometry-position",
+    "Presentation": "presentation-style",
+    "Scale": "geometry-scale",
+    "Coordinate": "geometry-coordinate"
+   },
+   "scope_precedence": "first-excluded-ancestor",
+   "text_and_tail": "excluded-no-payload",
+   "default_structure": "retain-every-eligible-element"
+  },
+  "mapping": {
+   "id": "native-assignment-1",
+   "version": 1,
+   "target_roots": [
+    "meta",
+    "units",
+    "streams",
+    "instruments",
+    "final_elements",
+    "controllers",
+    "manual_valves",
+    "relief_devices",
+    "unplaced"
+   ],
+   "mapping_kinds": [
+    "direct-copy",
+    "legacy-transform",
+    "container-transfer"
+   ],
+   "basis_labels": [
+    "generic-value",
+    "generic-units",
+    "generic-set",
+    "part-class",
+    "metadata-value",
+    "file-metadata",
+    "plant-structure-id",
+    "plant-structure-class"
+   ],
+   "pointer": "RFC6901",
+   "generation": "concrete-container-and-slot-every-write",
+   "composite": "unmapped",
+   "excluded_targets": [
+    "line_layers",
+    "report",
+    "prediction",
+    "source_evidence"
+   ]
+  },
+  "records": [
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "PlantModel"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [],
+     "children": [
+      "110f44e0785240004a884c95ffbe10ee6ee0e7447dcebffc0a9aae38df0d4036",
+      "15720f32f396c74dded3e761e153b450a250b3e2bcb55f29fb7ef9e9eb958352",
+      "afb52ec507c1c0ccc7a03f31adb9c6319a44a4b0c527382c0bb2cbf90efbefdb",
+      "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce",
+      "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b"
+     ],
+     "parent_occurrence_id": null,
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "2bf86dc0e889d875c1c67ffd76cd5c4f6b6fdeb4d7ebc2a18f2e730777af3638",
+    "id": "source_record:2bf86dc0e889d875c1c67ffd76cd5c4f6b6fdeb4d7ebc2a18f2e730777af3638"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "110f44e0785240004a884c95ffbe10ee6ee0e7447dcebffc0a9aae38df0d4036",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantInformation"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "PlantInformation"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "a723e3448c0691a9316191a201669b4928bdce2157716937b14638957ae785a5",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "SchemaVersion"
+       },
+       "ordinal": 1,
+       "value": "4.0.1"
+      },
+      {
+       "occurrence_id": "eb5c9181090b0904da687f448414e1be78887be7f8e45226c4dc84eb4ad0beba",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "OriginatingSystem"
+       },
+       "ordinal": 2,
+       "value": "DEXPI"
+      },
+      {
+       "occurrence_id": "dbde8739aa3cc58f004408463914a605ddab4bf0698c8a9ba175cd0c01a5f456",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Date"
+       },
+       "ordinal": 3,
+       "value": "2016-08-31"
+      },
+      {
+       "occurrence_id": "df9d418da84c52ea787c3a57fd767688502ca937244b95fcdf0d177003649b8e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Time"
+       },
+       "ordinal": 4,
+       "value": "10:00:00+02:00"
+      },
+      {
+       "occurrence_id": "3571915d19be9f48e65ad5d66497731def0a2198383deca86da8644d03eb9634",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Is3D"
+       },
+       "ordinal": 5,
+       "value": "no"
+      },
+      {
+       "occurrence_id": "fb250f17d5ff95f261ad652a146cfbed7d0753b49dc58066f37b6bae40d4aac3",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Units"
+       },
+       "ordinal": 6,
+       "value": "mm"
+      },
+      {
+       "occurrence_id": "4e71aad14b46c36d078e7213b5a4b3543a786823b0db5231ad204c96e461cf75",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Discipline"
+       },
+       "ordinal": 7,
+       "value": "PID"
+      }
+     ],
+     "children": [
+      "7200fbace195a2116c3d9d38a1934fb302edf5bdca3a71e749afb4c57e5a1842"
+     ],
+     "parent_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "110f44e0785240004a884c95ffbe10ee6ee0e7447dcebffc0a9aae38df0d4036",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "a723e3448c0691a9316191a201669b4928bdce2157716937b14638957ae785a5",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/SchemaVersion",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "SchemaVersion"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "5f85d809908a0e6673b22fe02368398bac4e71dac4c578531139b70adfbd0c96"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "eb5c9181090b0904da687f448414e1be78887be7f8e45226c4dc84eb4ad0beba",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/OriginatingSystem",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "OriginatingSystem"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "cab17d0f4525fec8aa17dc4fed4e8697cfc8a5654c2232dce391e30c0f771aee"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "dbde8739aa3cc58f004408463914a605ddab4bf0698c8a9ba175cd0c01a5f456",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/Date",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "Date"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "43a0d043513037ef706bf8b287a5133c674c5433fdafb84e3cf4e55f826b00fa"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "df9d418da84c52ea787c3a57fd767688502ca937244b95fcdf0d177003649b8e",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/Time",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "Time"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "ddb7e6c4ef8cef225f6f81cc61d2b7112ca43ef94e6bffba0340d1fad2b1f538"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "3571915d19be9f48e65ad5d66497731def0a2198383deca86da8644d03eb9634",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/Is3D",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "Is3D"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "04a06452677210a3cdaec376fd5ebbca1714cb7af9e62bf5cce1644310a9086a"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "fb250f17d5ff95f261ad652a146cfbed7d0753b49dc58066f37b6bae40d4aac3",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/Units",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "Units"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "3eb20ab926da2555b05722744e27375549f836dfbe2e6a1c93398d754a038f38"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "4e71aad14b46c36d078e7213b5a4b3543a786823b0db5231ad204c96e461cf75",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/meta/dexpi_file/Discipline",
+        "components": [
+         "meta",
+         "dexpi_file",
+         "Discipline"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "file-metadata",
+        "destination_sha256": "16994132deea56d2777a8bfdfe26749eda3ac2ab1ff3cc741e4791e33969b152"
+       }
+      ]
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "fc13c401654ce7cdecae4e4cd0069245ccacd8465b36eda0e6ec3593190ef71c",
+    "id": "source_record:fc13c401654ce7cdecae4e4cd0069245ccacd8465b36eda0e6ec3593190ef71c"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "7200fbace195a2116c3d9d38a1934fb302edf5bdca3a71e749afb4c57e5a1842",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantInformation"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "UnitsOfMeasure"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "UnitsOfMeasure"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [],
+     "children": [],
+     "parent_occurrence_id": "110f44e0785240004a884c95ffbe10ee6ee0e7447dcebffc0a9aae38df0d4036",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "7200fbace195a2116c3d9d38a1934fb302edf5bdca3a71e749afb4c57e5a1842",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "e2def6d21022401bcc91e85d231101025e161fb15c546fe6d733145a4876b49a",
+    "id": "source_record:e2def6d21022401bcc91e85d231101025e161fb15c546fe6d733145a4876b49a"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "15720f32f396c74dded3e761e153b450a250b3e2bcb55f29fb7ef9e9eb958352",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Equipment"
+     },
+     "original_id": {
+      "present": true,
+      "value": "T01"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "54eb665cf497e844300ffd7189bc0daa962aea2b6ba52e7c7d6fbc074d6968d4",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "T01"
+      },
+      {
+       "occurrence_id": "30526d42bda04f09ba97d2fa250cbd6ed0a08016bd05b7794f22664b53142c7c",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "TagName"
+       },
+       "ordinal": 2,
+       "value": "T01"
+      },
+      {
+       "occurrence_id": "3aa7257a4c550601b79ce9fcc52bcd2745c9196e7bb62b10f9b30877aee37ed1",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 3,
+       "value": "Tank"
+      },
+      {
+       "occurrence_id": "4d98881d444d158bcdcc713190907802832e7f3ba2db911aca2dd4a8a3b98f28",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 4,
+       "value": "http://data.posccaesar.org/rdl/RDS445139"
+      }
+     ],
+     "children": [
+      "514f16f900764c79c066710d84f0651855c98a8ff9fafe7a05c2cf8a556d4803",
+      "2d402bce92ad4e21c4f7202c687c96cea485935ae184102a28caecb98858941d"
+     ],
+     "parent_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "15720f32f396c74dded3e761e153b450a250b3e2bcb55f29fb7ef9e9eb958352",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "54eb665cf497e844300ffd7189bc0daa962aea2b6ba52e7c7d6fbc074d6968d4",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "30526d42bda04f09ba97d2fa250cbd6ed0a08016bd05b7794f22664b53142c7c",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "3aa7257a4c550601b79ce9fcc52bcd2745c9196e7bb62b10f9b30877aee37ed1",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4d98881d444d158bcdcc713190907802832e7f3ba2db911aca2dd4a8a3b98f28",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "08df06e0e1a60b3cfb102c043901dd4db6aac0b7e8055314e45dbf36497606e3",
+    "id": "source_record:08df06e0e1a60b3cfb102c043901dd4db6aac0b7e8055314e45dbf36497606e3"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "514f16f900764c79c066710d84f0651855c98a8ff9fafe7a05c2cf8a556d4803",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttributes"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "4f0f76977984b0bd7338c95279c2673943d0c89597b9dae6a3dfe3c3b11cc2cd",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Number"
+       },
+       "ordinal": 1,
+       "value": "2"
+      },
+      {
+       "occurrence_id": "00b6976b2b89649affc020a6e526a8d26759d4aff80e7df899c11d236770382c",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Set"
+       },
+       "ordinal": 2,
+       "value": "DexpiAttributes"
+      }
+     ],
+     "children": [
+      "a9a813ddd3b2d046656f69ee24d026f9e5fd83d02da746e62742e5d561c33305",
+      "4e5009ba4eea2bee0fb95f1fd55037c5bdb7a4753ff95c38b1df00d83e48d7bb"
+     ],
+     "parent_occurrence_id": "15720f32f396c74dded3e761e153b450a250b3e2bcb55f29fb7ef9e9eb958352",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "514f16f900764c79c066710d84f0651855c98a8ff9fafe7a05c2cf8a556d4803",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4f0f76977984b0bd7338c95279c2673943d0c89597b9dae6a3dfe3c3b11cc2cd",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "00b6976b2b89649affc020a6e526a8d26759d4aff80e7df899c11d236770382c",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "e088cc7e41faf93e56f7ba7966609910ff82cf7d9d389860980fcb2093882bee",
+    "id": "source_record:e088cc7e41faf93e56f7ba7966609910ff82cf7d9d389860980fcb2093882bee"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "a9a813ddd3b2d046656f69ee24d026f9e5fd83d02da746e62742e5d561c33305",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "07aecfc55beb653045eeb6db41b09a201fc8ba15213ff0ffc5ae2edcd638c344",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "TagNamePrefixAssignmentClass"
+      },
+      {
+       "occurrence_id": "f1456636bf1118cbd9b6cb8e357e045b5f33f63f9da983c0b05592e1af35412d",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 2,
+       "value": "http://sandbox.dexpi.org/rdl/TagNamePrefixAssignmentClass"
+      },
+      {
+       "occurrence_id": "ed8092e7eb35ea80298e942920d19b1aaceff3599cbce6b2cdaf2055fbc8909e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 3,
+       "value": "T"
+      },
+      {
+       "occurrence_id": "d3190713848cf33753e06b1f23f8ccc485114b330f891b97f8370dc7fca7d0d4",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 4,
+       "value": "string"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "514f16f900764c79c066710d84f0651855c98a8ff9fafe7a05c2cf8a556d4803",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "a9a813ddd3b2d046656f69ee24d026f9e5fd83d02da746e62742e5d561c33305",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "07aecfc55beb653045eeb6db41b09a201fc8ba15213ff0ffc5ae2edcd638c344",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "f1456636bf1118cbd9b6cb8e357e045b5f33f63f9da983c0b05592e1af35412d",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ed8092e7eb35ea80298e942920d19b1aaceff3599cbce6b2cdaf2055fbc8909e",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/units/0/TagNamePrefixAssignmentClass/value",
+        "components": [
+         "units",
+         "0",
+         "TagNamePrefixAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "57cb45de78dd46c65752468897bbc5ca4c01cffaf1dec35653e040bf7d8de523"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "d3190713848cf33753e06b1f23f8ccc485114b330f891b97f8370dc7fca7d0d4",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "126ea472fa1a8a96f9d0a0e06c2347f1e31243335e4f34d61c2e6a0e6b5b14e5",
+    "id": "source_record:126ea472fa1a8a96f9d0a0e06c2347f1e31243335e4f34d61c2e6a0e6b5b14e5"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "4e5009ba4eea2bee0fb95f1fd55037c5bdb7a4753ff95c38b1df00d83e48d7bb",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "d526785dd17610878fb93c080b5c9e1cb2d0c1c83ccbd756bbbd598459df49f9",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "TagNameSequenceNumberAssignmentClass"
+      },
+      {
+       "occurrence_id": "5f3868d111638458534f39222bba4e46638b98cbf19f497e18f2748ab95b8558",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 2,
+       "value": "http://sandbox.dexpi.org/rdl/TagNameSequenceNumberAssignmentClass"
+      },
+      {
+       "occurrence_id": "8a73a0b80bc49126b828f9bf85d87efa7380d4e1e69f07c6c2adf8d946f80422",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 3,
+       "value": "01"
+      },
+      {
+       "occurrence_id": "37e6871890259de3f6b1f33aff6580239567c61b161ac375ec47b770dd86011a",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 4,
+       "value": "string"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "514f16f900764c79c066710d84f0651855c98a8ff9fafe7a05c2cf8a556d4803",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "4e5009ba4eea2bee0fb95f1fd55037c5bdb7a4753ff95c38b1df00d83e48d7bb",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "d526785dd17610878fb93c080b5c9e1cb2d0c1c83ccbd756bbbd598459df49f9",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "5f3868d111638458534f39222bba4e46638b98cbf19f497e18f2748ab95b8558",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "8a73a0b80bc49126b828f9bf85d87efa7380d4e1e69f07c6c2adf8d946f80422",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/units/0/TagNameSequenceNumberAssignmentClass/value",
+        "components": [
+         "units",
+         "0",
+         "TagNameSequenceNumberAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "699cc6e015a59c04d0a0a7cf5376f0e83d4982bc7c781b644f7eecc798558358"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "37e6871890259de3f6b1f33aff6580239567c61b161ac375ec47b770dd86011a",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "120304295d2af61c81e3660c1e3428c0a8e701746dd6cb5ed8ee344114ec61e5",
+    "id": "source_record:120304295d2af61c81e3660c1e3428c0a8e701746dd6cb5ed8ee344114ec61e5"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "2d402bce92ad4e21c4f7202c687c96cea485935ae184102a28caecb98858941d",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Nozzle"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Nozzle"
+     },
+     "original_id": {
+      "present": true,
+      "value": "T01_N3"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "1750908aea2a5d1950e310954b788aee2b6710eb9528a2a7f8a0440963c25290",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "TagName"
+       },
+       "ordinal": 1,
+       "value": "N3"
+      },
+      {
+       "occurrence_id": "7806057c797a27770e79df4be3cd9d042efa69511419999e2c2bdcb3199cce69",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 2,
+       "value": "T01_N3"
+      },
+      {
+       "occurrence_id": "9d818d1efc0dff2d427cff3701c01c9eb7fe37b93292b40ad8babc6121b839ca",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 3,
+       "value": "Nozzle"
+      },
+      {
+       "occurrence_id": "51ae0dd1804abfa392f6c4de7febbcb333940ca20da9edcd535f9982e94d40a0",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 4,
+       "value": "http://data.posccaesar.org/rdl/RDS415214"
+      }
+     ],
+     "children": [
+      "b4f4c7c08cc3d6e864701395bb8cbcb1fb4767577e498236c435daaca88e12ee"
+     ],
+     "parent_occurrence_id": "15720f32f396c74dded3e761e153b450a250b3e2bcb55f29fb7ef9e9eb958352",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "2d402bce92ad4e21c4f7202c687c96cea485935ae184102a28caecb98858941d",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "1750908aea2a5d1950e310954b788aee2b6710eb9528a2a7f8a0440963c25290",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "7806057c797a27770e79df4be3cd9d042efa69511419999e2c2bdcb3199cce69",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9d818d1efc0dff2d427cff3701c01c9eb7fe37b93292b40ad8babc6121b839ca",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/units/0/T01_N3:dexpi_class",
+        "components": [
+         "units",
+         "0",
+         "T01_N3:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "46caf47c4474e3a5c0cea7584932f385528e9b1f7a03361542a5ca3d634b375e"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "51ae0dd1804abfa392f6c4de7febbcb333940ca20da9edcd535f9982e94d40a0",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "f661829c5feb41d3099eb14dbf59cfc6e676c084ae7f73f3551e173bf1c5baa8",
+    "id": "source_record:f661829c5feb41d3099eb14dbf59cfc6e676c084ae7f73f3551e173bf1c5baa8"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "b4f4c7c08cc3d6e864701395bb8cbcb1fb4767577e498236c435daaca88e12ee",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Nozzle"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "ConnectionPoints"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "ceee75604315630f55bbe09349aaa7a4ae11207d1f9c425bf38d05fa43ee2882",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "NumPoints"
+       },
+       "ordinal": 1,
+       "value": "2"
+      }
+     ],
+     "children": [
+      "c31a819bccbc5d6c016a7ecc5ebee5fbcdd34175983a830ac97014b00bc40bca",
+      "d661e68a6a8245a83e498119c30b800613614e06f999697233e51ac099565f61"
+     ],
+     "parent_occurrence_id": "2d402bce92ad4e21c4f7202c687c96cea485935ae184102a28caecb98858941d",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "b4f4c7c08cc3d6e864701395bb8cbcb1fb4767577e498236c435daaca88e12ee",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ceee75604315630f55bbe09349aaa7a4ae11207d1f9c425bf38d05fa43ee2882",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "697424590074098dfc7c58e3c6770cefae158307a5772fbb7a0c7ca68445ac9a",
+    "id": "source_record:697424590074098dfc7c58e3c6770cefae158307a5772fbb7a0c7ca68445ac9a"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "c31a819bccbc5d6c016a7ecc5ebee5fbcdd34175983a830ac97014b00bc40bca",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Nozzle"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "T01_N3_ND0"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "ce4423af68ef3774e3e477ad26d34a44d846d91b24c735c701b769f6cfd07a95",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "T01_N3_ND0"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "b4f4c7c08cc3d6e864701395bb8cbcb1fb4767577e498236c435daaca88e12ee",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "c31a819bccbc5d6c016a7ecc5ebee5fbcdd34175983a830ac97014b00bc40bca",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ce4423af68ef3774e3e477ad26d34a44d846d91b24c735c701b769f6cfd07a95",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "05258febfbb975d928dc6ff17bd114e472744822049892214724eb287cbc515c",
+    "id": "source_record:05258febfbb975d928dc6ff17bd114e472744822049892214724eb287cbc515c"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "d661e68a6a8245a83e498119c30b800613614e06f999697233e51ac099565f61",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Equipment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Nozzle"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "T01_N3_ND1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "5fd0f5805441da275cbd8ffa049f77387bcb2386be3affc9ec0ea29e1684eb27",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "T01_N3_ND1"
+      },
+      {
+       "occurrence_id": "fde91cd7bbc6dbcd1ec8aa9ae2603d2ba2feb62fd860bcb77b747b6855592889",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 2,
+       "value": "process"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "b4f4c7c08cc3d6e864701395bb8cbcb1fb4767577e498236c435daaca88e12ee",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "d661e68a6a8245a83e498119c30b800613614e06f999697233e51ac099565f61",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "5fd0f5805441da275cbd8ffa049f77387bcb2386be3affc9ec0ea29e1684eb27",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "fde91cd7bbc6dbcd1ec8aa9ae2603d2ba2feb62fd860bcb77b747b6855592889",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "8d044cd4d647e7fb2dd56480120bc53a50f20f96261ef73cae761a516a3ac7eb",
+    "id": "source_record:8d044cd4d647e7fb2dd56480120bc53a50f20f96261ef73cae761a516a3ac7eb"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "afb52ec507c1c0ccc7a03f31adb9c6319a44a4b0c527382c0bb2cbf90efbefdb",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "PipingNetworkSystem"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PNS1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "b13b8f3c3a0c7092144c18f24a7c01148dcfe20f6c868ef9f845f7583e3f659f",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PNS1"
+      },
+      {
+       "occurrence_id": "f1e4e71cded5c05e39cf7545e2318cff34491911d7b3254cea53fe974c04ebad",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 2,
+       "value": "PipingNetworkSystem"
+      },
+      {
+       "occurrence_id": "9c35828a8f8d81e0bd4cce40971c56cb63e0c901da2d0f227ef2c6ab41f78da2",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 3,
+       "value": "http://data.posccaesar.org/rdl/RDS270359"
+      }
+     ],
+     "children": [
+      "bb9b6cb387db35bd4e2c043344feab79f03bcf627184d02624c067122891196e"
+     ],
+     "parent_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "afb52ec507c1c0ccc7a03f31adb9c6319a44a4b0c527382c0bb2cbf90efbefdb",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "b13b8f3c3a0c7092144c18f24a7c01148dcfe20f6c868ef9f845f7583e3f659f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "f1e4e71cded5c05e39cf7545e2318cff34491911d7b3254cea53fe974c04ebad",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9c35828a8f8d81e0bd4cce40971c56cb63e0c901da2d0f227ef2c6ab41f78da2",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "73a21352f9a6c4cf8fda442c0603e477a4ddf7a0a7d03120e8b564c9c6d16ac4",
+    "id": "source_record:73a21352f9a6c4cf8fda442c0603e477a4ddf7a0a7d03120e8b564c9c6d16ac4"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "bb9b6cb387db35bd4e2c043344feab79f03bcf627184d02624c067122891196e",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "PipingNetworkSegment"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PNS1_S1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "3c50176a93879ae487b89f494de7c801f2cbdce4fae7848338b00185680e1940",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PNS1_S1"
+      },
+      {
+       "occurrence_id": "e949042c862d68a2bcdabb9197ec1d9b2ec07fde8e33fd84b45e2697cb1a7533",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 2,
+       "value": "PipingNetworkSegment"
+      },
+      {
+       "occurrence_id": "505c75c945f78941f0ede6706c81dc6d31dbc78b68d7f03f816e12e868f4fb14",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 3,
+       "value": "http://data.posccaesar.org/rdl/RDS267704"
+      }
+     ],
+     "children": [
+      "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769",
+      "58ed1320664dcc7a69591a082ca405fb4d38be3dcbfe53b35aaf914a676d1b2f"
+     ],
+     "parent_occurrence_id": "afb52ec507c1c0ccc7a03f31adb9c6319a44a4b0c527382c0bb2cbf90efbefdb",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "bb9b6cb387db35bd4e2c043344feab79f03bcf627184d02624c067122891196e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "3c50176a93879ae487b89f494de7c801f2cbdce4fae7848338b00185680e1940",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "e949042c862d68a2bcdabb9197ec1d9b2ec07fde8e33fd84b45e2697cb1a7533",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/streams/0/PNS1_S1:dexpi_class",
+        "components": [
+         "streams",
+         "0",
+         "PNS1_S1:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "fe76be8b5c7f9639a2d292413217da04d6b6dfbaedcfdaabe13ee73d184a38cb"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "505c75c945f78941f0ede6706c81dc6d31dbc78b68d7f03f816e12e868f4fb14",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "0146cdf6c11024b315e96790671ad9effa609eb0a024598c46cb5f945dca1f32",
+    "id": "source_record:0146cdf6c11024b315e96790671ad9effa609eb0a024598c46cb5f945dca1f32"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingComponent"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "PipingComponent"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PNS1_S1_C1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "52dc3b541670a0cbd2665abd598a91707993ac3c7be480b02d7c91e05bc7b0d0",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PNS1_S1_C1"
+      },
+      {
+       "occurrence_id": "ed0d2815d055c23d6817226185930eba3362714e8f241244961e724526eae7fd",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 2,
+       "value": "BlindFlange"
+      },
+      {
+       "occurrence_id": "5ca4a9da2a763d03ae96f48d1640100e7d8a2ad58893cf8d971497a888556e39",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 3,
+       "value": "http://data.posccaesar.org/rdl/RDS414719"
+      }
+     ],
+     "children": [
+      "3ef2ba41a8277172c96557a0b0436a5d0047157475fbc47a1207ee45202a188c",
+      "0a55a9ab22058ff6e6c0f1f9f151b330fec7aa175b0af73252b85cc3f7e01651"
+     ],
+     "parent_occurrence_id": "bb9b6cb387db35bd4e2c043344feab79f03bcf627184d02624c067122891196e",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "52dc3b541670a0cbd2665abd598a91707993ac3c7be480b02d7c91e05bc7b0d0",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ed0d2815d055c23d6817226185930eba3362714e8f241244961e724526eae7fd",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/streams/0/PNS1_S1_C1:dexpi_class",
+        "components": [
+         "streams",
+         "0",
+         "PNS1_S1_C1:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "df305f72e5f7c2af49dc33987a633d186855267bb005c2f3dacfe18378ddb08a"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "5ca4a9da2a763d03ae96f48d1640100e7d8a2ad58893cf8d971497a888556e39",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "4a55a41f4b9705636efe186ca6359aa7c0f35db3f0b0d8987d8c900c94972bde",
+    "id": "source_record:4a55a41f4b9705636efe186ca6359aa7c0f35db3f0b0d8987d8c900c94972bde"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "3ef2ba41a8277172c96557a0b0436a5d0047157475fbc47a1207ee45202a188c",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingComponent"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "bbfc65fa83347b6da57df2ae95f4a8530b05a31559a425426a95d1de2a81dbba",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is the location of"
+      },
+      {
+       "occurrence_id": "8a80f988bd8ea0ed33fae4b070a6da600c79a6eff0e31b5b9516dfbae8d1e35e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01_PSGF01"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "8a80f988bd8ea0ed33fae4b070a6da600c79a6eff0e31b5b9516dfbae8d1e35e",
+       "role": "ItemID",
+       "target_text": "PIF01_PSGF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "3ef2ba41a8277172c96557a0b0436a5d0047157475fbc47a1207ee45202a188c",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "bbfc65fa83347b6da57df2ae95f4a8530b05a31559a425426a95d1de2a81dbba",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "8a80f988bd8ea0ed33fae4b070a6da600c79a6eff0e31b5b9516dfbae8d1e35e",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "a8f274fed91b5f1a9e83fa6eee1a457122dab63db977b739b5d77159783628c5",
+    "id": "source_record:a8f274fed91b5f1a9e83fa6eee1a457122dab63db977b739b5d77159783628c5"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "0a55a9ab22058ff6e6c0f1f9f151b330fec7aa175b0af73252b85cc3f7e01651",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingComponent"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "ConnectionPoints"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "4aee21393db0d42632fea793886b059d41841f25393db369a859d9386f97c6d1",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "NumPoints"
+       },
+       "ordinal": 1,
+       "value": "2"
+      }
+     ],
+     "children": [
+      "235ab9b3e21248686a7306e45baf37df2392c89db81e2a282025771cd25939b6",
+      "fe22a615869430c015a8db7762cd2d6e5b5f3854e6b24bc829442b9b3be6cfcf"
+     ],
+     "parent_occurrence_id": "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "0a55a9ab22058ff6e6c0f1f9f151b330fec7aa175b0af73252b85cc3f7e01651",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4aee21393db0d42632fea793886b059d41841f25393db369a859d9386f97c6d1",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "ec3cf26bc205cf4b4c7b63f5054780ea5fc263030ba00d6b0203cf009292e584",
+    "id": "source_record:ec3cf26bc205cf4b4c7b63f5054780ea5fc263030ba00d6b0203cf009292e584"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "235ab9b3e21248686a7306e45baf37df2392c89db81e2a282025771cd25939b6",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingComponent"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PNS1_S1_C1_ND0"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "a860ab488db46d5e9426ad11ac8ca41e4e8f31b75d18ad6fc9ab9a4f0bbcca48",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PNS1_S1_C1_ND0"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "0a55a9ab22058ff6e6c0f1f9f151b330fec7aa175b0af73252b85cc3f7e01651",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "235ab9b3e21248686a7306e45baf37df2392c89db81e2a282025771cd25939b6",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "a860ab488db46d5e9426ad11ac8ca41e4e8f31b75d18ad6fc9ab9a4f0bbcca48",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "b4f2864caef240a8aa21d492b9126a090787b821c9b8e4ff3a6e599002a71c8b",
+    "id": "source_record:b4f2864caef240a8aa21d492b9126a090787b821c9b8e4ff3a6e599002a71c8b"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "fe22a615869430c015a8db7762cd2d6e5b5f3854e6b24bc829442b9b3be6cfcf",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingComponent"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PNS1_S1_C1_ND1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "90f1616b2227f1d8aadffdadb1aea8206b5f3c6e2daa650a271056511edb172a",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PNS1_S1_C1_ND1"
+      },
+      {
+       "occurrence_id": "5d7d83f7e4106892fe67d48054aecbced31ae06d55eb6516fe2539f2318bd0c4",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 2,
+       "value": "process"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "0a55a9ab22058ff6e6c0f1f9f151b330fec7aa175b0af73252b85cc3f7e01651",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "fe22a615869430c015a8db7762cd2d6e5b5f3854e6b24bc829442b9b3be6cfcf",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "90f1616b2227f1d8aadffdadb1aea8206b5f3c6e2daa650a271056511edb172a",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "5d7d83f7e4106892fe67d48054aecbced31ae06d55eb6516fe2539f2318bd0c4",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "45182c58bbedf23854f3d3602b6ddc42f8fa838063a27fab6ddc0ca68ab2e306",
+    "id": "source_record:45182c58bbedf23854f3d3602b6ddc42f8fa838063a27fab6ddc0ca68ab2e306"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "58ed1320664dcc7a69591a082ca405fb4d38be3dcbfe53b35aaf914a676d1b2f",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSystem"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PipingNetworkSegment"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Connection"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Connection"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "9638fb311cbc08fbd1c98c8f89acabf194098ce35c622c9bd062064cfc01412f",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "FromID"
+       },
+       "ordinal": 1,
+       "value": "T01_N3"
+      },
+      {
+       "occurrence_id": "58b0b5f60653ef623247aa96f7e82eb2d12d4123aa7dace62ef66df72361a47e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ToID"
+       },
+       "ordinal": 2,
+       "value": "PNS1_S1_C1"
+      },
+      {
+       "occurrence_id": "9224b07cd4182eaea0fd5fd71df8b56b2569928693f3ba6d2d69b9b33df2dd0d",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ToNode"
+       },
+       "ordinal": 3,
+       "value": "1"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "bb9b6cb387db35bd4e2c043344feab79f03bcf627184d02624c067122891196e",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "9638fb311cbc08fbd1c98c8f89acabf194098ce35c622c9bd062064cfc01412f",
+       "role": "FromID",
+       "target_text": "T01_N3",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "2d402bce92ad4e21c4f7202c687c96cea485935ae184102a28caecb98858941d"
+       ]
+      },
+      {
+       "attribute_occurrence_id": "58b0b5f60653ef623247aa96f7e82eb2d12d4123aa7dace62ef66df72361a47e",
+       "role": "ToID",
+       "target_text": "PNS1_S1_C1",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "58ed1320664dcc7a69591a082ca405fb4d38be3dcbfe53b35aaf914a676d1b2f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9638fb311cbc08fbd1c98c8f89acabf194098ce35c622c9bd062064cfc01412f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "58b0b5f60653ef623247aa96f7e82eb2d12d4123aa7dace62ef66df72361a47e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9224b07cd4182eaea0fd5fd71df8b56b2569928693f3ba6d2d69b9b33df2dd0d",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "b93260fa406b837fbccc923c4a716dbf84bd0495062fe29e7559d089645ef223",
+    "id": "source_record:b93260fa406b837fbccc923c4a716dbf84bd0495062fe29e7559d089645ef223"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InstrumentationLoopFunction"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "InstrumentationLoopFunction"
+     },
+     "original_id": {
+      "present": true,
+      "value": "ILF01"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "e14eeee587abe89ee5713c4689686802dc34a2f777991ed44a4d7f49f86744ad",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "ILF01"
+      },
+      {
+       "occurrence_id": "9c2a4125ad20a3f67241f5bdf6d72db90495b8011d979eecaf03474d6f90ac57",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "TagName"
+       },
+       "ordinal": 2,
+       "value": "01"
+      },
+      {
+       "occurrence_id": "64353b3b3e11510fc50d77630bdb3cdc6e862b94b7f40aceced0417a0d1fe137",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 3,
+       "value": "InstrumentationLoopFunction"
+      },
+      {
+       "occurrence_id": "5c4cee717e352a73c2efe09e597e574e0a5229def6c7f0cd30926af43c98f5b9",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 4,
+       "value": "http://sandbox.dexpi.org/rdl/InstrumentationLoopFunction"
+      }
+     ],
+     "children": [
+      "211e312cefb5f218c665ebc3aee0727bf9b4f80e4cde5f20b0f1437f8fbb5e94",
+      "7dc14633e012fc132659ba12249cadf95885abb8931b22fbee34e369b38075c3"
+     ],
+     "parent_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "e14eeee587abe89ee5713c4689686802dc34a2f777991ed44a4d7f49f86744ad",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9c2a4125ad20a3f67241f5bdf6d72db90495b8011d979eecaf03474d6f90ac57",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "64353b3b3e11510fc50d77630bdb3cdc6e862b94b7f40aceced0417a0d1fe137",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/ILF01:dexpi_class",
+        "components": [
+         "instruments",
+         "0",
+         "ILF01:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "1aa61a6be7857dceabec315b5a51c3be31911d36975565d1f0ffd889ee1abebe"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "5c4cee717e352a73c2efe09e597e574e0a5229def6c7f0cd30926af43c98f5b9",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "8ba9387f141090dbd8475c9089558736448d5117028f20b1a69082dd3caabc6d",
+    "id": "source_record:8ba9387f141090dbd8475c9089558736448d5117028f20b1a69082dd3caabc6d"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "211e312cefb5f218c665ebc3aee0727bf9b4f80e4cde5f20b0f1437f8fbb5e94",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InstrumentationLoopFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttributes"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "0ef75df17c38b96b7f7926b648e98e54a6e95fb8201efc250af485c379aee0fe",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Number"
+       },
+       "ordinal": 1,
+       "value": "1"
+      },
+      {
+       "occurrence_id": "74b7c40815042dda7b410699d7860551bbcbf9e6505f1c0ebf02f343199d1b9d",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Set"
+       },
+       "ordinal": 2,
+       "value": "DexpiAttributes"
+      }
+     ],
+     "children": [
+      "c16ac96b97c8444ebfee8553296034222b7f16be70c657bf28a2a0d6fb0afa13"
+     ],
+     "parent_occurrence_id": "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "211e312cefb5f218c665ebc3aee0727bf9b4f80e4cde5f20b0f1437f8fbb5e94",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "0ef75df17c38b96b7f7926b648e98e54a6e95fb8201efc250af485c379aee0fe",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "74b7c40815042dda7b410699d7860551bbcbf9e6505f1c0ebf02f343199d1b9d",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "41518ee8952b269ef957a2a7b4d74d03ba57066a1d2b6820aab1d6341ab5f779",
+    "id": "source_record:41518ee8952b269ef957a2a7b4d74d03ba57066a1d2b6820aab1d6341ab5f779"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "c16ac96b97c8444ebfee8553296034222b7f16be70c657bf28a2a0d6fb0afa13",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InstrumentationLoopFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "299660a86e1c3c881d9b039cf5bbe72e98d07200397323aaba174d827fb6f00e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "InstrumentationLoopFunctionNumberAssignmentClass"
+      },
+      {
+       "occurrence_id": "1208d0efc86abd60c6b85afae2998fe9e04bb96f8701cc02c6e270f4f1c56bcf",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 2,
+       "value": "01"
+      },
+      {
+       "occurrence_id": "32c64f9e01460419c79e2961cc5534fdc39e02038c8c0963c0758bb8aedd90a7",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 3,
+       "value": "string"
+      },
+      {
+       "occurrence_id": "91e5b81555423f217b477cc6c7083fcc38ad2240cb073b394e99ff6f58f104b2",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 4,
+       "value": "http://sandbox.dexpi.org/rdl/InstrumentationLoopFunctionNumberAssignmentClass"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "211e312cefb5f218c665ebc3aee0727bf9b4f80e4cde5f20b0f1437f8fbb5e94",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "c16ac96b97c8444ebfee8553296034222b7f16be70c657bf28a2a0d6fb0afa13",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "299660a86e1c3c881d9b039cf5bbe72e98d07200397323aaba174d827fb6f00e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "1208d0efc86abd60c6b85afae2998fe9e04bb96f8701cc02c6e270f4f1c56bcf",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/ILF01:InstrumentationLoopFunctionNumberAssignmentClass/value",
+        "components": [
+         "instruments",
+         "0",
+         "ILF01:InstrumentationLoopFunctionNumberAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "699cc6e015a59c04d0a0a7cf5376f0e83d4982bc7c781b644f7eecc798558358"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "32c64f9e01460419c79e2961cc5534fdc39e02038c8c0963c0758bb8aedd90a7",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "91e5b81555423f217b477cc6c7083fcc38ad2240cb073b394e99ff6f58f104b2",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "5e2a3c64fcff06057b826749189307d6edf9288d4f42ac2f68ef7b5b9b827ec8",
+    "id": "source_record:5e2a3c64fcff06057b826749189307d6edf9288d4f42ac2f68ef7b5b9b827ec8"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "7dc14633e012fc132659ba12249cadf95885abb8931b22fbee34e369b38075c3",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InstrumentationLoopFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "66a933820d59050e238248396b8a9dfddbd44d241c7c9899b61940382c0c0f5a",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is a collection including"
+      },
+      {
+       "occurrence_id": "adadb5ec7e4fdf2c889415e5a99ec043d293b723c75473c8e75bd11b94f9114c",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "adadb5ec7e4fdf2c889415e5a99ec043d293b723c75473c8e75bd11b94f9114c",
+       "role": "ItemID",
+       "target_text": "PIF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "7dc14633e012fc132659ba12249cadf95885abb8931b22fbee34e369b38075c3",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "66a933820d59050e238248396b8a9dfddbd44d241c7c9899b61940382c0c0f5a",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "adadb5ec7e4fdf2c889415e5a99ec043d293b723c75473c8e75bd11b94f9114c",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "ad6119e1511e4be499f865fbc42ad0efa27f14801978d99ffc27387552847dff",
+    "id": "source_record:ad6119e1511e4be499f865fbc42ad0efa27f14801978d99ffc27387552847dff"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "ProcessInstrumentationFunction"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PIF01"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "7b548c6066ff02ebecae0f7b6cf4f0cfc3a6ca8c5bbc339ce77cfe4d088e688b",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PIF01"
+      },
+      {
+       "occurrence_id": "bc68ef2226a29bf3ee479f6f8b8ec384338b4fb665a7289f3c63859a81feef0a",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "TagName"
+       },
+       "ordinal": 2,
+       "value": ""
+      },
+      {
+       "occurrence_id": "b4fccc44ba5da68aea0a090c6e56d9d5ad89f4cad10e7387d208d8f75af2c766",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 3,
+       "value": "ProcessInstrumentationFunction"
+      },
+      {
+       "occurrence_id": "8330f152cb3e2e8761da2d335dcfaab32b9613ae63761fb0773023539684d409",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 4,
+       "value": "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction"
+      }
+     ],
+     "children": [
+      "cc614daac5406f11cdbd9a780d8db13d936a6dd11e23bf5dcc46919a45a8e1d9",
+      "025d4cfc6aa647db1379a76e91600c79ab686036c109b062859798fbe8adf89f",
+      "e7f72104f2b312a7d6acebcda7b76c4564c7e43f37fc0827d6e487d2b9f0cf89",
+      "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+      "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+      "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c"
+     ],
+     "parent_occurrence_id": "063bd103a6d129a612a5f8e773424f408d3506675cfb196264b505ac7eeefafd",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "7b548c6066ff02ebecae0f7b6cf4f0cfc3a6ca8c5bbc339ce77cfe4d088e688b",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "bc68ef2226a29bf3ee479f6f8b8ec384338b4fb665a7289f3c63859a81feef0a",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "b4fccc44ba5da68aea0a090c6e56d9d5ad89f4cad10e7387d208d8f75af2c766",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "8330f152cb3e2e8761da2d335dcfaab32b9613ae63761fb0773023539684d409",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "c338fc5f8d773524ca350a2367a3fdbd738758bfa59c9eeccc3cef8e031c37b9",
+    "id": "source_record:c338fc5f8d773524ca350a2367a3fdbd738758bfa59c9eeccc3cef8e031c37b9"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "cc614daac5406f11cdbd9a780d8db13d936a6dd11e23bf5dcc46919a45a8e1d9",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "ConnectionPoints"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "db9b450387200940eb122959513feea7a24a77037e9dbbd90e789c9de42ff6e8",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "NumPoints"
+       },
+       "ordinal": 1,
+       "value": "2"
+      }
+     ],
+     "children": [
+      "46fa70a765063157c2905c758e16fb9effa560ca1922e0f4bbb6a3e78707a965",
+      "21014c398972228f70ea024db5014d8901bcaeb2de6e11b811e40728d254da13"
+     ],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "cc614daac5406f11cdbd9a780d8db13d936a6dd11e23bf5dcc46919a45a8e1d9",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "db9b450387200940eb122959513feea7a24a77037e9dbbd90e789c9de42ff6e8",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "dd0af629b930e3884658ad2e043f84c9a7bd996684f3060019cbf649394a2db2",
+    "id": "source_record:dd0af629b930e3884658ad2e043f84c9a7bd996684f3060019cbf649394a2db2"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "46fa70a765063157c2905c758e16fb9effa560ca1922e0f4bbb6a3e78707a965",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PIF01_ND0"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "1db6a3c3fa75433a516391feae1b94b1164a299c5a456463b4905d1ee78d0a3b",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PIF01_ND0"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "cc614daac5406f11cdbd9a780d8db13d936a6dd11e23bf5dcc46919a45a8e1d9",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "46fa70a765063157c2905c758e16fb9effa560ca1922e0f4bbb6a3e78707a965",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "1db6a3c3fa75433a516391feae1b94b1164a299c5a456463b4905d1ee78d0a3b",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "07a3740c4331a25815da968805cbdf70134bb12ddf398ed895d8d855370fd04b",
+    "id": "source_record:07a3740c4331a25815da968805cbdf70134bb12ddf398ed895d8d855370fd04b"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "21014c398972228f70ea024db5014d8901bcaeb2de6e11b811e40728d254da13",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ConnectionPoints"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Node"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Node"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PIF01_ND1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "4f3c75f174744f9337b9dc9f1b97d81ddb00fe680cc3dbc436a693118d147737",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PIF01_ND1"
+      },
+      {
+       "occurrence_id": "44d2cc1ff98293d81689fe1f9fb90d8078016021aed068ea61d838ce35f5ad44",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 2,
+       "value": "signal"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "cc614daac5406f11cdbd9a780d8db13d936a6dd11e23bf5dcc46919a45a8e1d9",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "21014c398972228f70ea024db5014d8901bcaeb2de6e11b811e40728d254da13",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4f3c75f174744f9337b9dc9f1b97d81ddb00fe680cc3dbc436a693118d147737",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "44d2cc1ff98293d81689fe1f9fb90d8078016021aed068ea61d838ce35f5ad44",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "bd22097c428fc7ade73715547fe63cea68eab54f61058f1028a11ebc812ab3de",
+    "id": "source_record:bd22097c428fc7ade73715547fe63cea68eab54f61058f1028a11ebc812ab3de"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "025d4cfc6aa647db1379a76e91600c79ab686036c109b062859798fbe8adf89f",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "3947f6ca71134ef21a3e7c9487c88d50cccc0bcf2f9026fb05261c8a314e1f60",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is logical end of"
+      },
+      {
+       "occurrence_id": "dd04ec45b0cd09bbecea0949bcd4a8e30ecbc21049d3feaaa6e9e83b647af445",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01_IF1"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "dd04ec45b0cd09bbecea0949bcd4a8e30ecbc21049d3feaaa6e9e83b647af445",
+       "role": "ItemID",
+       "target_text": "PIF01_IF1",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "025d4cfc6aa647db1379a76e91600c79ab686036c109b062859798fbe8adf89f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "3947f6ca71134ef21a3e7c9487c88d50cccc0bcf2f9026fb05261c8a314e1f60",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "dd04ec45b0cd09bbecea0949bcd4a8e30ecbc21049d3feaaa6e9e83b647af445",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "62e06065253e9681985d5114a031ff90451772435bf4eade1a3e5effbd4e2fe7",
+    "id": "source_record:62e06065253e9681985d5114a031ff90451772435bf4eade1a3e5effbd4e2fe7"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "e7f72104f2b312a7d6acebcda7b76c4564c7e43f37fc0827d6e487d2b9f0cf89",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "8b7ea645a9702baf26775bb24e0b6b81c30c20a71dd54636b3386f215e9df8ca",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is a part of"
+      },
+      {
+       "occurrence_id": "3969a76f0762f8376bf086c8f62f34a115829e6c454639ce72faf8f2901e993a",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "ILF01"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "3969a76f0762f8376bf086c8f62f34a115829e6c454639ce72faf8f2901e993a",
+       "role": "ItemID",
+       "target_text": "ILF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "daf2a2ca63b6872fd035d5a1ebc37bfefedec89853e1f2fad29872e5ce7115ce"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "e7f72104f2b312a7d6acebcda7b76c4564c7e43f37fc0827d6e487d2b9f0cf89",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "8b7ea645a9702baf26775bb24e0b6b81c30c20a71dd54636b3386f215e9df8ca",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "3969a76f0762f8376bf086c8f62f34a115829e6c454639ce72faf8f2901e993a",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "0a02b53bd525f8285160cad7efe25d251de3d33e9cbf3bc5a287da58ddd5bf28",
+    "id": "source_record:0a02b53bd525f8285160cad7efe25d251de3d33e9cbf3bc5a287da58ddd5bf28"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttributes"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "63fa1cf8f810b067e50386f7231afa46de72d8176e8f0825f22f5a0ecb36bb8d",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Number"
+       },
+       "ordinal": 1,
+       "value": "4"
+      },
+      {
+       "occurrence_id": "2a2eed405944a52a922d9a12b3659df10d44c6c42436992e8980541d47aa4847",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Set"
+       },
+       "ordinal": 2,
+       "value": "DexpiAttributes"
+      }
+     ],
+     "children": [
+      "f26868bd15878d45f9e42708c5f30d55b98ea6d684e12f004ddd036239c55662",
+      "a7b9947902b967cd74dccf011a6b285cf7e5738c7ec03344f5705234d7fc64e7",
+      "db0fff7c2c8202310e0903ee1dc6127685b45aa232c21dab955d5969fa7f48a2",
+      "7e585a74f5ee036797054661e6726b45847946e00acc302f7d3d980f59f51f77"
+     ],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "63fa1cf8f810b067e50386f7231afa46de72d8176e8f0825f22f5a0ecb36bb8d",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "2a2eed405944a52a922d9a12b3659df10d44c6c42436992e8980541d47aa4847",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "b03c950568e0b7201c0df3ddece6c26fcd3452e9448a7af25025f9c089da754c",
+    "id": "source_record:b03c950568e0b7201c0df3ddece6c26fcd3452e9448a7af25025f9c089da754c"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "f26868bd15878d45f9e42708c5f30d55b98ea6d684e12f004ddd036239c55662",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "4d4cfe0aecb60fdcc68c2a407ef71892a4cd4fd361d9509b519040d0b61bf7dc",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "ProcessInstrumentationFunctionNumberAssignmentClass"
+      },
+      {
+       "occurrence_id": "16bdf26206529c36d6c4cbf4b436711f7d572930139e467b653a9a63a63ceec6",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 2,
+       "value": "01"
+      },
+      {
+       "occurrence_id": "99f10822d06664fa7a777887e206345490879cfbd9bf8c377c0ec2aa79b8e078",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 3,
+       "value": "string"
+      },
+      {
+       "occurrence_id": "b90dd3def05a0c86976084dd0b1189a50090955cc4c07c9b953a98d47061c5af",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 4,
+       "value": "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionNumberAssignmentClass"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "f26868bd15878d45f9e42708c5f30d55b98ea6d684e12f004ddd036239c55662",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4d4cfe0aecb60fdcc68c2a407ef71892a4cd4fd361d9509b519040d0b61bf7dc",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "16bdf26206529c36d6c4cbf4b436711f7d572930139e467b653a9a63a63ceec6",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/ProcessInstrumentationFunctionNumberAssignmentClass/value",
+        "components": [
+         "instruments",
+         "0",
+         "ProcessInstrumentationFunctionNumberAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "699cc6e015a59c04d0a0a7cf5376f0e83d4982bc7c781b644f7eecc798558358"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "99f10822d06664fa7a777887e206345490879cfbd9bf8c377c0ec2aa79b8e078",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "b90dd3def05a0c86976084dd0b1189a50090955cc4c07c9b953a98d47061c5af",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "bb8b6aa4eabc7d56dca968dbf665166534f1ac2a9155ac2a3ec4413ea8996f37",
+    "id": "source_record:bb8b6aa4eabc7d56dca968dbf665166534f1ac2a9155ac2a3ec4413ea8996f37"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "a7b9947902b967cd74dccf011a6b285cf7e5738c7ec03344f5705234d7fc64e7",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "4be20ac0cad12ce1ac5b959695710444a6d9c55a20f8565cdbf380f20ae04ff8",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "LocationSpecialization"
+      },
+      {
+       "occurrence_id": "2ec1509d5a68f7757d9a75395ea58281a62c7338d3494829c27f9780b419d9f7",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 2,
+       "value": "CentralLocation"
+      },
+      {
+       "occurrence_id": "a380e16fa4331a56d9edccd99b43b19b4b9bed08de7ab9706d46e43fc19dc562",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ValueURI"
+       },
+       "ordinal": 3,
+       "value": "http://sandbox.dexpi.org/rdl/CentralLocation"
+      },
+      {
+       "occurrence_id": "ae34cc3502e89e3d8c046914c745a9550147ac6ee82e75a7e4d4ee915ae4fb54",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 4,
+       "value": "anyURI"
+      },
+      {
+       "occurrence_id": "12b720500863a290774707a458b9b33facb9f51ea20deac05af6d1c639786670",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 5,
+       "value": "http://sandbox.dexpi.org/rdl/LocationSpecialization"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "a7b9947902b967cd74dccf011a6b285cf7e5738c7ec03344f5705234d7fc64e7",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4be20ac0cad12ce1ac5b959695710444a6d9c55a20f8565cdbf380f20ae04ff8",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "2ec1509d5a68f7757d9a75395ea58281a62c7338d3494829c27f9780b419d9f7",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/LocationSpecialization/value",
+        "components": [
+         "instruments",
+         "0",
+         "LocationSpecialization",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "978ea63a8fbe4688ee2914ca548d11e4060931e33a7a682a0bf71164fb5a3250"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "a380e16fa4331a56d9edccd99b43b19b4b9bed08de7ab9706d46e43fc19dc562",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ae34cc3502e89e3d8c046914c745a9550147ac6ee82e75a7e4d4ee915ae4fb54",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "12b720500863a290774707a458b9b33facb9f51ea20deac05af6d1c639786670",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "7f10530a7639ba23f9b67ddeb239ea73d325b967262d45c97859175f44ded486",
+    "id": "source_record:7f10530a7639ba23f9b67ddeb239ea73d325b967262d45c97859175f44ded486"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "db0fff7c2c8202310e0903ee1dc6127685b45aa232c21dab955d5969fa7f48a2",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 3
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "a4b021d4b4593e03f1b7d9e86f8de9a8930fa0579c2cedb18a6ea667cc2d655f",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "ProcessInstrumentationFunctionCategoryAssignmentClass"
+      },
+      {
+       "occurrence_id": "4f2076ae715aa947e96bbde87bd3118a169d8098d755ec2007c9c9266ba147e3",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 2,
+       "value": "L"
+      },
+      {
+       "occurrence_id": "a45a8539cd0d1c71c048354406009dc5a61f9fdd19a12517301d35ade229dd6c",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 3,
+       "value": "string"
+      },
+      {
+       "occurrence_id": "a8330d5e6f5547b589fd49c6932ef792086cb947cfc0852424637e5ad1456585",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 4,
+       "value": "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionCategoryAssignmentClass"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "db0fff7c2c8202310e0903ee1dc6127685b45aa232c21dab955d5969fa7f48a2",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "a4b021d4b4593e03f1b7d9e86f8de9a8930fa0579c2cedb18a6ea667cc2d655f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "4f2076ae715aa947e96bbde87bd3118a169d8098d755ec2007c9c9266ba147e3",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/ProcessInstrumentationFunctionCategoryAssignmentClass/value",
+        "components": [
+         "instruments",
+         "0",
+         "ProcessInstrumentationFunctionCategoryAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "8463f556f97cf8fdcda977c053a5ff1b530500723772b0f884160d04256ad2fa"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "a45a8539cd0d1c71c048354406009dc5a61f9fdd19a12517301d35ade229dd6c",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "a8330d5e6f5547b589fd49c6932ef792086cb947cfc0852424637e5ad1456585",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "628d34fd1e7817d1de25b83b93c35f00da2d50ac5079a5252aca3fdd3b4f28a4",
+    "id": "source_record:628d34fd1e7817d1de25b83b93c35f00da2d50ac5079a5252aca3fdd3b4f28a4"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "7e585a74f5ee036797054661e6726b45847946e00acc302f7d3d980f59f51f77",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttributes"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "GenericAttribute"
+       },
+       "ordinal": 4
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "GenericAttribute"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "eaa2fbcab0bed712591ccfcd70d3b87df1b6c5098f8b6917f4b5c18a11a2453e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Name"
+       },
+       "ordinal": 1,
+       "value": "ProcessInstrumentationFunctionModifierAssignmentClass"
+      },
+      {
+       "occurrence_id": "655adbfc94cbe22e4d7a3e1940cdd78caf30572fd80f5d8c03db4c40bd93574e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "AttributeURI"
+       },
+       "ordinal": 2,
+       "value": "http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionModifierAssignmentClass"
+      },
+      {
+       "occurrence_id": "1dce8aef6ee0a6000e808f35cf459cd7f46203bfa01b1c9d9cec7f93ee033e08",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Value"
+       },
+       "ordinal": 3,
+       "value": "I"
+      },
+      {
+       "occurrence_id": "62e8e13aff52f3a38534df32fa892c460a0b0e5499977fb2930f04eb436777d0",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Format"
+       },
+       "ordinal": 4,
+       "value": "string"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "72449da5e2918c71d6e50607de5643516bd539ff6ca05dc2e58b4b8be49a1bea",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "7e585a74f5ee036797054661e6726b45847946e00acc302f7d3d980f59f51f77",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "eaa2fbcab0bed712591ccfcd70d3b87df1b6c5098f8b6917f4b5c18a11a2453e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "655adbfc94cbe22e4d7a3e1940cdd78caf30572fd80f5d8c03db4c40bd93574e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "1dce8aef6ee0a6000e808f35cf459cd7f46203bfa01b1c9d9cec7f93ee033e08",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/ProcessInstrumentationFunctionModifierAssignmentClass/value",
+        "components": [
+         "instruments",
+         "0",
+         "ProcessInstrumentationFunctionModifierAssignmentClass",
+         "value"
+        ],
+        "mapping_kind": "direct-copy",
+        "basis": "generic-value",
+        "destination_sha256": "5129ad1abe9eea738b3b1f08aebc5d18f807ef9a825378f467154ad3da50a538"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "62e8e13aff52f3a38534df32fa892c460a0b0e5499977fb2930f04eb436777d0",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "270dfc34f019378faa06948d2f8d2c13de7c5423c56a6f80d07e6975b2db0860",
+    "id": "source_record:270dfc34f019378faa06948d2f8d2c13de7c5423c56a6f80d07e6975b2db0860"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InformationFlow"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "InformationFlow"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PIF01_IF1"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "67d9728008c47e5eecafb1e0a5d2948b5cb1f15ca81b887b37cb2d058becaa22",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PIF01_IF1"
+      },
+      {
+       "occurrence_id": "d5372da10f2df8ba84acd2a275c8f9262d500f55ca070737e14f2bc888a15ef5",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 2,
+       "value": "SignalConveyingFunction"
+      },
+      {
+       "occurrence_id": "71b18896a78618a99f896e532a4d9222427d9468218a850e2d06636714b7a275",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 3,
+       "value": "http://sandbox.dexpi.org/rdl/SignalConveyingFunction"
+      }
+     ],
+     "children": [
+      "6e40d2964d0caac65dbbb5a0002fd609ee7f3f2d462f923f90ccdcaf54d9494e",
+      "82fc0ced709a86186318525d6de8d13d4844e4404e59ad66c633b196db505582",
+      "c69c70f5139f6e45270b2e55feb460ff958149e099b101ce2c20c19b079ae964"
+     ],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "67d9728008c47e5eecafb1e0a5d2948b5cb1f15ca81b887b37cb2d058becaa22",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "d5372da10f2df8ba84acd2a275c8f9262d500f55ca070737e14f2bc888a15ef5",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/PIF01_IF1:dexpi_class",
+        "components": [
+         "instruments",
+         "0",
+         "PIF01_IF1:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "3de8cc955d12aba76969662d999e41b718d932656fcfaaf02d2c7b6d8b6c53d3"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "71b18896a78618a99f896e532a4d9222427d9468218a850e2d06636714b7a275",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "ad141e553abc474f303655e0a67328236dafe401d07ee4be1c61b0e08421d573",
+    "id": "source_record:ad141e553abc474f303655e0a67328236dafe401d07ee4be1c61b0e08421d573"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "6e40d2964d0caac65dbbb5a0002fd609ee7f3f2d462f923f90ccdcaf54d9494e",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InformationFlow"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "3a77ca1551a02ef50de119c7eda30e2c5e0af98a4be6d2ac960c99a5d131ca40",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "has logical end"
+      },
+      {
+       "occurrence_id": "548c85d706d3605ee0ef23362acb144bb95de3aa863bc7e13137e28520cc691e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "548c85d706d3605ee0ef23362acb144bb95de3aa863bc7e13137e28520cc691e",
+       "role": "ItemID",
+       "target_text": "PIF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "6e40d2964d0caac65dbbb5a0002fd609ee7f3f2d462f923f90ccdcaf54d9494e",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "3a77ca1551a02ef50de119c7eda30e2c5e0af98a4be6d2ac960c99a5d131ca40",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "548c85d706d3605ee0ef23362acb144bb95de3aa863bc7e13137e28520cc691e",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "25b7d59c579eeee254eb0f7bec885819b452793ce10bd023468f94500ed0ebec",
+    "id": "source_record:25b7d59c579eeee254eb0f7bec885819b452793ce10bd023468f94500ed0ebec"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "82fc0ced709a86186318525d6de8d13d4844e4404e59ad66c633b196db505582",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InformationFlow"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "a7152465b8042bf27eec3cc07f71b6a7d696d9a5353e590fb14fad5f1df3e748",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "has logical start"
+      },
+      {
+       "occurrence_id": "9534643dd490276272a0b263abd7208f3397234c0182d8bc46e38fb8661a1a0c",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01_PSGF01"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "9534643dd490276272a0b263abd7208f3397234c0182d8bc46e38fb8661a1a0c",
+       "role": "ItemID",
+       "target_text": "PIF01_PSGF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "82fc0ced709a86186318525d6de8d13d4844e4404e59ad66c633b196db505582",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "a7152465b8042bf27eec3cc07f71b6a7d696d9a5353e590fb14fad5f1df3e748",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "9534643dd490276272a0b263abd7208f3397234c0182d8bc46e38fb8661a1a0c",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "5a5696f857b1ebce4fc653faa8f96b3b1c33a0a195540e59697884c4e69dc3da",
+    "id": "source_record:5a5696f857b1ebce4fc653faa8f96b3b1c33a0a195540e59697884c4e69dc3da"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "c69c70f5139f6e45270b2e55feb460ff958149e099b101ce2c20c19b079ae964",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "InformationFlow"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Connection"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Connection"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "6aac2effc8850e981353fe1050d4db7a0c3b4651cf65b03cd240d9ecb307cf23",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "FromID"
+       },
+       "ordinal": 1,
+       "value": "PNS1_S1_C1"
+      },
+      {
+       "occurrence_id": "43b67db902f327692aa4dadd406047ed3aee674e83c7fbc4df0d440d315d092f",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "FromNode"
+       },
+       "ordinal": 2,
+       "value": "2"
+      },
+      {
+       "occurrence_id": "60e2e79a69a0563fb25bb417a966701e030d46d26591f05043cff868996e064b",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ToID"
+       },
+       "ordinal": 3,
+       "value": "PIF01"
+      },
+      {
+       "occurrence_id": "b333b66920b2e14c67e45711d64726fe604e22ce9001139012bda961658b4857",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ToNode"
+       },
+       "ordinal": 4,
+       "value": "1"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "6aac2effc8850e981353fe1050d4db7a0c3b4651cf65b03cd240d9ecb307cf23",
+       "role": "FromID",
+       "target_text": "PNS1_S1_C1",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769"
+       ]
+      },
+      {
+       "attribute_occurrence_id": "60e2e79a69a0563fb25bb417a966701e030d46d26591f05043cff868996e064b",
+       "role": "ToID",
+       "target_text": "PIF01",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "c69c70f5139f6e45270b2e55feb460ff958149e099b101ce2c20c19b079ae964",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "6aac2effc8850e981353fe1050d4db7a0c3b4651cf65b03cd240d9ecb307cf23",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "43b67db902f327692aa4dadd406047ed3aee674e83c7fbc4df0d440d315d092f",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "60e2e79a69a0563fb25bb417a966701e030d46d26591f05043cff868996e064b",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "b333b66920b2e14c67e45711d64726fe604e22ce9001139012bda961658b4857",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "d7ba4806e7090edd92a40714485452d225b83fa14a6f07a0929d1f90e8d0d818",
+    "id": "source_record:d7ba4806e7090edd92a40714485452d225b83fa14a6f07a0929d1f90e8d0d818"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessSignalGeneratingFunction"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "ProcessSignalGeneratingFunction"
+     },
+     "original_id": {
+      "present": true,
+      "value": "PIF01_PSGF01"
+     },
+     "attributes": [
+      {
+       "occurrence_id": "cd713866e1d5803b0593ed4119a67c388288a5e3900ae7a9d52c2c125e2ba8a1",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ID"
+       },
+       "ordinal": 1,
+       "value": "PIF01_PSGF01"
+      },
+      {
+       "occurrence_id": "57adf1c69ef70367b29fcd724bd38309b93aa0ac8f02caddccf4568c197e8ff4",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClass"
+       },
+       "ordinal": 2,
+       "value": "ProcessSignalGeneratingFunction"
+      },
+      {
+       "occurrence_id": "44ec9fce1abd0db82b7b2fb42cc7b40f1fee12e8d336b91f3c3c4e8d5f550e5e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ComponentClassURI"
+       },
+       "ordinal": 3,
+       "value": "http://sandbox.dexpi.org/rdl/ProcessSignalGeneratingFunction"
+      }
+     ],
+     "children": [
+      "bf19a119393fbbae8c147185d8efeeda8279caf38e9f2ea0b0c1985a21d578cd",
+      "195c86951fcb44499de9c9f3b0a16eaf107975bbedbc91e9731b666537377ff7"
+     ],
+     "parent_occurrence_id": "ca880459bd67ef51ddad16ade89447614d9221888988367ea0a6d085c9cd936b",
+     "source_assertions": []
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "cd713866e1d5803b0593ed4119a67c388288a5e3900ae7a9d52c2c125e2ba8a1",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "57adf1c69ef70367b29fcd724bd38309b93aa0ac8f02caddccf4568c197e8ff4",
+      "disposition": "direct",
+      "destinations": [
+       {
+        "pointer": "/instruments/0/PIF01_PSGF01:dexpi_class",
+        "components": [
+         "instruments",
+         "0",
+         "PIF01_PSGF01:dexpi_class"
+        ],
+        "mapping_kind": "legacy-transform",
+        "basis": "part-class",
+        "destination_sha256": "61aa7627b878560ca2f33a915121e4039aa46a685def45894d4c53e32ea4f98d"
+       }
+      ]
+     },
+     {
+      "source_occurrence_id": "44ec9fce1abd0db82b7b2fb42cc7b40f1fee12e8d336b91f3c3c4e8d5f550e5e",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "0560db4e55fe4af981cdc8ee803484e06ed454138dd9dfbfb3c3661dc31632f5",
+    "id": "source_record:0560db4e55fe4af981cdc8ee803484e06ed454138dd9dfbfb3c3661dc31632f5"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "bf19a119393fbbae8c147185d8efeeda8279caf38e9f2ea0b0c1985a21d578cd",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessSignalGeneratingFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 1
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "896faf1b8bf39a3a1e7a4ae8d1d2cbc51b17dfa707b51a8505973f19504a2633",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is logical start of"
+      },
+      {
+       "occurrence_id": "d2afdf0c1058746c4448ec0fc7861def70af95efbe0ecea361b131286f53db9e",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PIF01_IF1"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "d2afdf0c1058746c4448ec0fc7861def70af95efbe0ecea361b131286f53db9e",
+       "role": "ItemID",
+       "target_text": "PIF01_IF1",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "7222af92078a529f14b27da5e7ea13ab974bd918e004c65320eff8f2176e78cb"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "bf19a119393fbbae8c147185d8efeeda8279caf38e9f2ea0b0c1985a21d578cd",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "896faf1b8bf39a3a1e7a4ae8d1d2cbc51b17dfa707b51a8505973f19504a2633",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "d2afdf0c1058746c4448ec0fc7861def70af95efbe0ecea361b131286f53db9e",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "7f27891d5253e7f7cb7ae05242890a122fd0799c45914eaaa4e9acd4b0e3e1e1",
+    "id": "source_record:7f27891d5253e7f7cb7ae05242890a122fd0799c45914eaaa4e9acd4b0e3e1e1"
+   },
+   {
+    "schema": "source-record-1",
+    "kind": "source_record",
+    "occurrence_id": "195c86951fcb44499de9c9f3b0a16eaf107975bbedbc91e9731b666537377ff7",
+    "document_id": "urn:sha256:cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "raw_source_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "locator": {
+     "path": [
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "PlantModel"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessInstrumentationFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ProcessSignalGeneratingFunction"
+       },
+       "ordinal": 1
+      },
+      {
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Association"
+       },
+       "ordinal": 2
+      }
+     ]
+    },
+    "raw_payload": {
+     "element_name": {
+      "namespace_uri": "",
+      "local_name": "Association"
+     },
+     "original_id": {
+      "present": false
+     },
+     "attributes": [
+      {
+       "occurrence_id": "ba16ee63c1f7928c76c1c30484b0859b997cf8a7fad8f86e0bfe5ca598203edb",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "Type"
+       },
+       "ordinal": 1,
+       "value": "is located in"
+      },
+      {
+       "occurrence_id": "92fb9b3837d6fa2f6fc3978abb7439afd739544d4d3c5939a05332783ce7a6d1",
+       "name": {
+        "namespace_uri": "",
+        "local_name": "ItemID"
+       },
+       "ordinal": 2,
+       "value": "PNS1_S1_C1"
+      }
+     ],
+     "children": [],
+     "parent_occurrence_id": "f0cdd2a9a6effb45cdf8452a5f21b03206fe7372e433241675ac248c48b5155c",
+     "source_assertions": [
+      {
+       "attribute_occurrence_id": "92fb9b3837d6fa2f6fc3978abb7439afd739544d4d3c5939a05332783ce7a6d1",
+       "role": "ItemID",
+       "target_text": "PNS1_S1_C1",
+       "resolution_status": "unverified",
+       "resolved_occurrence_ids": [
+        "a02343ba455d0de2b32a8df8ebd30a8cb5818774ec4f178be75a0d0c5e59a769"
+       ]
+      }
+     ]
+    },
+    "mappings": [
+     {
+      "source_occurrence_id": "195c86951fcb44499de9c9f3b0a16eaf107975bbedbc91e9731b666537377ff7",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "ba16ee63c1f7928c76c1c30484b0859b997cf8a7fad8f86e0bfe5ca598203edb",
+      "disposition": "unmapped",
+      "destinations": []
+     },
+     {
+      "source_occurrence_id": "92fb9b3837d6fa2f6fc3978abb7439afd739544d4d3c5939a05332783ce7a6d1",
+      "disposition": "unmapped",
+      "destinations": []
+     }
+    ],
+    "application_status": "unverified",
+    "policy_sha256": "b816fbe0316435f122ea91c65ab4a6e64cf5a6b6eb9a0f2119bd0e9f528a4d0a",
+    "mapping_sha256": "a86deeebc27b3d343901acbfc26fd459ef335e3ff3f3f6caed98482257463cb9",
+    "record_version_id": "6c09315218d80091056734b5de4cab37b78387761f0862af26e7377dd09e2e84",
+    "id": "source_record:6c09315218d80091056734b5de4cab37b78387761f0862af26e7377dd09e2e84"
+   }
+  ],
+  "exclusions": [],
+  "completeness": {
+   "elements": {
+    "total": 41,
+    "retained": 41,
+    "policy_redacted": 0,
+    "scope_excluded": 0
+   },
+   "attributes": {
+    "total": 108,
+    "retained": 108,
+    "policy_redacted": 0,
+    "scope_excluded": 0
+   },
+   "text_presence": {
+    "text": 17,
+    "tail": 40
+   },
+   "native_mapping": {
+    "retained_occurrences": 149,
+    "mapped_occurrences": 20,
+    "unmapped_occurrences": 129,
+    "destinations": 20,
+    "excluded_target_roots": [
+     "line_layers",
+     "report",
+     "prediction"
+    ]
+   }
+  },
+  "native_model_sha256": "3d35a256cb7a53e7ae7ac1684d6b5c46f52aba267a16f63e13d610211ae20dc4",
+  "integrity_sha256": "186bc30fcd698ce1fb18c08da40666417d5dd77ecca0ca73366d07c649b8e9ad"
+ }
+}

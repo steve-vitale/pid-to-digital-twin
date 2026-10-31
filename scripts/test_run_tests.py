@@ -119,6 +119,50 @@ class RunnerControls(unittest.TestCase):
         for name in runner.FULL_ONLY_TESTS:
             self.assertIn(name, output)
 
+    def test_capture_and_handoff_cohort_runs_offline_once(self):
+        required = ('scripts/test_source_evidence.py', 'scripts/test_source_capture_mode.py',
+                    'scripts/test_source_handoff.py')
+        status, _, run = self.invoke(['--source-only'])
+        self.assertEqual(status, 0)
+        launched = [c.args[0][-1] for c in run.call_args_list]
+        for name in required:
+            self.assertEqual(launched.count(name), 1, name)
+            self.assertNotIn(name, runner.FULL_ONLY_TESTS)
+
+    def test_missing_handoff_seed_or_methods_prevents_child_execution(self):
+        required = ('scripts/source_evidence.py', 'scripts/source_handoff.py', '.gitattributes', 'NOTICE.md',
+                    *(f'examples/source-handoff/fixture/{name}' for name in
+                      ('I01V01-VER.EX01.xml', 'embedded.model.json', 'PROVENANCE.json', 'EXPECTED.json')))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.fixture(root, cached=False)
+            for name in required:
+                with self.subTest(missing=name):
+                    path = root / name
+                    raw = path.read_bytes()
+                    path.unlink()
+                    with patch.object(runner, 'ROOT', root), \
+                         patch.object(runner.subprocess, 'run', side_effect=AssertionError('child forbidden')), \
+                         contextlib.redirect_stdout(io.StringIO()) as output:
+                        self.assertEqual(runner.main(['--source-only']), 2)
+                    self.assertIn('missing committed file: ' + name, output.getvalue())
+                    self.assertIn('no test scripts ran', output.getvalue())
+                    path.write_bytes(raw)
+
+    def test_handoff_platform_subcheck_notice_withholds_complete_pass(self):
+        result = subprocess.CompletedProcess([], 0, stdout='', stderr=(
+            'test_PT08_filesystem_git_checkout_relocation ... \n'
+            'SKIP [platform] PT08 escaping-symlink creation unavailable: WinError 1314\n'
+            'ok\n\nOK\n'))
+        with patch.object(runner, 'prerequisites', return_value=[]), \
+             patch.object(runner.subprocess, 'run', return_value=result), \
+             contextlib.redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(runner.main([]), 0)
+        self.assertIn(f'0 unittest case(s) skipped; {len(runner.TESTS)} platform notice(s); '
+                      '0 additional skipped-check notice(s)', output.getvalue())
+        self.assertIn('not a complete pass here', output.getvalue())
+        self.assertNotIn('FULL CACHED-DATA suite passed', output.getvalue())
+
     def test_test_failure_is_nonzero_in_both_modes(self):
         for args in ([], ['--source-only']):
             with self.subTest(args=args):

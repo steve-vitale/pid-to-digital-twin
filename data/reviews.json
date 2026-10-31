@@ -13851,6 +13851,294 @@
     "successor_actual_matrix_manifest_sha256": "f752a78cbc5d73c0051d8acbfd816b9bebd5f3d788665668985dd1da5cb8c14c",
     "prior_matrix_review_object_canonical_sha256": "287c9825f15e64b3f7f605c7cb25f12ada9317c251a1d0a405980fa143e034cc"
    }
+  },
+  {
+   "feature": "source-handoff",
+   "reviewer": "Independent AI review: exact worked Native/source trio, public explicit inspection and portable evidence boundary",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "Registry hashes cover complete text after CRLF-to-LF normalization. raw_input_bindings and private receipts separately bind exact fixture, method and worked bytes; no source pin is normalized or semantic field stripped.",
+   "registered_output_count": 3,
+   "files": {
+    "examples/source-handoff/worked/native.model.json": "a7975c551066cabecfb67e19d705a0431758e95611457875e137ae851a3d603b",
+    "examples/source-handoff/worked/source.evidence.json": "f4000235418e54f720e5d876bf9c6b4fcfd039992571f48f0515aa44c3b66290",
+    "examples/source-handoff/worked/handoff.manifest.json": "33de30fbf2d2285ded3160567d3a2ecbef0b7e4648f97ad3d89eb9e0f914888a"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "examples/source-handoff/worked/native.model.json": "a7975c551066cabecfb67e19d705a0431758e95611457875e137ae851a3d603b",
+    "examples/source-handoff/worked/source.evidence.json": "f4000235418e54f720e5d876bf9c6b4fcfd039992571f48f0515aa44c3b66290",
+    "examples/source-handoff/worked/handoff.manifest.json": "33de30fbf2d2285ded3160567d3a2ecbef0b7e4648f97ad3d89eb9e0f914888a"
+   },
+   "inherited_unchanged_files": {},
+   "changed_registered_outputs": [
+    "examples/source-handoff/worked/native.model.json",
+    "examples/source-handoff/worked/source.evidence.json",
+    "examples/source-handoff/worked/handoff.manifest.json"
+   ],
+   "supporting_files": {
+    ".gitattributes": "04f381e6b2c2ef923a132f5e4714ff7c51833c8c921e701556d70357b02f81a1",
+    "NOTICE.md": "e93973e7fb0e533af0eb8166a57a66624185140eb8f76b123c0df04fbb396a25",
+    "README.md": "8b400c25e8a8866b1a2962f72332b06aefc2be934b576ae8e0207356e1278157",
+    "docs/WORKFLOWS.md": "4ebcade3497f2e80448880d4615a5e32247f28b478e56ef8376532f176ecb697",
+    "scripts/run_tests.py": "262c0fdd96dbb872259cbf3f8d1348f91e68477bd36d555c5ca976e651f6243d",
+    "scripts/test_run_tests.py": "b59c7db5edf0e1111f98dbba39b816fe7ee2b8c1dd6232f628efdfdf3a49c671",
+    "data/script_index.json": "838fde575ee32b326c435310f5e6e206b48c1190630abfcf8bca48797d0ff3d9",
+    "docs/SCRIPTS.md": "3ee6e92f3cdfe96cdb3aad96da7cf3bd82b2d910446c544461a6745d3186c14c",
+    "examples/source-handoff/fixture/I01V01-VER.EX01.xml": "4d7ccf9ebff8db7f2849c9033dde1eb846bd8452154c0fe20d2bcb4e898cb043",
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92",
+    "examples/source-handoff/fixture/PROVENANCE.json": "976327aeed0c5e759cca12f9740c9554fea1b17b4036c5de76f3032384d08c13",
+    "examples/source-handoff/fixture/EXPECTED.json": "44b8043744b489e3f09d71be0ee455ae7377baa63cc93d96cffd0e0bb2526fc8",
+    "scripts/source_handoff.py": "e6efc65352f69692e634c32acff0c3963eadedb1f72488345d58f7ad877f490d",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6",
+    "scripts/test_source_handoff.py": "e073a7ff67513e6f8872dd9095a6f56e69c1041d1bc0f581a55fe2bea85d0a21",
+    "scripts/dexpi_reader.py": "14a6f23fea2bdb579c8604407d290a70065002b17019124e317b0fed44dddf3f",
+    "examples/source-handoff/README.md": "786c1bf16a783755ff1613369b1db03bcd376718e5cb10f51612de68db2f08cd",
+    "examples/from-dexpi-xml/README.md": "1a758ff6464b1d8219468a5cc22163689ae1964c282c5c6c412176e2fc8b31f9"
+   },
+   "raw_input_bindings": {
+    "examples/source-handoff/fixture/I01V01-VER.EX01.xml": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92",
+    "examples/source-handoff/fixture/PROVENANCE.json": "922abedde77a324d9f0b07fc0498b5e2af023ec9d318155054f792fa623d7cfc",
+    "examples/source-handoff/fixture/EXPECTED.json": "4ce9a92ffaef13563665c08e3f5453e4768e9b8afe7b08901a07e90aeaef680b",
+    "examples/source-handoff/worked/native.model.json": "a7975c551066cabecfb67e19d705a0431758e95611457875e137ae851a3d603b",
+    "examples/source-handoff/worked/source.evidence.json": "f4000235418e54f720e5d876bf9c6b4fcfd039992571f48f0515aa44c3b66290",
+    "examples/source-handoff/worked/handoff.manifest.json": "33de30fbf2d2285ded3160567d3a2ecbef0b7e4648f97ad3d89eb9e0f914888a",
+    "scripts/source_handoff.py": "e6efc65352f69692e634c32acff0c3963eadedb1f72488345d58f7ad877f490d",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6",
+    "scripts/test_source_handoff.py": "e073a7ff67513e6f8872dd9095a6f56e69c1041d1bc0f581a55fe2bea85d0a21"
+   },
+   "comparison_notes": {
+    "worked": "Root actually exported and inspected the public worked example against independently frozen pre-run data-only expectations. This reviewer separately inspected both complete encoded formats, reconstructed the full embedded model and verified exact Git-filtered raw bytes. All three role files are freshly validated.",
+    "dependencies": "The exact current public methods and fixture/test inputs match independent private core and portable acceptances; the exact joined historical replay is received separately, not reported as a new run by this reviewer.",
+    "registration": "One optional export feature registers exactly three worked files. Current script classification, source-only registration, committed prerequisites and guide roles agree. Company-managed systems own ongoing governance; no shared service is added."
+   },
+   "checks": [
+    "All three public role files match complete independently derived bytes, typed values/order, hashes and package identity. Only the training scope/role and derived package identity differ from the frozen historical manifest.",
+    "Two actual public inspect CLIs reproduce the entire frozen JSON/text briefs. Reattaching the complete packet reproduces all144647 embedded model bytes; no fields or values are removed for comparison.",
+    "The independent portable cohort ran fifteen methods successfully with zero unittest case skips, one recognized native Win1314 platform notice and zero additional notices. Twelve separately forced receiving controls cover allowed notices, unexpected I/O errors and actual successful junction escape; the unavailable native creation check remains explicit.",
+    "Exact joined dependencies passed the separately retained141-group/1292-assertion/94-CLI private historical replay. These counts are received replay evidence and do not erase the portable platform notice.",
+    "Sixteen current runner control cases pass. Original runner functions and old tests remain exact; registration/prerequisites and skipped-subcheck visibility are checked. Three exact -text rules preserve actual worked raw bytes.",
+    "The public fictional DEXPI fixture retains original/source credit, CC-BY-4.0 attribution and adaptation notice. Current guides/relative links/privacy and supplied-label/governance limits are reviewed."
+   ],
+   "scope": "Current optional local Native/complete-evidence export and explicit inspect prototype, its exact three worked outputs and current supporting registration/guides. This is a portable evidence on-ramp, not company governance infrastructure.",
+   "limits": [
+    "Complete means the entire captured policy-filtered structured packet, not every original XML byte, text/tail payload or engineering interpretation. Named-field filtering is not general PII detection or company-input clearance.",
+    "Scope/role/reference and historical method hashes are supplied declarations. They do not authenticate ownership, asset identity, company approval, latest/revocation or release authority.",
+    "Late failures can leave complete or partial role prefixes. No rollback, atomic trio, race-free transaction, concurrency or safe publication is certified.",
+    "Graph/context/MCP/Copilot consumers do not acquire source-packet support. Company-managed systems retain ongoing identity, access, review, decisions and published revisions.",
+    "The native Windows escaping-symlink creation subcheck was unavailable with Win1314 and is recorded separately. Forced junction success is a different exercised branch; no complete-all-checks claim follows.",
+    "Matrix/current-corpus refresh, expanded full suite, final publication, committed-tree identities, exact-head CI, plant validation and human review/transfer timing are outside this feature receipt."
+   ],
+   "private_proofs": {
+    "public_feature_receiving_sha256": "4b22c16dc267edaa3087aea0ad22618d7fb3c4a5c0795e5eaa10ccbcaf6cbc6d",
+    "public_feature_receiving_manifest_sha256": "546ff2cafe3cee27efb063acce312ce9aaa34fe20b26b3dcb0045d48471a693f",
+    "worked_prospective_sha256": "56f98cab338ae0996283fe7fa525a6246fe3b3afba704836a4fe8f2c69df2abd",
+    "root_worked_actual_sha256": "286a30e52cd63a332b1c0ace11ed92e324418a5fb131be43f562ad8c2f96bf01",
+    "root_public_XML_readback_sha256": "33dce64c082e09a6acbe60201c999789636561aaa96920a98abe9dfa48677bc3",
+    "own_public_actual_readback_sha256": "314f66365edad5c7ba9ec8649e32eb9a02739744a91d721e58d5472b29122499",
+    "private_current_base_core_acceptance_sha256": "558eb5be0a04bfc2173e858c3583a7c18110c56dee39b3082a28f4152a5dbfd7",
+    "private_portable_actual_acceptance_sha256": "275e2bbbd2a0dfa0611633b4bcc715e134559bfc8ff1a78ebb7b309b36c25d4c",
+    "private_joint_legacy_replay_sha256": "4209a9885d6ed7c80677b869b634e795e02878cc572f7a24884b30868051800d"
+   }
+  },
+  {
+   "feature": "dexpi-xml-to-model",
+   "reviewer": "Independent AI review: explicit source capture with released Native default and exact public fixture readback",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "Registry hashes cover complete text after CRLF-to-LF normalization. raw_input_bindings and private receipts separately bind exact fixture, method and worked bytes; no source pin is normalized or semantic field stripped.",
+   "registered_output_count": 4,
+   "files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd",
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92"
+   },
+   "inherited_unchanged_files": {
+    "examples/from-dexpi-xml/dexpi-c01.model.json": "72dbbfeea632ee66a5edacb0bc608e81359f8b2783190e39ecc73e8c34a540a8",
+    "examples/from-dexpi-xml/dexpi-c01.report.md": "1bbffb7f4b9abc80b4f9d8cb82a9bfbfd6d1b5727a05ee8b02bb4582fd4f8a04",
+    "examples/from-dexpi-xml/dexpi-c01.graph.json": "71dccd3ed1696099cc7379241213df30a0422b84f1a84c6d7d0939db2fa41dcd"
+   },
+   "changed_registered_outputs": [
+    "examples/source-handoff/fixture/embedded.model.json"
+   ],
+   "supporting_files": {
+    ".gitattributes": "04f381e6b2c2ef923a132f5e4714ff7c51833c8c921e701556d70357b02f81a1",
+    "NOTICE.md": "e93973e7fb0e533af0eb8166a57a66624185140eb8f76b123c0df04fbb396a25",
+    "README.md": "8b400c25e8a8866b1a2962f72332b06aefc2be934b576ae8e0207356e1278157",
+    "docs/WORKFLOWS.md": "4ebcade3497f2e80448880d4615a5e32247f28b478e56ef8376532f176ecb697",
+    "scripts/run_tests.py": "262c0fdd96dbb872259cbf3f8d1348f91e68477bd36d555c5ca976e651f6243d",
+    "scripts/test_run_tests.py": "b59c7db5edf0e1111f98dbba39b816fe7ee2b8c1dd6232f628efdfdf3a49c671",
+    "data/script_index.json": "838fde575ee32b326c435310f5e6e206b48c1190630abfcf8bca48797d0ff3d9",
+    "docs/SCRIPTS.md": "3ee6e92f3cdfe96cdb3aad96da7cf3bd82b2d910446c544461a6745d3186c14c",
+    "examples/source-handoff/fixture/I01V01-VER.EX01.xml": "4d7ccf9ebff8db7f2849c9033dde1eb846bd8452154c0fe20d2bcb4e898cb043",
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92",
+    "examples/source-handoff/fixture/PROVENANCE.json": "976327aeed0c5e759cca12f9740c9554fea1b17b4036c5de76f3032384d08c13",
+    "examples/source-handoff/fixture/EXPECTED.json": "44b8043744b489e3f09d71be0ee455ae7377baa63cc93d96cffd0e0bb2526fc8",
+    "scripts/dexpi_reader.py": "14a6f23fea2bdb579c8604407d290a70065002b17019124e317b0fed44dddf3f",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6",
+    "scripts/test_dexpi_reader.py": "550ec9a5d714c5cdd9aef0f4349874bef14c3dc01307c7552fe401fc48f64680",
+    "scripts/test_source_evidence.py": "c5ca373f957380e264455198a58e0e33ccb3f15bacc1c7654dc99c620ca87463",
+    "scripts/test_source_capture_mode.py": "57639ea54f02870c6aac18f766afa707f1d6b5cd093ddd97f4712edc0dce759b",
+    "scripts/source_handoff.py": "e6efc65352f69692e634c32acff0c3963eadedb1f72488345d58f7ad877f490d",
+    "scripts/test_source_handoff.py": "e073a7ff67513e6f8872dd9095a6f56e69c1041d1bc0f581a55fe2bea85d0a21",
+    "examples/from-dexpi-xml/README.md": "1a758ff6464b1d8219468a5cc22163689ae1964c282c5c6c412176e2fc8b31f9",
+    "examples/source-handoff/README.md": "786c1bf16a783755ff1613369b1db03bcd376718e5cb10f51612de68db2f08cd"
+   },
+   "supporting_inputs_not_independently_certified": {
+    "scripts/graph_export.py": "156af52fde88d47169dc84344f6082fcba6cfcfcc2e3813648a1339dfc791bd9",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509"
+   },
+   "raw_input_bindings": {
+    "examples/source-handoff/fixture/I01V01-VER.EX01.xml": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "examples/source-handoff/fixture/embedded.model.json": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92",
+    "examples/source-handoff/fixture/PROVENANCE.json": "922abedde77a324d9f0b07fc0498b5e2af023ec9d318155054f792fa623d7cfc",
+    "examples/source-handoff/fixture/EXPECTED.json": "4ce9a92ffaef13563665c08e3f5453e4768e9b8afe7b08901a07e90aeaef680b",
+    "scripts/dexpi_reader.py": "14a6f23fea2bdb579c8604407d290a70065002b17019124e317b0fed44dddf3f",
+    "scripts/test_dexpi_reader.py": "550ec9a5d714c5cdd9aef0f4349874bef14c3dc01307c7552fe401fc48f64680",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6",
+    "scripts/test_source_capture_mode.py": "57639ea54f02870c6aac18f766afa707f1d6b5cd093ddd97f4712edc0dce759b",
+    "scripts/test_source_evidence.py": "c5ca373f957380e264455198a58e0e33ccb3f15bacc1c7654dc99c620ca87463"
+   },
+   "comparison_notes": {
+    "fresh": "Two actual public reader CLIs on the unchanged6144-byte CRLF original produce the complete6094-byte Native model by default and the complete144647-byte captured model only with --capture-source. The newly registered captured fixture is freshly reproduced as exact raw bytes.",
+    "inherited": "The existing three registered C01 model/report/graph files match their prior review hashes unchanged. Their prior scope is inherited; this review does not claim a new C01 graph reproduction or renew graph-guard implementation certification.",
+    "current_core": "All five current core method/test bytes match the qualified independent opt-in acceptance. Its source465e and released Native default, strict opt-in, mappings and guard contracts retain that bounded private scope. The new public fixture/readback and documentation/registration are checked here.",
+    "governance": "Source occurrence IDs are provenance, not shared equipment identities or permission to merge across sites. Existing downstream consumers continue to use documented Native fields; ongoing company governance is external."
+   },
+   "checks": [
+    "The exact five public core files match the independent current-base acceptance:57 reader-union,38 source and11 opt-in unit methods plus four additional source-enabled bounded controls, with zero skips in that qualified private core run. Those unit cohorts are received evidence, not rerun here.",
+    "The qualified core receipt retains54 actual CLIs, complete27 Native and27 Source artifact comparisons, source/identity/mapping/strict-encoding controls, and296 matched API guard sessions. No broader XML, company, source-consumer or capacity acceptance is inferred.",
+    "This reviewer freshly executes the public Native/default and explicit-source CLI routes on the licensed committed XML and compares both full model outputs byte-for-byte to the frozen saved identities. Reconstructing the captured model from the public worked trio reproduces every embedded byte and typed value/order.",
+    "All three older C01 output hashes remain exact against the preceding review and pre-integration base. They are inherited unchanged, not freshly graph-reproduced in this review.",
+    "The guide and workflow map explicitly state opt-in, no disabled capture work, optional document-ID requirements, parsed attribute values and occurrence order, policy exclusions/text-tail limitations, unmapped content, and external identity/governance responsibility. Current source/transport tests and committed fixture prerequisites are registered offline.",
+    "Current runner controls pass sixteen cases, including registration once, missing committed inputs before child execution, and visibility of an unavailable platform subcheck. Portable transport coverage retains its separate Win1314 platform notice."
+   ],
+   "scope": "Explicit complete policy-filtered source capture on the current XML reader while preserving the released Native-only default. One freshly reproduced captured fixture plus three inherited unchanged Native registered outputs; current supporting docs/registries are reviewed.",
+   "limits": [
+    "Source records retain eligible structured content and parsed XML attribute values, not original lexical bytes or omitted text/tail payload. Full original documents remain separate. This is not a general XML round trip or general PII detector.",
+    "The existing named-field policy, unsupported protected nesting and Native interpretation limits remain. Original documents, historical decisions and old artifacts are not automatically sanitized or cleared for sharing.",
+    "Source occurrence IDs identify revision-bound provenance; equal equipment tags do not establish shared company identity or merge authority.",
+    "Graph/context/MCP and other downstream source-aware consumers are not added or certified. Company-managed systems own continuing access, review, decisions and publication.",
+    "Private core tests, newly checked public fixture/readback, inherited historical C01 evidence, matrix/full suite and committed CI are distinct scopes. No new C01 graph reproduction, plant accuracy, human review time, whole-matrix performance cause or company capacity is claimed."
+   ],
+   "private_proofs": {
+    "public_feature_receiving_sha256": "4b22c16dc267edaa3087aea0ad22618d7fb3c4a5c0795e5eaa10ccbcaf6cbc6d",
+    "public_feature_receiving_manifest_sha256": "546ff2cafe3cee27efb063acce312ce9aaa34fe20b26b3dcb0045d48471a693f",
+    "worked_prospective_sha256": "56f98cab338ae0996283fe7fa525a6246fe3b3afba704836a4fe8f2c69df2abd",
+    "root_worked_actual_sha256": "286a30e52cd63a332b1c0ace11ed92e324418a5fb131be43f562ad8c2f96bf01",
+    "root_public_XML_readback_sha256": "33dce64c082e09a6acbe60201c999789636561aaa96920a98abe9dfa48677bc3",
+    "own_public_actual_readback_sha256": "314f66365edad5c7ba9ec8649e32eb9a02739744a91d721e58d5472b29122499",
+    "private_current_base_core_acceptance_sha256": "558eb5be0a04bfc2173e858c3583a7c18110c56dee39b3082a28f4152a5dbfd7",
+    "private_portable_actual_acceptance_sha256": "275e2bbbd2a0dfa0611633b4bcc715e134559bfc8ff1a78ebb7b309b36c25d4c",
+    "private_joint_legacy_replay_sha256": "4209a9885d6ed7c80677b869b634e795e02878cc572f7a24884b30868051800d",
+    "prior_native_review_canonical_sha256": "a217d89ade657558b493c47afff399b2abb94375384b47664d07dc32412cd6a2"
+   }
+  },
+  {
+   "feature": "generalization-matrix",
+   "reviewer": "Independent AI review: explicit opt-in reader Native-default thirteen-cell refresh and complete receiving",
+   "date": "2026-10-31",
+   "verdict": "pass",
+   "file_hash_method": "SHA-256 of LF-normalized registered text; private proofs also bind complete raw run snapshots, inputs, methods and retained exclusive log pairs. Matrix binding contract unchanged.",
+   "registered_output_count": 3,
+   "files": {
+    "docs/GENERALIZATION.md": "681ba7cfac9c0b0522923564fa265db8913783e6b612ca06493b0648dd92d2bd",
+    "out/generalization/matrix.json": "66c233ba106116216ceb8c65897df58c3cbda9355506f1a74592c8a31aa7dbb1",
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "freshly_reproduced_or_validated_files": {
+    "docs/GENERALIZATION.md": "681ba7cfac9c0b0522923564fa265db8913783e6b612ca06493b0648dd92d2bd",
+    "out/generalization/matrix.json": "66c233ba106116216ceb8c65897df58c3cbda9355506f1a74592c8a31aa7dbb1"
+   },
+   "inherited_unchanged_files": {
+    "data/corpus.json": "0f02e9434b490769619d14f0440fe737e925b239a2633b70a0851bd154114e9c"
+   },
+   "changed_registered_outputs": [
+    "docs/GENERALIZATION.md",
+    "out/generalization/matrix.json"
+   ],
+   "supporting_files": {
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/test_corpus_matrix.py": "b016c9e1eb33a747d7f7ad6256f5160a56c12a17e4f1a604bd88451e6975fd10",
+    "scripts/dexpi_reader.py": "14a6f23fea2bdb579c8604407d290a70065002b17019124e317b0fed44dddf3f",
+    "scripts/test_dexpi_reader.py": "550ec9a5d714c5cdd9aef0f4349874bef14c3dc01307c7552fe401fc48f64680",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6"
+   },
+   "current_consumed_method_hashes": {
+    "data/agent_keys/commons-pid-sheets/P_ID.graphml": "d321542187a15bc1141060ae6dd7689bd1a85aa295fd4284ab4a03497d7a93ad",
+    "data/agent_keys/commons-pid-sheets/Pump_with_tank_pid_en.graphml": "a2255c924710353fe7fb669380e34e7f0a6a868ff1384a678ba74be00ccc7e61",
+    "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "7b6b80b3a3886802af0ceb0c24772e2c3685fc4e5dcfed63072b1d6228c03c00",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "43a4ebe740bc78b961011a476bbc7e8af98415011d2da104d841cd80ce41b037",
+    "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "ac948b59d12183e4dcc690566040ed2c1fa5d35345c3f183c12f0b1022266e8f",
+    "data/agent_keys/omre-1958-pid/omre_q4.graphml": "6cb0e9db7871f0c647d98e26d7dc84aa42a798c4fa342ae01c706d1de06d3e05",
+    "data/agent_keys/pronto-fig1/fig1.graphml": "f4e0b59ebaea8b3a97cc60b47a3f27c46a0f7ba835fe805008bba5da55327013",
+    "scripts/adapt_dexpi.py": "519025621ad2df4af5d0850d869fe3eff23ff33f609e5a0e5bc4a2a59371e9ce",
+    "scripts/build_twin.py": "8e9a5e26b9938a8adcca9590e03c3dde8c63af38aba09f6cf1aeafe6c4b0ded7",
+    "scripts/confidence.py": "0fc9948199d89edfeb091f4a9c1c961f5361f10bf0f292d7b7ce72740e7e4a10",
+    "scripts/corpus_adapters.py": "c589799614ebb821d7d8a73a0c3208ea9a182b5fe85f5bdd49200969ea524e73",
+    "scripts/corpus_matrix.py": "5407cd2daf752b48385e5226680f0b440d708e1ff55913bc081d159263a0f0ed",
+    "scripts/csv_normal_bands.py": "88baa8aa94fd29002956843a947a5e7bb2d428b09fc57af002c554c399099f6e",
+    "scripts/deliverable_report.py": "6df4ee498e6544d8f57327a1d6e675c059f189c2cc8fcac411a20fc120a4e425",
+    "scripts/dexpi_reader.py": "14a6f23fea2bdb579c8604407d290a70065002b17019124e317b0fed44dddf3f",
+    "scripts/dexpi_to_twin.py": "24920399a29e7556ee9bd1dee8541cb9c9c34622fd4ace861241639ee5f69a24",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/evaluate_vendor.py": "304be06c4a31e852dfcef093bd3cb858429fd962c5e45d0241cadefd0baf7fcd",
+    "scripts/fetch_corpus.py": "fb9f6480a2209054e30dfe56e69179570c1da6f766dc01fd04319077ae9e1e0b",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/historian_adapters.py": "1020bb06a248667a9308756bc24415ce1ec9cc8169b23b9df8cd378d1c78b761",
+    "scripts/import_site_drawing.py": "20127817b1f79e9f4b0b04d114f1736d4b70bd3c9f168cf9b1bd1b0f974d84d2",
+    "scripts/line_layers.py": "8da90dcfd6408f3c666df5ecf8e3e1d3bda2f9b5dd2ebbab57f76acad1993838",
+    "scripts/loop_audit.py": "ec7837928220abfffa5762650b9ee53c5aa30c048d32b2d591d0fe9dd9c4c4a5",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
+    "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433",
+    "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
+    "scripts/scan_cleanup.py": "f396c492a2e6e894763b1ed5f3a0eef6beb9a502f1d3d45cc617f3a8c8acd509",
+    "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
+    "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
+    "scripts/score_twin.py": "3bdf5993e0e3eb4ea11e5f01f23ba4571d2e25510a43d6f637132428841af223",
+    "scripts/source_evidence.py": "465edb94b8cdf6dab32fe4d68a8a96485d66b366075393688ba913378c74a9b6",
+    "scripts/test_scorer_controls.py": "fd6bb754ae45470077ef0b05c1d83fd6d9dcdd3663bd80aa9aca3100903b146b",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
+   },
+   "checks": [
+    "Verified root two actual commands covering exactly twelve plus one reader-dependent cells, all exact argv/UTC/exit receipts and complete retained stdout/stderr; both full matrix/page snapshots are bound and independently compared. Reviewer reran no producing cells or models.",
+    "Both frozen canonical JSON comparisons preserve all nonallowed values and types. Only26explicit cell timing fields,13reader bindings b27 to14a6 and13exact static backend465e dependency additions differ; all82other complete objects remain exact.",
+    "All substantive results, existing dependency keys, source/key/registry/runner bindings, split labels, criteria, reasons and per-case details remain exact. The six already-present N091 refusal diagnostics have zero new diagnostic allowance.",
+    "Both independent read-only receivers verify all95strict declared source bindings and complete frozen raw method/input identities; final page matches the unchanged renderer and final tool bindings are current. Root strict --check --require-inputs also exits zero with every optional input present.",
+    "Registered corpus is inherited at its exact prior accepted hash. The two changed registered outputs are validated root actual artifacts, not hash updates applied to saved results."
+   ],
+   "comparison_notes": {
+    "static_dependency": "The unchanged conservative AST recorder follows lazy optional import statements, so source_evidence.py is an additional static dependency in the13affected cells. These Native-default runs do not establish backend runtime import, capture execution or Source-enabled matrix coverage. Zero-import default behavior has a separate functional acceptance.",
+    "outcomes": "64pass/23fail/8not-applicable unchanged; historical generated/agent-key/development/heldout/scorer limitations and earlier-generator n/a reasons remain exact. No accuracy improvement or new source family is established.",
+    "inheritance": "82complete objects inherit earlier actual evidence and were not rerun. Existing historical proof-retention disclosures remain in prior append-only reviews; this refresh does not recover or replace old logs.",
+    "timing": "Cell and aggregate times are retained observations, not matched performance trials or evidence of organizational capacity."
+   },
+   "scope": "Current-code receiving of selected Native-default matrix workflows after an explicit opt-in source-capture reader adoption. These95workflow/input cells are not95independent trials, model comparisons or a whole-toolkit completion score.",
+   "limits": [
+    "No new Source-enabled accuracy cell or capture-function acceptance is provided by this matrix review; source-capture and handoff functionality have separate finite reviews.",
+    "Root performed13actual producing cells; reviewer performed only2read-only full snapshot comparisons. The82unchanged complete objects are inherited.",
+    "Full suite, publication, committed blobs and exact-head CI remain separate. No Source-aware consumer, operations execution, organizational authority or company-scale infrastructure claim is established."
+   ],
+   "private_proofs": {
+    "prospective_receiving_sha256": "fb1d8909182e6a544539a1a231dfe1458cc153f1061063bb4dfcad7614b429c9",
+    "canonical_type_strengthening_sha256": "ae08259a4fc9d6b60b1a00e9b0e34a9d1d2528e0f820e16d60f3b5367ef0a5be",
+    "static_dependency_disposition_sha256": "f29ad10be0cbbe2f74899f955f7904bbe664e9103cd512ae060df49f34566619",
+    "root_actual_result_sha256": "27c7402715ef22b80348bb8450886d4236bec03a821be2abb0c777af9c4cb185",
+    "independent_receiving_acceptance_sha256": "5f635eb2d5410fa074cb86917c230d9ede849dfea4ca5051d76e680d5e0c36b3",
+    "independent_receiving_manifest_sha256": "29ce8733d81987d8a66a3a583d0be90d987352c04646f48fce45a9947a41e35c",
+    "phase1_independent_comparison_sha256": "c728e0faa849d52e98d17bb65c56ae1c8b0948c776882f76dbcbc63bb4a6e707",
+    "final_independent_comparison_sha256": "751cb421e6d70837c0f14c5ca6fc3d65585dfbf198f2e3a9748fed2450a92d9a",
+    "separate_private_optin_core_acceptance_sha256": "558eb5be0a04bfc2173e858c3583a7c18110c56dee39b3082a28f4152a5dbfd7"
+   }
   }
  ]
 }

@@ -1,0 +1,50 @@
+{
+  "schema": "source-handoff-fixture-provenance-1",
+  "upstream_repository": "https://gitlab.com/dexpi/TrainingTestCases",
+  "upstream_commit": "a23d61e2e089eb2ca464cd552f9ae580a2785963",
+  "upstream_relative_path": "dexpi 1.2/example pids/I01 Measurement/I01V01-VER.EX01.xml",
+  "upstream_immutable_raw_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/dexpi%201.2/example%20pids/I01%20Measurement/I01V01-VER.EX01.xml",
+  "original": {
+    "file": "I01V01-VER.EX01.xml",
+    "bytes": 6144,
+    "raw_sha256": "cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+    "CRLF_pairs": 133,
+    "unchanged_original": true
+  },
+  "embedded_fixture": {
+    "file": "embedded.model.json",
+    "bytes": 144647,
+    "raw_sha256": "2c595fdae8a092182259281ee1b616b9245fc3b8cb23e5bafadaee6b699aab92",
+    "origin": "Byte-identical saved accepted development/public-training fixture; not regenerated to create this expectation."
+  },
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "upstream_license_url": "https://gitlab.com/dexpi/TrainingTestCases/-/raw/a23d61e2e089eb2ca464cd552f9ae580a2785963/LICENSE",
+    "cached_license_raw_sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+    "attribution": "DEXPI example P&IDs from the DEXPI TrainingTestCases repository, DEXPI initiative and its contributing members.",
+    "changes": "Original XML is redistributed unchanged. Embedded JSON is this project’s Native conversion plus the complete existing policy-filtered source packet; retain original-source credit and mark that adaptation. Do not relabel the fixture as MIT-only."
+  },
+  "content_scope": {
+    "original_elements": 41,
+    "original_attributes": 108,
+    "retained_records": 41,
+    "policy_redactions": 0,
+    "scope_exclusions": 0,
+    "native_mapped_occurrences": 20,
+    "native_unmapped_occurrences": 129,
+    "original_text_or_tail_nonwhitespace_payload": false,
+    "packet_text_tail_policy": "presence counted; text/tail payload not copied. Complete means the entire captured policy-filtered packet, not byte-perfect original XML."
+  },
+  "distribution_requirements": [
+    "Include this attribution/license link and adaptation notice adjacent to the public fixture.",
+    "Update NOTICE.md statement that original DEXPI XML is not redistributed, naming this explicit small exception.",
+    "Preserve originalXML and embedded fixture raw bytes with narrowly scoped -text Git attributes; preserve accepted utility/validator raw code bytes too.",
+    "Keep all PROVENANCE/EXPECTED metadata separate; never insert credit into the hash-bound saved model/packet."
+  ],
+  "limitations": [
+    "Public fictional training drawing, not plant/customer data, engineering approval or heldout transfer evidence.",
+    "Manual content review and exact source provenance support this seed; named-field exclusion is not general PII detection or a blanket clearance for arbitrary company input.",
+    "URI-looking source values are inert supplied ontology references; never fetch them during portable tests."
+  ]
+}

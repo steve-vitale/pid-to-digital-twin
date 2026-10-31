@@ -8,8 +8,8 @@ their original evidence remain in the journal and attempt ledger.
 source-backed question and a packet another engineer can reconstruct. This is a foundation for maintained
 engineering context; it is not a turnkey digital twin, process audit or company governance service.
 
-The [script registry](SCRIPTS.md) classifies 131 scripts: 31 tools, 12 checks, 12 support modules and 76 research
-scripts; tests are separate. Twenty [feature groups](FEATURES.md) have bounded example evidence. A reviewed
+The [script registry](SCRIPTS.md) classifies 133 scripts: 32 tools, 12 checks, 13 support modules and 76 research
+scripts; tests are separate. Twenty-one [feature groups](FEATURES.md) have bounded example evidence. A reviewed
 example does not certify every input, current implementation or engineering conclusion.
 
 ## Known defects
@@ -34,12 +34,20 @@ Schedule-field intake also rejects ambiguous case keys and conflicting values, m
 and refuses previously ignored native-model schedules. These input checks preserve evidence and explicit choices;
 they do not decide which source governs a company's engineering work.
 
-**Open N086 — source intake observability.** Existing I01 XML comparisons show why a missing native count
-is not automatically an omitted process item: one instrument is explicitly unplaced, and another file's segment
-ends at an instrument. The reader also leaves unattached source records outside the native model and reports
-losses in aggregate. Exact identity/value dispositions and declared uncertainty need a separate source-admission
-repair. Evaluation owns the source accounting; Questions provides independent source/key review. Historical
-matrix failures and source-owner/engineering acceptance remain unchanged.
+**N086 — optional source intake observability.** Explicit `--capture-source` now retains eligible structured
+XML occurrences, parsed attribute values, source identities and Native mappings, with unmapped occurrences
+counted separately. The default remains the existing Native-only model and reports. Capture follows a declared
+scope and named-field policy; omitted text/tail payloads and presentation/geometry records still require the
+separate original XML. Source IDs are provenance, not shared engineering identities. This does not improve
+Native placement or extraction accuracy, change historical matrix failures, or establish source authority.
+See the [capture guide](../examples/from-dexpi-xml/README.md#optional-capture-structured-source-evidence).
+
+**N097 — optional local handoff.** An already captured model can become a selected Native/evidence/manifest
+trio with explicit inspection and a bounded brief. The [worked files](../examples/source-handoff/README.md)
+retain complete captured evidence and checked byte bindings. The utility does not discover sources, collect
+data or provide company authentication, release, latest-version checking, atomic publication or concurrent
+editing. Graph/context/MCP consumers do not expose the captured packet. Ongoing identity, access, review and
+decisions belong in the company-managed receiving system.
 
 **N088 — bounded E27 repair.** The original thirteen matched runs preserve eight scope failures. A local,
 shared, unrelated, unknown or negated reset label now stays a candidate while each applicable condenser retains
@@ -47,7 +55,8 @@ train/operating-basis review. Source pointers and complete selected graph/contex
 answers can become stale. This does not establish actual control coverage, operating suitability or site savings.
 
 The [follow-up record](JOURNAL.md#120-keep-qualified-private-fields-and-condenser-train-review-at-their-source-boundaries)
-preserves the original failures and independently reviewed repairs. N086 source-identity and receiving work remains open.
+preserves the original failures and independently reviewed repairs. The bounded N086 capture and N097 local
+handoff are separate from source-owner acceptance and the real company receiving work in N062/N063.
 
 ## What exists, and what remains manual
 
@@ -100,8 +109,8 @@ actual participant, recipient, native-system and tenant observations remain **no
 
 | Workstream owner | Remaining work | Completion evidence |
 |---|---|---|
-| **Questions agent** | N065 useful source-backed questions, N082 remaining catalog source adequacy and independent N086 source/key review. Fifty rules/124 request bundles are inventoried; 14 rules have bounded collection reviews and 36 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
-| **Evaluation agent** | N086 exact source identity/value accounting, the matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
+| **Questions agent** | N065 useful source-backed questions, N082 remaining catalog source adequacy and independent engineering source/key acceptance for N086. Fifty rules/124 request bundles are inventoried; 14 rules have bounded collection reviews and 36 still await original-source adequacy review. | Prospective expected/unacceptable questions across applicable source families, followed by engineer/recipient usefulness observations. The scoped MGPI recipe is development evidence; default MGPI still produces zero findings. |
+| **Evaluation agent** | N086 original-source/key engineering acceptance and Native placement gaps, the matrix's existing failures, unfamiliar-source coverage, scorer limits, optional original-source skips and five missing historical prediction tables. | Matched reproducible experiments with fixed criteria, retained failures, exposure/split labels and independent source/key review. More files or rerunning development inputs is not generalization. |
 | **Context/retrieval agent** | Keep the local refresh/review/restart contract bounded and test receiving projections, including changed or removed identifiers and complete history. | Source-change and full readback controls retaining history; company service behavior needs its own acceptance. |
 | **Integration agent** | N062 real engineer/recipient pilot; N063 authorized company import/readback, client permissions and subsequent revision. | Actual observations from the [acceptance exercise](ACCEPTANCE.md), not an agent simulation. Native PI/gateway acceptance and operational benefit remain unverified. |
 
@@ -124,13 +133,16 @@ research, intentional tool boundaries and external acceptance are not silently c
 
 ## How this audit was checked
 
-The latest full 95-cell matrix run records **64 pass / 23 fail / 8 n/a**. The metadata-exclusion repair then
-actually reruns all 13 cells that consume the XML reader. Their results remain unchanged apart from timing/code
-bindings; the other 82 complete cells stay exact. Criteria, source/key inputs and historical failures are retained.
-No binding is backfilled. These failures remain research work, not failing unit tests.
-All **64 local test scripts pass**, with five Windows unittest skips and two explanatory platform notices;
-those counts are not added together. Targeted CLI controls, source-preservation checks, full-value reproductions
-and independent cross-reviews support the bounded repairs.
+The current 95-cell matrix records **64 pass / 23 fail / 8 n/a**. After explicit source capture was added, the
+13 Native-default cells that depend on the XML reader were actually rerun. Their substantive results remain
+exact; only the frozen timing fields, reader binding and conservative static source-backend dependency change.
+The other 82 complete cell objects stay exact. The static dependency is not evidence of Source-enabled execution.
+Criteria, source/key inputs and historical failures are retained; no binding is backfilled. These failures remain
+research work, not failing unit tests.
+All **70/70 local test scripts exit zero**, with five Windows unittest case skips, three platform notices and
+zero additional skipped-check notices. Those counts are distinct; the handoff's unavailable native-symlink
+subcheck is a platform notice without a skipped unittest case. This is not a complete runtime pass. Targeted CLI
+controls, source-preservation checks, full-value reproductions and independent cross-reviews support the bounded repairs.
 
 The publication check matches 41 numerical claims and identifies one prose-only claim; all 52 configured pipeline
 stages are fresh. Four current benchmark suites reproduce. Re-scoring saved predictions reproduces 30 tables

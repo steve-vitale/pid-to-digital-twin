@@ -1,0 +1,137 @@
+{
+ "meta": {
+  "model_id": "reference",
+  "title": "DEXPI XML I01V01-VER.EX01.xml",
+  "source_document": "DEXPI XML file I01V01-VER.EX01.xml, SHA-256 cdcb8a3ca7a447acab51957062d1473dd42826cb95798d50b097eedc88fe3269",
+  "model_kind": "dexpi_import",
+  "converted_by": "scripts/dexpi_reader.py (no model; every item cites its XML element ID)",
+  "dexpi_file": {
+   "SchemaVersion": "4.0.1",
+   "OriginatingSystem": "DEXPI",
+   "Date": "2016-08-31",
+   "Time": "10:00:00+02:00",
+   "Is3D": "no",
+   "Units": "mm",
+   "Discipline": "PID"
+  },
+  "drawing": {},
+  "plant_structure": [],
+  "not_a_drawing_of_record": "Converted from an exported file. Nothing here is verified by anyone; units of instruments and valves are inferred through the piping (unit_basis)."
+ },
+ "units": [
+  {
+   "id": "T01",
+   "name": "Tank",
+   "type": "tank",
+   "type_basis": "exact",
+   "dexpi_class": "Tank",
+   "dexpi_id": "T01",
+   "id_basis": "TagName XML attribute",
+   "source": "DEXPI XML T01 (Tank)",
+   "TagNamePrefixAssignmentClass": {
+    "value": "T",
+    "source": "DEXPI XML T01 GenericAttribute TagNamePrefixAssignmentClass"
+   },
+   "TagNameSequenceNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML T01 GenericAttribute TagNameSequenceNumberAssignmentClass"
+   },
+   "T01_N3:dexpi_class": {
+    "value": "Nozzle",
+    "source": "DEXPI XML T01_N3 <Nozzle>"
+   }
+  }
+ ],
+ "streams": [
+  {
+   "id": "PNS1",
+   "name": "Line PNS1: T01 to BL",
+   "from": "T01",
+   "to": "BL",
+   "dexpi_id": "PNS1",
+   "dexpi_class": "PipingNetworkSystem",
+   "source": "DEXPI XML PNS1 (PipingNetworkSystem), segments PNS1_S1",
+   "from_item": "T01_N3",
+   "to_item": "PNS1_S1_C1",
+   "to_end": "closed end at PNS1_S1_C1: the line stops here; BL stands in because a stream needs two ends",
+   "PNS1_S1:dexpi_class": {
+    "value": "PipingNetworkSegment",
+    "source": "DEXPI XML PNS1_S1 <PipingNetworkSegment>"
+   },
+   "PNS1_S1_C1:dexpi_class": {
+    "value": "BlindFlange",
+    "source": "DEXPI XML PNS1_S1_C1 <PipingComponent>"
+   }
+  }
+ ],
+ "instruments": [
+  {
+   "tag": "LI-01",
+   "unit": "T01",
+   "variable": "level",
+   "uom": "",
+   "description": "LI-01: level, indicate (central location)",
+   "dexpi_class": "ProcessInstrumentationFunction",
+   "dexpi_id": "PIF01",
+   "tag_basis": "category + functions + number attributes",
+   "unit_basis": "first unit upstream through the piping from PNS1_S1_C1 (1 step(s), via T01_N3)",
+   "source": "DEXPI XML PIF01 (ProcessInstrumentationFunction)",
+   "location": "PNS1_S1_C1",
+   "stream": "PNS1",
+   "ProcessInstrumentationFunctionNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionNumberAssignmentClass"
+   },
+   "LocationSpecialization": {
+    "value": "CentralLocation",
+    "source": "DEXPI XML PIF01 GenericAttribute LocationSpecialization"
+   },
+   "ProcessInstrumentationFunctionCategoryAssignmentClass": {
+    "value": "L",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionCategoryAssignmentClass"
+   },
+   "ProcessInstrumentationFunctionModifierAssignmentClass": {
+    "value": "I",
+    "source": "DEXPI XML PIF01 GenericAttribute ProcessInstrumentationFunctionModifierAssignmentClass"
+   },
+   "PIF01_PSGF01:dexpi_class": {
+    "value": "ProcessSignalGeneratingFunction",
+    "source": "DEXPI XML PIF01_PSGF01 <ProcessSignalGeneratingFunction>"
+   },
+   "PIF01_IF1:dexpi_class": {
+    "value": "SignalConveyingFunction",
+    "source": "DEXPI XML PIF01_IF1 <InformationFlow>"
+   },
+   "ILF01:dexpi_class": {
+    "value": "InstrumentationLoopFunction",
+    "source": "DEXPI XML ILF01 <InstrumentationLoopFunction>"
+   },
+   "ILF01:InstrumentationLoopFunctionNumberAssignmentClass": {
+    "value": "01",
+    "source": "DEXPI XML ILF01 GenericAttribute InstrumentationLoopFunctionNumberAssignmentClass"
+   }
+  }
+ ],
+ "final_elements": [],
+ "controllers": [],
+ "manual_valves": [],
+ "relief_devices": [],
+ "line_layers": {
+  "schema": "line-layers-2",
+  "method": "scripts/dexpi_reader.py from the XML's piping topology",
+  "definitions": {
+   "piped_to": "a process pipe segment joins the two directly: consecutive along a drawn run, through bends and past instrument taps, with no pipe tee or other item between; or two items drawn against each other with nothing between (touching: no line is drawn, so the segment is on no line network unless both ends already share one)",
+   "junction": "a point where three or more drawn line arms meet. junction_kind says which: pipe_tee (three or more pipe arms: a tee or branch), instrument_tap (an instrument line meets a pipe that carries on through it: the tap sits on the pipe segment named by on_segment and does not split it), marked_crossing (a 4-arm crossing the drawing marks connected with a dot), instrument_line_junction (instrument lines meeting away from a pipe)",
+   "instrument_connection": "a drawn line that joins an instrument (its bubble) to a pipe at a tap, to an item, or to another instrument line: a leader, impulse or signal line, not a process pipe",
+   "actuated_by": "a valve and the actuator drawn stacked on it (a small symbol beside the valve box, joined only by a short stem): the stem is part of the valve, not a pipe",
+   "nozzle_of": "a nozzle mark (N1, N2...) and the vessel it sits on: the short stub between them is part of the vessel, not a pipe",
+   "line_network": "drawn lines that touch one another outside the item boxes, through bends, junctions or crossings, as the tracer joins them (its network). Lines that meet only at an item's edge can be joined: such a network names that item in joined_only_at",
+   "network_pair": "the tracer's pairwise link: both items are on the same line network (not pipe adjacency)"
+  },
+  "networks": [],
+  "junctions": [],
+  "segments": [],
+  "tees_passed_through": 0,
+  "note": "pipe items only: units (through their nozzles), valves and the battery limit (off-page connectors and open ends). Instruments are joined to the piping by measuring lines, which are not pipes; their place is in sits_on and measures."
+ }
+}

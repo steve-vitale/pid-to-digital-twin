@@ -49,7 +49,13 @@ other source license stated above.
 **DEXPI example P&IDs** (round 5) are from the DEXPI initiative's public
 [TrainingTestCases repository](https://gitlab.com/dexpi/TrainingTestCases), commit `a23d61e2`, licensed
 [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). The drawings, XML
-files and item lists are downloaded by `scripts/adapt_dexpi.py` and are not redistributed. Material derived from
+files and item lists are downloaded by `scripts/adapt_dexpi.py` and are not redistributed, except for the one
+unchanged 6,144-byte training XML `examples/source-handoff/fixture/I01V01-VER.EX01.xml` from commit
+`a23d61e2e089eb2ca464cd552f9ae580a2785963`. That original and its adapted
+`embedded.model.json` (Native conversion plus the complete existing policy-filtered source packet) are
+redistributed under CC BY 4.0 with credit to the DEXPI initiative and its contributing members; they are not
+MIT-only. Exact original path, license and adaptation details are adjacent in `PROVENANCE.json` and the example
+guide. The XML remains unchanged; no blanket permission for company source data is implied. Material derived from
 them (scores, summaries and any committed review-kit images in `out/`) is shared under CC BY 4.0 with credit to the
 DEXPI initiative and its contributing members. Changes: rasterised to PNG, converted to this repository's
 answer-key format, and scored.

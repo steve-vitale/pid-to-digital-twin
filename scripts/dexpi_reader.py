@@ -181,19 +181,42 @@ def _read_source_bytes(source):
 
 
 class Reader:
-    def __init__(self, xml_path, sheet_id=None, attribution=None):
+    def __init__(self, xml_path, sheet_id=None, attribution=None, source_document_id=None, *, capture_source=False):
+        if type(capture_source) is not bool:
+            raise DexpiError("capture_source must be a boolean; nothing was written")
+        if not capture_source and source_document_id is not None:
+            raise DexpiError("source_document_id requires capture_source=True; nothing was written")
         self.path = Path(xml_path)
         if not self.path.is_file():
             raise DexpiError(f"{self.path.name}: no such file")
-        try:
-            with self.path.open("rb") as source:
-                self.raw_bytes = _read_source_bytes(source)
-            if len(self.raw_bytes) > MAX_BYTES:
-                raise DexpiError(f"{self.path.name}: larger than {MAX_BYTES} bytes; refusing to parse")
-            self.root = ET.fromstring(self.raw_bytes)
-        except ET.ParseError as exc:
-            raise DexpiError(f"{self.path.name}: not well-formed XML; nothing was written") from exc
-        self.raw_sha256 = hashlib.sha256(self.raw_bytes).hexdigest()
+        source_duplicate = None
+        self.source_capture = None
+        self._source_backend = None
+        with self.path.open("rb") as source:
+            self.raw_bytes = _read_source_bytes(source)
+        if len(self.raw_bytes) > MAX_BYTES:
+            raise DexpiError(f"{self.path.name}: larger than {MAX_BYTES} bytes; refusing to parse")
+        if capture_source:
+            import source_evidence as SE
+            self._source_backend = SE
+            try:
+                self.source_capture = SE.capture_xml(self.raw_bytes, source_document_id)
+                self.root = self.source_capture.root
+            except SE._DuplicateSourceIDs as exc:
+                # The private strict source refusal hands off its SAME parse only for native duplicate validation.
+                # Do not continue interpretation or derive a native count from the narrower source-ID scope.
+                self.root = exc._root
+                self.source_capture = None
+                source_duplicate = exc
+            except SE.SourceEvidenceError as exc:
+                raise DexpiError(f"{self.path.name}: {exc}; nothing was written") from exc
+        else:
+            try:
+                self.root = ET.fromstring(self.raw_bytes)
+            except ET.ParseError as exc:
+                raise DexpiError(f"{self.path.name}: not well-formed XML; nothing was written") from exc
+        self.raw_sha256 = (self.source_capture.raw_sha256 if self.source_capture is not None
+                           else hashlib.sha256(self.raw_bytes).hexdigest())
         self.original_tags = {el: el.tag for el in self.root.iter()}
         for el in self.root.iter():  # tolerate a default namespace: DEXPI 1.x files usually have none
             if isinstance(el.tag, str) and "}" in el.tag:
@@ -216,6 +239,8 @@ class Reader:
         if dup:
             raise DexpiError(f"{self.path.name}: element IDs used more than once ({len(set(dup))} duplicate identifier(s)); "
                              "references would be ambiguous; nothing was written")
+        if source_duplicate is not None:
+            raise DexpiError(f"{self.path.name}: {source_duplicate}; nothing was written") from source_duplicate
         self.protected_gas = frozenset(g for g in self.root.iter("GenericAttribute") if person_designated(g))
         self.protected_descendants = frozenset(d for g in self.protected_gas for d in g.iter() if d is not g)
         self.protected_subtree = self.protected_gas | self.protected_descendants
@@ -431,6 +456,43 @@ class Reader:
 
     # ------------------------------------------------------------ attributes and labels
 
+    def _assign_native(self, source, container, key_or_index, value, mapping_kind, basis):
+        """Private reader dispatch: exact retained origin maps; original safe scope origin stays untracked."""
+        if self.source_capture is None:
+            if type(container) is list and key_or_index == len(container):
+                container.append(value)
+            else:
+                container[key_or_index] = value
+            return value
+        source = self.source_capture._original_source_handle(source)
+        if source in self.source_capture._reader_scope_handles:
+            return self._assign_scope_excluded_native(source, container, key_or_index, value, mapping_kind, basis)
+        return self.source_capture.assign(source, container, key_or_index, value, mapping_kind, basis)
+
+    def _assign_scope_excluded_native(self, source, container, key_or_index, value, mapping_kind, basis):
+        """No excluded raw record/mapping: preserve the accepted native write using explicit untracked COPY."""
+        if self.source_capture is None:
+            raise DexpiError("source capture is not enabled")
+        SE = self._source_backend
+        source = self.source_capture._original_source_handle(source)
+        admissible = source in self.source_capture._reader_scope_handles
+        element = source[0] if type(source) is tuple else source
+        admissible = admissible and any(node is element for node in self.source_capture.root.iter())
+        if type(source) is tuple:
+            admissible = admissible and source[1] in element.attrib
+        SE._require(admissible, "source is not an admissible original scope-excluded native origin")
+        SE._require(type(mapping_kind) is str and type(basis) is str
+                    and mapping_kind in SE.KINDS and basis in SE.BASES, "unknown native assignment profile")
+        SE._require(type(container) is dict or type(container) is list, "invalid native assignment container")
+        SE._require((type(container) is dict and type(key_or_index) is str) or
+                    (type(container) is list and type(key_or_index) is int and 0 <= key_or_index <= len(container)),
+                    "invalid native assignment slot")
+        SE._native_write_encoding(container, key_or_index, value)
+        temporary = {"value": value}
+        self.source_capture.transfer(temporary, container,
+                                     [{"old_key": "value", "new_key": key_or_index, "mode": "copy"}])
+        return value
+
     def own_gas(self, el):
         for gs in el.findall("GenericAttributes"):
             for ga in gs.findall("GenericAttribute"):
@@ -456,11 +518,13 @@ class Reader:
             n, base = 2, key
             while key in into:
                 key, n = f"{base}#{n}", n + 1
-            rec = {"value": value}
+            rec = {}
+            self._assign_native((ga, "Value"), rec, "value", value, "direct-copy", "generic-value")
             if ga.get("Units"):
-                rec["uom"] = ga.get("Units")
+                self._assign_native((ga, "Units"), rec, "uom", ga.get("Units"), "direct-copy", "generic-units")
             if set_name and set_name != "DexpiAttributes":
-                rec["attribute_set"] = set_name
+                self._assign_native((self.parent[ga], "Set"), rec, "attribute_set", set_name,
+                                           "direct-copy", "generic-set")
             rec["source"] = f"DEXPI XML {eid} GenericAttribute {name}" + (f" ({what})" if what else "")
             into[key] = rec
             self.ga_state[ga] = state
@@ -494,8 +558,10 @@ class Reader:
     def part(self, el, into, state="claim", what=None):
         """Fold a part (nozzle, chamber, actuator, sensor, fitting, segment...) into an item, keyed by its XML ID."""
         pid = el.get("ID")
-        into[f"{pid}:dexpi_class"] = {"value": el.get("ComponentClass") or el.tag,
-                                      "source": f"DEXPI XML {pid} <{el.tag}>"}
+        self._assign_native((el, "ComponentClass") if "ComponentClass" in el.attrib else el,
+            into, f"{pid}:dexpi_class", {"value": el.get("ComponentClass") or el.tag,
+                                        "source": f"DEXPI XML {pid} <{el.tag}>"},
+            "legacy-transform", "part-class")
         self.records(el, f"{pid}:", into, state, what)
         self.label_records(el, f"{pid}:", into)
         return into
@@ -1280,7 +1346,8 @@ class Reader:
                 elif name is None:
                     self.ga_state[g] = ("dropped", "missing metadata Name: not mapped to native metadata")
                 else:
-                    drawing[name + (f"@{g.get('Language')}" if g.get("Language") else "")] = value
+                    self._assign_native((g, "Value"), drawing,
+                        name + (f"@{g.get('Language')}" if g.get("Language") else ""), value, "direct-copy", "metadata-value")
                     self.ga_state[g] = "meta"
             self.fate(md, "meta.drawing")
         structure = []
@@ -1294,9 +1361,17 @@ class Reader:
                 elif g.get("Name") is None:
                     self.ga_state[g] = ("dropped", "missing metadata Name: not mapped to native metadata")
                 else:
-                    attrs[g.get("Name")] = g.get("Value")
+                    self._assign_native((g, "Value"), attrs, g.get("Name"), g.get("Value"),
+                                               "direct-copy", "metadata-value")
                     self.ga_state[g] = "meta"
-            structure.append({"dexpi_id": psi.get("ID"), "class": psi.get("ComponentClass"), "attributes": attrs})
+            structure_item = {"dexpi_id": psi.get("ID"), "class": psi.get("ComponentClass"), "attributes": attrs}
+            if "ID" in psi.attrib:
+                self._assign_native((psi, "ID"), structure_item, "dexpi_id", psi.get("ID"),
+                                           "direct-copy", "plant-structure-id")
+            if "ComponentClass" in psi.attrib:
+                self._assign_native((psi, "ComponentClass"), structure_item, "class", psi.get("ComponentClass"),
+                                           "direct-copy", "plant-structure-class")
+            structure.append(structure_item)
             self.fate(psi, "meta.plant_structure")
         title_bits = [drawing.get(k) for k in ("DrawingNameAssignmentClass", "DrawingNumberAssignmentClass",
                                                "TitleAssignmentClass@en", "TitleAssignmentClass") if drawing.get(k)]
@@ -1314,6 +1389,8 @@ class Reader:
                                            "units of instruments and valves are inferred through the piping (unit_basis)."}
         if self.attribution:
             meta["attribution"] = self.attribution
+        for key, value in meta["dexpi_file"].items():
+            self._assign_native((info, key), meta["dexpi_file"], key, value, "direct-copy", "file-metadata")
         return meta
 
     def read(self):
@@ -1348,7 +1425,13 @@ class Reader:
                     del out["split_range"]
         unplaced_records = []
         for kind, item in unplaced:
-            unplaced_records.append(dict(item, kind=kind))
+            if self.source_capture is None:
+                unplaced_records.append(dict(item, kind=kind))
+            else:
+                copied = {}
+                self.source_capture.transfer(item, copied, [{"old_key": key, "new_key": key, "mode": "copy"} for key in item])
+                copied["kind"] = kind
+                unplaced_records.append(copied)
             self.mark_unplaced(item)
         model = {"meta": meta, "units": units, "streams": streams, "instruments": insts, "final_elements": finals,
                  "controllers": ctrls, "manual_valves": manual, "relief_devices": relief}
@@ -1357,6 +1440,8 @@ class Reader:
         if self.broken_refs:
             meta["broken_references"] = list(self.broken_refs)
         model["line_layers"] = self.line_layers(model)
+        if self.source_capture is not None:
+            model["source_evidence"] = self.source_capture.finalize(model)
         return model
 
     def line_layers(self, model):
@@ -1530,6 +1615,9 @@ class Reader:
         if self.person_metadata_attributes_excluded:
             # These are direct XML attributes, not GenericAttribute occurrences.
             r["person_metadata_attributes_excluded"] = self.person_metadata_attributes_excluded
+        if self.source_capture is not None:
+            r["source_evidence"] = {"schema": self._source_backend.SCHEMA, "document_id": model["source_evidence"]["document"]["document_id"],
+                                    "completeness": model["source_evidence"]["completeness"]}
         return r
 
 
@@ -1687,6 +1775,14 @@ def report_text(r):
                            f"{' (drawn label kept)' if row['drawn_label_kept'] else ' (DRAWN LABEL NOT KEPT)'}")
     elif isinstance(c, dict):
         out += ["", f"Key comparison: {c['skipped']}"]
+    if r.get("source_evidence"):
+        coverage = r["source_evidence"]["completeness"]
+        out += ["", "Opaque XML source evidence (not process interpretation or engineering verification):",
+                f"- structured elements: {coverage['elements']['retained']} retained of {coverage['elements']['total']}; "
+                f"attributes: {coverage['attributes']['retained']} retained of {coverage['attributes']['total']}",
+                f"- native mapping: {coverage['native_mapping']['mapped_occurrences']} retained occurrences mapped; "
+                f"{coverage['native_mapping']['unmapped_occurrences']} explicitly unmapped; "
+                "raw retention and native mapping are separate counts."]
     out += ["", "Lossy steps:"] + [f"- {s}" for s in r["lossy_steps"]]
     return "\n".join(out) + "\n"
 
@@ -1747,8 +1843,12 @@ def prediction(xml_path, png_path, sheet_id, title, reader=None):
     return pred, rep
 
 
-def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet=False):
-    reader = Reader(xml, sheet_id, attribution)
+def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet=False, source_document_id=None, *, capture_source=False):
+    if type(capture_source) is not bool:
+        raise DexpiError("capture_source must be a boolean; nothing was written")
+    if not capture_source and source_document_id is not None:
+        raise DexpiError("source_document_id requires capture_source=True; nothing was written")
+    reader = Reader(xml, sheet_id, attribution, source_document_id, capture_source=capture_source)
     model = reader.read()
     rep = reader.report(model)
     if compare:
@@ -1819,14 +1919,23 @@ def main(argv=None):
     ap.add_argument("--sheet-id", help="model id and file prefix (default: from the file name)")
     ap.add_argument("--png", help="a render of the whole drawing: also write an intake prediction + manifest")
     ap.add_argument("--attribution", help="licence/attribution text to carry in meta.attribution")
+    ap.add_argument("--capture-source", action="store_true", help="include the complete policy-filtered source packet (default: Native-only)")
+    ap.add_argument("--source-document-id", help="explicit local source-document identity (default: revision-only raw SHA256 URN)")
     ap.add_argument("--compare-key", metavar="KEYDIR",
                     help="folder with <sheet-id>.graphml + .tags.json from adapt_dexpi.py: report agreement")
     a = ap.parse_args(argv)
+    if a.source_document_id is not None and not a.capture_source:
+        ap.error("--source-document-id requires --capture-source")
     if hasattr(sys.stdout, "reconfigure"):  # a Windows console is cp1252: print units like m\u207a, don't crash
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    errors = (DexpiError,)
+    if a.capture_source:
+        from source_evidence import SourceEvidenceError
+        errors += (SourceEvidenceError,)
     try:
-        run(a.xml, a.out, a.sheet_id, a.png, a.attribution, a.compare_key)
-    except DexpiError as exc:
+        run(a.xml, a.out, a.sheet_id, a.png, a.attribution, a.compare_key, source_document_id=a.source_document_id,
+            capture_source=a.capture_source)
+    except errors as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 2
     return 0

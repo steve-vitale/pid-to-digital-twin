@@ -89,16 +89,19 @@
    "example_outputs": [
     "examples/from-dexpi-xml/dexpi-c01.model.json",
     "examples/from-dexpi-xml/dexpi-c01.report.md",
-    "examples/from-dexpi-xml/dexpi-c01.graph.json"
+    "examples/from-dexpi-xml/dexpi-c01.graph.json",
+    "examples/source-handoff/fixture/embedded.model.json"
    ],
    "tests": [
-    "scripts/test_dexpi_reader.py"
+    "scripts/test_dexpi_reader.py",
+    "scripts/test_source_evidence.py",
+    "scripts/test_source_capture_mode.py"
    ],
    "job": "Turn the DEXPI XML my CAD tool exports into a model, keeping line sizes, specs and design limits",
-   "why": "A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations, and reports what it folds, cannot place or drops.",
+   "why": "A CAD export can hold sizes, specifications and design limits. The reader preserves supported attributes with XML element citations and reports folds, placement gaps and omissions. Explicit source capture also retains the complete policy-filtered structured packet, distinguishing Native mappings from retained but uninterpreted occurrences.",
    "you_need": "A DEXPI P&ID XML file (tested on DEXPI 1.3, and on DEXPI 1.2 exports from SPPID, Comos, AVEVA and AutoCAD); a rendered PNG only if you also want the drawing bundle",
    "time": "Seconds per sheet",
-   "you_get": "A process model the export, graph and screen tools accept, plus a report of what was kept, folded and dropped, and why"
+   "you_get": "A Native process model and conversion report. Existing downstream tools can use eligible Native fields after their own validation; some converted models lack the equipment or instruments a tool requires. Optional explicit capture appends a complete policy-filtered source packet; graph/context/MCP consumers do not expose that packet."
   },
   {
    "id": "description-to-model",
@@ -724,6 +727,28 @@
    "you_need": "Cleared source and reviewed key with provenance, a supported versioned task, saved answers for declared attempts, model/interface/configuration and pinned recipe metadata; no model account needed to re-score",
    "time": "Offline rescoring; model execution and human source/key review are separate contributions",
    "you_get": "Reproducible per-case counts/failures, model/version/method groups, repeated-run mean/range/SD, coverage and fingerprints. Three adapters: historical drawings, selected description facts and fixed-claim labels. Label results are synthetic controls on explicit development paraphrases; reasons/source validity unscored. Other tasks need evaluators"
+  },
+  {
+   "id": "source-handoff",
+   "category": "export",
+   "title": "Carry a converted model and its captured source evidence to review",
+   "tools": [
+    "scripts/source_handoff.py"
+   ],
+   "guide": "examples/source-handoff/README.md",
+   "example_outputs": [
+    "examples/source-handoff/worked/native.model.json",
+    "examples/source-handoff/worked/source.evidence.json",
+    "examples/source-handoff/worked/handoff.manifest.json"
+   ],
+   "tests": [
+    "scripts/test_source_handoff.py"
+   ],
+   "job": "Prepare and inspect a local model/evidence packet for an approved company handoff",
+   "why": "Another reviewer or receiving system needs the converted model and the captured evidence it leaves uninterpreted. An explicit three-file packet preserves both with checked bindings and a qualified brief, while company systems retain ongoing ownership, access and decisions.",
+   "you_need": "An already source-bearing model from explicit DEXPI capture, an approved local root, and supplied scope/role labels; originals remain separate",
+   "time": "Local file processing; human review and transfer effort have not been measured",
+   "you_get": "A Native model projection, complete policy-filtered captured evidence, hash-bound manifest and bounded inspection brief. No automatic source capture, company approval, access control, atomic publication or source-aware MCP consumer."
   }
  ]
 }

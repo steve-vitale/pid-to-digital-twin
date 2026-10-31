@@ -1248,5 +1248,29 @@ class BoundedNativeSourceRead(unittest.TestCase):
             self.assertEqual(str(error.exception), 'source changed before output; nothing further was written')
 
 
+class ScopeFoldCompatibility(unittest.TestCase):
+    """Nonstandard scope nesting preserves legacy native facts; this is not DEXPI performance evidence."""
+
+    def test_plain_and_qualified_scope_wrappers_preserve_folded_class_and_safe_fact(self):
+        for scope in ('ShapeCatalogue', 'Drawing', 'Text', 'Extent', 'Position', 'Presentation', 'Scale', 'Coordinate'):
+            for qualified in (False, True):
+                with self.subTest(scope=scope, qualified=qualified), tempfile.TemporaryDirectory() as tmp:
+                    root = ET.Element('PlantModel'); eq = ET.SubElement(root, 'Equipment', ID='E1', ComponentClass='Tank')
+                    parent = ET.SubElement(eq, '{urn:scope}' + scope if qualified else scope)
+                    nozzle = ET.SubElement(parent, 'Nozzle', ID='N1', ComponentClass='Nozzle')
+                    group = ET.SubElement(nozzle, 'GenericAttributes', Set='Custom')
+                    ET.SubElement(group, 'GenericAttribute', Name='Engineering', Value='SAFE-SCOPE', Units='Bar')
+                    base = Path(tmp); xml = base / 'scope.xml'; raw = ET.tostring(root); xml.write_bytes(raw)
+                    model, report = R.run(xml, base / 'out', 'scope', quiet=True, capture_source=True)
+                    unit = model['units'][0]
+                    self.assertEqual(unit['N1:dexpi_class']['value'], 'Nozzle')
+                    self.assertEqual(unit['N1:Engineering']['value'], 'SAFE-SCOPE')
+                    self.assertEqual(unit['N1:Engineering']['uom'], 'Bar')
+                    self.assertEqual(unit['N1:Engineering']['attribute_set'], 'Custom')
+                    self.assertEqual(report['attributes']['in_file'], 1)
+                    self.assertEqual(report['attributes']['kept_as_sourced_records'], 1)
+                    self.assertEqual(xml.read_bytes(), raw)
+
+
 if __name__ == "__main__":
     unittest.main()

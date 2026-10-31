@@ -47,6 +47,8 @@ MCP access. It cannot currently regenerate every tool's input.
 
 Use the [workflow and format map](docs/WORKFLOWS.md) to see the supported connections and manual steps.
 The [feature reference](docs/FEATURES.md) lists the individual tools and reviewed examples.
+For structured XML evidence, the optional [DEXPI source capture and local handoff](examples/from-dexpi-xml/README.md#optional-capture-structured-source-evidence)
+keeps a complete policy-filtered packet beside the Native interpretation; capture is explicit and the default is unchanged.
 
 ## From a first packet to company context
 

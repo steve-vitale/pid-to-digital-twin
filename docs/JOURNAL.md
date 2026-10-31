@@ -5910,3 +5910,97 @@ unittest skips, two platform notices and no additional skipped-check notices. Al
 unchanged during that run. The later append of two independent review records, feature-index regeneration and
 this factual journal note change only metadata; the tested methods, fixtures and corpus artifacts stay exact.
 Suite duration is an execution receipt, not a throughput or capacity benchmark.
+
+
+## 127. Preserve structured source evidence only when explicitly requested
+
+**A268 / N086 / N098 / N099.** A Native interpretation cannot account for every source record merely by counting
+placed assets. The opt-in capture path now retains eligible structured XML occurrences, expanded names, parsed
+attribute values, source identity and explicit Native assignments. Retained but unmapped occurrences stay visible.
+The complete captured packet follows its declared scope and named-field policy; text/tail presence is counted
+without retaining its payload, and presentation/geometry exclusions remain explicit. Original XML and images
+stay separate. This is source observability, not a new physical model, XML round trip or general PII detector.
+
+The public default stays Native-only. Python callers use the keyword-only builtin boolean `capture_source=True`;
+the CLI uses `--capture-source`. Supplying a source document ID without capture refuses before input/output work.
+Disabled conversion performs no source capture or backend import. Enabled capture preserves the complete
+previously accepted source-bearing output rather than dropping fields to reduce its cost. Source occurrence IDs
+bind document identity and raw revision bytes; they do not establish company asset identity or approval.
+
+Pre-publication controls caught unsafe origin equality and mutation before canonical encoding failed. The source
+writer now requires exact original handles and admitted fields; foreign, excluded, malformed and callback-bearing
+inputs refuse. A write's encoding is checked before changing Native values or provenance generations. Equal values
+are not evidence of a shared origin. Earlier failures remain recorded separately from the corrected method.
+
+Independent private receiving checked the exact five-file successor from raw Git inputs. The 56 existing Native
+test bodies remain unchanged; the source-only fold case and 38 source tests explicitly enable capture, alongside
+11 new mode tests. Four additional enabled-mode bounded-read controls make 110 unit methods with no skips in
+that receiving cohort. The complete 27 Native artifacts match the prior default bytes and the complete 27
+source-bearing artifacts match the accepted capture baseline; neither comparison strips fields. Separate scoped
+projection comparisons remain labelled as projections. Both modes preserve all seven source guard sites, route
+order, errors, causes and full late-write prefixes across 296 API sessions and 148 matched comparisons.
+
+These are offline implementation and preservation checks on public/development fixtures. No new model extraction,
+held-out drawing family, company source, timed human review or large-team capacity result is established.
+
+## 128. Make the local handoff reproducible without a private cache
+
+**A269 / N097.** The optional local handoff separates an already source-bearing model into a Native projection,
+complete policy-filtered evidence packet and hash-bound manifest. Explicit inspection validates the three selected
+roles and reports a qualified brief. It never captures a missing source, follows references or grants company
+ownership. A later failure can leave a partial prefix; a manifest's presence is not atomic publication or approval.
+Ongoing identity, permissions, review and decisions remain responsibilities of the company-managed system.
+
+The public training fixture includes the unchanged 6,144-byte DEXPI reference XML and its saved source-bearing
+model, with CC-BY-4.0 attribution and adaptation notices. Native/evidence/manifest example bytes and metadata were
+derived independently before actual export and selected-file inspection. The manifest's supplied training scope
+and role are data. Complete captured evidence is not every original XML byte or proof of installed equipment.
+
+The earlier private harness depended on a D drive and private fixture selectors. The new portable cohort uses
+committed inputs and the caller's temporary directory. Its 12 groups cover complete values/order, strict receiving,
+raw/canonical identities, bounded reads, encoded brief limits, Git checkout/relocation and late-write prefixes.
+Three added reporting methods keep an unavailable platform subcheck visible and reject unrelated I/O failures.
+An initial attribute-file CRLF checkout failure was preserved and corrected by its declared LF policy. Review also
+caught archive-smudged base claims and a notice that the suite runner could not count; corrected raw-Git receiving
+and the matched notice/error witnesses retain those earlier failures, without changing the utility or its oracles.
+
+Independent receiving ran all 15 methods and separate functional/reporting controls. This Windows account could
+not create one native escaping symlink: the runner reports one platform notice, zero unittest case skips and
+zero other notices. A separate real junction exercises successful escape refusal. This is not an unqualified
+all-checks or cross-platform runtime pass. A fresh private replay also ran the unchanged historical 105-group and
+independent 36-group harnesses on the adopted dependencies: 141 groups, 1,292 assertions, 94 real CLI calls and
+six large in-process export vectors. Private selectors remain confined to that historical replay, not public CI.
+
+No source-aware graph/context/MCP consumer, shared governance service, live process connector or ontology engine
+is added. The toolkit prepares inspectable inputs and an initial engineering packet; the maintained company
+record and operational execution remain separate.
+
+## 129. Receive the public source handoff without changing Native results
+
+The public worked trio was derived from data-only expectations before actual export and inspection. Three root
+CLI commands reproduce its complete Native/evidence/manifest bytes and entire text/JSON briefs; separate public
+XML default/capture readbacks reproduce both complete saved models. An independent reviewer executes the four
+selected public readbacks and checks reassembly, raw bindings, license, guides and runner controls. The new
+captured fixture is freshly validated; the older three C01 outputs are explicitly inherited unchanged.
+
+The current reader then actually reruns the 13 affected Native-default matrix cells, with both intermediate and
+final full snapshots retained. Independent strict canonical comparisons preserve every substantive value, type,
+diagnostic and existing source/key binding; all 82 other complete objects stay exact. Only the predeclared timing
+fields, reader binding and conservative static source-module dependency change. The unchanged AST recorder
+follows lazy imports; its extra source dependency is not evidence that these cells execute capture. Results stay
+64 pass, 23 fail and eight not applicable. The separate strict check verifies all 95 declared cached input bindings.
+
+The full cached-data runner exits zero for all 70 registered scripts in one 605.482-second Windows observation:
+five unittest case skips, three platform notices and no additional skipped-check notices. The handoff's unavailable
+native-symlink subcheck is a notice without a skipped unittest case. All 2,889 public files remain raw-identical
+during that run. This is not a complete runtime pass, timed engineer trial or capacity measurement. The four
+benchmark suites reproduce; claims match 41 numerical records plus one prose-only record; all 52 pipeline stages
+are fresh. Saved predictions reproduce 23 MATCH and seven MATCH-OLD tables, retaining five historical GAPs.
+
+Post-run content review corrects the stale status count, distinguishes implemented capture accounting from
+remaining engineering/source acceptance, and makes downstream model eligibility explicit. The runtime log also
+exposes an older inaccurate runner banner: full mode does start a temporary loopback OPC UA test service. Its
+message and agent instructions are corrected to disclose that service; source-only excludes that integration test.
+The correction changes diagnostic text and documentation, not test selection or service behavior. Targeted runner
+and metadata checks follow separately; no second local full run is implied. Committed-tree and exact-head CI
+verification remain separate publication gates.

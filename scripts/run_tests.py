@@ -1,7 +1,9 @@
 """Explicit offline test modes; never downloads, installs, or contacts a gateway.
 
 Default/--full: all registered tests, using installed dependencies and cached TE data.
---source-only: stdlib and committed-fixture checks only (NOT a full-suite pass).
+Includes a temporary OPC UA replay test service/client on 127.0.0.1 with an ephemeral port.
+--source-only: stdlib and committed-fixture checks only; excludes that replay service
+(NOT a full-suite pass).
 --check-prerequisites: read-only preflight for the selected mode; does not run tests.
 Exit codes: 0 selected checks pass, 1 test failure, 2 missing/invalid prerequisites.
 """
@@ -27,6 +29,9 @@ SOURCE_TESTS = (
     "scripts/test_dexpi_adapter.py",
     "scripts/test_dexpi_to_twin.py",
     "scripts/test_dexpi_reader.py",
+    "scripts/test_source_evidence.py",
+    "scripts/test_source_capture_mode.py",
+    "scripts/test_source_handoff.py",
     "scripts/test_score_tags.py",
     "scripts/test_replicate_stats.py",
     "scripts/test_review_kit.py",
@@ -92,6 +97,9 @@ DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
 TWIN = "out/twin/r2-tiles-trace/codex"
 DRAWINGS = "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"
 SOURCE_FILES = (
+    "scripts/source_evidence.py", "scripts/source_handoff.py", ".gitattributes", "NOTICE.md",
+    *(f"examples/source-handoff/fixture/{name}" for name in
+      ("I01V01-VER.EX01.xml", "embedded.model.json", "PROVENANCE.json", "EXPECTED.json")),
     *(f"examples/opportunity-screen/pump-motor-basis/{name}" for name in
       ("model.json", "questions.json", "screen.md", "README.md")),
     *(f"examples/opportunity-screen/source-investigation/{name}" for name in
@@ -225,7 +233,7 @@ def main(argv=None):
     parser.add_argument("--check-prerequisites", action="store_true", help="preflight only; no tests or setup actions")
     args = parser.parse_args(argv)
     label = "SOURCE-ONLY" if args.source_only else "FULL CACHED-DATA"
-    print(f"Mode: {label}. No downloads, installs, servers, or gateway operations.")
+    print(f"Mode: {label}. No downloads, installs, or plant/gateway connections. Full tests include a temporary OPC UA replay service/client on 127.0.0.1 with an ephemeral port; source-only excludes it.")
     if args.source_only:
         print("Scope exclusions (not run): " + ", ".join(FULL_ONLY_TESTS))
     issues = prerequisites(ROOT, args.source_only)

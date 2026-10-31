@@ -44,7 +44,8 @@ converted-key DEXPI adapter produces an extracted twin through its separate cont
 
 | Tool or route | Current input | Output and integration boundary |
 |---|---|---|
-| `dexpi_reader.py` | Supported DEXPI XML | A process-model-shaped JSON plus an omissions/placement report. Vendor dialects, mapped classes and downstream eligibility need review; not every source role is used by every generator. |
+| `dexpi_reader.py` | Supported DEXPI XML | A Native process-model-shaped JSON plus an omissions/placement report by default. Explicit `--capture-source` adds the complete policy-filtered structured-source packet and coverage summary. Vendor dialects, mapped classes and downstream eligibility need review; not every source role is used by every generator. |
+| `source_handoff.py` | An explicitly selected process model already containing a captured `source_evidence` packet | Optional local Native/evidence/manifest trio and bounded inspection brief. No automatic capture, original-document fetching, company publication or source-aware graph/context/MCP consumer. See the [handoff guide](../examples/source-handoff/README.md). |
 | `dexpi_to_twin.py` | The pre-adapted DEXPI sheets/keys contract | An extracted twin/review bundle. This route is distinct from the direct XML reader and does not import arbitrary CAD formats. |
 | `description_workflow.py` | UTF-8 text for `prepare`; an engineer/approved assistant's model+layout+quotation JSON for `check` and `build` | Source packet and validation feedback, then draft sheets, questions, graph, staging and full supplied-record/source-line review sheets. Interpretation/layout remain authored and all review rows start unreviewed; no model API, automatic detailed layout or tested Copilot tenant. See the [connected example](../examples/from-description/README.md#try-the-connected-route-offline). |
 | `draw_pid_from_model.py` | Process-model fields plus an authored drafting-layout JSON | Detailed draft PNG/SVG P&ID sheets and a key. No automatic detailed layout or general graph/extracted-twin conversion into this drawing contract. |
@@ -64,6 +65,31 @@ Drawing manifests identify their generator, model and layout with the drawer's e
 CRLF pairs are folded to LF; other bytes remain significant. The topology verifier uses that same rule and
 still checks the recorded key networks. This does not normalize original source-document hashes, context
 source pins or bundle inventories, and a matching manifest does not establish engineering correctness.
+
+## Optional DEXPI source handoff
+
+The [direct XML reader](../examples/from-dexpi-xml/README.md#optional-capture-structured-source-evidence)
+keeps its existing Native-only default. Its Native model can still go straight to `graph_export.py` through the
+existing route. Graph export, context registers and snapshot/MCP readback do not acquire source-packet support.
+
+For a manual evidence handoff:
+
+1. Explicitly read the XML with `--capture-source` (Python: `capture_source=True`). Keep the original XML/images
+   separately and review the conversion report, exclusions and mapped/unmapped counts. A custom
+   `--source-document-id` / `source_document_id` requires capture; it never enables capture implicitly.
+2. Keep that complete embedded packet, or use `source_handoff.py export` to write the Native projection,
+   complete policy-filtered evidence packet and hash-bound manifest into a new version folder. The utility
+   refuses a Native-only input; it does not find or capture missing evidence.
+3. Select all three files explicitly for `source_handoff.py inspect`, then transfer the permitted files and brief
+   through the company's approved route. Follow the [commands and failure limits](../examples/source-handoff/README.md),
+   including inspection after transfer; the trio is not an atomic publication or a company access service.
+
+The packet preserves eligible structured XML and parsed attribute values, with explicit Native mappings and
+unmapped occurrences. It excludes defined presentation/geometry subtrees and protected named-person fields;
+text/tail presence counts do not retain their payloads. Complete capture is therefore not all original XML,
+a round trip, general PII clearance or plant truth. Occurrence IDs identify source provenance, not shared
+engineering identities. The company-managed system owns ongoing identity, access, review, decisions and
+published revisions; these local files are an inspectable starting point for that handoff.
 
 ## Carry a finding forward
 
