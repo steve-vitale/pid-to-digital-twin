@@ -711,9 +711,18 @@ def validate_field_scopes(catalog):
     for q in catalog["questions"]:
         for r in q.get("data_requests", []):
             scope = r.get("field_scope", "anchors")
-            if scope not in ("anchors", "unit") or ("field_scope" in r and not r.get("fields")):
+            if scope not in ("anchors", "unit") or ("field_scope" in r and not (r.get("fields") or r.get("show_fields"))):
                 raise InputError(f"catalog question {q['id']} request {r['item']!r}: field_scope must be "
-                                 "anchors or unit on a request with fields")
+                                 "anchors or unit on a request with fields or show_fields")
+            if "show_fields" in r:
+                names = r["show_fields"]
+                required = r.get("fields", [])
+                if (not isinstance(names, list) or not names or any(not isinstance(n, str) or not n.strip() for n in names)
+                        or not isinstance(required, list) or any(not isinstance(f, str) for f in required)
+                        or len({n.lower() for n in names}) != len(names)
+                        or any(n.lower() in {f.lower() for f in required} for n in names)):
+                    raise InputError(f"catalog question {q['id']} request {r['item']!r}: show_fields must be "
+                                     "distinct nonempty field names, separate from required fields")
 
 
 def resolve_requests(q, ctx):
@@ -726,6 +735,14 @@ def resolve_requests(q, ctx):
         subjects = list(OrderedDict((i["id"], i) for i in subjects).values())
         coverage = [{"id": it["id"], "label": it.label(), "fields": [], "still_needed": []}
                     for it in subjects]
+        candidates = []
+        for fname in r.get("show_fields", []):
+            for it in subjects:
+                st, val, where = field_state(it, fname)
+                if st == "present":
+                    candidates.append({"id": it["id"], "label": it.label(), "name": fname, "value": val, "where": where})
+                    evidence.append({"item": r["item"], "text": f"Supplied candidate fact, basis unverified: "
+                                     f"{it.label()} {fname} = {val}", "where": where})
         for fname in fields:
             for it, subject in zip(subjects, coverage):
                 st, val, where = field_state(it, fname)
@@ -753,6 +770,11 @@ def resolve_requests(q, ctx):
             if txt and txt not in places:
                 places.append(txt)
         req = {"item": r["item"], "state": state, "where": places, "how": r["how"]}
+        if "show_fields" in r:
+            req["candidate_scope"] = scope
+            req["candidate_facts"] = candidates
+            if scope == "unit" and not subjects:
+                req["scope_note"] = "No owning equipment unit is identified for this finding; no unit fields are resolved."
         if have:
             req["already_on_drawing"] = sorted(have)
             req["still_needed"] = missing + list(r.get("also_needs") or [])
@@ -967,7 +989,7 @@ def count_by(found, key):
     return c
 
 
-def request_progress(r):
+def field_progress(r):
     """Readable coverage, also used for per-finding roll-up details."""
     if "field_coverage" in r and (len(r["field_coverage"]) != 1 or r.get("scope_note")):
         parts = [r["scope_note"]] if r.get("scope_note") else []
@@ -983,6 +1005,22 @@ def request_progress(r):
         return (f"Already on the drawing: {', '.join(r['already_on_drawing'])}; still needed: "
                 f"{', '.join(r['still_needed'])}.")
     return ""
+
+
+def request_progress(r):
+    parts = [field_progress(r)]
+    if "candidate_facts" in r:
+        parts.append(f"Candidate scope: {r['candidate_scope']}.")
+        if r.get("scope_note") and "field_coverage" not in r:
+            parts.append(r["scope_note"])
+        if r["candidate_facts"]:
+            facts = [f"{f['label']} ({f['id']}) {f['name']} = {json.dumps(f['value'], ensure_ascii=False)} "
+                     f"[{f['where']}]" for f in r["candidate_facts"]]
+            parts.append("Supplied candidate facts (meaning and suitability unverified): " + "; ".join(facts) + ".")
+        else:
+            parts.append("No candidate values found in the selected model records.")
+        parts.append("The collection/review request remains open; supplied values or document references do not settle it.")
+    return " ".join(p for p in parts if p)
 
 
 def render_md(model, catalog, doc):
@@ -1108,17 +1146,60 @@ def load_site(arg, catalog):
                 not isinstance(r.get("how"), str) or (r["item"], r["how"]) not in pairs for r in requests):
             conflicts.append("data_requests")
         else:
+            always_open = {r["item"] for r in q.get("data_requests", []) if not r.get("fields") or r.get("also_needs")}
+            if always_open - {r["item"] for r in requests}:
+                conflicts.append("data_requests.missing_required")
             for r in requests:
                 definition = definitions[r["item"]]
                 if "field_scope" in r and r["field_scope"] != definition.get("field_scope", "anchors"):
                     conflicts.append("data_requests.field_scope")
                 if not valid_coverage(r, definition, finding, q):
                     conflicts.append("data_requests.field_coverage")
+                if not valid_candidates(r, definition, finding, q):
+                    conflicts.append("data_requests.candidate_facts")
         if conflicts:
             raise InputError(f"{shown_path(f)} finding {finding.get('id', q['id'])!r} conflicts with catalog "
                              f"question {q['id']} ({', '.join(conflicts)}); reconcile the catalog and regenerate "
                              "the screen before combining sites")
     return name, shown_path(f), d
+
+
+def valid_candidates(request, definition, finding, question):
+    names = definition.get("show_fields")
+    if not names:
+        return "candidate_facts" not in request and "candidate_scope" not in request
+    if (request.get("candidate_scope") != definition.get("field_scope", "anchors")
+            or not isinstance(request.get("candidate_facts"), list)):
+        return False
+    if "scope_note" in request and (not isinstance(request["scope_note"], str) or not request["scope_note"].strip()):
+        return False
+    if not isinstance(finding.get("evidence"), list) or not isinstance(finding.get("assets"), list):
+        return False
+    if request["candidate_scope"] == "anchors":
+        role = question["applies_when"].get("anchor_role", "trigger")
+        subjects = {e["id"] for e in finding.get("evidence", []) if isinstance(e, dict)
+                    and e.get("role") == role and isinstance(e.get("id"), str)}
+    else:
+        owner = finding.get("id", "").partition("@")[2]
+        subjects = {owner} if question["applies_when"].get("group_by", "unit") == "unit" and any(
+            isinstance(e, dict) and e.get("id") == owner and isinstance(e.get("field"), str)
+            and e["field"].startswith("units[") for e in finding["evidence"]) else set()
+        if not subjects and not request.get("scope_note"):
+            return False
+    assets = {a["id"] for a in finding.get("assets", []) if isinstance(a, dict) and isinstance(a.get("id"), str)}
+    seen = set()
+    for fact in request["candidate_facts"]:
+        if (not isinstance(fact, dict) or not isinstance(fact.get("id"), str) or fact["id"] not in subjects & assets
+                or not isinstance(fact.get("label"), str) or not fact["label"].strip() or fact.get("name") not in names
+                or not isinstance(fact.get("where"), str) or not fact["where"].strip()):
+            return False
+        value = fact.get("value")
+        pair = (fact["id"], fact["name"])
+        if (pair in seen or value is None
+                or (isinstance(value, str) and (not value.strip() or PLACEHOLDER.match(value)))):
+            return False
+        seen.add(pair)
+    return True
 
 
 def valid_coverage(request, definition, finding, question):
@@ -1228,7 +1309,7 @@ def rollup(site_args, catalog, *, catalog_path=CATALOG):
                 s["per"].setdefault(f["id"], [])
                 s["per"][f["id"]] += [w for w in r["where"] if w not in s["per"][f["id"]]]
                 detail = {k: r[k] for k in ("field_scope", "field_coverage", "already_on_drawing",
-                                            "still_needed", "scope_note") if k in r}
+                                            "still_needed", "scope_note", "candidate_scope", "candidate_facts") if k in r}
                 if detail:
                     s.setdefault("coverage_by_finding", []).append({"finding_id": f["id"], **detail})
     for e in per.values():  # places every finding at a site shares are listed once; the rest per finding

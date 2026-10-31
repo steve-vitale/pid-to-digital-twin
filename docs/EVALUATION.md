@@ -501,5 +501,8 @@ measurement above, and does not change the field scorer, question catalog or his
 The [field-coverage controls](../examples/opportunity-screen/field-coverage/README.md) separately test whether
 each subject's missing evidence stays requested through screening and handoff. They use fictional values and
 actual offline CLIs; no new question trigger or benefit is inferred. Correct completeness accounting does not
-establish source support, useful investigations or a complete catalog. E5's curve and H3's hours/power-field
-contracts remain open in [STATUS](STATUS.md#known-defects).
+establish source support, useful investigations or a complete catalog. The separate
+[fan/heater controls](../examples/opportunity-screen/collection-basis/README.md) repair E5's curve and H3's
+hours/power request contracts using an independently frozen source-informed collection rubric. They test
+retention and unresolved review needs on fictional inputs, without a human usefulness trial, engineering
+suitability verdict or unfamiliar-source/model performance result.

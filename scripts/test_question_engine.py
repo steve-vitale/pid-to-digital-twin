@@ -679,6 +679,158 @@ class FieldSubjects(unittest.TestCase):
                         qe.rollup([str(site)], CAT)
 
 
+class CollectionBasis(unittest.TestCase):
+    """Scalar candidates cannot stand in for performance documents or representative operating records."""
+
+    example = EX / "collection-basis"
+
+    def screen(self, facts=None):
+        model = json.loads((self.example / "model.json").read_text(encoding="utf-8"))
+        if facts:
+            for unit in model["units"]:
+                unit["facts"].update(facts)
+        return model
+
+    def generate(self, tmp, facts=None, catalog=None):
+        model = self.screen(facts)
+        path = Path(tmp) / "model.json"
+        path.write_text(json.dumps(model), encoding="utf-8")
+        args = ["--model", str(path), "--question", "E5", "--question", "H3"]
+        if catalog:
+            cp = Path(tmp) / "catalog.json"
+            cp.write_text(json.dumps(catalog), encoding="utf-8")
+            args += ["--catalog", str(cp)]
+        return run(args, tmp)[1]
+
+    def test_nameplate_and_rich_raw_candidates_keep_collection_review_open(self):
+        cases = [None, {"input_power_kW": 10}, {"operating_hours": 8000},
+                 {"fan_curve_uri": "F-2-curve.pdf", "fan_curve_asset": "F-2", "fan_curve_readable": False},
+                 {"fan_curve": True, "fan_curve_uri": "F-1-curve.pdf", "input_power_kW": 10,
+                  "operating_hours": 8000, "energy_kWh": 80000, "control_mode": "mixed manual/bypass"}]
+        for values in cases:
+            with self.subTest(values=values), tempfile.TemporaryDirectory() as tmp:
+                doc = self.generate(tmp, values)
+                fan, heater = finding(doc, "E5@F-1"), finding(doc, "H3@EH-1")
+                self.assertEqual(len(fan["data_requests"]), 4)
+                self.assertEqual(len(heater["data_requests"]), 3)
+                self.assertTrue(all(r["state"] == "not_on_drawing" for f in (fan, heater) for r in f["data_requests"]))
+                self.assertFalse(any("still_needed" in r or "already_on_drawing" in r
+                                     for f in (fan, heater) for r in f["data_requests"]))
+                facts = [v for f in (fan, heater) for r in f["data_requests"] for v in r.get("candidate_facts", [])]
+                self.assertTrue(any(v["name"] == "HP" and v["id"] == "F-1" and v["value"] == 15 for v in facts))
+                if values and "fan_curve_readable" in values:
+                    self.assertTrue(any(v["name"] == "fan_curve_readable" and v["value"] is False for v in facts))
+                md = (Path(tmp) / "screen.md").read_text(encoding="utf-8")
+                self.assertIn("collection/review request remains open", md)
+                self.assertIn("representative period", md)
+                self.assertIn("a URI or present/readable flag", md)
+                self.assertIn("original units", md)
+
+    def test_candidate_values_case_and_locator_survive_rollup_and_graph(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            doc = self.generate(tmp, {"INPUT_POWER_KW": 0, "fan_curve_readable": False})
+            r = next(r for r in finding(doc, "E5@F-1")["data_requests"] if r["item"] == "Fan electrical-input and load history")
+            fact = next(f for f in r["candidate_facts"] if f["name"] == "input_power_kW")
+            self.assertEqual(fact["value"], 0)
+            self.assertEqual(fact["where"], "units[F-1].facts.INPUT_POWER_KW")
+            graph = gx.build(Path(tmp) / "model.json", questions=Path(tmp) / "questions.json")
+            self.assertEqual(graph["questions"], doc["questions"])
+            rolled = qe.rollup(["A=" + tmp, "B=" + tmp], CAT)
+            rr = next(q for q in rolled["questions"] if q["question_id"] == "E5")
+            request = next(x for x in rr["data_requests"] if x["item"] == r["item"])
+            for site in request["sites"]:
+                self.assertEqual(site["coverage_by_finding"][0]["candidate_facts"], r["candidate_facts"])
+            self.assertEqual(qe.render_rollup_md(rolled, CAT).count("units[F-1].facts.INPUT_POWER_KW"), 2)
+
+    def test_supplied_facts_never_count_toward_required_fields(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = copy.deepcopy(CAT)
+            r = next(q for q in catalog["questions"] if q["id"] == "E5")["data_requests"][0]
+            r["fields"] = ["reviewed_period"]
+            doc = self.generate(tmp, {"damper_position": 40}, catalog)
+            request = finding(doc, "E5@F-1")["data_requests"][0]
+            self.assertEqual(request["still_needed"], ["reviewed_period"])
+            self.assertNotIn("already_on_drawing", request)
+            self.assertEqual(request["candidate_facts"][0]["value"], 40)
+
+    def test_committed_collection_reports_reproduce(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run(["--model", str(self.example / "model.json"), "--question", "E5", "--question", "H3"], tmp)
+            for name in ("questions.json", "screen.md"):
+                self.assertEqual((Path(tmp) / name).read_text(encoding="utf-8"),
+                                 (self.example / name).read_text(encoding="utf-8"))
+
+    def test_rollup_cannot_erase_always_open_collection_tasks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            original = self.generate(tmp)
+            for requests in ([], original["questions"][0]["data_requests"][1:]):
+                with self.subTest(count=len(requests)):
+                    doc = copy.deepcopy(original)
+                    doc["questions"][0]["data_requests"] = requests
+                    (Path(tmp) / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                    with self.assertRaisesRegex(qe.InputError, "missing_required"):
+                        qe.rollup([tmp], CAT)
+
+    def test_evidence_only_unit_request_explains_missing_owner(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = copy.deepcopy(CAT)
+            next(q for q in catalog["questions"] if q["id"] == "H3")["data_requests"][0]["field_scope"] = "unit"
+            doc = self.generate(tmp, catalog=catalog)
+            request = finding(doc, "H3@EH-1")["data_requests"][0]
+            self.assertEqual(request["candidate_scope"], "unit")
+            self.assertEqual(request["candidate_facts"], [])
+            self.assertIn("No owning equipment unit", request["scope_note"])
+            self.assertIn("No owning equipment unit", (Path(tmp) / "screen.md").read_text(encoding="utf-8"))
+            rolled = qe.rollup([tmp], catalog)
+            self.assertIn("No owning equipment unit", qe.render_rollup_md(rolled, catalog))
+
+    def test_invalid_show_fields_refuse_without_replacing_existing_reports(self):
+        for show in (None, "HP", [], ["HP", "hp"], [""], [False]):
+            with self.subTest(show=show), tempfile.TemporaryDirectory() as tmp:
+                base = Path(tmp)
+                self.generate(tmp)
+                before = {name: (base / name).read_bytes() for name in ("questions.json", "screen.md")}
+                catalog = copy.deepcopy(CAT)
+                next(q for q in catalog["questions"] if q["id"] == "E5")["data_requests"][0]["show_fields"] = show
+                cp = base / "catalog.json"
+                cp.write_text(json.dumps(catalog), encoding="utf-8")
+                with contextlib.redirect_stderr(io.StringIO()) as err:
+                    code = qe.main(["--model", str(base / "model.json"), "--catalog", str(cp), "--out", str(base)])
+                self.assertEqual(code, 2)
+                self.assertIn("show_fields", err.getvalue())
+                self.assertEqual({name: (base / name).read_bytes() for name in before}, before)
+
+    def test_malformed_candidate_metadata_refuses_before_rollup_publication(self):
+        def duplicate(r):
+            r["candidate_facts"].append(copy.deepcopy(r["candidate_facts"][0]))
+
+        changes = [duplicate, lambda r: r.update(candidate_facts=17),
+                   lambda r: r.pop("candidate_facts"), lambda r: r.update(candidate_scope="unit"),
+                   lambda r: r["candidate_facts"][0].update(id="OUTSIDE"),
+                   lambda r: r["candidate_facts"][0].update(label=""),
+                   lambda r: r["candidate_facts"][0].update(name="UNLISTED"),
+                   lambda r: r["candidate_facts"][0].update(value=None),
+                   lambda r: r["candidate_facts"][0].update(where="")]
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            original = self.generate(tmp)
+            out = base / "rollup"
+            out.mkdir()
+            for name in ("rollup.json", "rollup.md"):
+                (out / name).write_text("previous report", encoding="utf-8")
+            before = {p.name: p.read_bytes() for p in out.iterdir()}
+            for change in changes:
+                with self.subTest(change=change.__name__):
+                    doc = copy.deepcopy(original)
+                    change(finding(doc, "E5@F-1")["data_requests"][2])
+                    (base / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                    with contextlib.redirect_stderr(io.StringIO()) as err:
+                        code = qe.main(["--rollup", str(base), "--out", str(out)])
+                    self.assertEqual(code, 2)
+                    self.assertIn("candidate_facts", err.getvalue())
+                    self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+
+
 class ReviewFixes(unittest.TestCase):
     """One regression test per finding of the two independent reviews (2026-10-29)."""
 

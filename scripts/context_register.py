@@ -31,7 +31,7 @@ PLANT_TRUTH = ("unknown", "confirmed", "wrong")
 ANSWER_STATES = ("partial", "needs_data", "answered")
 DECISIONS = ("proposed", "accepted", "rejected")
 HASH = re.compile(r"^[0-9a-f]{64}$")
-# Status fields describe a review, not a change to engineering content. All other content is bound.
+# Review bookkeeping is ignored at record levels; opaque source evidence and claim values stay bound.
 BOOKKEEPING = {"status", "context", "context_register"}
 
 
@@ -77,7 +77,7 @@ def semantic(value):
     if isinstance(value, dict):
         # Original evidence records are opaque content, including fields named status/context. Stripping
         # bookkeeping inside them would hide an evidence change from the context freshness comparison.
-        return {k: copy.deepcopy(v) if k in ("provenance", "citations") else semantic(v)
+        return {k: copy.deepcopy(v) if k in ("provenance", "citations", "value", "candidate_facts", "field_coverage") else semantic(v)
                 for k, v in value.items() if k not in BOOKKEEPING}
     if isinstance(value, list):
         # Lists can carry engineering order (curves, split ranges); preserve that order.
@@ -87,12 +87,32 @@ def semantic(value):
 
 def coverage_subjects(request):
     """Validate the new collection metadata's shape, without re-running its catalog or resolving answers."""
+    candidates = set()
+    if "candidate_facts" in request or "candidate_scope" in request:
+        if (request.get("candidate_scope") not in ("anchors", "unit")
+                or not isinstance(request.get("candidate_facts"), list)):
+            raise InputError("collection candidate_facts needs a list and candidate_scope anchors or unit")
+        seen = set()
+        for fact in request["candidate_facts"]:
+            if (not isinstance(fact, dict) or not isinstance(fact.get("id"), str)
+                    or not fact["id"].strip() or not isinstance(fact.get("label"), str) or not fact["label"].strip()
+                    or not isinstance(fact.get("name"), str) or not fact["name"].strip()
+                    or not isinstance(fact.get("where"), str) or not fact["where"].strip()
+                    or "value" not in fact or fact["value"] is None):
+                raise InputError("collection candidate_facts need identity, field name, value and locator")
+            pair = (fact["id"], fact["name"])
+            if pair in seen:
+                raise InputError("collection candidate_facts repeats a subject/field")
+            seen.add(pair)
+            candidates.add(fact["id"])
+        if "scope_note" in request and (not isinstance(request["scope_note"], str) or not request["scope_note"].strip()):
+            raise InputError("collection scope_note must be nonempty text")
     for key in ("already_on_drawing", "still_needed"):
         if key in request and (not isinstance(request[key], list)
                                or any(not isinstance(f, str) for f in request[key])):
             raise InputError(f"collection {key} must be a list of field names")
     if "field_coverage" not in request and "field_scope" not in request:
-        return set()  # historical/unstructured collection prompts remain readable
+        return candidates  # historical/unstructured collection prompts remain readable
     if request.get("field_scope") not in ("anchors", "unit") or not isinstance(request.get("field_coverage"), list):
         raise InputError("collection field_coverage needs a list and field_scope anchors or unit")
     if "scope_note" in request and not isinstance(request["scope_note"], str):
@@ -112,7 +132,7 @@ def coverage_subjects(request):
                     or entry.get("state") not in ("present", "blank", "absent")
                     or (entry.get("where") is not None and not isinstance(entry["where"], str))):
                 raise InputError("collection field_coverage fields need a name, state and text/null locator")
-    return subjects
+    return subjects | candidates
 
 
 def load_inputs(model_path, question_path):
@@ -577,6 +597,15 @@ def report(register):
                     continue
                 lines.append(f"- **{md(request.get('item', 'Collection prompt'))}**")
                 coverage_subjects(request)
+                if "candidate_facts" in request:
+                    lines.append(f"  Candidate scope: {md(request['candidate_scope'])}")
+                    lines.append("  Supplied candidate facts; meaning and suitability unverified. "
+                                 "The collection/review request remains open.")
+                    for fact in request["candidate_facts"]:
+                        lines.append(f"  {md(fact['label'])} ({md(fact['id'])}) {md(fact['name'])} = "
+                                     f"{md(json.dumps(fact['value'], ensure_ascii=False))}; source: {md(fact['where'])}")
+                    if not request["candidate_facts"]:
+                        lines.append("  No candidate values found in the selected model records.")
                 if request.get("field_scope"):
                     lines.append(f"  Field scope: {md(request['field_scope'])}")
                 if request.get("scope_note"):

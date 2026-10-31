@@ -22,10 +22,12 @@ equipment. Field coverage survives readable screens, graph/context handoff and p
 strings count as blanks. The [two-supply control](../examples/opportunity-screen/field-coverage/README.md) shows
 the failure this fixes. It establishes software accounting, without validating supplied values or useful questions.
 
-**Question-catalog gaps (N071, open):** E5's fan-curve request can be discharged by HP/RPM without a curve;
-H3's rating-and-hours request encodes both kW and HP but no hours. Their field/request contracts need separate
-engineering review. Schedule files replace an entry's field object rather than merging keys, and conflicts
-between facts/schedules or case-variant keys remain unresolved. The field-scope repair does not fix these limits.
+**Repaired collection contracts (N071):** E5 now separates curves, rating/drive basis and actual input/load
+history; H3 separates stated rating from actual hours/load and heat-source compatibility. Supplied scalars,
+references and flags remain unverified candidates, with their qualifiers and exact locators retained through
+handoff. They cannot remove those collection/review tasks. See the [fan/heater control](../examples/opportunity-screen/collection-basis/README.md).
+This fixes two known false-completion cases, without certifying the whole catalog, document suitability or
+engineer usefulness. Schedule replacement, conflicting facts/schedules and case-variant keys remain unresolved.
 
 **Repaired additional output writers (N069):** actual copied-input probes first reproduced collisions in the
 report, loop-audit and line-enrichment commands, then eleven more tools. The fourteen repaired writers now

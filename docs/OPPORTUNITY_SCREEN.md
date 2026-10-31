@@ -99,7 +99,7 @@ Every data request is in one of three states, and the output says which:
 |---|---|---|
 | **on drawing** | The value is on the drawing or model | Nothing to collect; the value is quoted as evidence with the model field it came from |
 | **blank on drawing** | The drawing prints a field for it and leaves it empty (or writes a placeholder such as `XXX`) | Fill that field: "the blank HP field on the sheet 2 equipment schedule, entry CND-PU-162" |
-| **not on drawing** | The drawing has no place for it | Where it lives instead, most direct first: a historian tag if the model maps one (named), the DCS/PLC configuration, a nameplate, the vendor datasheet, maintenance records, utility bills, or a walkdown with a named instrument |
+| **not on drawing** | The requested value or complete collection/review basis is not established by the model; any supplied candidates remain visible | Where to collect or review it, most direct first: a mapped historian tag, DCS/PLC configuration, existing nameplate/vendor records, maintenance records, utility bills, or an approved walkdown |
 
 The OPEN100 drawings show why the middle state matters. They are template drawings: every equipment schedule prints
 CAPACITY, DISCHARGE, RPM and HP (or OD, LENGTH and MATERIAL) and leaves them blank. A screen that treated those as
@@ -123,9 +123,23 @@ state and locator) and `still_needed`. `already_on_drawing` names fields supplie
 it can overlap the remaining list when another subject lacks that field. Read the subject coverage rather than
 treating either list as a plant-wide answer. Null, empty/whitespace and recognized placeholder values are blank;
 zero and false remain supplied values. Conflicting facts/schedules and duplicate case variants are not resolved.
-This accounting covers the fields encoded in a request, not everything its prose may require. E5's fan curve
-and H3's hours/power contract remain [open catalog gaps](STATUS.md#known-defects); field completion alone does
-not establish that the full engineering collection task is satisfied.
+This accounting covers the fields encoded in a request, not everything its prose may require. Field completion
+alone does not establish that the full engineering collection task is satisfied.
+
+Use `show_fields` for **evidence-only candidates** when a scalar cannot settle a collection/review requirement.
+E5 now separates matched fan curves, motor rating/drive basis and representative electrical-input/load records;
+H3 separates stated rating from actual hours/load and source compatibility. Both retain supplied kW/HP and other
+candidates without demanding two power-unit representations or converting a rating into measured input. The
+[worked collection example](../examples/opportunity-screen/collection-basis/README.md) starts with the scalars
+that previously hid those requests.
+
+`candidate_facts` retains each supplied value, subject and locator; `candidate_scope` uses the request's subject
+scope. Missing/blank optional candidates receive no satisfaction credit and do not add required fields. With
+only `show_fields`, a request remains open. If an author also supplies `fields`, those required fields retain
+their normal completeness rules; use `also_needs` for additional review obligations. Neither mechanism validates
+units, meaning, a document's usability, process compatibility or plant truth. A reference or Boolean flag is not
+a reviewed artifact. For an open request with candidates, `not_on_drawing` describes the full unresolved
+collection/review requirement, rather than claiming that no candidate information exists.
 
 Historian names come from the model: TE's recorded signal indices (`XMEAS(n)`, `XMV(n)`), the Bayer model's
 digitized Fig 11 series, and an extracted twin's mapped data points (`data_point`). Where none is mapped the request
@@ -190,7 +204,9 @@ Before combining findings, the engine refuses disagreement with the selected cat
 family, decision rule, typical-benefit record or limits, and emitted collection items/instructions. Findings must
 identify a catalog question; request lists must contain records with matching item/instruction strings. Conflicting
 instructions for one selected-catalog request item are also refused before publication.
-New field coverage must agree with the selected catalog's effective field scope. Malformed coverage is refused.
+New field coverage and candidate metadata must agree with the selected catalog's effective subject scope and
+field names. Malformed metadata and candidates outside the finding's subjects are refused. Candidate values
+remain supplied data; these checks do not compare them to an original operating record or approve their meaning.
 Legacy screens without scope/coverage remain readable, but cannot establish which subject policy produced them;
 regenerate them under the reviewed catalog before using them as evidence of the current completeness behavior.
 
@@ -257,8 +273,8 @@ the trigger language covers. `fields_help` in the file documents every key. The 
    "absent_note": "no speed control drawn on the agitator"},
  "evidence_fields": ["agitator tag", "no speed control"],
  "data_requests": [
-   {"item": "Motor rating", "fields": ["HP"], "where": [{"place": "nameplate", "what": "motor"}], "how": "Copy rated kW."},
-   {"item": "Run hours", "where": [{"place": "historian", "for": "trigger"}, {"place": "records", "what": "operator logs"}], "how": "Hours per year."}],
+   {"item": "Stated motor output HP", "fields": ["HP"], "where": [{"place": "records", "what": "existing nameplate"}], "how": "Retain stated output HP and its source; this is not measured electrical input."},
+   {"item": "Operating input and hours", "show_fields": ["kW", "operating_hours"], "where": [{"place": "records", "what": "approved existing power and operating logs"}], "how": "Review original units/basis, period, coverage and actual load; supplied scalars do not settle this request."}],
  "decision_rule": "Worth a look when it runs long hours on a duty that varies.",
  "typical_benefit": {"wording": "No source found; report as qualitative only.", "source": [], "arc": null},
  "limits": null}
@@ -276,6 +292,9 @@ the trigger language covers. `fields_help` in the file documents every key. The 
   return).
 - **fields** in a data request are looked up in the model's facts and the equipment schedule, which is how the
   three evidence states are decided.
+- **show_fields** quotes present candidate facts from the same subjects without contributing to required-field
+  completion. Preserve records and remaining review needs separately; do not encode a fan curve as HP/RPM or
+  actual operation as a nameplate rating.
 - Copy the source's wording exactly. If no source has a number, say so in the wording (the tests insist that a
   question with no source key says it has none). Never write a figure for a specific plant.
 

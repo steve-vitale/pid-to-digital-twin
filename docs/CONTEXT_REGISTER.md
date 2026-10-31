@@ -187,6 +187,12 @@ limits. These are the screen's collection prompts, not per-request completion tr
 recording an answer does not automatically satisfy or clear them. Their exact content remains in the enriched
 question JSON for the engineer to carry forward.
 
+Supplied candidate facts retain their subject, scope, value and locator in both the report and JSON. They remain
+unverified information, without settling the collection/review task. Context checks their shape and referenced
+asset identities; it does not reapply the engine's catalog, decide field meaning or validate document suitability.
+Claim values and recorded field/candidate evidence are opaque: qualifiers named `status`, `context` or
+`context_register` inside them remain content, survive the handoff and change the evidence binding when edited.
+
 Each immutable decision includes its question id, answer id, owner at the time, reviewer, review date, verdicts, note,
 predecessor decision id, and the full evidence snapshot. That snapshot binds:
 

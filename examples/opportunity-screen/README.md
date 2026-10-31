@@ -17,6 +17,8 @@ How the engine works, the three evidence states and how to add a question: [`doc
 
 The separate [two-supply regression](field-coverage/README.md) shows why grouping questions by unit must not
 combine different assets' partial answers. It is a fictional software control, not another public source family.
+The [fan/heater collection example](collection-basis/README.md) keeps nameplate candidates separate from
+curves, actual operation and the review still needed. It also uses invented assets, without a usefulness claim.
 
 Regenerate (the test checks these outputs byte for byte):
 

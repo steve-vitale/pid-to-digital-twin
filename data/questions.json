@@ -13,7 +13,7 @@
   "applies_when": "absent_note: a sentence quoted as evidence saying what was looked for and not found. anchor: a selector (or list of selectors, any may match) for the item that triggers the question. with: clauses that must all find a related item. without: clauses of which none may find one. also_show: related items quoted as evidence if present. group_by: unit | item | model. needs_model: item kinds the model must contain, else the question is reported as not checked. min_anchors: fewest triggering items per group.",
   "selector": "kind (equipment, instrument, valve = control valve, final_element = other operated valve or speed element, hand_valve, relief, controller, interlock, stream, line_item, offpage), type (exact), type_text (regex over type and text), isa (regex over ISA letters), variable, text (regex over tag, name, description and schedule service), text_all (all regexes), not_text, tagged, control_valve, fact_C_min / fact_C_max (a stated temperature fact), schedule_field (the drawing prints this field, filled or blank).",
   "relation": "same_unit, same_stream, same_unit_same_medium (same unit and same utility: steam, cooling water, air...), other_unit, discharge_side (streams leaving the anchor's unit; on an extracted twin, within max_hops drawn links on the same sheet, direction unknown), near (same unit or stream; on a twin within max_hops links), drives (a controller writing to the anchor), reads (a controller or interlock reading the anchor), anywhere, linked (on a hand-built model: a stream drawn from or to the anchor's unit, an item on such a stream, or the equipment at its other end; on an extracted twin, within max_hops drawn links like near). twin_only / hand_only: true limits a clause to extracted twins / hand-built models. anchor_kind: the clause applies only to anchors of these kinds.",
-  "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any subject lacks a field; field_scope defaults to anchors, requiring each triggering record separately; unit explicitly selects only the finding's owning equipment record, not related context or a join of sources), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how.",
+  "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any subject lacks a field; field_scope defaults to anchors, requiring each triggering record separately; unit explicitly selects only the finding's owning equipment record, not related context or a join of sources), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how. show_fields: optional distinct evidence-only fact/schedule names, resolved on the same subjects; present values are unverified candidates and never discharge a collection/review request. Keep required fields and show_fields separate.",
   "typical_benefit": "wording copied from the source, source keys, arc = DOE IAC/ITAC recommendation code where mapped. Never a figure for a specific plant."
  },
  "screen_exclusions": [
@@ -625,7 +625,11 @@
    ],
    "data_requests": [
     {
-     "item": "Damper position history",
+     "item": "Damper position, control mode and operating period",
+     "show_fields": [
+      "damper_position",
+      "control_mode"
+     ],
      "where": [
       {
        "place": "historian",
@@ -633,36 +637,69 @@
        "quantity": "position"
       },
       {
-       "place": "walkdown",
-       "what": "damper linkage position"
+       "place": "records",
+       "what": "existing control narratives, drive settings and operating logs"
       }
      ],
-     "how": "Note typical and minimum opening and hours."
+     "how": "Use approved existing records. Identify damper/vanes type, fixed or variable speed, bypass/manual modes and representative dates/hours; retain unknown modes and gaps. A drawn device does not establish how it is used."
     },
     {
-     "item": "Fan curve and motor kW",
-     "fields": [
-      "HP",
-      "RPM"
+     "item": "Matched fan curves and system operating points",
+     "show_fields": [
+      "fan_curve",
+      "fan_curve_uri",
+      "fan_curve_readable",
+      "fan_curve_asset"
      ],
      "where": [
       {
        "place": "vendor",
-       "what": "fan curve"
+       "what": "fan pressure/flow and available power/efficiency curves for the installed configuration"
       },
       {
-       "place": "nameplate",
-       "what": "motor"
-      },
-      {
-       "place": "walkdown",
-       "what": "clamp-on power meter"
+       "place": "records",
+       "what": "system resistance or required airflow/pressure, operating points and process constraints"
       }
      ],
-     "how": "Plot the operating point on the fan curve."
+     "how": "Review the document itself against fan identity/size, speed, gas conditions, axes/units and static/total pressure basis. Retain source revision, locator and suitability gaps; a URI or present/readable flag does not establish a usable matching curve."
+    },
+    {
+     "item": "Motor nameplate rating and drive basis",
+     "show_fields": [
+      "HP",
+      "RPM",
+      "kW",
+      "motor_rated_output_kW"
+     ],
+     "where": [
+      {
+       "place": "records",
+       "what": "existing motor nameplate/datasheet and drive/bypass configuration"
+      }
+     ],
+     "how": "Retain original power units, rated speed, asset identity, source and rating basis. Review whether power denotes rated shaft output or electrical input. Do not demand a second unit representation or treat a conversion as measured input."
+    },
+    {
+     "item": "Fan electrical-input and load history",
+     "show_fields": [
+      "input_power_kW",
+      "operating_hours",
+      "run_hours",
+      "energy_kWh",
+      "airflow",
+      "pressure",
+      "operating_speed_rpm"
+     ],
+     "where": [
+      {
+       "place": "records",
+       "what": "approved existing electrical-input metering and representative fan/process operating records"
+      }
+     ],
+     "how": "Retain period/coverage and coincident airflow, pressure, actual speed/control mode and load timing where available. Distinguish measured electrical input, stated motor output, energy over a period and assumed hours. Record unavailable evidence; this request does not instruct live measurements."
     }
    ],
-   "decision_rule": "Worth a drive quote when the damper normally runs partly closed for long hours; fan power falls with the cube of speed.",
+   "decision_rule": "Worth further study when representative records show sustained part-load control and required airflow/pressure can be maintained. A drive quote needs reviewed fan/system curves, operating constraints and electrical-input/load history; the cube-speed relationship alone is not a site estimate.",
    "typical_benefit": {
     "wording": "Dampers \"remain closed so often that they can be found rusted or locked in a restrictive position... the system continually operates against an unnecessary load.\" Fan \"power is related to the cube of fan speed.\" No % stated.",
     "source": [
@@ -670,7 +707,7 @@
     ],
     "arc": "2.4146 (by description)"
    },
-   "limits": null
+   "limits": "Damper or drive presence does not establish actual control mode. Fan/system conditions and process requirements need qualified review. Similarity relationships are conditional, not a universal drive recommendation or a quantified benefit for this plant."
   },
   {
    "id": "E6",
@@ -2140,37 +2177,54 @@
    ],
    "data_requests": [
     {
-     "item": "Heater rating and hours",
-     "fields": [
+     "item": "Heater nameplate/design rating and basis",
+     "show_fields": [
       "kW",
-      "HP"
+      "HP",
+      "heater_rated_input_kW"
      ],
      "where": [
       {
-       "place": "nameplate",
-       "what": "heater"
-      },
-      {
-       "place": "historian",
-       "for": "trigger",
-       "quantity": "power"
-      },
-      {
-       "place": "walkdown",
-       "what": "clamp-on power meter"
+       "place": "records",
+       "what": "existing heater nameplate or design/vendor record"
       }
      ],
-     "how": "Rated kW and run hours."
+     "how": "Identify heater/service and confirm the heating method. Retain stated rating in original units, source/locator and whether it denotes electrical input or delivered heat. Generic kW/HP fields remain candidates; ambiguous HP or a unit conversion does not establish rated electrical input."
+    },
+    {
+     "item": "Heater operating hours and load history",
+     "show_fields": [
+      "operating_hours",
+      "run_hours",
+      "input_power_kW",
+      "energy_kWh"
+     ],
+     "where": [
+      {
+       "place": "records",
+       "what": "approved existing heater energization, power/energy and production/load records"
+      }
+     ],
+     "how": "State the representative period, coverage and load/stage/cycling basis. Distinguish enabled, energized, full-load-equivalent and calendar hours, and measured versus estimated values. Retain missing periods/gaps; nameplate rating or a bare hours scalar does not establish actual consumption. No live measurement is requested."
     },
     {
      "item": "Waste or low-grade heat nearby",
      "where": [
       {
+       "place": "records",
+       "what": "documented process demand and candidate source conditions/availability"
+      },
+      {
        "place": "walkdown",
-       "what": "hot streams, condensate or cooling water returns within reach"
+       "what": "approved observations of candidate sources and distance; no equipment changes"
       }
      ],
-     "how": "List sources above the load temperature."
+     "how": "Review required load temperature/range and demand timing alongside source temperature, available quantity/flow, timing overlap, medium/contamination and distance. Keep unknown availability and compatibility explicit; nearby heat alone does not establish a usable match.",
+     "show_fields": [
+      "load_temperature_C",
+      "normal_temperature_C",
+      "temperature_C"
+     ]
     }
    ],
    "decision_rule": "Worth a look when the heater runs long hours and a lower-grade source above the load temperature is close by.",
@@ -2179,7 +2233,7 @@
     "source": [],
     "arc": null
    },
-   "limits": "Fires only when the model states the load temperature; an electric heater with no stated temperature (for example a pressurizer heater) is not a low-temperature load and does not fire."
+   "limits": "Fires only when the model states a load temperature at or below 150 C, a catalog screening heuristic rather than a validated feasibility cutoff. Without a stated temperature the load remains unknown and this question does not fire. Rated power, actual operation and source compatibility need separate review; no recovered energy or saving is established."
   },
   {
    "id": "H4",

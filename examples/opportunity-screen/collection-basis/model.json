@@ -1,0 +1,37 @@
+{
+ "meta": {
+  "title": "Fictional fan and heater collection controls",
+  "note": "Invented assets/values; nameplate candidates only, no curves, operating records or plant truth."
+ },
+ "units": [
+  {
+   "id": "F-1",
+   "type": "fan",
+   "name": "Ventilation fan",
+   "facts": {
+    "HP": 15,
+    "RPM": 1780
+   }
+  },
+  {
+   "id": "EH-1",
+   "type": "heater",
+   "name": "Electric heater, tank warming",
+   "facts": {
+    "load_temperature_C": 60,
+    "kW": 20,
+    "HP": 26.8
+   }
+  }
+ ],
+ "streams": [],
+ "instruments": [],
+ "final_elements": [
+  {
+   "tag": "DMP-1",
+   "unit": "F-1",
+   "description": "Fan discharge damper"
+  }
+ ],
+ "controllers": []
+}

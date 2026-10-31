@@ -5173,3 +5173,44 @@ suite passes 45. The full cached-data runner reports 63/63 scripts, five unittes
 platform notices. Four registered benchmark suites reproduce; the unchanged matrix/pipeline inventories remain
 fresh. A separate reader independently rebuilds all sixty-three description files and checks the application
 snapshot fingerprint. These are bounded software observations, not an engineer trial or native plant acceptance.
+
+
+## 112. Keep candidate facts separate from collection and review
+
+Actual baseline CLIs show E5 dropping its curve/input request from HP/RPM alone and H3 dropping its hours
+request from kW/HP alone. An independent reviewer freezes a primary-source-informed collection rubric before
+seeing catalog/software candidates. The revised requests distinguish nameplate/design information, matched
+fan/system evidence, actual operation over a stated period, and heat-source compatibility. E5 now requires
+further study and reviewed constraints before a drive quote; its similarity relation is not a site estimate.
+H3 keeps the 150 C threshold as an explicitly unvalidated catalog heuristic and treats absent temperature as
+unknown. Both question triggers and their benefit wording stay unchanged.
+
+Evidence-only `show_fields` retains candidate facts with their subject, original value and source locator,
+without counting them toward required fields or settling document suitability. The fictional example retains
+the fan's HP/RPM, heater's kW/HP and stated 60 C load, while seven distinct collection/review tasks stay open.
+Actual-power-only, bare hours, curve references/flags, wrong-asset/unreadable references and richer raw facts
+likewise do not replace missing review/basis/coverage. Original units can be retained without demanding both
+HP and kW or equating shaft output to measured electrical input. No automatic artifact approval or conversion
+is added. Existing required-field behavior remains separate; additional review uses `also_needs`.
+
+Independent consumer probes expose opaque value loss: recursive context bookkeeping removal strips
+`status: estimated`, `status: unreadable`, period/asset context and vendor metadata from supplied fact values.
+Opaque claim values and candidate/field evidence now survive unchanged and their qualifiers affect the
+context evidence binding. Other probes expose erasure of always-open tasks during roll-up and an unexplained
+unit-scope request with no owner. The corrected roll-up rejects omitted unconditional collection tasks before
+writes; no-owner evidence-only requests retain the reason. Malformed metadata refuses, while generic context
+continues to preserve caller-supplied unverified information without reapplying the question catalog.
+
+The new example's actual screen, graph and context commands run offline. Both questions remain unanswered,
+need owners and have no decisions or source-operating records. An independent reader follows that route and
+finds all seven requests and five supplied candidate values/locators retained. This is an AI reader/software
+observation, not an engineer adoption or usefulness trial. The normal published screens remain byte-identical;
+both description bundles are actually rebuilt from unchanged sources/answers, with only their build inventories
+changing. Research metrics, existing context decisions and benchmark reports remain unchanged.
+
+Final local checks pass all sixty-three cached-data test scripts, with five unittest skips and two explanatory
+platform notices. The question suite has 84 tests with one Windows symlink skip; the context suite has 48.
+Four registered benchmark suites reproduce; the unchanged matrix and 52 configured pipeline stages check fresh.
+Independent software evidence comprises ninety-seven actual CLI calls and 195 substantive controls. Source/UI,
+reader-route and artifact-lineage scopes are recorded separately; none establishes human usefulness or
+engineering/plant acceptance.

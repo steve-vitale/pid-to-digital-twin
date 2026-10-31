@@ -3661,6 +3661,23 @@
         "examples/opportunity-screen/field-coverage/README.md",
         "docs/STATUS.md#known-defects"
       ]
+    },
+    {
+      "id": "A246",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Separate E5/H3 collection contracts from evidence-only candidate facts; preserve opaque qualifiers through context and refuse omitted always-open tasks.",
+      "hypothesis": "Ratings and bare scalar/reference fields must remain useful information without falsely satisfying curve suitability, actual hours/load or representative electrical-input evidence.",
+      "evidence": "Actual baseline fanHP/RPM and heaterkW/HP erase curve/hours requests. Independently frozen primary-source rubric precedes candidate. Revised7tasks retain5nameplate/temperature candidates; richer values/URI/Boolean/wrong-asset/unreadable cases remain open. Independent97actualCLI/195substantive controls pass after repairing stripped opaque qualifiers, omitted unconditional tasks, no-owner explanation and malformed attribution. Separate reader executes screen/graph/context route; no answers/owners/decisions invented. Two descriptions actually rebuilt; only2buildinventories change, prior screens/context decisions/benchmarks retained. Final full cached-data runner63/63scripts,5unittestskips/2platformnotices; fourbenchmarkregistry suites reproduce; no model or newengineeringresult.",
+      "runs": "Offline actual CLI development controls, primary-source-informed agent rubric, independent software and reader review; question84tests1Windowsskip/context48tests. No new model/source-family performance, live plant or human usefulness trial.",
+      "verdict": "kept",
+      "why": "Close bounded N071 false-completion cases while keeping document/engineering suitability, source validity and usefulness unverified. This is a starter collection/review handoff, not a company records or execution service.",
+      "source": [
+        "docs/JOURNAL.md#112-keep-candidate-facts-separate-from-collection-and-review",
+        "examples/opportunity-screen/collection-basis/README.md",
+        "docs/OPPORTUNITY_SCREEN.md#the-three-evidence-states",
+        "docs/CONTEXT_REGISTER.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4403,12 +4420,13 @@
     {
       "id": "N071",
       "function": "intake_and_reuse",
-      "status": "not-done",
+      "status": "done",
       "idea": "Review catalog field/request adequacy: E5 needs a fan curve beyond HP/RPM, and H3 needs an explicit hours and alternative power-unit contract.",
-      "why_not_yet": "Source/code audit found that fields do not encode the full collection wording. Correct per-subject accounting does not repair semantic request adequacy. Separate source-grounded expected/missing-evidence cases and engineering review are needed before changing these rules. Fact/schedule conflicts and replacement-file semantics also remain limited; no automatic merge or conflict resolution is claimed.",
+      "why_not_yet": "Completed 2026-10-30: E5/H3 separate artifact/rating/operation/source review tasks; evidence-only show_fields retains supplied candidates without converting units or erasing unresolved collection. Opaque qualifiers survive graph/context/rollup and affect evidence bindings; always-open task omission refuses. Original-source-informed rubric, actual software controls and AI reader walkthrough establish bounded behavior only. Whole-catalog adequacy, document suitability and engineer usefulness remain unverified.",
       "source": [
         "docs/STATUS.md#known-defects",
-        "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation"
+        "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation",
+        "docs/JOURNAL.md#112-keep-candidate-facts-separate-from-collection-and-review"
       ]
     }
   ]

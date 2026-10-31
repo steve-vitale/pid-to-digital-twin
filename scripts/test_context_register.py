@@ -410,6 +410,71 @@ class ContextRegister(unittest.TestCase):
                 self.assertIn("collection", err)
                 self.assertEqual({p.name: p.read_bytes() for p in (self.root / "bundle").iterdir() if p.is_file()}, before)
 
+    def test_collection_candidates_survive_actual_graph_context_handoff_without_answers(self):
+        import graph_export
+        example = Path(__file__).resolve().parent.parent / "examples/opportunity-screen/collection-basis"
+        self.graph = graph_export.build(example / "model.json", questions=example / "questions.json")
+        self.questions = json.loads((example / "questions.json").read_text(encoding="utf-8"))
+        self.manifest = {"schema": "context-sources-1", "documents": []}
+        self.save_inputs()
+        self.prepared()
+        register = self.read()
+        self.assertEqual(register["decisions"], [])
+        for qid in ("E5@F-1", "H3@EH-1"):
+            self.assertEqual(self.state(register, qid)["state"], "unanswered")
+            self.assertEqual(self.state(register, qid)["ownership"], "needs_owner")
+        report = (self.root / "bundle/context.md").read_text(encoding="utf-8")
+        self.assertIn("meaning and suitability unverified", report)
+        self.assertIn("collection/review request remains open", report)
+        self.assertIn("F-1 (F-1) HP = 15; source: units[F-1].facts.HP", report)
+        self.assertIn("EH-1 (EH-1) kW = 20; source: units[EH-1].facts.kW", report)
+        enriched = self.read("bundle/enriched_questions.json")
+        for before, after in zip(self.questions["questions"], enriched["questions"]):
+            self.assertEqual(before["data_requests"], after["data_requests"])
+
+    def test_malformed_candidate_facts_refuse_without_changing_prior_packet(self):
+        fact = {"id": "P-1", "label": "P-1", "name": "HP", "value": 15, "where": "units[P-1].facts.HP"}
+        cases = [17, [17], [dict(fact, value=None)], [dict(fact, where="")], [dict(fact, name="")],
+                 [dict(fact, label=" ")],
+                 [dict(fact, id="OUTSIDE")], [fact, fact]]
+        self.prepared()
+        before = {p.name: p.read_bytes() for p in (self.root / "bundle").iterdir() if p.is_file()}
+        for facts in cases:
+            with self.subTest(facts=facts):
+                self.questions["questions"][0]["data_requests"] = [
+                    {"item": "Review supplied rating", "candidate_scope": "anchors", "candidate_facts": facts}]
+                self.save_inputs()
+                _, error = self.invoke("prepare", expected=2)
+                self.assertIn("collection", error)
+                self.assertEqual({p.name: p.read_bytes() for p in (self.root / "bundle").iterdir() if p.is_file()}, before)
+
+    def test_opaque_candidate_and_claim_values_keep_qualifiers_and_bind_changes(self):
+        value = {"uri": "file:///f1.pdf", "status": "unreadable",
+                 "context": {"period": "2025-08", "asset": "F-1"}, "context_register": "vendor metadata"}
+        request = {"item": "Review supplied document", "candidate_scope": "anchors", "candidate_facts": [
+            {"id": "P-1", "label": "P-1", "name": "fan_curve", "where": "units[P-1].facts.fan_curve", "value": value}]}
+        self.questions["questions"][0]["data_requests"] = [request]
+        self.graph["nodes"][1]["attributes"].append(
+            {"name": "input_power_kW", "value": {"value": 11, "status": "estimated", "context": "test period"}})
+        self.save_inputs()
+        self.prepared()
+        before = self.read()
+        current = self.state(before)
+        self.assertEqual(current["question"]["data_requests"], [request])
+        report = (self.root / "bundle/context.md").read_text(encoding="utf-8")
+        for text in ("unreadable", "2025-08", "vendor metadata"):
+            self.assertIn(text, report)
+        bound = cr.load_inputs(self.root / "model.json", self.root / "questions.json")[2]
+        attr = next(a for a in bound["Q1@P-1"]["assets"][0]["content"]["attributes"] if a["name"] == "input_power_kW")
+        self.assertEqual(attr["value"]["status"], "estimated")
+        original_digest = cr.digest(bound["Q1@P-1"])
+        for field in ("status", "context", "context_register"):
+            changed = copy.deepcopy(self.questions)
+            changed["questions"][0]["data_requests"][0]["candidate_facts"][0]["value"][field] = "changed"
+            self.write("questions.json", changed)
+            after = cr.load_inputs(self.root / "model.json", self.root / "questions.json")[2]
+            self.assertNotEqual(cr.digest(after["Q1@P-1"]), original_digest)
+
     def test_source_and_plant_truth_are_separate_and_checked_in_order(self):
         self.prepared()
         self.answers(self.row(source_match="mismatch", plant_truth="unknown", answer_state="partial"))
