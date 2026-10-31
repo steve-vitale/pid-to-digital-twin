@@ -15,6 +15,11 @@ The tool does not decide whether a document is authoritative, choose an owner, o
 Its job is to make the decision, its responsibility and its evidence travel together, and to reopen the affected
 answers when that evidence changes.
 
+Record-level `status` changes are excluded from evidence binding: a graph asset/claim changing to `rejected`
+alone does not reopen its accepted answer. A semantic rejection policy remains open as
+[N075](STATUS.md#known-defects); inspect such transitions explicitly rather than relying on `current` alone.
+Historical source truth and applicability to a rejected asset are separate questions.
+
 Graph item appearances and original citations travel as evidence records, separately from each claim's source.
 Their complete supplied metadata participates in context binding, including later drawing appearances. An
 added or changed appearance can therefore reopen a dependent answer even when the engineering value is unchanged.

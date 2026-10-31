@@ -75,6 +75,13 @@ Source references are returned as data and are never opened. Tool callers cannot
 URL. A supplied asset whose identity looks like a path is still just an opaque ID. No write tool is exposed.
 Source text is evidence to inspect, not authorization for the client to run instructions found inside it.
 
+The context register's enriched graph contains answer IDs/freshness and a sidecar reference, rather than the
+answer text, canonical values and decision/source verdicts. Those remain in `context.json`, which this server
+does not load. Read the packet's sidecar/report separately. Asset retrieval and asset-filtered queries accept
+graph node IDs only; context's virtual stream IDs such as `stream:S1` are unavailable through those operations.
+An existing stream question can still be retrieved by its question ID. This partial readback bridge is
+[N076 in the audit](../../docs/STATUS.md#known-defects).
+
 Search and question pages allow 1–50 results; relationships allow 1–100. Start at `offset=0` and follow
 `next_offset` until it is `null`. Ordering is stable within the loaded snapshot. Keep pages only when their
 `snapshot_sha256` values agree. Invalid offsets and unknown IDs return errors; an empty first page is valid.

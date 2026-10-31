@@ -11,6 +11,10 @@ finding: [`examples/opportunity-screen/`](../examples/opportunity-screen/README.
 Decision rules describe which investigations to pursue or conclude. In this screening language, "close it" means
 close the investigation, never operate or close equipment. Findings do not authorize operational changes.
 
+**Open collection defects:** E1/E2/E4 can drop pump-curve or efficiency obligations after basic rating fields are
+supplied; E2 can label generic ratings as BEP evidence. Review those obligations separately. The E5/H3 repairs
+do not certify the rest of the catalog. See [N073 in the current audit](STATUS.md#known-defects).
+
 ```sh
 python -S scripts/question_engine.py --list
 python -S scripts/question_engine.py --model data/te_process_model.json --loops examples/loop-audit/te_loops.csv --out out/screen-te

@@ -19,6 +19,11 @@ receiving-system adaptation and acceptance; generic file generation does not per
 
 ## 1. The operations review
 
+**Open correctness defects:** native-model review can delete unrelated supplied `alarm_setpoints`, and a
+native tag correction can leave controller references dangling. Use a disposable copy and inspect its full
+diff; a successful exit and change record do not catch these failures. See [N072 in the current audit](STATUS.md#known-defects).
+The extracted-model examples below do not establish native tag-identity correctness.
+
 **The sheet.** It's one row per item, riskiest first (red, amber, green):
 - Tennessee Eastman: `out/ops_review_sheet.csv`;
 - an extracted twin: `review_queue.csv`.

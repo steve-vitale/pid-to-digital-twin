@@ -5214,3 +5214,37 @@ Four registered benchmark suites reproduce; the unchanged matrix and 52 configur
 Independent software evidence comprises ninety-seven actual CLI calls and 195 substantive controls. Source/UI,
 reader-route and artifact-lineage scopes are recorded separately; none establishes human usefulness or
 engineering/plant acceptance.
+
+
+## 113. Refresh the whole-toolkit audit with failing handoffs
+
+Steve asks for the whole state of the union, including half-built work. The audit freezes code baseline
+3d93c5f (2026-10-30 20:19 Central), rather than relying on the earlier handoff or a count of green feature labels.
+Three fresh coding-agent reviewers inspect the entry journey, implementation contracts and evaluation; the
+maintainer separately runs current offline checks. Public input/output records remain unchanged.
+
+Actual fictional-model CLIs expose unlogged alarm metadata loss during unrelated review and native tag renaming
+that leaves a controller's measurement reference dangling. Generic pump ratings satisfy E2's BEP-labelled
+request; E1 loses pump-curve/efficiency obligations and E4 loses its efficiency request with HP alone. All these
+review/screen commands report successful execution; existing tests do not establish these collection semantics.
+The E5/H3 repair did not certify the remaining catalog. The new failures stay open as N072/N073.
+
+A private-copy key edit still passes matrix freshness: ordinary consumed sources/keys are not bound, despite
+current recorded code dependencies (N074). An accepted illustrative context answer remains current after graph
+asset/claim rejection because record-level status is ignored; the right semantic rejection policy needs explicit
+design rather than treating every review event as new evidence (N075). Context answer values/verdicts remain in
+the sidecar, outside the snapshot server; virtual stream identities also lack node-only asset/filter access
+(N076). This is a partial local readback bridge, not permission to build a company governance service.
+
+The current registries and four saved benchmark suites reproduce; saved predictions reproduce thirty tables
+with five missing-prediction gaps retained. Matrix totals stay 64 pass/23 fail/8 n/a; no new matrix/model run or
+generalization gain is claimed. The public status now leads with open defects and actual maturity; earlier
+repairs move behind a disclosure instead of dominating the current-state page. The documentation review finds
+no missing local paths among 285 checked across 22 guides, without checking anchors. The main remaining product
+evidence is still one engineer/recipient investigation, useful source-backed question evaluation and a scoped
+company handoff. No human, plant, Copilot tenant or company acceptance is inferred from this audit.
+
+The fresh full cached-data runner passes all 63 scripts with five unittest skips, two explanatory platform
+notices and no additional skipped-check notices. The notices do not increase the skipped-case count. The
+new audit probes still fail; script-exit success does not establish the contracts they expose. MCP runtime
+was not rerun in this audit, and its prior transport evidence remains separate.

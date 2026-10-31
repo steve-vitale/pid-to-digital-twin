@@ -3678,6 +3678,21 @@
         "docs/OPPORTUNITY_SCREEN.md#the-three-evidence-states",
         "docs/CONTEXT_REGISTER.md"
       ]
+    },
+    {
+      "id": "A247",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Audit the whole toolkit at 3d93c5f with fresh independent entry, implementation-contract and evaluation reviews; retain actual failing handoff probes and prioritize unfinished work.",
+      "hypothesis": "Passing example bindings and command exits can coexist with incomplete engineering semantics, preservation and maintenance contracts.",
+      "evidence": "Actual CLIs expose unrelated alarm metadata deletion, dangling native tag references, E1/E2/E4 false collection completion, matrix input edits missed by freshness, status-only rejection freshness and partial context-to-MCP readback. Current registries/four benchmark suites reproduce; saved predictions30tables with5GAP. Existing matrix64pass/23fail/8n-a unchanged, no full matrix/model run. Independent reader checks285localpaths/22guides, no missing paths; anchors untested.",
+      "runs": "Offline baseline checks, independent coding-agent review and disposable fictional/public CLI probes; no new model, company or plant run.",
+      "verdict": "kept",
+      "why": "Publish current open defects and actual boundaries before adding breadth. N072-N076 remain open; reviewed examples are not whole-workflow or engineer acceptance.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
+      ]
     }
   ],
   "not_tried": [
@@ -4427,6 +4442,61 @@
         "docs/STATUS.md#known-defects",
         "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation",
         "docs/JOURNAL.md#112-keep-candidate-facts-separate-from-collection-and-review"
+      ]
+    },
+    {
+      "id": "N072",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "Preserve pre-existing native-model alarm metadata during unrelated reviews and keep native tag identity corrections reference-consistent, or refuse them before mutation.",
+      "why_not_yet": "Actual successful review deletes untouched alarm_setpoints without a change record; a native measurement rename leaves a dangling controller reference. Regression controls and independent repair review still needed.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
+      ]
+    },
+    {
+      "id": "N073",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Audit remaining question-catalog collection contracts, beginning with E1/E2/E4 scalar-versus-curve/efficiency/BEP false completion.",
+      "why_not_yet": "Actual screens omit obligations or mislabel generic ratings as BEP; N071 fixes E5/H3 only. Source-informed collection review, negative controls and affected-output refresh still needed.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
+      ]
+    },
+    {
+      "id": "N074",
+      "function": "scoring",
+      "status": "not-done",
+      "idea": "Bind generalization-matrix freshness to actually consumed source/key/configuration bytes as well as recorded code dependencies.",
+      "why_not_yet": "An edited ordinary OPEN100 key still passes --check in a private copy. Existing metrics are not shown wrong; complete input freshness remains unimplemented.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
+      ]
+    },
+    {
+      "id": "N075",
+      "function": "review_loop",
+      "status": "not-done",
+      "idea": "Define and test semantic rejection freshness for context dependencies, distinct from benign review bookkeeping and historical-source truth.",
+      "why_not_yet": "Changing graph asset/attribute status to rejected leaves an accepted illustrative answer current because status is excluded from binding. The correct transition/scope policy has not been implemented.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
+      ]
+    },
+    {
+      "id": "N076",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Define and demonstrate complete bounded context-to-MCP answer readback, with explicit stream-identity retrieval semantics.",
+      "why_not_yet": "Enriched graph holds answer references/freshness while values/verdicts remain in context.json, which the server does not load. Node-only asset/filter operations cannot address context virtual streams. No company service is implied.",
+      "source": [
+        "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
+        "docs/STATUS.md#known-defects"
       ]
     }
   ]
