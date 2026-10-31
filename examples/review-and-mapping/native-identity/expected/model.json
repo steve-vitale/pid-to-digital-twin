@@ -1,0 +1,318 @@
+{
+  "meta": {
+    "model_id": "review-training",
+    "title": "Fictional review fixture",
+    "source_document": "Fictional development fixture, no plant evidence"
+  },
+  "units": [
+    {
+      "id": "T-1",
+      "name": "Training tank",
+      "type": "vessel",
+      "layout": {
+        "x": 220,
+        "y": 160
+      }
+    }
+  ],
+  "streams": [],
+  "instruments": [
+    {
+      "tag": "PT-902",
+      "description": "Pressure",
+      "variable": "pressure",
+      "uom": "kPa",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PT-900"
+        }
+      ],
+      "former_tag": "Original-PT-900",
+      "id": "pressure-record",
+      "alarm_setpoints": [
+        123,
+        456
+      ],
+      "ops_review": {
+        "status": "corrected",
+        "show_on_screen": null,
+        "alarm_priority": null,
+        "notes": "Fictional identity correction; no source or signal-address change",
+        "by": "Fictional example reviewer",
+        "on": "2026-10-30",
+        "history": [
+          {
+            "on": "2026-10-30",
+            "by": "Fictional example reviewer",
+            "decision": "corrected",
+            "changes": {
+              "tag": [
+                "PT-900",
+                "PT-902"
+              ]
+            },
+            "notes": "Fictional identity correction; no source or signal-address change",
+            "reference_changes": [
+              {
+                "path": "controllers[0].measurement",
+                "old": "PT-900",
+                "new": "PT-902"
+              },
+              {
+                "path": "controllers[1].measurement",
+                "old": "PT-900",
+                "new": "PT-902"
+              },
+              {
+                "path": "interlocks[0].measurement",
+                "old": "PT-900",
+                "new": "PT-902"
+              },
+              {
+                "path": "limits[0].tag",
+                "old": "PT-900",
+                "new": "PT-902"
+              },
+              {
+                "path": "line_layers.networks[0].members[0]",
+                "old": "PT-900",
+                "new": "PT-902"
+              },
+              {
+                "path": "line_layers.instrument_lines[0].from",
+                "old": "PT-900",
+                "new": "PT-902"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tag": "TT-900",
+      "description": "Temperature",
+      "variable": "temperature",
+      "uom": "C",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "TT-900"
+        }
+      ],
+      "former_tag": "Original-TT-900",
+      "alarm_setpoints": {
+        "status": "unreadable",
+        "value": null
+      },
+      "ops_review": {
+        "status": "confirmed",
+        "show_on_screen": null,
+        "alarm_priority": null,
+        "notes": "Fictional confirmation; unreadable alarm metadata stays unresolved",
+        "by": "Fictional example reviewer",
+        "on": "2026-10-30",
+        "history": [
+          {
+            "on": "2026-10-30",
+            "by": "Fictional example reviewer",
+            "decision": "confirmed",
+            "changes": {},
+            "notes": "Fictional confirmation; unreadable alarm metadata stays unresolved"
+          }
+        ]
+      }
+    }
+  ],
+  "final_elements": [
+    {
+      "tag": "PV-902",
+      "description": "Pressure valve",
+      "variable": "pressure",
+      "uom": "%",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PV-900"
+        }
+      ],
+      "former_tag": "Original-PV-900",
+      "ops_review": {
+        "status": "corrected",
+        "show_on_screen": null,
+        "alarm_priority": null,
+        "notes": "Fictional identity correction; preserve recorded control relationships",
+        "by": "Fictional example reviewer",
+        "on": "2026-10-30",
+        "history": [
+          {
+            "on": "2026-10-30",
+            "by": "Fictional example reviewer",
+            "decision": "corrected",
+            "changes": {
+              "tag": [
+                "PV-900",
+                "PV-902"
+              ]
+            },
+            "notes": "Fictional identity correction; preserve recorded control relationships",
+            "reference_changes": [
+              {
+                "path": "controllers[0].output.final_element",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "controllers[1].output.split_range[0]",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "interlocks[0].final_element",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "limits[1].tag",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "line_layers.networks[0].members[1]",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "line_layers.segments[0].to",
+                "old": "PV-900",
+                "new": "PV-902"
+              },
+              {
+                "path": "line_layers.actuator_stems[0].from",
+                "old": "PV-900",
+                "new": "PV-902"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tag": "PV-901",
+      "description": "Second pressure valve",
+      "variable": "pressure",
+      "uom": "%",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PV-901"
+        }
+      ],
+      "former_tag": "Original-PV-901"
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "PIC-900",
+      "unit": "T-1",
+      "measurement": "PT-902",
+      "output": {
+        "final_element": "PV-902"
+      },
+      "source": "PT-900 quoted"
+    },
+    {
+      "tag": "PIC-901",
+      "unit": "T-1",
+      "measurement": "PT-902",
+      "output": {
+        "split_range": [
+          "PV-902",
+          "PV-901"
+        ]
+      }
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "IL-1",
+      "measurement": "PT-902",
+      "final_element": "PV-902",
+      "cause": "Illustrative"
+    }
+  ],
+  "limits": [
+    {
+      "id": "L1",
+      "tag": "PT-902",
+      "what": "Fictional pressure limit"
+    },
+    {
+      "id": "L2",
+      "tag": "PV-902",
+      "what": "Fictional valve limit"
+    }
+  ],
+  "line_layers": {
+    "networks": [
+      {
+        "id": "N1",
+        "members": [
+          "PT-902",
+          "PV-902",
+          "PV-901"
+        ],
+        "junctions": [
+          "J1"
+        ]
+      }
+    ],
+    "junctions": [
+      {
+        "id": "J1",
+        "junction_kind": "instrument_line_junction",
+        "network": "N1"
+      }
+    ],
+    "segments": [
+      {
+        "id": "SEG1",
+        "from": "T-1",
+        "to": "PV-902",
+        "network": "N1"
+      }
+    ],
+    "instrument_lines": [
+      {
+        "id": "ILINE1",
+        "from": "PT-902",
+        "to": "J1",
+        "network": "N1"
+      }
+    ],
+    "actuator_stems": [
+      {
+        "id": "ACT1",
+        "from": "PV-902",
+        "to": "PV-901"
+      }
+    ],
+    "nozzle_stubs": []
+  }
+}

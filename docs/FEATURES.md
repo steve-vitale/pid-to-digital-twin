@@ -458,9 +458,9 @@ Example review: **reviewed example**
 <details>
 <summary>Example files, tests and independent review</summary>
 
-- **Example outputs:** [`reviewed_sheet0.csv`](../examples/review-and-mapping/reviewed_sheet0.csv), [`2026-10-29-bundle.md`](../examples/review-and-mapping/records/2026-10-29-bundle.md), [`mapping_dry_run.md`](../examples/review-and-mapping/mapping_dry_run.md), [`graph_after_review.json`](../examples/review-and-mapping/graph_after_review.json), [`REPORT_after_review.html`](../examples/review-and-mapping/REPORT_after_review.html), [`pi_mapping_dry_run.txt`](../examples/review-and-mapping/pi_mapping_dry_run.txt), [`README.md`](../out/review_kit/sheet-8/README.md)
-- **Tests:** `test_apply_review.py`, `test_map_points.py`, `test_pi_mapping.py`, `test_review_kit.py`, `test_deliverable_report.py`
-- **Independent review:** Independent Codex coding agent: bounded graph-evidence spoke refresh review, 2026-10-30: pass
+- **Example outputs:** [`reviewed_sheet0.csv`](../examples/review-and-mapping/reviewed_sheet0.csv), [`2026-10-29-bundle.md`](../examples/review-and-mapping/records/2026-10-29-bundle.md), [`mapping_dry_run.md`](../examples/review-and-mapping/mapping_dry_run.md), [`graph_after_review.json`](../examples/review-and-mapping/graph_after_review.json), [`REPORT_after_review.html`](../examples/review-and-mapping/REPORT_after_review.html), [`pi_mapping_dry_run.txt`](../examples/review-and-mapping/pi_mapping_dry_run.txt), [`README.md`](../out/review_kit/sheet-8/README.md), [`model.json`](../examples/review-and-mapping/native-identity/expected/model.json), [`change_record.json`](../examples/review-and-mapping/native-identity/expected/change_record.json), [`change_record.md`](../examples/review-and-mapping/native-identity/expected/change_record.md)
+- **Tests:** `test_apply_review.py`, `test_map_points.py`, `test_pi_mapping.py`, `test_review_kit.py`, `test_deliverable_report.py`, `test_review_identity.py`
+- **Independent review:** Independent AI reader: native identity and alarm preservation walkthrough, 2026-10-30: pass
 
 </details>
 

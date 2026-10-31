@@ -3693,6 +3693,22 @@
         "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
         "docs/STATUS.md#known-defects"
       ]
+    },
+    {
+      "id": "A248",
+      "function": "review_loop",
+      "date": "2026-10-30",
+      "change": "Repair N072 alarm-metadata loss and native instrument/final-element tag references; retain dated review records and refuse ambiguous sheet instructions (N077).",
+      "hypothesis": "A correction should migrate typed live references while retaining original evidence, stable extracted IDs and prior decision records; successful command exits alone cannot establish that contract.",
+      "evidence": "Independent source contract frozen before candidate. Final 71 actual CLI invocations pass against frozen implementation after initial unknown-alarm, contradictory-row, receipt-overwrite, repeated-cell and duplicate-header findings. Native graph/C2/staging checked before/after; original detailed TE layout refuses, explicit two-endpoint manual reconciliation passes with loop flags unchanged. New fictional example retains 13 reference migrations and 3 expected artifacts. Root 20 actual-CLI tests include complete example reproduction; old extracted examples remain unchanged. No new source/model performance, engineering or company result. Final full local rerun: 64/64 scripts, five unittest skips and two platform notices; initial 63/64 example-ownership failure retained and targeted nine-test fix rechecked. Four benchmark suites and 30 prediction tables reproduce with five gaps; matrix/pipeline unchanged.",
+      "runs": "Offline actual CLI development controls, targeted/full repository checks and fresh independent software/source/reader reviews; no provider model, plant or company run.",
+      "verdict": "kept",
+      "why": "Close bounded N072/N077 preservation, identity and review-record failures; preserve external companion reconciliation and local/nonconcurrent limits. N073 collection semantics and broader useful-question/human/company validation remain open.",
+      "source": [
+        "docs/JOURNAL.md#114-preserve-evidence-and-references-through-model-review",
+        "examples/review-and-mapping/native-identity/README.md",
+        "docs/REVIEW_LOOP.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4447,12 +4463,14 @@
     {
       "id": "N072",
       "function": "review_loop",
-      "status": "not-done",
+      "status": "done",
       "idea": "Preserve pre-existing native-model alarm metadata during unrelated reviews and keep native tag identity corrections reference-consistent, or refuse them before mutation.",
-      "why_not_yet": "Actual successful review deletes untouched alarm_setpoints without a change record; a native measurement rename leaves a dangling controller reference. Regression controls and independent repair review still needed.",
+      "why_not_yet": "Completed 2026-10-30: supplied alarms retained opaque; unresolved basis never implies installed absence; matching TE reference read without gateway configuration import. Native instrument/final tag references, mixed IDs and replay kept coherent; collisions/ambiguous input refused. Independent 71 actual CLI invocations and public fictional walkthrough verify bounded behavior; authored external layouts need explicit reconciliation, no engineering/runtime acceptance.",
       "source": [
         "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
-        "docs/STATUS.md#known-defects"
+        "docs/STATUS.md#known-defects",
+        "docs/JOURNAL.md#114-preserve-evidence-and-references-through-model-review",
+        "examples/review-and-mapping/native-identity/README.md"
       ]
     },
     {
@@ -4497,6 +4515,18 @@
       "source": [
         "docs/JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs",
         "docs/STATUS.md#known-defects"
+      ]
+    },
+    {
+      "id": "N077",
+      "function": "review_loop",
+      "status": "done",
+      "idea": "Preserve standalone dated review records during repeat or later application, and refuse contradictory rows, repeated field assignments and ambiguous CSV identities before mutation.",
+      "why_not_yet": "Found and completed during N072 independent review: original receipt overwrite, conflicting row notes/decisions, conflicting cell fields and duplicate CSV headers reproduced before correction. Fingerprinted immutable record pairs, frozen sheet targets, input refusals and unchanged replay verified through actual CLIs. No file locking/transaction/concurrent-writer guarantee.",
+      "source": [
+        "docs/JOURNAL.md#114-preserve-evidence-and-references-through-model-review",
+        "docs/REVIEW_LOOP.md",
+        "examples/review-and-mapping/native-identity/README.md"
       ]
     }
   ]

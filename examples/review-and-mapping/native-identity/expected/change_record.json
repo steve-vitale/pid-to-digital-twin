@@ -1,0 +1,126 @@
+{
+ "model": "native-identity/model.json",
+ "reviewer": "Fictional example reviewer",
+ "date": "2026-10-30",
+ "applied": [
+  {
+   "item": "PT-900",
+   "kind": "instruments",
+   "decision": "corrected",
+   "changes": {
+    "tag": [
+     "PT-900",
+     "PT-902"
+    ]
+   },
+   "show_on_screen": null,
+   "alarm_priority": null,
+   "notes": "Fictional identity correction; no source or signal-address change",
+   "reference_changes": [
+    {
+     "path": "controllers[0].measurement",
+     "old": "PT-900",
+     "new": "PT-902"
+    },
+    {
+     "path": "controllers[1].measurement",
+     "old": "PT-900",
+     "new": "PT-902"
+    },
+    {
+     "path": "interlocks[0].measurement",
+     "old": "PT-900",
+     "new": "PT-902"
+    },
+    {
+     "path": "limits[0].tag",
+     "old": "PT-900",
+     "new": "PT-902"
+    },
+    {
+     "path": "line_layers.networks[0].members[0]",
+     "old": "PT-900",
+     "new": "PT-902"
+    },
+    {
+     "path": "line_layers.instrument_lines[0].from",
+     "old": "PT-900",
+     "new": "PT-902"
+    }
+   ],
+   "identity_change": {
+    "old": "PT-900",
+    "new": "PT-902",
+    "external_companions": "not updated: reconcile authored drawing/display layouts and external loop/mapping records; regenerate dependent outputs and refresh context"
+   }
+  },
+  {
+   "item": "PV-900",
+   "kind": "final_elements",
+   "decision": "corrected",
+   "changes": {
+    "tag": [
+     "PV-900",
+     "PV-902"
+    ]
+   },
+   "show_on_screen": null,
+   "alarm_priority": null,
+   "notes": "Fictional identity correction; preserve recorded control relationships",
+   "reference_changes": [
+    {
+     "path": "controllers[0].output.final_element",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "controllers[1].output.split_range[0]",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "interlocks[0].final_element",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "limits[1].tag",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "line_layers.networks[0].members[1]",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "line_layers.segments[0].to",
+     "old": "PV-900",
+     "new": "PV-902"
+    },
+    {
+     "path": "line_layers.actuator_stems[0].from",
+     "old": "PV-900",
+     "new": "PV-902"
+    }
+   ],
+   "identity_change": {
+    "old": "PV-900",
+    "new": "PV-902",
+    "external_companions": "not updated: reconcile authored drawing/display layouts and external loop/mapping records; regenerate dependent outputs and refresh context"
+   }
+  },
+  {
+   "item": "TT-900",
+   "kind": "instruments",
+   "decision": "confirmed",
+   "changes": {},
+   "show_on_screen": null,
+   "alarm_priority": null,
+   "notes": "Fictional confirmation; unreadable alarm metadata stays unresolved"
+  }
+ ],
+ "unchanged": 0,
+ "refused": [],
+ "needs_moc": []
+}

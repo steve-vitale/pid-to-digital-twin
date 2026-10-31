@@ -315,14 +315,18 @@
     "examples/review-and-mapping/graph_after_review.json",
     "examples/review-and-mapping/REPORT_after_review.html",
     "examples/review-and-mapping/pi_mapping_dry_run.txt",
-    "out/review_kit/sheet-8/README.md"
+    "out/review_kit/sheet-8/README.md",
+    "examples/review-and-mapping/native-identity/expected/model.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.md"
    ],
    "tests": [
     "scripts/test_apply_review.py",
     "scripts/test_map_points.py",
     "scripts/test_pi_mapping.py",
     "scripts/test_review_kit.py",
-    "scripts/test_deliverable_report.py"
+    "scripts/test_deliverable_report.py",
+    "scripts/test_review_identity.py"
    ],
    "job": "Apply review decisions and assign supplied OPC or PI addresses",
    "you_need": "A filled review sheet; the plant's I/O list",

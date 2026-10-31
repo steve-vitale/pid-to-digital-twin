@@ -17,22 +17,29 @@ than implementation/test hashes. The [workflow map](WORKFLOWS.md) gives the actu
 
 ## Known defects
 
-These remain **open at the audited baseline**. The reproductions use disposable fictional/public inputs;
+These remain **open after the N072 follow-up**. The reproductions use disposable fictional/public inputs;
 no production records were changed. Priorities describe impact within this starter toolkit, not plant risk.
 
 | Priority / tracking | Reproduced behavior | Consequence and completion criterion |
 |---|---|---|
-| **P1 — N072: model review loses data or breaks references** | In `apply_review.py`, confirming fictional TT-900 also deletes untouched PT-900 `alarm_setpoints: [123,456]`, without logging that deletion. A separate allowed native-model correction `tag=PT-901` leaves a controller referencing PT-900; graph export then refuses a dangling endpoint. | Work on a disposable copy and inspect the complete model diff. Fix preservation of pre-existing metadata and either preserve/reconcile references or refuse an unsupported identity change before mutation. Existing extracted-model correction examples do not establish native tag-identity correctness. |
 | **P1 — N073: catalog fields can falsely settle a larger collection task** | E1 drops pump-curve and motor-efficiency requests after CAPACITY/DISCHARGE/HP/RPM. E2 labels generic rated CAPACITY/DISCHARGE as best-efficiency-point evidence and removes curve collection. E4 drops its efficiency/nameplate request with HP alone although its decision formula needs efficiency. All commands exit successfully. | Review the full collection task against its encoded fields. Keep scalar candidates distinct from curves, efficiency and operating evidence; do not use these screens to declare collection complete. N071 repaired E5/H3 only. Audit the remaining catalog with negative controls before claiming adequate coverage. |
 | **P2 — N074: matrix freshness misses ordinary input/key changes** | Changing OPEN100 `0.graphml` bytes in a private copy still lets `corpus_matrix.py --check` pass. Of 95 cells, 83 bind code only; 12 additionally bind agent-made keys. | Bind each cell to the sources, keys and configuration it actually consumed, then test changed/removed inputs. Current metrics are not thereby shown wrong; the present check establishes recorded code freshness, not complete input freshness. |
 | **P2 — N075: rejection freshness policy is incomplete** | An accepted illustrative context answer remains `answered/current` after its supplied graph asset and attribute statuses change to `rejected`. `context_register.py` excludes record-level status from evidence fingerprints. | Define which rejection/status transitions invalidate a dependency and which are bookkeeping. Test that distinction without making every review event invalidate every answer. This observation does not establish that a historical source answer becomes false when an asset is rejected. |
 | **P2 — N076: context-to-MCP readback is partial** | Enriched graph questions carry answer IDs/freshness and a `context.json` pointer; answer text, canonical values and decision/source verdicts remain in that sidecar. The snapshot server never loads it. Context's virtual `stream:S1` identity is also unavailable through node-only MCP asset/filter lookups, though its question can be read by question ID. | Document or implement one bounded, evidence-preserving readback contract, including stream identities. A served enriched graph alone does not expose the complete investigation answer packet. No shared governance service is needed to demonstrate this local boundary. |
 
+**Repaired after the audit — N072/N077:** supplied alarm metadata survives review; native instrument/final-
+element corrections migrate supported live references with auditable paths. Unknown alarm basis stays unresolved.
+Frozen sheet targets and input/collision refusals prevent ambiguous retargeting. Earlier dated records stay intact,
+including on replay. The [fictional native correction](../examples/review-and-mapping/native-identity/README.md)
+and [review guide](REVIEW_LOOP.md) explain the bounded behavior and explicit companion reconciliation. Twenty
+CLI-based regressions and 71 independent actual CLI invocations cover preservation and consumers; no engineering,
+plant, company or human-usefulness acceptance is inferred. See [JOURNAL §114](JOURNAL.md#114-preserve-evidence-and-references-through-model-review).
+
 The relevant implementations are [model review](../scripts/apply_review.py), the
 [question catalog](../data/questions.json) and [resolver](../scripts/question_engine.py),
 [matrix freshness](../scripts/corpus_matrix.py), [context binding/output](../scripts/context_register.py) and
 [snapshot retrieval](../scripts/serve_snapshot.py). [JOURNAL §113](JOURNAL.md#113-refresh-the-whole-toolkit-audit-with-failing-handoffs)
-records the observations. The [attempt ledger](TRIED.md) keeps each follow-up open.
+records the observations. The [attempt ledger](TRIED.md) records open and completed follow-ups.
 
 ## What exists, and what remains manual
 
@@ -98,7 +105,7 @@ The [lifecycle](CONTEXT_LIFECYCLE.md) describes the intended company handoff;
 
 ## Recommended order of work
 
-1. **Repair the reproduced preservation, identity and collection defects.** Retain the failing cases, show
+1. **Repair the remaining collection defects (N073) and retain the N072 preservation controls.** Keep failing cases, show
    before/after behavior, and check related paths rather than closing the issue on one passing example.
 2. **Close the bounded maintenance contracts.** Bind matrix inputs; define rejection freshness and context/MCP
    readback. Keep original sources, prior decisions and unresolved states intact.
@@ -129,10 +136,14 @@ offline CLI probes retained before/after files and failure logs for the defects 
 local link paths across 22 guides, with none missing; anchors were not checked. Prior output reviews remain
 bounded to their recorded examples. Fresh checks do not erase the new failing probes.
 
-The fresh local cached-data suite reports **63/63 scripts passed, five unittest cases skipped, two explanatory
+The audit-refresh local cached-data suite reported **63/63 scripts passed, five unittest cases skipped, two explanatory
 platform notices and zero additional skipped-check notices**. Notices are not extra skipped cases. The run
 establishes the exercised regressions, not complete coverage or a repair of the audit failures. MCP runtime was
 not rerun for this audit; its existing SDK/stdio/loopback evidence is separate.
+
+The N072 follow-up rerun passes **64/64 scripts**, with five unittest skips, two explanatory platform
+notices and no additional skipped-check notices. Its first 63/64 example-test ownership failure is
+retained in the journal. This repair adds no matrix/model-performance or human-acceptance result.
 
 Model calls, original-source downloads, company systems, plant imports and live gateways were not exercised.
 These are software and agent-reader observations, not human engineering sign-off. For numerical research

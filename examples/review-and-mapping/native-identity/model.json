@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "model_id": "review-training",
+    "title": "Fictional review fixture",
+    "source_document": "Fictional development fixture, no plant evidence"
+  },
+  "units": [
+    {
+      "id": "T-1",
+      "name": "Training tank",
+      "type": "vessel",
+      "layout": {
+        "x": 220,
+        "y": 160
+      }
+    }
+  ],
+  "streams": [],
+  "instruments": [
+    {
+      "tag": "PT-900",
+      "description": "Pressure",
+      "variable": "pressure",
+      "uom": "kPa",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PT-900"
+        }
+      ],
+      "former_tag": "Original-PT-900",
+      "id": "pressure-record",
+      "alarm_setpoints": [
+        123,
+        456
+      ]
+    },
+    {
+      "tag": "TT-900",
+      "description": "Temperature",
+      "variable": "temperature",
+      "uom": "C",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "TT-900"
+        }
+      ],
+      "former_tag": "Original-TT-900",
+      "alarm_setpoints": {
+        "status": "unreadable",
+        "value": null
+      }
+    }
+  ],
+  "final_elements": [
+    {
+      "tag": "PV-900",
+      "description": "Pressure valve",
+      "variable": "pressure",
+      "uom": "%",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PV-900"
+        }
+      ],
+      "former_tag": "Original-PV-900"
+    },
+    {
+      "tag": "PV-901",
+      "description": "Second pressure valve",
+      "variable": "pressure",
+      "uom": "%",
+      "unit": "T-1",
+      "source": "Fictional source names PT-900 and PV-900; retain this text.",
+      "facts": {
+        "vendor_note": "PT-900 is an original quotation"
+      },
+      "provenance": [
+        {
+          "tag_as_extracted": "PV-901"
+        }
+      ],
+      "former_tag": "Original-PV-901"
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "PIC-900",
+      "unit": "T-1",
+      "measurement": "PT-900",
+      "output": {
+        "final_element": "PV-900"
+      },
+      "source": "PT-900 quoted"
+    },
+    {
+      "tag": "PIC-901",
+      "unit": "T-1",
+      "measurement": "PT-900",
+      "output": {
+        "split_range": [
+          "PV-900",
+          "PV-901"
+        ]
+      }
+    }
+  ],
+  "interlocks": [
+    {
+      "id": "IL-1",
+      "measurement": "PT-900",
+      "final_element": "PV-900",
+      "cause": "Illustrative"
+    }
+  ],
+  "limits": [
+    {
+      "id": "L1",
+      "tag": "PT-900",
+      "what": "Fictional pressure limit"
+    },
+    {
+      "id": "L2",
+      "tag": "PV-900",
+      "what": "Fictional valve limit"
+    }
+  ],
+  "line_layers": {
+    "networks": [
+      {
+        "id": "N1",
+        "members": [
+          "PT-900",
+          "PV-900",
+          "PV-901"
+        ],
+        "junctions": [
+          "J1"
+        ]
+      }
+    ],
+    "junctions": [
+      {
+        "id": "J1",
+        "junction_kind": "instrument_line_junction",
+        "network": "N1"
+      }
+    ],
+    "segments": [
+      {
+        "id": "SEG1",
+        "from": "T-1",
+        "to": "PV-900",
+        "network": "N1"
+      }
+    ],
+    "instrument_lines": [
+      {
+        "id": "ILINE1",
+        "from": "PT-900",
+        "to": "J1",
+        "network": "N1"
+      }
+    ],
+    "actuator_stems": [
+      {
+        "id": "ACT1",
+        "from": "PV-900",
+        "to": "PV-901"
+      }
+    ],
+    "nozzle_stubs": []
+  }
+}

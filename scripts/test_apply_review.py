@@ -7,6 +7,7 @@ import csv
 import copy
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -42,7 +43,8 @@ def run(model, rows, cols, tmp, extra=()):
                        # This test reads the child's output as UTF-8, so it asks for UTF-8: a piped Windows child
                        # otherwise writes the ANSI code page and the read fails on the first non-ASCII character.
                        env={**os.environ, "PYTHONIOENCODING": "utf-8"})
-    rec = tmp / "rec" / f"2026-10-08-{model.stem if model.name != 'plant_model.json' else model.parent.name}.json"
+    chosen = re.search(r"^Record: (.+)$", p.stdout, re.M)
+    rec = tmp / "rec" / (chosen.group(1) if chosen else "no-record.json")
     return p, (json.loads(rec.read_text(encoding="utf-8")) if rec.exists() else None)
 
 
@@ -77,7 +79,8 @@ def main():
         check("5 decisions applied", rec and len(rec["applied"]) == 5, rec and [a["item"] for a in rec["applied"]])
         moc = {m["item"]: m["request"] for m in (rec or {}).get("needs_moc", [])}
         check("removing PT-107's published alarm is flagged for a change review", moc.get("PT-107") == "remove alarm", moc)
-        check("a new alarm on FT-102 (no setpoint) is flagged, not created", moc.get("FT-102", "").startswith("new"), moc)
+        check("FT-102's unknown alarm basis is flagged without inferring installed absence",
+              moc.get("FT-102", "").startswith("verify"), moc)
         check("TT-109 priority change (published alarm) is not flagged", "TT-109" not in moc, moc)
         m = json.loads(te.read_text(encoding="utf-8"))
         ti = next(i for i in m["instruments"] if i["tag"] == "TT-122")

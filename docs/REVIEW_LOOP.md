@@ -19,10 +19,10 @@ receiving-system adaptation and acceptance; generic file generation does not per
 
 ## 1. The operations review
 
-**Open correctness defects:** native-model review can delete unrelated supplied `alarm_setpoints`, and a
-native tag correction can leave controller references dangling. Use a disposable copy and inspect its full
-diff; a successful exit and change record do not catch these failures. See [N072 in the current audit](STATUS.md#known-defects).
-The extracted-model examples below do not establish native tag-identity correctness.
+Native instrument/final-element tag corrections migrate their supported live references together. Supplied
+alarm metadata remains intact, including unknown or unreadable values. The
+[fictional native correction](../examples/review-and-mapping/native-identity/README.md) shows both behaviors,
+repeat review and the separate authored-layout reconciliation step. Use a disposable copy and inspect its full diff.
 
 **The sheet.** It's one row per item, riskiest first (red, amber, green):
 - Tennessee Eastman: `out/ops_review_sheet.csv`;
@@ -70,9 +70,16 @@ python scripts/generate.py                                  # or: generate.py <t
   valid rows can be applied even when other rows are refused, and the run then exits non-zero. Preview with
   `--dry-run` first. After any failure, inspect the change record and model diff before retrying or regenerating;
   a non-zero exit does not mean the model was left unchanged.
+- **Sheet identities are frozen before application.** Native instruments/final elements use tags even when an
+  auxiliary ID is supplied; extracted assets retain stable IDs. Contradictory rows/cell assignments, collisions,
+  chains/swaps, duplicate CSV headers and malformed/ambiguous JSON refuse. A newly created tag cannot retarget a
+  later row in the same sheet. Historical tag aliases permit unchanged replay only; use the current identity for
+  a new decision. Controllers/manual valves/relief/unplaced records are not newly editable collections here.
 - **Decisions are written onto each item** as `ops_review`: status, reviewer, date, notes, screen and alarm choices.
   Each correction keeps the old value in the item's history. The model file is updated in place, so the git diff is
-  exactly the review. A dated change record goes to `out/review/`.
+  exactly the review. A dated change record goes to `out/review/`; `Record:` identifies the selected JSON/Markdown
+  pair. Different results on the same date get a fingerprint suffix. Earlier records stay intact; identical
+  replay reuses its own record. These local checks do not provide filesystem locking or concurrent publication.
 - **Re-applying the same sheet changes nothing.** The regenerated sheet prints earlier decisions back into the
   `OPS_` columns, so a reviewer can stop and resume.
 - **Downstream:**
@@ -113,9 +120,18 @@ mismatched loop is refused. The whole-record review status stays unchanged; corr
 recorded separately in `ops_review.field_decisions` and history. Extraction provenance, inferred function,
 classification, parent, connections and I/O are untouched. Regeneration never turns this into `confirm`.
 
-**Alarms stay a change-review decision.** A reviewer may set the priority of an alarm that already has a published
-setpoint, and that is applied. Asking to remove a published alarm, or to add one where no setpoint exists, changes
-which alarms the plant has. Those requests are recorded as needing a change review (MOC) and are not applied.
+**Alarms stay a change-review decision.** Supplied numeric setpoint lists remain recorded inputs, with zero a
+valid value; they do not establish an installed or approved alarm. Empty, null, unreadable and unrecognized
+metadata stays unresolved. The declared TE simulator model can use the gateway's XMEAS(7)/XMEAS(9) reference
+without injecting fields or importing gateway configuration; supplied metadata takes precedence. Coincidental
+tag text on another model does not qualify. The change record names this basis. Removing a recorded/reference
+alarm or requesting a priority with unresolved basis requires a change review (MOC). Priority choices are local
+review metadata; the command creates or removes no alarm and changes no setpoint.
+
+Separate authored drawing/display layouts and external loop/mapping files are outside the apply command.
+Reconcile their actual tag references and regenerate/check affected outputs. A successful seed SVG/platform
+export does not establish detailed layout consistency; the [native example](../examples/review-and-mapping/native-identity/README.md#reconcile-the-companions-explicitly)
+shows the exact TE companion correction and its limits. Retain actual signal addresses and original evidence.
 
 ## 2. Mapping instruments to data points
 

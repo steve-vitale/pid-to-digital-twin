@@ -11,6 +11,10 @@ The I/O list is the repository's synthetic demo list.
 
 ## What's here
 
+For native instrument/final-element identity changes, the [fictional tag-correction example](native-identity/README.md)
+preserves existing alarm metadata and migrates live controller/interlock/limit/line-layer references. Separate
+authored layouts need explicit reconciliation; the example shows that boundary and retains dated change records.
+
 For a hand-built process model, the [seed refresh example](seed-refresh/README.md) carries fictional review
 decisions through the next SVG, Ignition and PI bundle, including unknown ownership, unchanged address claims,
 obsolete generated files and explicit reinstatement. The sheet-0 example below remains an extracted-twin example.

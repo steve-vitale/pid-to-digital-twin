@@ -28,9 +28,12 @@ Usage:
 Then regenerate: python scripts/generate.py [<model.json>]  (and scripts/ignition/build_gateway.py for Ignition)
 """
 import argparse
+import ast
 import csv
 import datetime
+import hashlib
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -44,16 +47,210 @@ PRIORITY = {"h": "High", "high": "High", "m": "Medium", "medium": "Medium", "l":
             "none": "none", "no": "none", "-": "none"}
 EDITABLE = {"tag", "name", "description", "uom", "class", "unit", "parent", "from", "to", "variable", "text"}
 COLLECTIONS = ("units", "instruments", "final_elements", "line_items", "offpage_connectors", "streams")
+NATIVE_TAGS = ("instruments", "final_elements")
 
 
 def index(model):
-    """item id -> (collection, item). TE instruments are keyed by tag; everything else by id."""
+    """Review identity -> record. Native instruments/outputs use tag, including those with auxiliary ids."""
     out = {}
+    twin = model.get("meta", {}).get("model_kind") == "extracted_twin"
     for c in COLLECTIONS:
         for it in model.get(c, []):
-            key = it.get("id") or it.get("tag")
+            key = it.get("tag") if not twin and c in NATIVE_TAGS else it.get("id") or it.get("tag")
+            if not isinstance(key, str) or not key or key in out:
+                raise ValueError(f"missing or duplicate review identity: {key!r}")
             out[key] = (c, it)
     return out
+
+
+def review_lookup(ids, twin):
+    """Freeze targets for the whole sheet; historical names permit only unchanged replay."""
+    current, historical = {}, {}
+    def add(table, name, key):
+        if isinstance(name, str) and name:
+            for spelling in (name, review_csv_cell(name)):
+                table.setdefault(spelling, set()).add(key)
+    for key, (collection, item) in ids.items():
+        add(current, key, key)
+        if not twin and collection in NATIVE_TAGS:
+            add(current, item.get("id"), key)
+            for event in (item.get("ops_review") or {}).get("history", []):
+                pair = (event.get("changes") or {}).get("tag")
+                if isinstance(pair, list) and len(pair) == 2:
+                    for name in pair:
+                        add(historical, name, key)
+    all_names = {name: current.get(name, set()) | historical.get(name, set())
+                 for name in current.keys() | historical.keys()}
+    return all_names, current
+
+
+def native_namespace(model):
+    """Exact live graph identities, separate from auxiliary ids and historical/source text."""
+    entries = [("PLANT", None), ("BL", None)]
+    for group, field in (("units", "id"), ("instruments", "tag"), ("final_elements", "tag"),
+                         ("controllers", "tag"), ("manual_valves", "tag"), ("relief_devices", "tag"),
+                         ("interlocks", "id"), ("unplaced", "tag")):
+        entries += [(it[field], it) for it in model.get(group, [])]
+    entries += [(f"stream:{it['id']}", it) for it in model.get("streams", [])]
+    entries += [(it.get("id") or f"LIM-{i}", it) for i, it in enumerate(model.get("limits", []), 1)]
+    for group in ("junctions", "networks"):
+        entries += [(it["id"], it) for it in (model.get("line_layers") or {}).get(group, [])]
+    names = {}
+    for name, item in entries:
+        if not isinstance(name, str) or not name or name.casefold() in names:
+            raise ValueError(f"missing or ambiguous native graph identity: {name!r}")
+        names[name.casefold()] = item
+    auxiliary = {}
+    for group in NATIVE_TAGS:
+        for item in model.get(group, []):
+            alias = item.get("id")
+            if alias:
+                if not isinstance(alias, str) or alias.casefold() in auxiliary:
+                    raise ValueError(f"ambiguous native auxiliary identity: {alias!r}")
+                auxiliary[alias.casefold()] = item
+    return names
+
+
+def native_references(model, collection, old, new):
+    """Plan only supported live references. No source prose, history, point address or geometry edits."""
+    plan = []
+    def slot(obj, key, path, many=False):
+        value = obj.get(key)
+        if value is None or value == "" or value == []:
+            return
+        if many and isinstance(value, list):
+            if any(not isinstance(v, str) for v in value):
+                raise ValueError(f"unsupported reference shape: {path}")
+            for i, v in enumerate(value):
+                if v == old:
+                    plan.append((value, i, f"{path}[{i}]", v, new))
+        elif isinstance(value, str) and many != "list":
+            if value == old:
+                plan.append((obj, key, path, value, new))
+        else:
+            raise ValueError(f"unsupported reference shape: {path}")
+    for i, controller in enumerate(model.get("controllers", [])):
+        prefix = f"controllers[{i}]"
+        if collection == "instruments":
+            slot(controller, "measurement", prefix + ".measurement")
+            slot(controller, "measurement_unplaced", prefix + ".measurement_unplaced", True)
+        else:
+            output = controller.get("output") or {}
+            if not isinstance(output, dict):
+                raise ValueError(f"unsupported reference shape: {prefix}.output")
+            slot(output, "final_element", prefix + ".output.final_element")
+            slot(output, "split_range", prefix + ".output.split_range", "list")
+            slot(controller, "output_unplaced", prefix + ".output_unplaced", True)
+    for i, interlock in enumerate(model.get("interlocks", [])):
+        field = "measurement" if collection == "instruments" else "final_element"
+        slot(interlock, field, f"interlocks[{i}].{field}")
+    for i, limit in enumerate(model.get("limits", [])):
+        slot(limit, "tag", f"limits[{i}].tag")
+    layers = model.get("line_layers") or {}
+    for i, network in enumerate(layers.get("networks", [])):
+        slot(network, "members", f"line_layers.networks[{i}].members", "list")
+    for group in ("segments", "instrument_lines", "actuator_stems", "nozzle_stubs"):
+        for i, segment in enumerate(layers.get(group, [])):
+            for field in ("from", "to"):
+                slot(segment, field, f"line_layers.{group}[{i}].{field}")
+    return plan
+
+
+def rename_conflicts(model, rows, ids, lookup):
+    """Original-sheet targets only. Refuse chains/swaps, colliding destinations and contradictory edits."""
+    namespace = native_namespace(model)
+    conflicts, planned, edits = {}, {}, {}
+    auxiliary = {it.get("id"): key for key, (_, it) in ids.items() if it.get("id")}
+    for row in rows:
+        matches = lookup.get(row.get("item_id"), lookup.get((row.get("item_id") or "").strip(), set()))
+        if len(matches) != 1 or ACTIONS.get((row.get("OPS_confirm_or_correct") or "").strip().lower()) != "corrected":
+            continue
+        key = next(iter(matches))
+        group, item = ids[key]
+        if group not in NATIVE_TAGS:
+            continue
+        changes, error = parse_corrections(row.get("OPS_correct_value"), group, item, False)
+        if error:
+            continue
+        for field, value in changes.items():
+            previous = edits.setdefault(key, {}).setdefault(field, value)
+            if previous != value:
+                conflicts[key] = "conflicting corrections for the same original native record"
+        tag = changes.get("tag")
+        if tag is None or tag == item["tag"]:
+            continue
+        owner = namespace.get(tag.casefold(), item)
+        alias_owners = set().union(*(keys for name, keys in lookup.items() if name.casefold() == tag.casefold()))
+        if (tag in {"PLANT", "BL"} or tag.casefold().startswith("stream:")
+                or owner is not item or (tag in auxiliary and auxiliary[tag] != key) or alias_owners - {key}):
+            conflicts[key] = "native tag destination collides with an existing or reserved identity; chains/swaps are refused"
+        destination = planned.setdefault(tag.casefold(), set())
+        destination.add(key)
+    for keys in planned.values():
+        if len(keys) > 1:
+            conflicts.update({key: "multiple original records request the same native tag destination" for key in keys})
+    return conflicts
+
+
+def sheet_conflicts(rows, ids, lookup, twin):
+    """Refuse contradictory instructions for one frozen target, including review metadata."""
+    intents, conflicts = {}, {}
+    for row in rows:
+        matches = lookup.get(row.get("item_id"), lookup.get((row.get("item_id") or "").strip(), set()))
+        if len(matches) != 1:
+            continue
+        key = next(iter(matches))
+        group, item = ids[key]
+        action = (row.get("OPS_confirm_or_correct") or "").strip().lower()
+        wanted = {}
+        if action in ACTIONS:
+            wanted["decision"] = ACTIONS[action]
+        for column in ("OPS_show_on_operator_screen_Y_N", "OPS_alarm_priority_H_M_L_none", "OPS_notes"):
+            value = (row.get(column) or "").strip()
+            if value:
+                if column == "OPS_alarm_priority_H_M_L_none":
+                    value = PRIORITY.get(value.lower(), value)
+                wanted[column] = value
+        if wanted:
+            wanted["scope"] = (row.get("OPS_scope") or "").strip()
+        if ACTIONS.get(action) == "corrected":
+            changes, error = parse_corrections(row.get("OPS_correct_value"), group, item, twin)
+            if not error:
+                wanted.update({"field:" + field: value for field, value in changes.items()})
+        for field, value in wanted.items():
+            old = intents.setdefault(key, {}).setdefault(field, value)
+            if old != value:
+                conflicts[key] = "conflicting instructions for the same original record; reconcile the sheet before applying"
+    return conflicts
+
+
+def te_alarm_items(model):
+    """Reference knowledge for declared TE simulator channels; never inject fields into source records."""
+    if model.get("meta", {}).get("model_id") != "te-process" or model.get("meta", {}).get("model_kind") == "extracted_twin":
+        return set()
+    # Read the literal reference without importing the gateway module (which loads local gateway configuration).
+    source = ROOT / "scripts" / "ignition" / "build_gateway.py"
+    assignments = ast.parse(source.read_text(encoding="utf-8"))
+    values = [ast.literal_eval(n.value) for n in assignments.body if isinstance(n, ast.Assign)
+              and any(isinstance(t, ast.Name) and t.id == "ALARMS" for t in n.targets)]
+    if len(values) != 1 or not isinstance(values[0], dict):
+        raise ValueError("TE alarm reference is unavailable or has changed shape; no review applied")
+    alarms = values[0]
+    # The gateway reference's two process alarms are on TE XMEAS(7) and XMEAS(9), not arbitrary equal tag text.
+    channels = {7: "PT-107", 9: "TT-109"}
+    return {id(item) for item in model.get("instruments", [])
+            if type(item.get("xmeas")) is int and item["xmeas"] in channels and alarms.get(channels[item["xmeas"]])}
+
+
+def alarm_basis(item, published):
+    """Recorded/reference setpoints or unresolved; missing metadata never proves no installed alarm."""
+    if "alarm_setpoints" in item:
+        values = item["alarm_setpoints"]
+        if (isinstance(values, list) and values and
+                all(type(v) in (int, float) and math.isfinite(v) for v in values)):
+            return "supplied-setpoints"
+        return "unresolved"
+    return "te-reference" if id(item) in published else "unresolved"
 
 
 def main_field(collection, item, twin):
@@ -80,6 +277,8 @@ def parse_corrections(text, collection, item, twin):
             return {}, f"field '{k}' can't be edited here (allowed: {', '.join(sorted(EDITABLE))})"
         if not v:  # "tag=" is a typo, not a request to blank the tag: refuse rather than erase a value
             return {}, f"'{k}=' has no value; give the corrected value, or reject the item instead"
+        if k in changes and changes[k] != v:
+            return {}, f"conflicting values for field '{k}' in one correction cell"
         changes[k] = v
     return changes, None
 
@@ -128,13 +327,15 @@ def sync_hierarchy_tag(node, item_id, tag):
             sync_hierarchy_tag(child, item_id, tag)
 
 
-def apply(model, rows, reviewer, today, ids):
+def apply(model, rows, reviewer, today, ids, published_alarm_items=()):
     twin = model.get("meta", {}).get("model_kind") == "extracted_twin"
     log = {"applied": [], "unchanged": 0, "refused": [], "needs_moc": []}
-    csv_ids = {}
-    for key in ids:
-        for spelling in (key, review_csv_cell(key)):
-            csv_ids.setdefault(spelling, set()).add(key)
+    csv_ids, current_ids = review_lookup(ids, twin)
+    conflicts = sheet_conflicts(rows, ids, csv_ids, twin)
+    if not twin:
+        conflicts.update(rename_conflicts(model, rows, ids, csv_ids))
+    alarms = {id(item): alarm_basis(item, published_alarm_items)
+              for _, item in ids.values()}
     for n, r in enumerate(rows, 2):
         item_id = (r.get("item_id") or "").strip()
         act = (r.get("OPS_confirm_or_correct") or "").strip().lower()
@@ -155,6 +356,9 @@ def apply(model, rows, reviewer, today, ids):
             log["refused"].append({"row": n, "item": item_id, "reason": "no such item in the model"})
             continue
         collection, item = ids[item_id]
+        if item_id in conflicts:
+            log["refused"].append({"row": n, "item": item_id, "reason": conflicts[item_id]})
+            continue
         if act and act not in ACTIONS:
             log["refused"].append({"row": n, "item": item_id, "reason": f"unknown decision '{act}' (confirm/correct/reject)"})
             continue
@@ -199,16 +403,33 @@ def apply(model, rows, reviewer, today, ids):
         new = {"status": status, "show_on_screen": {"Y": True, "N": False}.get(show, prev.get("show_on_screen")),
                "alarm_priority": PRIORITY.get(prio, prev.get("alarm_priority")), "notes": notes or prev.get("notes")}
         same = all(prev.get(k) == v for k, v in new.items()) and not changes
+        spelling = r.get("item_id") or ""
+        if item_id not in current_ids.get(spelling, current_ids.get(spelling.strip(), set())) and not same:
+            log["refused"].append({"row": n, "item": item_id,
+                                   "reason": "historical identity permits only unchanged replay; use the current item_id for new decisions"})
+            continue
         if same:
             log["unchanged"] += 1
             continue
+        references = []
+        if not twin and collection in NATIVE_TAGS and "tag" in changes:
+            try:
+                references = native_references(model, collection, item["tag"], changes["tag"])
+            except ValueError as error:
+                log["refused"].append({"row": n, "item": item_id, "reason": str(error)})
+                continue
         history = list(prev.get("history", []))
         history.append({"on": today, "by": reviewer, "decision": status,
                         "changes": {k: [item.get(k), v] for k, v in changes.items()}, "notes": notes or None})
         if scope:
             history[-1].update(decision="corrected", scope=scope, fields=sorted(changes))
+        if references:
+            history[-1]["reference_changes"] = [{"path": path, "old": old, "new": new}
+                                               for _, _, path, old, new in references]
         for k, v in changes.items():
             item[k] = v
+        for container, key, _, _, value in references:
+            container[key] = value
         if scope and "tag" in changes:
             sync_hierarchy_tag(model.get("hierarchy"), item_id, changes["tag"])
         item["ops_review"] = {**prev, **new, "by": reviewer, "on": today, "history": history}
@@ -223,18 +444,25 @@ def apply(model, rows, reviewer, today, ids):
                                "notes": notes or None})
         if scope:
             log["applied"][-1].update(decision="corrected", scope=scope, record_status=status)
+        if references:
+            log["applied"][-1]["reference_changes"] = history[-1]["reference_changes"]
+        if not twin and collection in NATIVE_TAGS and "tag" in changes:
+            log["applied"][-1]["identity_change"] = {"old": history[-1]["changes"]["tag"][0], "new": item["tag"],
+                "external_companions": "not updated: reconcile authored drawing/display layouts and external loop/mapping records; regenerate dependent outputs and refresh context"}
         # Requests the reviewer can make but that must not be applied silently: they change what alarms exist.
-        has_alarm = bool(item.get("alarm_setpoints"))  # TE alarm setpoints live in build_gateway.ALARMS
+        basis = alarms[id(item)]
         asked = PRIORITY.get(prio)
         if asked and collection in ("instruments", "final_elements", "units"):
-            if asked == "none" and has_alarm:
+            log["applied"][-1]["alarm_basis"] = basis
+            if basis == "unresolved":
+                log["needs_moc"].append({"item": item_id, "request": f"verify {asked} alarm request",
+                                         "why": "setpoint basis is unresolved; missing, empty or unrecognized metadata "
+                                                "does not establish which alarms exist. Reconcile the applicable record "
+                                                "through a change review; no alarm is created or removed here"})
+            elif asked == "none":
                 log["needs_moc"].append({"item": item_id, "request": "remove alarm",
-                                         "why": "removing a published alarm is a change review (MOC), not an edit; "
+                                         "why": "removing a recorded/reference alarm is a change review (MOC), not an edit; "
                                                 "the alarm stays"})
-            elif asked != "none" and not has_alarm:
-                log["needs_moc"].append({"item": item_id, "request": f"new {asked} alarm",
-                                         "why": "no published setpoint exists; a new alarm needs one set and approved "
-                                                "through a change review, so none is created"})
     return log
 
 
@@ -264,19 +492,41 @@ def write_record(log, model_path, reviewer, today, dry, rec_dir=None, source_pat
             scr = {True: "show", False: "hide", None: ""}[a["show_on_screen"]]
             lines.append(f"| {a['item']} | {a['decision']} | {ch} | {scr} | {a['alarm_priority'] or ''} | {a['notes'] or ''} |")
         lines.append("")
+        for a in log["applied"]:
+            if a.get("identity_change"):
+                lines += [f"### Native identity: {a['identity_change']['old']} → {a['identity_change']['new']}", "",
+                          a["identity_change"]["external_companions"], ""]
+                for ref in a.get("reference_changes", []):
+                    lines.append(f"- `{ref['path']}`: `{ref['old']}` → `{ref['new']}`")
+                lines.append("")
     if log["refused"]:
         lines += ["## Refused (fix the sheet and re-apply)", "", "| Row | Item | Reason |", "|---|---|---|"]
         lines += [f"| {r['row']} | {r['item']} | {r['reason']} |" for r in log["refused"]] + [""]
     if log["needs_moc"]:
         lines += ["## Needs a change review (not applied to alarms)", "", "| Item | Request | Why |", "|---|---|---|"]
         lines += [f"| {m['item']} | {m['request']} | {m['why']} |" for m in log["needs_moc"]] + [""]
-    if not dry:  # LF on every OS, so a record is byte-identical wherever it is made
+    record_name = None
+    if not dry:  # Existing standalone records remain immutable, including during unchanged replay.
+        md = "\n".join(lines)
+        doc = json.dumps({"model": rel(model_path), "reviewer": reviewer, "date": today, **log}, indent=1)
+        def destinations(stem):
+            return {rec_dir / f"{stem}.md": md, rec_dir / f"{stem}.json": doc}
+        def identical(payloads):
+            return all(path.is_file() and path.read_text(encoding="utf-8") == value for path, value in payloads.items())
+        payloads = destinations(stem)
+        if any(path.exists() for path in payloads) and not identical(payloads):
+            fingerprint = hashlib.sha256((doc + "\0" + md).encode("utf-8")).hexdigest()
+            payloads = destinations(stem + "-" + fingerprint[:16])
+            if any(path.exists() for path in payloads) and not identical(payloads):
+                raise ValueError("review record fingerprint collision or partial record; preserve it and choose another record directory")
+        protect_outputs(payloads, [model_path, *source_paths])
         rec_dir.mkdir(parents=True, exist_ok=True)
-        (rec_dir / f"{stem}.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
-        (rec_dir / f"{stem}.json").write_text(json.dumps({"model": rel(model_path),
-                                                          "reviewer": reviewer, "date": today, **log}, indent=1),
-                                              encoding="utf-8", newline="\n")
-    return "\n".join(lines)
+        if not identical(payloads):
+            for path, value in payloads.items():
+                with path.open("x", encoding="utf-8", newline="\n") as stream:
+                    stream.write(value)
+        record_name = next(path.name for path in payloads if path.suffix == ".json")
+    return "\n".join(lines) + (f"\nRecord: {record_name}\n" if record_name else "")
 
 
 def main():
@@ -293,10 +543,24 @@ def main():
     model_path = Path(a.model).resolve()
     try:
         raw = model_path.read_text(encoding="utf-8")
-        model = json.loads(raw)
+        def unique_object(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ValueError(f"duplicate JSON field: {key!r}")
+                result[key] = value
+            return result
+        def invalid_constant(value):
+            raise ValueError(f"nonfinite JSON value: {value}")
+        model = json.loads(raw, object_pairs_hook=unique_object, parse_constant=invalid_constant)
         with open(a.sheet, encoding="utf-8-sig", newline="") as f:
-            reader = csv.DictReader(f)
+            reader = csv.DictReader(f, strict=True)
+            fields = reader.fieldnames or []
+            if len(fields) != len(set(fields)):
+                raise ValueError("duplicate CSV column names; each review field must be unambiguous")
             rows = list(reader)
+            if any(any(str(value).strip() for value in row.get(None, [])) for row in rows):
+                raise ValueError("review row has nonempty fields beyond the CSV header")
     except (OSError, ValueError, csv.Error) as exc:  # a missing or unreadable file: say which, no traceback
         ap.exit(2, f"review not applied; nothing written: {exc}\n")
     # Keep the file's own formatting, so the git diff shows only what the review changed.
@@ -309,25 +573,17 @@ def main():
         sys.exit("not a review sheet: no item_id column")
     if not rows:
         sys.exit("the review sheet has no rows: nothing to apply")
-    # TE alarm setpoints come from the gateway build; mark which TE items carry one so requests are judged right.
     try:
-        sys.path.insert(0, str(ROOT / "scripts" / "ignition"))
-        from build_gateway import ALARMS
-        for c in ("instruments", "final_elements"):
-            for it in model.get(c, []):
-                if it.get("tag") in ALARMS:
-                    it["alarm_setpoints"] = [x["setpointA"] for x in ALARMS[it["tag"]]]
-    except Exception:  # noqa: BLE001  (twin models have no published setpoints)
-        pass
-    log = apply(model, rows, a.reviewer, a.date, index(model))
-    for c in ("instruments", "final_elements"):
-        for it in model.get(c, []):
-            it.pop("alarm_setpoints", None)
+        log = apply(model, rows, a.reviewer, a.date, index(model), te_alarm_items(model))
+    except (ValueError, KeyError, TypeError, AttributeError, OSError, SyntaxError) as exc:
+        ap.exit(2, f"review not applied; nothing written: {exc}\n")
     try:
         print(write_record(log, model_path, a.reviewer, a.date, a.dry_run, a.record_dir,
-                           source_paths=[a.sheet], model_write=bool(log['applied'])))
+                           source_paths=[a.sheet, *([ROOT / 'scripts/ignition/build_gateway.py']
+                               if model.get('meta', {}).get('model_id') == 'te-process' else [])],
+                           model_write=bool(log['applied'])))
     except (ValueError, OSError) as exc:
-        ap.exit(2, f"review not applied; nothing written: {exc}\n")
+        ap.exit(2, f"review model not updated: {exc}\n")
     if not a.dry_run and log["applied"]:
         model_path.write_text(json.dumps(model, indent=indent, ensure_ascii=ascii_only) + trailing, encoding="utf-8",
                               newline=newline)

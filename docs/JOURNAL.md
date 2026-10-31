@@ -5248,3 +5248,49 @@ The fresh full cached-data runner passes all 63 scripts with five unittest skips
 notices and no additional skipped-check notices. The notices do not increase the skipped-case count. The
 new audit probes still fail; script-exit success does not establish the contracts they expose. MCP runtime
 was not rerun in this audit, and its prior transport evidence remains separate.
+
+
+## 114. Preserve evidence and references through model review
+
+The whole-toolkit audit's N072 cases become the next correction, before further corpus or feature breadth.
+An independent reviewer freezes a consumer contract before seeing the candidate. Native instrument/final-element
+tags are live identities, including records with auxiliary IDs; extracted twins instead keep stable asset IDs.
+Corrections now migrate supported controller/interlock/limit/unplaced-control and line-layer references together,
+with exact paths and old/new values in history and records. Source quotations, provenance, former tags, physical
+point mappings and unrelated metadata stay intact. Sheet targets are frozen before application; collisions,
+chains/swaps and contradictory edits refuse, while historical aliases permit unchanged replay only.
+
+TE alarm knowledge no longer mutates then strips supplied fields. The declared simulator's matching XMEAS(7)/
+XMEAS(9) reference is read as a literal without importing gateway configuration. Supplied setpoint metadata takes
+precedence; missing/empty/null/unrecognized values remain unresolved. Requested priority with unresolved basis
+goes to change review without inferring installed absence. No alarm or setpoint is executed or changed.
+
+Fresh adversarial probes find related failures in the first candidate: Boolean alarm classification, contradictory
+row notes/decisions, dated receipt overwrite even on unchanged replay, repeated contradictory assignments in one
+cell and duplicate identity headers. Their first failures remain preserved. Corrections retain standalone receipt
+pairs, select fingerprinted names for different same-date results and reuse identical replay. CSV/JSON ambiguity
+refuses before source mutation. These are local single-invocation protections, not atomic publication or locking.
+
+Final independent behavior review retains 71 actual CLI invocations against one frozen implementation: positive
+native graph/C2/generation, two-step rename and historical replay, metadata/receipt preservation, ambiguity and
+output-alias controls, plus extracted stable-ID/scoped correction. The original TE detailed layout actually
+refuses a retagged model; explicitly changing its two signal endpoints makes --check pass while every other
+layout value and derived loop flag stays unchanged. That is a manual companion correction, not an automatic
+layout migration or an engineering layout acceptance.
+
+The new fictional native example shares its initial model with twenty actual-CLI regressions, retains thirteen
+live reference migrations and three expected output artifacts. Its original source words and unreadable metadata
+remain visible. Separate drawing/display layouts, external loop/mapping records, prior snapshots and context need
+explicit reconciliation/regeneration/refresh. No new corpus source family, model performance, human usefulness,
+native platform, Copilot tenant or company-governance acceptance follows from these controls. N073 remains the
+next collection-semantic defect; N074-N076 and the larger engineer/company trials remain open.
+
+The first full run reports 63/64: an older extracted-example test recursively counts the new native subfolder
+as outputs its extracted recipe should reproduce. The two recipes now have explicit test ownership; the native
+test also pins its complete six-file inventory and all three expected artifacts, so the partition does not
+silently omit those files. The original failure remains recorded before the targeted and full retests.
+
+Final local cached-data rerun passes all 64 registered scripts, with five unittest skips, two explanatory
+platform notices and no additional skipped-check notices. Four saved benchmark suites and thirty saved-
+prediction tables reproduce; five prediction gaps remain. Recorded matrix code bindings and all 52
+configured pipeline stages check fresh; no matrix or provider run is added.

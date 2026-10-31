@@ -9707,6 +9707,84 @@
    "private_proofs": {
     "description-refresh-verification.json": "74b484ff5fc9cad18fb8a450af9b863ae152fdf1bd75c37ad64b5bcef55e042a"
    }
+  },
+  {
+   "feature": "review-and-mapping",
+   "reviewer": "Independent AI reader: native identity and alarm preservation walkthrough",
+   "date": "2026-10-30",
+   "verdict": "pass",
+   "registered_output_count": 10,
+   "file_hash_method": "SHA256 after CRLF-to-LF byte normalization, matching feature_catalog. Private proof hashes use exact raw bytes.",
+   "files": {
+    "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+    "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+    "examples/review-and-mapping/mapping_dry_run.md": "0a1055bd00dba08fadd5544b37dabec4009a04004925a26e63e991d49dee9205",
+    "examples/review-and-mapping/graph_after_review.json": "0abf44119d3bd8c8bf3f90e2eed0f6f61508c7d08e3a246b48fac9c1523cc867",
+    "examples/review-and-mapping/REPORT_after_review.html": "33e641c1c5b7d718034671829b0575b927848d1d947636c1c94d3e08775b3b88",
+    "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+    "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d",
+    "examples/review-and-mapping/native-identity/expected/model.json": "f9f28f256b962414d3c865f9cd3a414654f1f2499546ba48f03789ea15056c44",
+    "examples/review-and-mapping/native-identity/expected/change_record.json": "b471c67b2b61a67c8da4b8e755a64a36978f9acd07ae6315330b192efd0d3d02",
+    "examples/review-and-mapping/native-identity/expected/change_record.md": "529d077d7a16630bb5aafebfd329671849e4e6e3b119e911204ebcd26a77bf26"
+   },
+   "supporting_files": {
+    "docs/REVIEW_LOOP.md": "d5600f00a57da849ed549b194e1f3e7665511bf7f2e40adddce808a40168d20f",
+    "examples/review-and-mapping/README.md": "8e785711d4a0d363895a92bd0d87261535be4e1aee4297e7460a0190f6eb6a14",
+    "examples/review-and-mapping/native-identity/README.md": "9515cbd51d87f3a183f929bcda086575ebdff404fe651bbdd800ba25c8295637",
+    "examples/review-and-mapping/native-identity/model.json": "12c9cd6f24a17cec76787fcc33071f056d8c155e772c1b0e0b7b63909f40adfe",
+    "examples/review-and-mapping/native-identity/review.csv": "0656b70c904b8731a4814ca1225236a7fa84de6680957e135958c8fa5507fff9",
+    "scripts/apply_review.py": "22abfde579415d35a04a6e274803d5440ad238ffaa9bb62b82a8703a1a058fe9",
+    "scripts/graph_export.py": "16d786f3d7ec78183db3df05a84d30e26f7e8b3057583a496e1e6231584b7be5",
+    "scripts/question_engine.py": "d7fcdc7e4118824130e945a23ea7569e41fdb9b13250a87db05f79546a85f8c1",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef"
+   },
+   "inherited_scope": {
+    "reviewer": "Independent Codex coding agent: bounded graph-evidence spoke refresh review",
+    "date": "2026-10-30",
+    "prior_registered_output_count": 7,
+    "unchanged_registered_output_bindings": {
+     "examples/review-and-mapping/reviewed_sheet0.csv": "d8159f4fb4c8d8ca3497f5d0985298ed2000610efd29ab5f2d7be1595a3d0c15",
+     "examples/review-and-mapping/records/2026-10-29-bundle.md": "8ee42f4d23643b7d2f37e92769adffa20d04875bc4ac65db186fcdcaad0e53c3",
+     "examples/review-and-mapping/mapping_dry_run.md": "0a1055bd00dba08fadd5544b37dabec4009a04004925a26e63e991d49dee9205",
+     "examples/review-and-mapping/graph_after_review.json": "0abf44119d3bd8c8bf3f90e2eed0f6f61508c7d08e3a246b48fac9c1523cc867",
+     "examples/review-and-mapping/REPORT_after_review.html": "33e641c1c5b7d718034671829b0575b927848d1d947636c1c94d3e08775b3b88",
+     "examples/review-and-mapping/pi_mapping_dry_run.txt": "5dd633a14b312e17dc7fd574f9a86866e593f3577d3f565e39b3485cbcbdd47d",
+     "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d"
+    },
+    "scope": "Seven unchanged outputs inherit only the prior review scope and limits. Matching baseline Git blobs and normalized file hashes were independently checked; their original engineering and source correctness was not newly reviewed."
+   },
+   "scope": "Fresh AI reader and bounded software/artifact walkthrough of the fictional native identity packet. Three new outputs reproduce completely with only the stated working-model location substituted in dated records. No human engineering acceptance is implied.",
+   "changed_registered_outputs": [
+    "examples/review-and-mapping/native-identity/expected/model.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.md"
+   ],
+   "findings": [],
+   "checks": [
+    "Executed the documented five-command offline sequence with a new private destination, plus two identical apply replays, explicit graph validation, baseline C2 and three detailed-layout controls: twelve successful/expected-refusal commands in the retained final trace.",
+    "The full resulting model matches the committed expected model after line-ending normalization; both dated records match completely after substituting only their model location. Thirteen exact supported reference changes are retained, while original source strings, vendor quotations, extraction provenance, former tags, numeric alarm setpoints and unreadable alarm metadata remain unchanged.",
+    "Explicit graph validation passes; the complete C2 findings equal the initial-model findings, containing only TT-900 and no invented missing-controller finding for corrected PT-902. Regeneration reports structural validation only and emits corrected tag text in local seed staging.",
+    "Two identical apply replays leave the model byte-identical and preserve every first-run dated record; the second replay reuses the same replay record.",
+    "Independently reran the TE detailed-layout check before rename (pass), with renamed model and original layout (expected refusal), and with copied manually reconciled layout (pass). Complete layout comparison confirms only the two documented signal endpoint fields change; derived loop labels remain unchanged.",
+    "Seven inherited registered output bindings match their prior review and baseline commit907b017. No old registered output was regenerated or given broader acceptance."
+   ],
+   "limits": [
+    "Independent AI reader/software review, not a human trial, engineering sign-off, plant configuration acceptance or measured usefulness.",
+    "Fictional development fixture and previously exposed TE development control; no new public source family, model call, held-out benchmark, native platform import, process action or company connectivity.",
+    "External authored layouts and mapping/loop records are not automatically migrated. The detailed-layout test verifies only a specific manual reconciliation and structural check.",
+    "Only the three new expected artifacts and stated inherited bindings are covered. Final generated feature/status/journal/ledger text and later edits are outside these supporting bindings."
+   ],
+   "private_proofs": {
+    "review.py": "ed412820158ef6ff831f192861001f789260ac16e99875584d12c71d8ceba4f2",
+    "followup.py": "f01f08b3ebb7d3f081b9d2d1768103df0b377ee9ddf52839e0362a72166a1206",
+    "commands.json": "44f77e9f477503cfc275cc1e65acfbde9bd0e66615438df63d5207ef480d37f1",
+    "result.json": "fa20d0fb04780524729d9a76b62ae1b88da4b111be7bd00129bf4046f086b813",
+    "inherited-prior-review.json": "76d3603c8f8f2179b04a8c1117408671b40feb8f5c139fc017375135dfeffeb3",
+    "run3-lf/commands.json": "44f77e9f477503cfc275cc1e65acfbde9bd0e66615438df63d5207ef480d37f1",
+    "run3-lf/result.json": "fa20d0fb04780524729d9a76b62ae1b88da4b111be7bd00129bf4046f086b813",
+    "reviewer-notes.md": "9f3c9c9098d185fbd1e4028f969a796d8de77a893b7ff9fa416d23f768f68d3f"
+   }
   }
  ]
 }

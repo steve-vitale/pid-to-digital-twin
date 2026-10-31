@@ -21,6 +21,7 @@ SOURCE_TESTS = (
     "scripts/test_process_mimic.py",
     "scripts/test_tiling.py",
     "scripts/test_apply_review.py",
+    "scripts/test_review_identity.py",
     "scripts/test_scorer_controls.py",
     "scripts/test_pid2graph_synthetic_adapter.py",
     "scripts/test_dexpi_adapter.py",
@@ -88,6 +89,12 @@ DEPENDENCIES = {"numpy": "numpy", "cv2": "opencv-python-headless",
 TWIN = "out/twin/r2-tiles-trace/codex"
 DRAWINGS = "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100"
 SOURCE_FILES = (
+    "examples/review-and-mapping/native-identity/model.json",
+    "examples/review-and-mapping/native-identity/README.md",
+    "examples/review-and-mapping/native-identity/review.csv",
+    "examples/review-and-mapping/native-identity/expected/model.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.json",
+    "examples/review-and-mapping/native-identity/expected/change_record.md",
     "data/te_process_model.json", "data/te_display_layout.json", "data/te_unit_purposes.json",
     "data/fixtures/water_utility_twin.json", "data/fixtures/water_utility_display.json",
     "data/dataset_adapters/pid2graph_synthetic.json", "data/dataset_adapters/dexpi_examples.json",
