@@ -297,7 +297,8 @@
    "code": [
     "scripts/generate.py",
     "scripts/pi_mapping.py",
-    "scripts/provenance.py"
+    "scripts/provenance.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/svg/*.svg",
@@ -545,7 +546,8 @@
     "data/te_process_model.json"
    ],
    "code": [
-    "scripts/draw_pid_from_model.py"
+    "scripts/draw_pid_from_model.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "data/te_pid/*.png",
@@ -687,7 +689,8 @@
     "scripts/tiling.py",
     "scripts/remerge_tiles.py",
     "scripts/trace_connections.py",
-    "scripts/degrade_scans.py"
+    "scripts/degrade_scans.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [],
    "requires": [],
@@ -743,7 +746,7 @@
      "te-clean-trace-r1"
     ]
    ],
-   "requires_note": "model calls (Codex and Claude CLIs) with PID_SHEETS_DIR=data/te_pid/rev-a; run records are not committed",
+   "requires_note": "model calls (Codex and Claude CLIs) with PID_SHEETS_DIR=data/te_pid/rev-a; run records are not committed Historical records retained after the 2026-10-30 publication-guard revision; original trials predate the current CLI wrappers. Non-publication function ASTs and constants remain unchanged; saved predictions were re-scored. Acceptance renews unchanged records, not model/extraction execution. Baseline 15ea4c979beebaca77f70ee5a36cb8329df116bc; JOURNAL section109.",
    "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
    "carries": "per item: the model's confidence and the source run",
    "checked_by": "the frozen scorer, through te.pid_roundtrip"
@@ -807,7 +810,8 @@
     "scripts/run_extraction.py",
     "scripts/run_te_roundtrip.py",
     "scripts/tiling.py",
-    "scripts/trace_connections.py"
+    "scripts/trace_connections.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [],
    "requires": [],
@@ -863,7 +867,7 @@
      "te-clean-trace-r1"
     ]
    ],
-   "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude --sheets data/te_pid/rev-c; run records are not committed",
+   "requires_note": "model calls (Codex and Claude CLIs on their subscriptions) via python scripts/run_te_roundtrip.py --tool codex|claude --sheets data/te_pid/rev-c; run records are not committed Historical records retained after the 2026-10-30 publication-guard revision; original trials predate the current CLI wrappers. Non-publication function ASTs and constants remain unchanged; saved predictions were re-scored. Acceptance renews unchanged records, not model/extraction execution. Baseline 15ea4c979beebaca77f70ee5a36cb8329df116bc; JOURNAL section109.",
    "treatment": "Method M3 unchanged (2x2 tiles, 0.15 overlap, prompt_v2, then the code line tracer).",
    "carries": "GPT and Claude: 42 sheet runs each, 0 failed tiles (2026-10-28 and 2026-10-29)",
    "checked_by": "the frozen scorer, through te.pid_roundtrip"
@@ -976,7 +980,8 @@
    "code": [
     "scripts/generate.py",
     "scripts/pi_mapping.py",
-    "scripts/provenance.py"
+    "scripts/provenance.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/te_pid/twin/key/review_queue.csv",
@@ -1211,7 +1216,8 @@
     "scripts/run_extraction.py",
     "scripts/tiling.py",
     "scripts/remerge_tiles.py",
-    "scripts/trace_connections.py"
+    "scripts/trace_connections.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [],
    "external_outputs": [
@@ -1248,7 +1254,7 @@
      "r2-tiles-trace"
     ]
    ],
-   "requires_note": "model calls (sends drawings to the selected service); run records are not committed (runs/README.md)",
+   "requires_note": "model calls (sends drawings to the selected service); run records are not committed (runs/README.md) Historical records retained after the 2026-10-30 publication-guard revision; original trials predate the current CLI wrappers. Non-publication function ASTs and constants remain unchanged; saved predictions were re-scored. Acceptance renews unchanged records, not model/extraction execution. Baseline 15ea4c979beebaca77f70ee5a36cb8329df116bc; JOURNAL section109.",
    "treatment": "Method M3, chosen by a rule written before the holdouts were scored.",
    "carries": "per item: the model's confidence and the source run; scored per set against the answer keys",
    "checked_by": "scripts/score_pid2graph.py (frozen scorer) on sealed holdouts",
@@ -1310,7 +1316,8 @@
     "scripts/run_extraction.py",
     "scripts/trace_connections.py",
     "scripts/replicate_stats.py",
-    "scripts/score_pid2graph.py"
+    "scripts/score_pid2graph.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/replicates_r5_holdout-a.json",
@@ -1353,7 +1360,7 @@
      "out/replicates_r5_holdout-a"
     ]
    ],
-   "requires_note": "model calls (Codex and Claude CLIs); run records are not committed",
+   "requires_note": "model calls (Codex and Claude CLIs); run records are not committed Historical records retained after the 2026-10-30 publication-guard revision; original trials predate the current CLI wrappers. Non-publication function ASTs and constants remain unchanged; saved predictions were re-scored. Acceptance renews unchanged records, not model/extraction execution. Baseline 15ea4c979beebaca77f70ee5a36cb8329df116bc; JOURNAL section109.",
    "treatment": "Pre-registered in docs/GOAL.md before the runs; a failed drawing scores as zero, never re-run to replace it.",
    "carries": "GPT 20.1, Claude 29.8 review load per 100; GPT minus Claude is beyond run noise on these 6 sheets and a tie across drawings",
    "checked_by": "scripts/test_replicate_stats.py (interval arithmetic on synthetic cases)"
@@ -1416,7 +1423,8 @@
    "code": [
     "scripts/generate.py",
     "scripts/pi_mapping.py",
-    "scripts/provenance.py"
+    "scripts/provenance.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/twin/r2-tiles-trace/codex/review_queue.csv",
@@ -1453,7 +1461,8 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png"
    ],
    "code": [
-    "scripts/review_kit.py"
+    "scripts/review_kit.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/review_kit/sheet-8/README.md",
@@ -1482,10 +1491,11 @@
      "--sheet",
      "8",
      "--out",
-     "out/review_kit/sheet-8"
+     "out/review_kit/sheet-8",
+     "--refresh-unstarted"
     ]
    ],
-   "treatment": "Copies the sheet's review rows with blank OPS_ columns, the drawing and overlay, an empty timer log and a draft protocol that fails validation until an administrator completes it.",
+   "treatment": "Copies the sheet's review rows with blank OPS_ columns, the drawing and overlay, an empty timer log and a draft protocol that fails validation until an administrator completes it. Explicit refresh requires the existing packet, draft protocol and empty timer to remain untouched; started/edited kits refuse and need a new output folder.",
    "carries": "no minutes: the kit ships no measured result",
    "checked_by": "scripts/test_review_kit.py"
   },
@@ -1973,7 +1983,8 @@
    ],
    "code": [
     "scripts/flow_direction.py",
-    "scripts/trace_connections.py"
+    "scripts/trace_connections.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/open100_structural/flow_direction.json",
@@ -2255,7 +2266,8 @@
     "scripts/trace_connections.py",
     "scripts/replicate_stats.py",
     "scripts/score_tags.py",
-    "scripts/score_pid2graph.py"
+    "scripts/score_pid2graph.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "out/replicates_r5_dexpi.json",
@@ -2300,7 +2312,7 @@
      "out/replicates_r5_dexpi"
     ]
    ],
-   "requires_note": "model calls and the DEXPI download; run records are not committed",
+   "requires_note": "model calls and the DEXPI download; run records are not committed Historical records retained after the 2026-10-30 publication-guard revision; original trials predate the current CLI wrappers. Non-publication function ASTs and constants remain unchanged; saved predictions were re-scored. Acceptance renews unchanged records, not model/extraction execution. Baseline 15ea4c979beebaca77f70ee5a36cb8329df116bc; JOURNAL section109.",
    "treatment": "Pre-registered in docs/GOAL.md; tag scoring rules dated in score_tags.py before any run.",
    "carries": "clean vector drawings from one publisher; says nothing about scans or real archives",
    "checked_by": "scripts/test_score_tags.py, scripts/test_replicate_stats.py"
@@ -2342,7 +2354,8 @@
     "data/bayer_rt/process_model.json"
    ],
    "code": [
-    "scripts/draw_pid_from_model.py"
+    "scripts/draw_pid_from_model.py",
+    "scripts/output_paths.py"
    ],
    "outputs": [
     "data/bayer_rt/pid/RT1.png",

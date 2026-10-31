@@ -5045,3 +5045,95 @@ they are not counted as final freshness. The global 64 pass / 23 fail / 8 not-ap
 These repairs improve how evidence is read, not model accuracy or operational outcomes. The next work remains
 one bounded engineer investigation, source-grounded useful/unacceptable question rubrics, and an approved
 company handoff. No paid models, new source download, company write, plant import or public post was involved.
+
+## 108. Audit delivery state and remaining source-output writers
+
+A fresh state audit separates the last released evaluator from unfinished local source-support work. The latter
+has a packet validator, label scorer, development keys and controls, but no registered suite, run manifests,
+published report or completed reader route. It is not an implemented semantic-verification service or a new
+model-performance result. The three existing benchmark suites reproduce with the exact released evaluator and
+its five dependencies copied from Git; the modified evaluator correctly makes the existing snapshots stale.
+Historical reports are retained rather than hand-rebound to the changed code.
+
+The audit inspected the twenty-feature inventory and the contracts of thirty-one tools, checked the existing
+registries, and ran representative actual CLIs. One public drawing builds an intake bundle, report and question
+screen. The authored illustrative description builds a drawing/graph/staging packet. A planted MGPI false
+shutdown again passes structure and five exact-quotation checks, matches all twenty-seven selected facts, and
+produces zero question findings. These are software and scoring observations, not human usefulness or plant
+validation. The source-support work cannot close the separate useful-question gap merely by grading labels.
+
+Three additional source-output collisions were reproduced on separate disposable copies. The report command
+can replace its input plant_model.json with HTML through --out. The loop-audit command can replace its drawing
+key with the JSON result when the output prefix resolves to that key. Line enrichment can replace a supplied
+drawing image with model JSON. Each command returned success; before/after hashes changed. Original inputs were
+unchanged. N069 records these as open defects. N066 remains the completed repair for its three named tools;
+its scope is not extended to these newly tested writers. Intentional model-in-place enrichment remains a
+different contract that the eventual repair must preserve.
+
+The status page now puts those defects before feature expansion. The current first-use path is a bounded
+investigation packet; description interpretation/layout, source judgments and company acceptance still need
+people. A portable graph is a one-way snapshot, MCP is local read-only retrieval, and company authority,
+operational connectors and maintained-document round trips remain external or unimplemented. The audit adds
+no model call, source download, installed-state judgment, company integration or operational-benefit claim.
+
+## 109. Preserve sources across the remaining output writers
+
+N069 began with report, loop-audit and line-enrichment collisions. An independent sweep of the thirty-one
+tool contracts reproduced failures in eleven additional writers, including late batch destinations and files
+retired by export. Fourteen writers now check active inputs and publication/retirement targets before writes.
+The same helper checks resolved paths, hardlink identity and sibling aliases. Intentional reviewed model changes
+and model-in-place enrichment remain allowed. Review-kit generation also refuses to replace an existing kit's
+review/timer files; an extraction skip outside the repository now prints a bounded path instead of crashing.
+
+Independent actual CLI retests cover the twelve additional failure scenarios, nine advanced alias/batch cases,
+and sixty-four initial report/loop/line probes. Ordinary output comparisons retain prior payloads except the
+declared generator fingerprint. Fresh-kit history refusal and external-record skipping preserve bytes. These
+are stable-local-file preflights, not a concurrent-writer lock, transaction or guarantee for every research script.
+No provider model call or plant-system import is involved.
+
+Saved-prediction rescoring actually reproduces thirty tables (seven under explicit historical formatting), with
+five missing-prediction gaps. Eleven offline generation commands across seven stages run again. Five recorded
+stages accept historical evidence after reviewed publication/skip-wrapper changes and unchanged output hashes;
+they are not new extraction trials. Three extraction stages bind zero output files, so their renewal verifies
+no raw extraction records. Two replicate stages retain six bound outputs. At that point, of 497 archived pre-refresh files,
+493 remain raw byte-identical; the other four are pipeline metadata and TE/Bayer drawing manifests whose only
+changed content is generator_sha256. Native-runtime, Blender and browser records remain historical.
+
+Both description bundles are actually prepared and rebuilt to scratch from their unchanged sources and answers.
+Their only changed files are the drawing manifest and build inventory, reflecting the changed generator/export
+code and manifest hash. Source interpretation, rendered geometry, questions and staging content do not improve.
+The lineage guide now states exactly what accepted-record freshness verifies and what it cannot verify.
+
+The full suite then exposed a pipeline integration boundary: unconditional existing-kit refusal also blocked
+rebuilding the repository's untouched blank kit. Default make still refuses existing kits. The pipeline now
+explicitly opts into refresh-unstarted, which first checks all packet hashes, blank decisions, empty timer,
+unchanged draft protocol and absence of unexpected files (the retained README is allowed). Any started, edited or incomplete packet requires a new
+folder. This preserves the intentional rebuild path without silently resetting review work.
+
+All eighty-five cells in matrix rows 1–5, 7 and 8 are actually rerun after the final relevant code changes;
+the ten row-6 cells retain their previous complete records. Totals remain 64 pass, 23 fail and 8 not applicable.
+The criteria and substantive results are unchanged. This refresh tests the affected software paths and current
+fingerprints; it adds no unfamiliar-source performance or engineering acceptance claim.
+
+## 110. Separate fixed-claim judgments from useful questions
+
+The MGPI false automatic-shutdown control passes quotations and all twenty-seven selected model facts, while
+the question screen returns zero findings. A separate source-support adapter now grades fixed supplied claims
+as supported, contradicted or insufficient-evidence. A separate coding agent froze twelve original-source
+judgments before candidate/scorer work: six MGPI and six NIST, balanced four per label. The public projection
+preserves evidence joins, timestamps and scope, removing private absolute-path metadata. It exposes project
+paraphrases that explicitly scaffold distinctions; this is development label classification, not raw-document
+comprehension, a blind trial or a model-performance result.
+
+Synthetic controls score reference 12/12, empty 0/12 and each uniform label 4/12. Primary accuracy keeps missing
+claims in its denominator; diagnostic F1 can differ on partial answers. IDs, admitted citations and nonempty
+reasons are checked structurally. A false explanation can still earn perfect label accuracy; no reason-quality,
+source-validity, question-usefulness or plant-truth scoring is claimed. All three previous suites are actually
+re-scored into new prefixes with substantive results unchanged. All eight prior report files remain intact;
+changed implementation/cohort identities are visible rather than hand-rebound.
+
+The existing first-question route gets a worked MGPI draft: historical notification versus unloading shutdown,
+qualified by report scope, with current installed evidence unknown and recipient/reviewer unassigned. It records
+no trial, benefit or company acceptance. This makes the human handoff concrete without building a company
+governance service. The question catalog is unchanged; N065 still needs useful/unacceptable question keys and
+false-positive checks across other sources. A small label task does not close that gap.

@@ -25,6 +25,24 @@ class Kit(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_make_preserves_source_queue_drawing_overlay_and_companion_files(self):
+        for i, source in enumerate((TWIN / 'review_queue.csv', DRAWINGS / '8.png', TWIN / 'svg/sheet_8.svg')):
+            # Use private source copies so a failed guard cannot damage committed evidence.
+            root = Path(self.tmp.name) / f'guard-{i}'
+            twin, drawings, out = root / 'twin', root / 'drawings', root / 'out'
+            (twin / 'svg').mkdir(parents=True)
+            drawings.mkdir(); out.mkdir()
+            for original, copied in ((TWIN / 'review_queue.csv', twin / 'review_queue.csv'),
+                                     (DRAWINGS / '8.png', drawings / '8.png'),
+                                     (TWIN / 'svg/sheet_8.svg', twin / 'svg/sheet_8.svg')):
+                copied.write_bytes(original.read_bytes())
+            copied = (twin / 'review_queue.csv', drawings / '8.png', twin / 'svg/sheet_8.svg')[i]
+            (out / 'review_queue_sheet8.csv').hardlink_to(copied)
+            before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+            with self.assertRaisesRegex(ValueError, 'aliases an input'):
+                rk.make(twin, '8', out, drawings)
+            self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
     def test_packet(self):
         _, rows = rk.read_queue(self.kit / "review_queue_sheet8.csv")
         _, source = rk.read_queue(TWIN / "review_queue.csv")
@@ -33,6 +51,60 @@ class Kit(unittest.TestCase):
         self.assertEqual(self.manifest["rows"], len(rows))
         self.assertNotIn(":", self.manifest["source_twin"])                    # no local drive path
         self.assertEqual(rk.read_timer(self.kit / "timer_log.csv"), [])
+
+    def test_make_cannot_reset_existing_review_or_timer_history(self):
+        rk.timer(self.kit, 'start', 'R1', now=T0)
+        before = {p: p.read_bytes() for p in self.kit.rglob('*') if p.is_file()}
+        with self.assertRaisesRegex(ValueError, 'retain review/timer history'):
+            rk.make(TWIN, '8', self.kit, DRAWINGS)
+        self.assertEqual(before, {p: p.read_bytes() for p in self.kit.rglob('*') if p.is_file()})
+
+    def test_explicit_unstarted_refresh_is_repeatable_and_preserves_readme(self):
+        (self.kit / 'README.md').write_text('Retained instructions', encoding='utf-8')
+        before = {p: p.read_bytes() for p in self.kit.rglob('*') if p.is_file()}
+        self.assertEqual(rk.make(TWIN, '8', self.kit, DRAWINGS, refresh_unstarted=True), self.manifest)
+        self.assertEqual(before, {p: p.read_bytes() for p in self.kit.rglob('*') if p.is_file()})
+
+    def test_unstarted_refresh_refuses_timer_queue_protocol_and_incomplete_or_extra_files(self):
+        for kind in ('timer', 'queue', 'protocol', 'missing', 'extra', 'manifest'):
+            with self.subTest(kind=kind):
+                kit = Path(self.tmp.name) / ('edited-' + kind)
+                shutil.copytree(self.kit, kit)
+                if kind == 'timer':
+                    rk.timer(kit, 'start', 'R1', now=T0)
+                elif kind == 'queue':
+                    p = kit / 'review_queue_sheet8.csv'
+                    p.write_bytes(p.read_bytes() + b'changed')
+                elif kind == 'protocol':
+                    p = kit / 'protocol_draft.json'
+                    p.write_text(p.read_text(encoding='utf-8').replace('"study_id": ""', '"study_id": "started"'), encoding='utf-8')
+                elif kind == 'missing':
+                    (kit / 'timer_log.csv').unlink()
+                elif kind == 'extra':
+                    (kit / 'notes.txt').write_text('Work begun', encoding='utf-8')
+                else:
+                    p = kit / 'manifest.json'
+                    d = json.loads(p.read_bytes()); d['rows'] += 1
+                    p.write_text(json.dumps(d), encoding='utf-8')
+                before = {p: p.read_bytes() for p in kit.rglob('*') if p.is_file()}
+                with self.assertRaises((ValueError, KeyError)):
+                    rk.make(TWIN, '8', kit, DRAWINGS, refresh_unstarted=True)
+                self.assertEqual(before, {p: p.read_bytes() for p in kit.rglob('*') if p.is_file()})
+
+    def test_unstarted_refresh_carries_changed_source_rows_without_starting_a_timer(self):
+        twin = Path(self.tmp.name) / 'changed-twin'
+        (twin / 'svg').mkdir(parents=True)
+        shutil.copyfile(TWIN / 'svg/sheet_8.svg', twin / 'svg/sheet_8.svg')
+        fields, rows = rk.read_queue(TWIN / 'review_queue.csv')
+        selected = next(r for r in rows if r['sheet'] == '8')
+        selected['what_it_is'] = 'UPDATED-SOURCE-DESCRIPTION'
+        with (twin / 'review_queue.csv').open('w', encoding='utf-8', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=fields, lineterminator='\n')
+            writer.writeheader(); writer.writerows(rows)
+        rk.make(twin, '8', self.kit, DRAWINGS, refresh_unstarted=True)
+        _, refreshed = rk.read_queue(self.kit / 'review_queue_sheet8.csv')
+        self.assertEqual(refreshed[0]['what_it_is'], 'UPDATED-SOURCE-DESCRIPTION')
+        self.assertEqual(rk.read_timer(self.kit / 'timer_log.csv'), [])
 
     def test_committed_packet_matches_generator(self):
         committed = ROOT / "out/review_kit/sheet-8/manifest.json"

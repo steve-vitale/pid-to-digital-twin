@@ -1,0 +1,32 @@
+{
+  "schema": "source-support-rubric-1",
+  "fixture_id": "original-source-judgment-dev-20261030-v1",
+  "classification": "All material parts must be supported for supported; explicit same-scope incompatibility for contradicted; otherwise insufficient-evidence. No majority-vote treatment of conjunctive claims.",
+  "primary_metric": "Exact judgment accuracy on the 12 fixed claims, reported with numerator and denominator; macro accuracy per family and per label should accompany it. Results describe this development fixture only.",
+  "secondary_checks": [
+    "Exactly one decision per item; no missing/duplicate/extra ids.",
+    "Judgment is one of the three literal labels.",
+    "At least one admitted evidence id and no non-admitted evidence id per item.",
+    "Reason states the decisive supported fact, explicit opposite, or missing scope, without upgrading historical evidence to current plant truth.",
+    "Reasons must not claim safe/approved operation, human review or a verified live installation."
+  ],
+  "rationale_review": "Independent human or fresh agent inspection can assess concise reasons against key rationales and original locators; exact label matching alone cannot validate reasoning quality.",
+  "edge_rules": {
+    "SJ005": "Current-state claim is unresolved, not contradicted by a historical condition.",
+    "SJ006": "No pH mention is unresolved, not proof of no pH sensor.",
+    "SJ009": "Contradiction concerns the recorded literal value, not the actual physical spindle state.",
+    "SJ011": "Name compatibility and publication date cannot prove deployed revision.",
+    "SJ012": "UNAVAILABLE is missing observation, not an explicit physical stopped-state counterexample."
+  },
+  "critical_controls": [
+    "SJ003 notification versus automatic shutdown",
+    "SJ004 stop endpoint reversal",
+    "SJ005 historical versus current installed",
+    "SJ006 silence versus negative evidence",
+    "SJ008 revision-scoped identifier reuse",
+    "SJ009 unavailable versus zero",
+    "SJ011 published versus deployed configuration",
+    "SJ012 partial records versus continuous named production"
+  ],
+  "no_new_runs": "No model calls, paid runs, external downloads, ports, company/private-organization data or current-plant access were used to author this fixture."
+}

@@ -1,0 +1,135 @@
+{
+  "schema": "source-support-key-1",
+  "fixture_id": "original-source-judgment-dev-20261030-v1",
+  "frozen_at_utc": "2026-10-30T23:08:20.393648+00:00",
+  "author_role": "Fresh independent coding-agent original-source/key reviewer, separate from candidate/scorer implementation.",
+  "candidate_exposure": "No new source-support candidate answer, implementation or scorer supplied or inspected. Existing NIST packet README and source manifest were read as source navigation; their derived answer/key files were not read.",
+  "scope": "Post-hoc development fixture from exposed development source families. No held-out accuracy, source-family generalization, human engineering sign-off or plant-truth verdict.",
+  "label_counts": {
+    "supported": 4,
+    "contradicted": 4,
+    "insufficient-evidence": 4
+  },
+  "answers": [
+    {
+      "id": "SJ001",
+      "judgment": "supported",
+      "rationale": "Both the outdoor bulk-storage facts and the downstream indoor day-tank step are stated in the admitted process narrative.",
+      "decisive_evidence_ids": [
+        "E01"
+      ],
+      "failure_control": "Requires joining a sentence across the p.7-to-p.8 boundary; no figure-derived route.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ002",
+      "judgment": "supported",
+      "rationale": "The reported alarm activation and time are explicit. Support is for the report account, not independent telemetry reconstruction.",
+      "decisive_evidence_ids": [
+        "E02"
+      ],
+      "failure_control": "Alarm occurrence must remain distinct from automatic mitigation.",
+      "sibling_group": "MGPI-alarm-scope"
+    },
+    {
+      "id": "SJ003",
+      "judgment": "contradicted",
+      "rationale": "The source explicitly says the alarm only notified operators and was not configured to stop transfer automatically. This is a direct opposite, not an inference from silence.",
+      "decisive_evidence_ids": [
+        "E02"
+      ],
+      "failure_control": "Notification-to-automatic-action overclaim.",
+      "sibling_group": "MGPI-alarm-scope"
+    },
+    {
+      "id": "SJ004",
+      "judgment": "contradicted",
+      "rationale": "The report explicitly excludes this unloading-to-bulk path from the stop capability and says the unloading area lacked remote shutdown capability. A bulk-to-day-tank stop does not cover that endpoint.",
+      "decisive_evidence_ids": [
+        "E03"
+      ],
+      "failure_control": "Endpoint scope reversal for a real control function.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ005",
+      "judgment": "insufficient-evidence",
+      "rationale": "The admitted report describes a historical configuration. No 2026 inspection, change history or current control configuration is admitted. The old condition neither establishes nor contradicts the present condition.",
+      "decisive_evidence_ids": [
+        "E02"
+      ],
+      "failure_control": "Historical-to-current extrapolation must abstain.",
+      "sibling_group": "MGPI-alarm-scope"
+    },
+    {
+      "id": "SJ006",
+      "judgment": "insufficient-evidence",
+      "rationale": "The bounded narrative does not inventory all instruments or explicitly address a pH sensor. Lack of mention cannot establish its absence. Lack of an automatic shutdown is not lack of every sensor.",
+      "decisive_evidence_ids": [
+        "E04"
+      ],
+      "failure_control": "Absence of evidence is not explicit negative evidence.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ007",
+      "judgment": "supported",
+      "rationale": "The UUID and device identity match in both original XML Device elements. This supports a published identity join, not a live installation claim.",
+      "decisive_evidence_ids": [
+        "E05"
+      ],
+      "failure_control": "Document identity versus deployed configuration identity.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ008",
+      "judgment": "supported",
+      "rationale": "The two original DataItem definitions explicitly assign different names, types and units to the same id string. Revision scope resolves the apparent conflict.",
+      "decisive_evidence_ids": [
+        "E06"
+      ],
+      "failure_control": "Reused identifier must not silently become a permanent signal alias.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ009",
+      "judgment": "contradicted",
+      "rationale": "The value at that exact timestamp is UNAVAILABLE. A separate numeric-zero sample on February 17 cannot replace it. This contradicts the record-value claim, without claiming the physical spindle could not have been stopped.",
+      "decisive_evidence_ids": [
+        "E07"
+      ],
+      "failure_control": "Missing-state coercion to zero.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ010",
+      "judgment": "contradicted",
+      "rationale": "The explicit February 14 record is a counterexample. One counterexample refutes the universal claim without requiring assumptions about missing samples.",
+      "decisive_evidence_ids": [
+        "E08"
+      ],
+      "failure_control": "Filename is not a source time-range guarantee.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ011",
+      "judgment": "insufficient-evidence",
+      "rationale": "Published XML definitions and matching names do not establish deployment. The raw records contain no configuration revision field and no deployment history is admitted. They do not prove or disprove that later mapping was deployed.",
+      "decisive_evidence_ids": [
+        "E09"
+      ],
+      "failure_control": "Plausible name compatibility must not become a deployed revision verdict.",
+      "sibling_group": null
+    },
+    {
+      "id": "SJ012",
+      "judgment": "insufficient-evidence",
+      "rationale": "READY plus a single-space program-name field does not identify a production job, and later UNAVAILABLE does not establish physical inactivity or continuous execution. Partial observations cannot decide the asserted continuous named-job history.",
+      "decisive_evidence_ids": [
+        "E10"
+      ],
+      "failure_control": "READY is not a named-job execution proof; unavailable later is not physical contradiction.",
+      "sibling_group": null
+    }
+  ]
+}

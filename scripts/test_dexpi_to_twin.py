@@ -183,6 +183,35 @@ class PortableStaging(unittest.TestCase):
     def snapshot(self, folder):
         return {str(p.relative_to(folder)): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
 
+    def test_all_conversion_inputs_and_output_siblings_are_preserved(self):
+        xml = self.source / 'source.xml'
+        xml.write_text('<PlantModel><Equipment ID="P1" ComponentClass="CentrifugalPump"/></PlantModel>', encoding='utf-8')
+        config = self.source / 'config.json'
+        config.write_text('{}', encoding='utf-8')
+        for i, source in enumerate([*D.key_paths(self.sid, self.source).values(), xml, config]):
+            for ext in ('prediction.json', 'intake-manifest.json'):
+                out = self.root / f'guard-{i}-{ext}'
+                out.mkdir()
+                target = out / f'{self.sid}.{ext}'
+                target.hardlink_to(source)
+                companion = out / f'{self.sid}.source.png'
+                companion.write_bytes(self.image.read_bytes())
+                before = {p: p.read_bytes() for p in (source, target, companion)}
+                with mock.patch.object(D.A, 'CONFIG', config), self.assertRaisesRegex(ValueError, 'aliases an input'):
+                    D.write_outputs(self.sid, self.pred, out, {'license': 'test'},
+                                    {'xml': str(xml), 'title': 'test'}, self.image)
+                self.assertEqual(before, {p: p.read_bytes() for p in before})
+        import dexpi_reader as R
+        out = self.root / 'reader-guard'
+        out.mkdir()
+        target = out / f'{self.sid}.model.json'
+        target.hardlink_to(xml)
+        before = self.snapshot(self.root)
+        with self.assertRaisesRegex(R.DexpiError, 'aliases an input'):
+            R.run(xml, out, self.sid, quiet=True)
+        self.assertEqual(self.snapshot(self.root), before)
+
+
     def test_packet_moves_without_original_image_and_imports(self):
         self.write()
         original = self.image.read_bytes()
@@ -241,7 +270,7 @@ class PortableStaging(unittest.TestCase):
         image = self.source / f"{self.sid}.prediction.json"
         image.write_bytes(self.image.read_bytes())
         before = self.snapshot(self.source)
-        with self.assertRaisesRegex(ValueError, "overlaps the source image"):
+        with self.assertRaisesRegex(ValueError, "aliases an input"):
             D.write_outputs(self.sid, self.pred, self.source, {"license": "test"},
                             {"xml": "T01.xml", "title": "synthetic"}, image)
         self.assertEqual(before, self.snapshot(self.source))
@@ -250,7 +279,7 @@ class PortableStaging(unittest.TestCase):
         xml.write_text('<PlantModel><Equipment ID="P1" ComponentClass="CentrifugalPump"/></PlantModel>')
         before = self.snapshot(self.source)
         with mock.patch.object(R, "prediction", return_value=(self.pred, {})):
-            with self.assertRaisesRegex(R.DexpiError, "overlaps a source"):
+            with self.assertRaisesRegex(R.DexpiError, "aliases an input"):
                 R.run(xml, self.source, self.sid, png=self.image, quiet=True)
         self.assertEqual(before, self.snapshot(self.source))
 

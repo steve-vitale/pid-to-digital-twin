@@ -53,6 +53,14 @@ which model/version and method handles each task. Both kinds of improvement belo
    benchmark case does not automatically make it applicable to every tool or add it to the existing eight-row
    matrix. If a task has no evaluator, propose its output contract, source truth, metrics and planted faults first.
 
+For fixed claim judgments, start with the [source-support contract](benchmarks/source-support/prompt.md) and
+[development suite](benchmarks/source-support-development.json). Freeze source scope, timestamps, key rationale
+and admitted evidence before authoring answers. Keep the key/reference controls out of the inference packet.
+Exact label accuracy includes missing claims; admitted citation IDs and a nonempty reason do not verify source
+support. The supplied paraphrases scaffold this task, so distinguish it from original-document comprehension,
+question usefulness and current installed-state validation. Publish genuine model attempts separately from
+synthetic controls, with the actual exposure and provider/version/settings declared.
+
 `development` means used for method work; `validation` can inform selection; `held-out` requires an actual
 documented separation from tuning. Public keys cannot prove that a model or contributor never saw them. Once a
 case informs a fix, retain that history and use new evidence for a subsequent generalization claim. Keep

@@ -131,6 +131,29 @@ class Controls(unittest.TestCase):
 
 @unittest.skipUnless(HAVE_KEYS, "cached OPEN100 answer keys not present")
 class Vendor(unittest.TestCase):
+    @unittest.skipUnless(HAVE_KEYS, 'committed drawing/key required')
+    def test_reports_preserve_predictions_keys_images_and_existing_companions(self):
+        import shutil
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            keys, preds = folder / 'keys', folder / 'preds'
+            keys.mkdir(); preds.mkdir()
+            for ext in ('png', 'graphml'):
+                shutil.copyfile(KEYS / ('8.' + ext), keys / ('8.' + ext))
+            source = preds / '8.json'
+            source.write_text(json.dumps({'symbols': [], 'connections': []}), encoding='utf-8')
+            for i, consumed in enumerate((source, keys / '8.png', keys / '8.graphml')):
+                for ext in ('json', 'md'):
+                    out = folder / f'out-{i}-{ext}'
+                    target, companion = out.with_suffix('.' + ext), out.with_suffix('.md' if ext == 'json' else '.json')
+                    target.hardlink_to(consumed)
+                    companion.write_bytes(b'retain report')
+                    before = {p: p.read_bytes() for p in (source, keys / '8.png', keys / '8.graphml', target, companion)}
+                    code, errors = quiet_main(['--keys', str(keys), '--predictions', str(preds), '--out', str(out)])
+                    self.assertEqual(code, 1)
+                    self.assertIn('aliases an input', errors)
+                    self.assertEqual(before, {p: p.read_bytes() for p in before})
+
     def test_perfect_vendor_file_and_run_record_both_load(self):
         with tempfile.TemporaryDirectory() as t:
             write(Path(t) / "contract", "6", perfect("6"))

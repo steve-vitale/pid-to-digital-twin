@@ -212,7 +212,7 @@ def check_controls(per_sheet, agg):
     return fails
 
 
-def evaluate(keys_dir, pred_dirs, sheets=None, name="vendor"):
+def evaluate(keys_dir, pred_dirs, sheets=None, name="vendor", source_paths=None):
     keys_dir = Path(keys_dir)
     available = sorted((g.stem for g in keys_dir.glob("*.graphml")), key=sheet_sort)
     if sheets:
@@ -225,6 +225,8 @@ def evaluate(keys_dir, pred_dirs, sheets=None, name="vendor"):
     for s in sheets:
         if not (keys_dir / f"{s}.png").exists():
             raise ValueError(f"sheet {s}: {s}.png must sit beside {s}.graphml (it gives the pixel size)")
+    if source_paths is not None:
+        source_paths.extend([Path(sc.__file__), *(keys_dir / f"{s}.{ext}" for s in sheets for ext in ("png", "graphml"))])
 
     # Controls: same keys, same scorer.
     ctrl_counts = {c: {} for c in CONTROL_ORDER}
@@ -256,6 +258,8 @@ def evaluate(keys_dir, pred_dirs, sheets=None, name="vendor"):
         rep_counts, rep_sheets, files, ignored, models = {}, {}, {}, 0, set()
         for s in sheets:
             path = d / f"{s}.json"
+            if source_paths is not None:
+                source_paths.append(path)
             pred, status, note = load_prediction(path)
             if status == "ok":
                 try:
@@ -430,15 +434,19 @@ def main(argv=None):
     ap.add_argument("--out", required=True, help="output path without extension (.md and .json are written)")
     a = ap.parse_args(argv)
     try:
-        r = evaluate(a.keys, a.predictions, [s for s in a.sheets.split(",") if s], a.name)
-    except ValueError as e:
+        sources = []
+        r = evaluate(a.keys, a.predictions, [s for s in a.sheets.split(",") if s], a.name, sources)
+        from output_paths import protect_outputs
+        out = Path(a.out)
+        protect_outputs([out.with_suffix(".json"), out.with_suffix(".md")], sources)
+        md = markdown(r)
+        encoded = json.dumps(r, indent=1) + "\n"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.with_suffix(".json").write_text(encoded, encoding="utf-8")
+        out.with_suffix(".md").write_text(md, encoding="utf-8")
+    except (ValueError, OSError) as e:
         print(f"evaluate_vendor: {e}", file=sys.stderr)
         return 1
-    out = Path(a.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    md = markdown(r)
-    out.with_suffix(".json").write_text(json.dumps(r, indent=1) + "\n", encoding="utf-8")
-    out.with_suffix(".md").write_text(md, encoding="utf-8")
     print(md)
     for p in r["missing_or_failed"]:
         print(f"WARNING: {p['run']} sheet {p['sheet']} {p['status']}: scored as an empty answer", file=sys.stderr)

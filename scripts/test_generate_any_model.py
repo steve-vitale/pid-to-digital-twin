@@ -140,6 +140,31 @@ class DrawRefusals(unittest.TestCase):
         return subprocess.run([sys.executable, str(ROOT / "scripts" / "draw_pid_from_model.py"), "--check", *args],
                               capture_output=True, text=True, timeout=300)
 
+    def test_register_inputs_and_generated_siblings_are_checked_before_drawing_publication(self):
+        import draw_pid_from_model as dp
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            model, layout = folder / 'model.json', folder / 'layout.json'
+            model.write_bytes(BAYER.read_bytes())
+            layout.write_bytes((ROOT / 'data/bayer_rt/pid_layout.json').read_bytes())
+            before = {p: p.read_bytes() for p in (model, layout)}
+            for i, target in enumerate((model, layout)):
+                out = folder / f'out-{i}'
+                with self.assertRaisesRegex(ValueError, 'aliases an input'):
+                    dp.generate(model, layout, out, register=target)
+                self.assertFalse(out.exists())
+                self.assertEqual(before, {p: p.read_bytes() for p in before})
+            out = folder / 'siblings'
+            with self.assertRaisesRegex(ValueError, 'files alias each other'):
+                dp.generate(model, layout, out, register=out / 'key.json')
+            self.assertFalse(out.exists())
+            out.mkdir()
+            (out / 'key.json').hardlink_to(model)
+            with self.assertRaisesRegex(ValueError, 'aliases an input'):
+                dp.generate(model, layout, out)
+            self.assertEqual(before, {p: p.read_bytes() for p in before})
+            self.assertEqual(sorted(p.name for p in out.iterdir()), ['key.json'])
+
     def test_missing_files_are_refused(self):
         for flag in ("--model", "--layout"):
             with self.subTest(flag=flag):

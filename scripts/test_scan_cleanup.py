@@ -4,8 +4,12 @@ degraded copy the step removes isolated specks, carries a faded line through a w
 leaves where it stops short of another line (so two networks the drawing keeps apart stay apart). Needs OpenCV and
 numpy (as the tracer does); no model calls, no network."""
 import sys
+import contextlib
+import io
+import json
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import cv2
@@ -69,6 +73,48 @@ class Detect(unittest.TestCase):
 
 
 class Clean(unittest.TestCase):
+    def test_cli_refuses_image_and_native_file_aliases_before_cleaning(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            image = folder / 'source.png'
+            cv2.imwrite(str(image), drawing([((100, 500), (900, 500))], {}))
+            alias = folder / 'alias.png'
+            alias.hardlink_to(image)
+            before = image.read_bytes()
+            for target in (image, alias):
+                with self.subTest(target=target.name), contextlib.redirect_stderr(io.StringIO()) as errors:
+                    with self.assertRaises(SystemExit) as caught:
+                        scl.main([str(image), '--out', str(target), '--clean', 'on'])
+                    self.assertEqual(caught.exception.code, 2)
+                    self.assertIn('aliases an input', errors.getvalue())
+                    self.assertEqual(image.read_bytes(), before)
+            import degrade_scans
+            source = folder / 'batch-L2'
+            source.mkdir()
+            (source / '0.png').write_bytes(before)
+            (source / '0.graphml').write_bytes(b'retain key')
+            with self.assertRaisesRegex(ValueError, 'aliases an input'):
+                degrade_scans.degrade_set(source, ['0'], folder / 'batch')
+            self.assertFalse((folder / 'batch-L1').exists())
+            self.assertEqual((source / '0.png').read_bytes(), before)
+            self.assertEqual((source / '0.graphml').read_bytes(), b'retain key')
+
+    def test_tracing_refuses_source_record_replacement_before_the_batch(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            source = folder / 'same' / 'test' / '0.json'
+            source.parent.mkdir(parents=True)
+            original = json.dumps({'prediction': {'symbols': [], 'connections': []}, 'raw_text': 'retain original'})
+            source.write_text(original, encoding='utf-8')
+            args = ['trace', '--src-label', 'same', '--tool', 'test', '--drawings', '0', '--label', 'same']
+            with mock.patch.object(tc, 'RUNS', folder), mock.patch.object(sys, 'argv', args), \
+                    contextlib.redirect_stderr(io.StringIO()) as errors:
+                with self.assertRaises(SystemExit) as caught:
+                    tc.main()
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn('aliases an input', errors.getvalue())
+            self.assertEqual(source.read_text(encoding='utf-8'), original)
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)

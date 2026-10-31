@@ -1,0 +1,54 @@
+{
+  "id": "source-support-development",
+  "version": "1",
+  "task": "source-support",
+  "protocol": "Fixed supplied claims, bounded project-authored paraphrases, exact key labels. Primary metric correct/expected claims; missing labels stay in denominator. Citations structural; reasoning unscored. Separate coding-agent original-source key frozen before candidate/scorer; public development only.",
+  "registration": "12 fixed claims in two source families, balanced 4 supported/4 contradicted/4 insufficient-evidence. Only synthetic scorer controls; no model trial, raw-document comprehension, useful-question result or plant validation. Paraphrases explicitly scaffold scope/absence distinctions.",
+  "cases": [
+    {
+      "id": "mgpi-source-claims",
+      "family": "csb-mgpi",
+      "split": "development",
+      "evidence": "Independent coding-agent original-source key; fixed claims and explicit paraphrases, exposed development sources; no model trial or human approval",
+      "source_url": "https://www.csb.gov/file.aspx?DocumentId=6047",
+      "license": "Project-derived claims/paraphrases; original attribution retained, originals not redistributed",
+      "key_author": "Separate original-source coding agent; frozen before candidate/scorer, post-hoc development fixture",
+      "files": {
+        "input": {
+          "path": "benchmarks/source-support/mgpi.input.json",
+          "sha256": "2e18d560cd3d10a7b95ec1a0b09c4e3664531d99c317d585680cd0c183385cc0"
+        },
+        "key": {
+          "path": "benchmarks/source-support/mgpi.key.json",
+          "sha256": "53ac5896121b31194a5d5841a32524633a8faebefb9a0405966877309bc9d5da"
+        }
+      }
+    },
+    {
+      "id": "nist-source-claims",
+      "family": "nist-smstestbed",
+      "split": "development",
+      "evidence": "Independent coding-agent original-source key; fixed claims and explicit paraphrases, exposed development sources; no model trial or human approval",
+      "source_url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml",
+      "license": "Project-derived claims/paraphrases; original attribution retained, originals not redistributed",
+      "key_author": "Separate original-source coding agent; frozen before candidate/scorer, post-hoc development fixture",
+      "files": {
+        "input": {
+          "path": "benchmarks/source-support/nist.input.json",
+          "sha256": "364f4dff9b9cbf7ece673b113ce002fccfba8962e535910726c9dbe4fd4af868"
+        },
+        "key": {
+          "path": "benchmarks/source-support/nist.key.json",
+          "sha256": "6f2c0f733cddd938be7072b00951d281ce586243ded7417b674d69e1a54d8804"
+        }
+      }
+    }
+  ],
+  "runs": [
+    "benchmarks/runs/source-support-reference.json",
+    "benchmarks/runs/source-support-empty.json",
+    "benchmarks/runs/source-support-all-supported.json",
+    "benchmarks/runs/source-support-all-contradicted.json",
+    "benchmarks/runs/source-support-all-insufficient.json"
+  ]
+}

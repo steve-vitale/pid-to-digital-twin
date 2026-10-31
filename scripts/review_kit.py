@@ -45,7 +45,39 @@ def read_queue(path):
         return reader.fieldnames, list(reader)
 
 
-def make(twin, sheet, out, drawing_dir):
+def require_unstarted_kit(out, sheet, targets):
+    """Permit explicit refresh only while every original packet/protocol/timer file is untouched."""
+    refusal = "review kit has edits, history or incomplete files; retain it and choose a new output folder"
+    if not all(p.is_file() and not p.is_symlink() for p in targets):
+        raise ValueError(refusal)
+    if any(p.name not in {x.name for x in targets} | {"README.md"} for p in out.iterdir()):
+        raise ValueError(refusal)
+    manifest = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    expected = {f"review_queue_sheet{sheet}.csv", f"drawing_sheet{sheet}.png",
+                f"extracted_overlay_sheet{sheet}.svg"}
+    if not isinstance(manifest, dict) or \
+            set(manifest) != {"sheet", "source_twin", "rows", "tiers", "item_types", "files", "source_bundle_sha256"} or \
+            manifest["sheet"] != str(sheet) or not isinstance(manifest["files"], dict) or \
+            set(manifest["files"]) != expected or \
+            any(sha(out / name) != digest for name, digest in manifest["files"].items()):
+        raise ValueError(refusal)
+    bundle = hashlib.sha256(json.dumps(manifest["files"], sort_keys=True).encode()).hexdigest()
+    timer = (out / "timer_log.csv").read_bytes().replace(b"\r\n", b"\n")
+    protocol = (out / "protocol_draft.json").read_bytes().replace(b"\r\n", b"\n")
+    _, rows = read_queue(out / f"review_queue_sheet{sheet}.csv")
+    if not all(isinstance(r.get("item_type"), str) for r in rows):
+        raise ValueError(refusal)
+    tiers = {t: sum(1 for r in rows if r.get("tier") == t) for t in ("red", "amber", "green")}
+    kinds = {t: sum(1 for r in rows if r.get("item_type") == t) for t in sorted({r.get("item_type") for r in rows})}
+    if manifest["source_bundle_sha256"] != bundle or manifest["rows"] != len(rows) or \
+            manifest["tiers"] != tiers or manifest["item_types"] != kinds or \
+            any(r.get(c) for r in rows for c in OPS_COLUMNS) or \
+            timer != (",".join(TIMER_FIELDS) + "\n").encode() or \
+            protocol != json.dumps(protocol_draft(sheet, manifest), indent=1).encode():
+        raise ValueError(refusal)
+
+
+def make(twin, sheet, out, drawing_dir, refresh_unstarted=False):
     twin, out = Path(twin), Path(out)
     fields, rows = read_queue(twin / "review_queue.csv")
     mine = [r for r in rows if r.get("sheet") == str(sheet)]
@@ -54,6 +86,17 @@ def make(twin, sheet, out, drawing_dir):
     for r in mine:
         for c in OPS_COLUMNS:
             r[c] = ""
+    from output_paths import protect_outputs
+    targets = [out / name for name in (f"review_queue_sheet{sheet}.csv", f"drawing_sheet{sheet}.png",
+                                       f"extracted_overlay_sheet{sheet}.svg", "timer_log.csv",
+                                       "manifest.json", "protocol_draft.json")]
+    protect_outputs(targets,
+                    [twin / "review_queue.csv", Path(drawing_dir) / f"{sheet}.png",
+                     twin / "svg" / f"sheet_{sheet}.svg"])
+    if any(path.exists() or path.is_symlink() for path in targets):
+        if not refresh_unstarted:
+            raise ValueError("review kit files already exist; retain review/timer history and choose a new output folder")
+        require_unstarted_kit(out, sheet, targets)
     out.mkdir(parents=True, exist_ok=True)
     queue = out / f"review_queue_sheet{sheet}.csv"
     with open(queue, "w", encoding="utf-8", newline="") as f:
@@ -204,6 +247,8 @@ def main(argv=None):
     m.add_argument("--twin", default="out/twin/r2-tiles-trace/codex")
     m.add_argument("--sheet", default="8")
     m.add_argument("--out", required=True)
+    m.add_argument("--refresh-unstarted", action="store_true",
+                   help="refresh only an intact kit with its original blank queue, draft protocol and empty timer")
     m.add_argument("--drawings", default="data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100")
     t = sub.add_parser("timer")
     t.add_argument("event", choices=EVENTS)
@@ -216,7 +261,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     try:
         if a.cmd == "make":
-            print(json.dumps(make(ROOT / a.twin, a.sheet, ROOT / a.out, ROOT / a.drawings), indent=1))
+            print(json.dumps(make(ROOT / a.twin, a.sheet, ROOT / a.out, ROOT / a.drawings,
+                                  refresh_unstarted=a.refresh_unstarted), indent=1))
         elif a.cmd == "timer":
             print(f"{a.event} at {timer(a.kit, a.event, a.reviewer, a.note)}")
         else:

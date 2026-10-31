@@ -7,6 +7,7 @@
   "research": "This project's research record: reproduces one result, not built for other inputs"
  },
  "scripts": {
+  "scripts/source_support.py": {"kind": "support", "guide": "benchmarks/README.md"},
   "scripts/benchmark.py": {"kind": "tool", "guide": "CONTRIBUTING.md"},
   "scripts/description_workflow.py": {"kind": "tool", "guide": "examples/from-description/README.md"},
   "scripts/serve_snapshot.py": {"kind": "tool", "guide": "examples/internal-mcp/README.md"},

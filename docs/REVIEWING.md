@@ -77,6 +77,13 @@ hands rather than from anyone's claim. What it isn't: a study. One reviewer on o
 [REVIEW_EFFORT_PROTOCOL.md](REVIEW_EFFORT_PROTOCOL.md) is the full design, with a manual baseline and an independent
 audit.
 
+Keep the working kit, filled sheet and timer log together. `review_kit.py make` requires new kit output files;
+it refuses an existing kit by default. The pipeline explicitly uses `--refresh-unstarted` to rebuild only an
+intact original packet with a blank queue, unchanged draft protocol and empty timer. Edited, started,
+incomplete packets or unexpected extra files refuse before writing; the retained README is allowed.
+Use a new folder for another exercise and retain
+the earlier packet. These local integrity checks do not authenticate an approval or lock out concurrent edits.
+
 If you do run it and want to share the result, open an issue with your timer log and filled sheet (use a
 pseudonymous reviewer id such as R1, never your name). Not required.
 

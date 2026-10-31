@@ -9,9 +9,28 @@ There is no universal best-model score.
 
 | Task | What is scored | Current evidence | Results |
 |---|---|---|---|
-| `drawing-extraction`, `pid2graph-v1` | Rough/strict six-class symbol F1 and asset-network F1 using the unchanged scorer | Existing five replicates each for Claude and Codex on six OPEN100 validation drawings. The method includes tiling and deterministic tracing. This is retrospective registration of saved runs; validation also informed method selection. | [Model comparison](results/open100-validation-report-clarified.md), [JSON](results/open100-validation-report-clarified.json), [suite](open100-validation.json) |
-| `description-facts`, `native-facts-v1` | Literal selected equipment/type, stream endpoints, instrument/valve placement and controller relations against explicit fact atoms | Two authored synthetic cases with reference, empty and wrong-endpoint controls. Keys come from those same references. **Scorer development only: no AI interpretation benchmark.** | [Scorer controls](results/description-controls.md), [JSON](results/description-controls.json), [suite](description-controls.json) |
-| `description-facts`, `native-facts-v1`, source review | The same selected fields against separately prepared original-source keys | [MGPI source-adapted development case](../examples/from-description/mgpi/README.md), with retained unsupported initial adaptation and an explicit source/key expansion. No held-out or original-text model trial. A planted false-shutdown claim still scores perfectly and exposes a scorer blindspot. | [Development artifacts and controls](results/mgpi-development.md), [suite](mgpi-development.json) |
+| `drawing-extraction`, `pid2graph-v1` | Rough/strict six-class symbol F1 and asset-network F1 using the unchanged scorer | Existing five replicates each for Claude and Codex on six OPEN100 validation drawings. The method includes tiling and deterministic tracing. This is retrospective registration of saved runs; validation also informed method selection. | [Model comparison](results/open100-validation-report-clarified-source-preserved.md), [JSON](results/open100-validation-report-clarified-source-preserved.json), [suite](open100-validation.json) |
+| `description-facts`, `native-facts-v1` | Literal selected equipment/type, stream endpoints, instrument/valve placement and controller relations against explicit fact atoms | Two authored synthetic cases with reference, empty and wrong-endpoint controls. Keys come from those same references. **Scorer development only: no AI interpretation benchmark.** | [Scorer controls](results/description-controls-source-preserved.md), [JSON](results/description-controls-source-preserved.json), [suite](description-controls.json) |
+| `description-facts`, `native-facts-v1`, source review | The same selected fields against separately prepared original-source keys | [MGPI source-adapted development case](../examples/from-description/mgpi/README.md), with retained unsupported initial adaptation and an explicit source/key expansion. No held-out or original-text model trial. A planted false-shutdown claim still scores perfectly and exposes a scorer blindspot. | [Development artifacts and controls](results/mgpi-development-source-preserved.md), [suite](mgpi-development.json) |
+| `source-support`, `claim-judgments-v1` | Labels for fixed supplied claims against a bounded key; missing claims stay in the accuracy denominator | Twelve MGPI/NIST development claims using explicit project paraphrases. Synthetic scorer controls only; reasons and source validity unscored. | [Control results](results/source-support-development.md), [suite](source-support-development.json) |
+
+The third adapter, `source-support` / `claim-judgments-v1`, grades **fixed supplied claims** as supported,
+contradicted or insufficient-evidence. Its [development suite](source-support-development.json) has twelve
+claims, six each from MGPI and NIST, balanced four per label. A separate coding agent froze the original-source
+key before candidate/scorer work. The public packets are project-authored paraphrases that explicitly scaffold
+scope and absence distinctions; they are not original-document comprehension inputs or a blind evaluation.
+The [prompt](source-support/prompt.md), [full review key](source-support/review_key.json),
+[source inventory](source-support/source_inventory.json) and [projection receipt](source-support/KEY_PROVENANCE.json)
+retain dates, locators and multi-source joins. Source hashes are declared metadata; this scorer does not fetch
+or revalidate the original files.
+
+[Results](results/source-support-development.md) show synthetic controls only: reference 12/12, empty 0/12,
+and each uniform-label control 4/12. These validate scorer behavior, not model capability. Primary accuracy is
+correct/expected claims; missing decisions remain in the denominator. Per-label F1 is diagnostic and can differ
+from accuracy on incomplete answers. Citation IDs must be admitted and reasons nonempty, but **reason quality
+and whether a citation supports a claim are unscored**. Readable partial answers can have status `ok`; that means
+scored, not complete or reviewed. This adds no automatic claim discovery, useful-question score, question rule,
+current plant truth or human acceptance. Preserve genuine model attempts separately from these controls.
 
 Drawing cases pair a PNG input with a PID2Graph GraphML key; answers use `symbols`/`connections` or the existing
 saved prediction envelope. Description cases pair UTF-8 source text, a JSON `facts` key and an expected native
@@ -38,7 +57,7 @@ provides separate structure/quotation/drawing checks; those are not substituted 
 | Historian analysis and impact estimates | Separate public-data matrix runs and calculation tests | Labelled detection conditions, false alarms, measurement uncertainty and calculation truth; distinguish deterministic methods from AI models |
 | MCP, maintenance and other integrations | Bounded protocol/feature tests and selected lab acceptance | Task-specific retrieval/coverage and compatibility tests; no performance claim about an untested company deployment |
 
-These rows identify work to add. Only the two task adapters above are implemented in this runner; every feature
+These rows identify work to add. Only the three task adapters above are implemented in this runner; every feature
 does not yet have a generalization benchmark. New tasks require a tested evaluator contract and known-answer
 controls, rather than importing an arbitrary score column into a leaderboard. See the full
 [feature inventory](../docs/FEATURES.md) and [eight-workflow matrix](../docs/GENERALIZATION.md).
@@ -70,13 +89,12 @@ the corpus. This makes improvements inspectable and keeps failures useful to the
 
 ## Report implementation revisions
 
-The current drawing report was re-scored offline after correcting the vendor-report interpretation. Counts,
-metrics, controls, source/key/prediction/recipe bindings and model declarations are unchanged. The evaluator
-module is part of the implementation fingerprint, so its wording edit produces new cohort and group identities.
-That is an implementation revision, not a new model trial or performance improvement.
+The registry selects new offline scores of the three earlier suites after the source-preservation and
+fixed-claim adapter edits. Counts, metrics, controls, source/key/prediction/recipe bindings and model declarations
+are unchanged. Implementation fingerprints and cohort/group identities change because the evaluator changed;
+these are not new model trials or performance improvements.
 
-The [original drawing JSON](results/open100-validation.json) and [Markdown](results/open100-validation.md) remain
-unchanged as historical snapshots of the implementation at commit `283146fbfff512b6fe7b5281967a8e04fa18ec62`.
-They are outside the current registry and will not byte-reproduce under the changed implementation. All four
-description-report files remain unchanged and current. Do not replace an older report's fingerprints by hand;
-retain it, re-score the saved answers into a new prefix, and declare the new snapshot in the registry.
+All eight earlier JSON/Markdown files remain byte-identical historical snapshots, including the earlier
+vendor-interpretation revision. They are outside the current registry and do not byte-reproduce under the
+changed implementation. The source-preserved report pairs are actual re-scores, not hand-rehashed receipts.
+Retain previous reports and register a new prefix whenever the implementation changes.

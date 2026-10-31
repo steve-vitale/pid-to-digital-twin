@@ -1513,9 +1513,18 @@ def run(xml, out, sheet_id=None, png=None, attribution=None, compare=None, quiet
                "image": image, "extraction": pp.name, "extraction_format": "prediction", "producer": PRODUCER,
                "drawing_number": Path(xml).stem, "system_name": model["meta"]["title"][:200]}
         pending[f"{sid}.intake-manifest.json"] = json.dumps(man, indent=1) + "\n"
-    sources = {Path(xml).resolve()} | ({Path(png).resolve()} if png else set())
-    if any((out / name).resolve() in sources for name in pending):
-        raise DexpiError("generated output overlaps a source; use a new output folder")
+    from output_paths import protect_outputs
+    sources = [xml, png]
+    if compare:
+        sources.extend(Path(compare) / f"{sid}.{ext}" for ext in ('graphml', 'tags.json'))
+    retained = out / image if pred is not None else None
+    if retained is not None and retained.exists():
+        sources.append(retained)
+    try:
+        protect_outputs([*(out / name for name in pending),
+                         *([retained] if retained is not None and not retained.exists() else [])], sources)
+    except ValueError as exc:
+        raise DexpiError(str(exc)) from exc
     if pred is not None:
         try:
             D.retain_intake_image(png, out, sid, pred["source"]["image_sha256"])

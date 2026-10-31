@@ -70,8 +70,17 @@ def degrade(img, p, rng):
     return out
 
 
+def preflight(src, drawings, destinations, extra_outputs=()):
+    from output_paths import protect_outputs
+    sources = [Path(src) / f"{d}.{ext}" for d in drawings for ext in ("png", "graphml")]
+    outputs = [Path(dest) / f"{d}.{ext}" for dest in destinations for d in drawings for ext in ("png", "graphml")]
+    protect_outputs([*outputs, *extra_outputs], sources)
+
+
 def degrade_set(src, drawings, dest_prefix):
     """The same levels and per-drawing seeds for any folder of <id>.png + <id>.graphml (ids must be integers)."""
+    drawings = list(drawings)
+    preflight(src, drawings, [Path(f"{dest_prefix}-L{level}") for level in LEVELS])
     for level, p in LEVELS.items():
         dest = Path(f"{dest_prefix}-L{level}")
         dest.mkdir(parents=True, exist_ok=True)
@@ -90,8 +99,18 @@ def main():
     ap.add_argument("--dest", default=None, help="output prefix; level folders are <dest>-L1..L3")
     a = ap.parse_args()
     if a.src:
-        degrade_set(ROOT / a.src, [x for x in a.drawings.split(",") if x], ROOT / a.dest)
+        if not a.dest:
+            ap.error("--src requires --dest")
+        try:
+            degrade_set(ROOT / a.src, [x for x in a.drawings.split(",") if x], ROOT / a.dest)
+        except ValueError as exc:
+            ap.exit(2, f"refused: {exc}\n")
         return
+    try:
+        preflight(SRC, DRAWINGS, [COMPLETE / f"PID2Graph OPEN100 scan-L{level}" for level in LEVELS],
+                  [ROOT / "docs/screenshots/scan-levels.png"])
+    except ValueError as exc:
+        ap.exit(2, f"refused: {exc}\n")
     crops = []
     for level, p in LEVELS.items():
         dest = COMPLETE / f"PID2Graph OPEN100 scan-L{level}"

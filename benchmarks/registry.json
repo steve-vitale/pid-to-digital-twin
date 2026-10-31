@@ -3,15 +3,19 @@
   "reports": [
     {
       "suite": "benchmarks/open100-validation.json",
-      "report": "benchmarks/results/open100-validation-report-clarified"
+      "report": "benchmarks/results/open100-validation-report-clarified-source-preserved"
     },
     {
       "suite": "benchmarks/description-controls.json",
-      "report": "benchmarks/results/description-controls"
+      "report": "benchmarks/results/description-controls-source-preserved"
     },
     {
       "suite": "benchmarks/mgpi-development.json",
-      "report": "benchmarks/results/mgpi-development"
+      "report": "benchmarks/results/mgpi-development-source-preserved"
+    },
+    {
+      "suite": "benchmarks/source-support-development.json",
+      "report": "benchmarks/results/source-support-development"
     }
   ]
 }

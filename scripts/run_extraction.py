@@ -296,7 +296,8 @@ def main():
         image = DATA / f"{d}.png"
         out_path = RUNS / a.label / a.tool / f"{d}.json"
         if out_path.exists():
-            print(f"skip {a.tool} drawing {d}: already run ({out_path.relative_to(ROOT)})")
+            shown = out_path.relative_to(ROOT) if out_path.is_relative_to(ROOT) else Path(out_path.parent.name) / out_path.name
+            print(f"skip {a.tool} drawing {d}: already run ({shown})")
             continue
         t0, extra_s = time.time(), 0
         if a.tiles:

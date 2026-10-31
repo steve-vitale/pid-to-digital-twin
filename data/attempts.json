@@ -3597,6 +3597,53 @@
         "examples/vendor-evaluation/README.md",
         "benchmarks/README.md#report-implementation-revisions"
       ]
+    },
+    {
+      "id": "A242",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Audit current delivery state, distinguish unfinished source-support work from the released evaluator, and reproduce three additional source-output collisions on disposable copies.",
+      "hypothesis": "Passing example reviews and structure checks do not establish complete workflows or preservation by every output writer; actual CLI probes can expose remaining defects.",
+      "evidence": "Drawing intake/report/questions and an authored description build succeed. A false-shutdown control passes structure/five quotations, scores27/27 selected facts and emits0questions. Report, loop-audit and line-enrichment CLIs each return0 while overwriting a copied consumed input; all originals remain unchanged. Exact released evaluator/dependencies reproduce all three registered suites; the modified local evaluator makes current snapshots stale. No repair or usefulness improvement is inferred.",
+      "runs": "Offline implementation/contract audit, actual CLI positive and destructive-copy controls, repository checks and saved-answer re-scoring; no new model or company trial.",
+      "verdict": "kept",
+      "why": "Record N069 as open and prioritize source preservation, a bounded useful investigation and semantic evaluation before more corpus or integration scope. Company governance/execution remain external.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "docs/JOURNAL.md#108-audit-delivery-state-and-remaining-source-output-writers"
+      ]
+    },
+    {
+      "id": "A243",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Repair the fourteen additional source-output writers found by N069, refuse review-kit history reset and repair the external extraction-record skip path.",
+      "hypothesis": "Complete preflight over active inputs, outputs and retired files can preserve source/companion bytes without changing ordinary artifacts or intentional model updates.",
+      "evidence": "Independent actual CLI probes reproduce twelve additional failure scenarios before repair and refuse them afterward;64 initial report/loop/line probes and nine advanced writer cases pass. Ordinary-output comparisons agree except generator fingerprints. Review-kit history and external skip controls pass. Actual saved-prediction re-score reproduces30tables with5gaps. Eleven offline generation commands across7stages run;5historical renewals explicitly do not repeat models, including3stages with no bound outputs.At the initial generation-refresh checkpoint,493of497 archived artifact bytes remain unchanged; four changes are pipeline metadata and generator hashes.",
+      "runs": "Offline copied-input preservation probes, bounded implementation review, regression controls, actual artifact regeneration and independent lineage review; no model or native-runtime execution.",
+      "verdict": "kept",
+      "why": "Close bounded N069 collisions while retaining intentional model-in-place updates, historical evidence and stable-local-file limitations. No transactional/concurrent-write or plant correctness guarantee.",
+      "source": [
+        "docs/JOURNAL.md#109-preserve-sources-across-the-remaining-output-writers",
+        "docs/DATA_LINEAGE.md",
+        "docs/REVIEWING.md"
+      ]
+    },
+    {
+      "id": "A244",
+      "function": "scoring",
+      "date": "2026-10-30",
+      "change": "Add a fixed-claim label scorer and two source-family development packets, with a qualified manual MGPI first-question brief.",
+      "hypothesis": "A separate support/contradiction/insufficient-evidence contract can expose mistakes outside selected model fields while keeping source reasoning and useful questions distinct.",
+      "evidence": "Independent original-source key frozen before scorer/candidate:12claims in MGPI and NIST,4perlabel. Public projection preserves timestamps and multi-source joins. Synthetic reference12/12,empty0/12,uniformcontrols4/12; no model attempt. Missing claims remain in accuracy denominator; wrong nonempty reasons can still earn perfect labels. Three prior suites actually re-scored to new prefixes with substantive values unchanged and eight original files retained. MGPI manual brief retains historical-only answer, current-state unknowns and unassigned owner; question-engine findings remain0.",
+      "runs": "Development scorer controls, independent projection/refusal checks and offline saved-answer scoring; no unfamiliar-description/model/customer trial.",
+      "verdict": "kept",
+      "why": "Add an explicit bounded evaluation contract without claiming original-document comprehension, automated source verification, question usefulness or company acceptance. N065 remains open.",
+      "source": [
+        "docs/JOURNAL.md#110-separate-fixed-claim-judgments-from-useful-questions",
+        "benchmarks/README.md",
+        "examples/from-description/mgpi/first-question.md"
+      ]
     }
   ],
   "not_tried": [
@@ -4311,6 +4358,18 @@
         "docs/STATUS.md#known-defects",
         "examples/vendor-evaluation/README.md",
         "docs/JOURNAL.md#107-correct-vendor-report-interpretation-without-changing-its-scores"
+      ]
+    },
+    {
+      "id": "N069",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Repair reproduced input-output collisions in deliverable_report.py, loop_audit.py and line_layers.py; inspect remaining user-facing writers before claiming repository-wide source preservation.",
+      "why_not_yet": "Completed 2026-10-30 for fourteen inspected writers: active inputs, companion outputs and retirement targets preflighted; actual alias/refusal controls preserve bytes. Intentional review/mapping/model-in-place updates retained. Review-kit history reset also refused; the pipeline explicitly refreshes only an intact blank kit after hashes, decisions, timer and draft-protocol checks. This is stable-local-file preflight, not transactional publication, concurrent-writer locking or a guarantee for every research script.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "docs/JOURNAL.md#108-audit-delivery-state-and-remaining-source-output-writers",
+        "docs/JOURNAL.md#109-preserve-sources-across-the-remaining-output-writers"
       ]
     }
   ]

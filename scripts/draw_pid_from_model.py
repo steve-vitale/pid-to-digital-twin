@@ -1022,6 +1022,10 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
     if not write:
         return sheets
     out_dir = Path(out_dir)
+    reg = Path(register) if register else out_dir / "sheet_register.csv"
+    from output_paths import protect_outputs
+    targets = [out_dir / f"{sh.spec['id']}.{ext}" for sh in sheets for ext in ("png", "svg", "graphml")]
+    protect_outputs([*targets, out_dir / "key.json", out_dir / "manifest.json", reg], [model_path, layout_path])
     out_dir.mkdir(parents=True, exist_ok=True)
     key = {"about": "Answer key emitted by scripts/draw_pid_from_model.py from the same model that drew the sheets. "
                     "Scoring against it is a ROUND TRIP: it measures how faithfully a reader recovers our own "
@@ -1047,7 +1051,6 @@ def generate(model_path, layout_path, out_dir, write=True, register=None):
     (out_dir / "key.json").write_text(json.dumps(key, indent=1), encoding="utf-8")
     manifest["files"]["key.json"] = sha_file(out_dir / "key.json")
     (out_dir / "manifest.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
-    reg = Path(register) if register else out_dir / "sheet_register.csv"
     reg.write_text(layout.get("register_header", "# Drawing register for the generated Tennessee Eastman sheets "
                                                  "(scripts/draw_pid_from_model.py).") + "\n"
                    "# Read from each sheet's title block, as a plant would supply from its drawing index.\n"

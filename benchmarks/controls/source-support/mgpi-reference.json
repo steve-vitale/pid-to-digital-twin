@@ -1,0 +1,53 @@
+{
+  "schema": "source-support-answer-1",
+  "decisions": [
+    {
+      "id": "SJ001",
+      "judgment": "supported",
+      "evidence_ids": [
+        "E01"
+      ],
+      "reason": "Both the outdoor bulk-storage facts and the downstream indoor day-tank step are stated in the admitted process narrative."
+    },
+    {
+      "id": "SJ002",
+      "judgment": "supported",
+      "evidence_ids": [
+        "E02"
+      ],
+      "reason": "The reported alarm activation and time are explicit. Support is for the report account, not independent telemetry reconstruction."
+    },
+    {
+      "id": "SJ003",
+      "judgment": "contradicted",
+      "evidence_ids": [
+        "E02"
+      ],
+      "reason": "The source explicitly says the alarm only notified operators and was not configured to stop transfer automatically. This is a direct opposite, not an inference from silence."
+    },
+    {
+      "id": "SJ004",
+      "judgment": "contradicted",
+      "evidence_ids": [
+        "E03"
+      ],
+      "reason": "The report explicitly excludes this unloading-to-bulk path from the stop capability and says the unloading area lacked remote shutdown capability. A bulk-to-day-tank stop does not cover that endpoint."
+    },
+    {
+      "id": "SJ005",
+      "judgment": "insufficient-evidence",
+      "evidence_ids": [
+        "E02"
+      ],
+      "reason": "The admitted report describes a historical configuration. No 2026 inspection, change history or current control configuration is admitted. The old condition neither establishes nor contradicts the present condition."
+    },
+    {
+      "id": "SJ006",
+      "judgment": "insufficient-evidence",
+      "evidence_ids": [
+        "E04"
+      ],
+      "reason": "The bounded narrative does not inventory all instruments or explicitly address a pH sensor. Lack of mention cannot establish its absence. Lack of an automatic shutdown is not lack of every sensor."
+    }
+  ]
+}

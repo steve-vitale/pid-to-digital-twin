@@ -23,7 +23,7 @@ and adds that one placement fact. It retains V1 unchanged. **The source/key chan
 | [V2 inventory](v2/source_inventory.json), [V2 fact key](v2/facts.json) | Explicitly enlarged original-source scope and key, with the added locator and exact difference recorded. |
 | [source.txt](source.txt), [expanded-source model](model-expanded-source.json), [answer.json](answer.json) | Current source-adapted development draft; layout is authored separately from the initial model freeze. All tags are project aliases. |
 | [HYP draft](result/pid/HYP.png), [ACID draft](result/pid/ACID.png), [graph](result/graph.json), [review](result/REVIEW.md) | Actual built outputs. Geometry and size/spec fields are proposed; platform files are staging. No plant-system acceptance is established. |
-| [Protocol](protocol.json), [registered results](../../../benchmarks/results/mgpi-development.md) | Exposure, source revisions, selected scoring scope and planted controls. Recorded model identity/settings are incomplete, so these are development artifacts rather than provider model comparisons. |
+| [Protocol](protocol.json), [registered results](../../../benchmarks/results/mgpi-development-source-preserved.md) | Exposure, source revisions, selected scoring scope and planted controls. Recorded model identity/settings are incomplete, so these are development artifacts rather than provider model comparisons. |
 
 `BL` denotes a scope boundary. The two chemistry paths do not share a physical junction, and the unspecified acid
 destination must not be equated with `HYPO_PROCESS`. The graph uses the existing single `BL` boundary node; do not
@@ -67,7 +67,14 @@ level alarm stop unloading, or only notify operators?** The selected historical 
 only. Installed-state evidence, present-day protections, numerical settings, complete controls, responsible
 owners and accepted decisions are outside this example. Carry the question, source revision, qualification and
 next owner through a private [first-question brief](../../first-pilot/pilot-brief.md) into the company's maintained
-information and decision system. No company handoff has occurred here.
+information and decision system. The [worked draft](first-question.md) shows the qualified answer, missing
+installed-state evidence and unassigned recipient. No company handoff has occurred here.
+
+The separate [fixed-claim label exercise](../../../benchmarks/results/source-support-development.md) includes the
+false automatic-shutdown claim and historical/current distinctions. Its twelve supplied claims across MGPI and
+NIST use explicit project paraphrases and a separately frozen agent-authored key. Results are synthetic scorer
+controls, not model trials, raw-report comprehension or a useful-question benchmark. The fact scorer and
+question-engine catalog remain unchanged.
 
 ## Check the original source
 

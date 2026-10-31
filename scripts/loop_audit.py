@@ -58,6 +58,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from output_paths import protect_outputs
 
 ROOT = Path(__file__).resolve().parent.parent
 REQUIRED = ("controller", "measurement", "output")
@@ -355,13 +356,16 @@ def main(argv=None):
     args = ap.parse_args(argv)
     try:
         result = run(args.loops, args.drawing)
-    except (InputError, OSError) as exc:
+        md, js = args.out.with_suffix(".md"), args.out.with_suffix(".json")
+        protect_outputs([md, js], [args.loops, args.drawing])
+        text = markdown(result)
+        encoded = json.dumps(result, indent=1) + "\n"
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        md.write_text(text, encoding="utf-8", newline="\n")
+        js.write_text(encoded, encoding="utf-8", newline="\n")
+    except (InputError, OSError, ValueError) as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 2
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    md, js = args.out.with_suffix(".md"), args.out.with_suffix(".json")
-    md.write_text(markdown(result), encoding="utf-8", newline="\n")
-    js.write_text(json.dumps(result, indent=1) + "\n", encoding="utf-8", newline="\n")
     print(f"{headline(result)}; report {md} and {js.name}")
     return 0
 

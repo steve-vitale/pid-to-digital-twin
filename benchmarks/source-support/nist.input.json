@@ -1,0 +1,198 @@
+{
+  "schema": "source-support-input-1",
+  "fixture_id": "original-source-judgment-dev-20261030-v1-nist",
+  "task": "Classify candidate engineering claims against bounded admitted original-source evidence.",
+  "labels": [
+    "supported",
+    "contradicted",
+    "insufficient-evidence"
+  ],
+  "instructions": [
+    "Judge evidence support, not whether an installation is safe or engineering-approved.",
+    "Supported requires evidence for all material parts at the claimed entity, time and configuration scope.",
+    "Contradicted requires an explicit incompatible fact for that same scope; a missing statement alone is insufficient-evidence.",
+    "Use insufficient-evidence if admitted sources leave the claim unresolved. Historical truth does not establish current installed truth.",
+    "Alarm/notification, automatic action and remote action have distinct meanings and endpoints.",
+    "Keep source literals, unavailable values, zero, blank fields, document revisions and individual timestamps distinct.",
+    "Do not infer deployment history, job execution or physical condition from publication metadata or filenames.",
+    "Use only each item's admitted evidence IDs and the source identity/time metadata; do not use external knowledge or other items's evidence."
+  ],
+  "expected_response": {
+    "schema": "source-support-answer-1",
+    "decisions": [
+      {
+        "id": "<item id>",
+        "judgment": "<one permitted label>",
+        "evidence_ids": [
+          "<admitted evidence id>"
+        ],
+        "reason": "<brief reason>"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "id": "E05",
+      "source_ids": [
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "2016 Devices.xml physical lines 691-692; 2017 Devices.xml physical lines 463-464; Device element and Description.",
+      "paraphrase": "Both pinned XML versions give the device name and id as Hurco04 and UUID as mtc_adapter008; the Description identifies manufacturer Hurco and model VMX24.",
+      "time_scope": "Comparison of the two published git versions, not deployed revision or live identity verification."
+    },
+    {
+      "id": "E06",
+      "source_ids": [
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "2016 Devices.xml physical line 724; 2017 Devices.xml physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7'].",
+      "paraphrase": "In the older XML, Hurco04-path_7 is named current_tool and typed TOOL_NUMBER. In the later XML, that same id string is named Program_Runtime_Seconds and typed ACCUMULATED_TIME, with SECOND units.",
+      "time_scope": "Different published historical document revisions; their definitions are not simultaneous readings."
+    },
+    {
+      "id": "E07",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Archived raw log physical lines 3 and 34, preserving each timestamp, item and value.",
+      "paraphrase": "At 2017-02-14T16:12:54.968217Z the Spindle_Speed value is the literal UNAVAILABLE. At 2017-02-17T09:18:51.4531250Z the Spindle_Speed value is numeric 0. These are separate records with different timestamps and different literal values.",
+      "time_scope": "Only the two archived samples at their exact timestamps; no inferred interpolation."
+    },
+    {
+      "id": "E08",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Source filename Hurco04-20170217-20170218.txt and physical line 3.",
+      "paraphrase": "Despite the date strings in its filename, this archive includes a Spindle_Speed record timestamped 2017-02-14T16:12:54.968217Z, whose value is UNAVAILABLE.",
+      "time_scope": "An included timestamp predating February 17, 2017; no filename-derived completeness claim."
+    },
+    {
+      "id": "E09",
+      "source_ids": [
+        "SMS-RAW",
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "All 363 raw physical lines inspected for field format; example line 81; paired XML identities at 2016 lines 691-692 and 2017 lines 463-464.",
+      "paraphrase": "Each raw line has timestamp, item name and value separated by vertical bars; no deployed-configuration revision field appears. Line 81 records Spindle_Speed as 1000.000000 at 2017-02-17T09:26:08.0468750Z. The two published XML files share machine identity, but neither supplies deployment history for this log.",
+      "time_scope": "Historical archive and two published XML revisions; no installation or deployment record admitted."
+    },
+    {
+      "id": "E10",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Raw physical lines 37, 45 and 359, preserving the single-space program name value at line 37.",
+      "paraphrase": "At 2017-02-17T09:18:51.4531250Z Program_Name_Running contains one space, and Program_Status is READY. At 2017-02-17T09:40:46.755688Z Program_Status is UNAVAILABLE. None of these records names a production job or documents continuous execution.",
+      "time_scope": "The specific archived observations only; no complete production-state timeline."
+    }
+  ],
+  "sources": [
+    {
+      "id": "SMS-DEV-2016",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/2016/Devices.xml",
+      "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "title": "NIST SMS Hurco04 device configuration, 2016-10-06 commit",
+      "identity": "Official usnistgov/smstestbed mtconnect/agent/Devices.xml at git 1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml",
+      "time_scope": "Published historical configuration at the pinned git revision; not a deployment or live machine record.",
+      "admitted_scope": "Physical lines 691-692 and 724 only.",
+      "bytes": 61363,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    },
+    {
+      "id": "SMS-DEV-2017",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/2017/Devices.xml",
+      "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "title": "NIST SMS later Hurco04 device configuration, last changed 2017-07-11",
+      "identity": "Official usnistgov/smstestbed mtconnect/agent/Devices.xml at git 968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/mtconnect/agent/Devices.xml",
+      "time_scope": "Published historical configuration at the pinned git revision; not evidence this revision was deployed for the February log.",
+      "admitted_scope": "Physical lines 463-464 and 496 only.",
+      "bytes": 39450,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    },
+    {
+      "id": "SMS-RAW",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/raw/Hurco04-20170217-20170218.txt",
+      "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "title": "NIST SMS archived Hurco04 raw operating log",
+      "identity": "Official usnistgov/smstestbed raw/Hurco04/Hurco04-20170217-20170218.txt at git 968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/raw/Hurco04/Hurco04-20170217-20170218.txt",
+      "time_scope": "Exact timestamps in individual archived records. Filename is not a guarantee of temporal bounds or complete coverage.",
+      "admitted_scope": "Physical lines 3, 34, 37, 45, 81, 359, plus inspection of the three-field format of all 363 lines solely for the absent deployed-revision field.",
+      "bytes": 17314,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    }
+  ],
+  "items": [
+    {
+      "id": "SJ007",
+      "family": "nist-smstestbed",
+      "candidate_claim": "The two pinned XML configurations publish the same Hurco04 device UUID, mtc_adapter008.",
+      "claim_time_scope": "Comparison of the two exact published historical XML revisions.",
+      "admitted_evidence_ids": [
+        "E05"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ008",
+      "family": "nist-smstestbed",
+      "candidate_claim": "The id Hurco04-path_7 is reused with different meanings across the pinned XML revisions: TOOL_NUMBER in the older file and accumulated runtime in seconds in the later file.",
+      "claim_time_scope": "The older and later published document versions, separately scoped.",
+      "admitted_evidence_ids": [
+        "E06"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ009",
+      "family": "nist-smstestbed",
+      "candidate_claim": "The raw Spindle_Speed record at 2017-02-14T16:12:54.968217Z records numeric zero.",
+      "claim_time_scope": "That exact archived sample.",
+      "admitted_evidence_ids": [
+        "E07"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ010",
+      "family": "nist-smstestbed",
+      "candidate_claim": "Every timestamp recorded inside Hurco04-20170217-20170218.txt falls on February 17 or February 18, 2017.",
+      "claim_time_scope": "Recorded timestamps in the identified raw archive.",
+      "admitted_evidence_ids": [
+        "E08"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ011",
+      "family": "nist-smstestbed",
+      "candidate_claim": "The later pinned XML configuration was the configuration actually deployed to produce the February 2017 raw log.",
+      "claim_time_scope": "Deployed configuration at raw-log acquisition time.",
+      "admitted_evidence_ids": [
+        "E05",
+        "E06",
+        "E09"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ012",
+      "family": "nist-smstestbed",
+      "candidate_claim": "These records establish that Hurco04 continuously ran a named production job from 09:18:51.4531250Z through 09:40:46.755688Z on February 17, 2017.",
+      "claim_time_scope": "Complete continuous production activity over the stated interval.",
+      "admitted_evidence_ids": [
+        "E10"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    }
+  ]
+}

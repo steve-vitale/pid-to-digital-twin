@@ -1,10 +1,12 @@
 # Data lineage: what we start from, how sure we are, and what each step adds
 
-Every output in this repository is built from one of two datasets (a third, five public DEXPI sheets, is used only to
-score tag reading). Before anything is built, each dataset gets a
-**Stage 0: data state and confidence assessment**: where the data came from, what has been checked against an
-independent source, what is inferred or unknown, and how sure we are about each class of element. Every later
-stage is written as **input → treatment → output → confidence carried forward → who or what checked it**.
+This page follows the Tennessee Eastman and OPEN100 demonstrations and the early five-sheet DEXPI tag-reading
+experiment. The toolkit also has other inputs and worked examples; see the [corpus matrix](GENERALIZATION.md)
+and [supported workflows](WORKFLOWS.md) for their separate scope and evidence.
+
+The demonstrations begin with **Stage 0: data state and confidence assessment**: source identity, independent
+checks, inferred or unknown facts and confidence in each class of element. Later stages follow
+**input → treatment → output → confidence carried forward → who or what checked it**.
 
 Two rules hold throughout:
 
@@ -291,13 +293,21 @@ These are built so we can iterate on them, and labelled that way in their own fi
   binding after executable-AST, coefficient/threshold and output-hash checks. No extraction, model build or score
   was repeated; their historical extraction and later review/mapping provenance remains. The stage notes identify
   that documentation-only renewal.
+  A later source-preservation repair renewed five recorded stages after independently checked code diffs,
+  unchanged published-output hashes and an actual saved-prediction re-score (30 tables reproduced; five gaps).
+  This accepts historical records under changed publication/skip wrappers; it does not re-run extraction.
+  Three extraction stages declare no output files, so their renewed lock entries verify no raw extraction
+  records. Those uncommitted runs remain unavailable. The two replicate stages retain six bound output files.
+  Eleven offline generation commands across seven stages were actually repeated; other stages retain their
+  previous records. See [JOURNAL §109](JOURNAL.md#109-preserve-sources-across-the-remaining-output-writers).
 - **The confidence rollup trusts the reviewer string.** A string that names an operations role counts as an
   operations review; nothing authenticates it. Anything else, including a confirmation by a non-process-expert,
   keeps its label in every output.
 - **Some stages need more than Python.** Stages that need a download (the TE replay files), a package (Pillow,
   OpenCV) or a local program (Blender for the 3D stills, a headless browser for the OPEN100 mimic PNGs, named in
-  `BLENDER_EXE` and `BROWSER_EXE`) report `BLOCKED` on a checkout without them; in this commit they were rebuilt
-  with them, so the lock shows them fresh. Two stages, the live replay and the native acceptance run, need a running
+  `BLENDER_EXE` and `BROWSER_EXE`) report `BLOCKED` on a checkout without them. Their current lock retains
+  historical builds; the source-preservation repair did not repeat Blender, browser or native-runtime runs.
+  Two stages, the live replay and the native acceptance run, need a running
   Ignition gateway to execute again. Their recorded lock entries currently show `FRESH` for the declared inputs;
   neither runtime stage declares output files in that lock. The historical gateway receipts are separate evidence.
   This status does not verify those receipts, repeat a gateway run or establish that a gateway is running now.

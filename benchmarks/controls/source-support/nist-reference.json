@@ -1,0 +1,53 @@
+{
+  "schema": "source-support-answer-1",
+  "decisions": [
+    {
+      "id": "SJ007",
+      "judgment": "supported",
+      "evidence_ids": [
+        "E05"
+      ],
+      "reason": "The UUID and device identity match in both original XML Device elements. This supports a published identity join, not a live installation claim."
+    },
+    {
+      "id": "SJ008",
+      "judgment": "supported",
+      "evidence_ids": [
+        "E06"
+      ],
+      "reason": "The two original DataItem definitions explicitly assign different names, types and units to the same id string. Revision scope resolves the apparent conflict."
+    },
+    {
+      "id": "SJ009",
+      "judgment": "contradicted",
+      "evidence_ids": [
+        "E07"
+      ],
+      "reason": "The value at that exact timestamp is UNAVAILABLE. A separate numeric-zero sample on February 17 cannot replace it. This contradicts the record-value claim, without claiming the physical spindle could not have been stopped."
+    },
+    {
+      "id": "SJ010",
+      "judgment": "contradicted",
+      "evidence_ids": [
+        "E08"
+      ],
+      "reason": "The explicit February 14 record is a counterexample. One counterexample refutes the universal claim without requiring assumptions about missing samples."
+    },
+    {
+      "id": "SJ011",
+      "judgment": "insufficient-evidence",
+      "evidence_ids": [
+        "E09"
+      ],
+      "reason": "Published XML definitions and matching names do not establish deployment. The raw records contain no configuration revision field and no deployment history is admitted. They do not prove or disprove that later mapping was deployed."
+    },
+    {
+      "id": "SJ012",
+      "judgment": "insufficient-evidence",
+      "evidence_ids": [
+        "E10"
+      ],
+      "reason": "READY plus a single-space program-name field does not identify a production job, and later UNAVAILABLE does not establish physical inactivity or continuous execution. Partial observations cannot decide the asserted continuous named-job history."
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # State of the toolkit
 
 Audit date: 2026-10-30. Original functional baseline: `e8277779f7a30f526740a58af9bdb5088555fa4d`.
-The evidence-preservation repairs below follow that audit; company integrations remain incomplete.
+The evidence-preservation repairs below follow that audit and a wider output-writer sweep. Company integrations
+remain incomplete; a local preservation check does not establish a complete engineering workflow.
 
 **This is a collection of working local prototypes and research demonstrations, with a partially connected user
 workflow. It is not a turnkey document-to-digital-twin product or a company context service.** The strongest
@@ -9,15 +10,24 @@ starting use is one source-backed engineering investigation. Most utilities have
 unfinished work is concentrated in evidence preservation, conversion between formats, semantic evaluation and
 company integration. Repaired defects and remaining validation boundaries are listed below.
 
-The [script registry](SCRIPTS.md) distinguishes 31 scripts classified as tools, 12 repository checks, eleven support modules and
+The [script registry](SCRIPTS.md) distinguishes 31 scripts classified as tools, 12 repository checks, twelve support modules and
 76 research scripts. Research scripts reproduce this project's demonstrations; their presence is not evidence
 that the same output is available for arbitrary company inputs. Test scripts are listed separately by the runner.
 
 ## Known defects
 
-The reproduced source-preservation and report-interpretation findings from this audit are repaired below.
-This does not establish that every input or workflow is defect-free. Validating a bounded investigation journey
-takes priority over adding outputs or more corpus cases.
+**Repaired additional output writers (N069):** actual copied-input probes first reproduced collisions in the
+report, loop-audit and line-enrichment commands, then eleven more tools. The fourteen repaired writers now
+preflight their consumed source files, generated/retired targets and companion aliases before writing. Tests
+and independent CLI probes preserve source/companion bytes for direct paths, hardlinks and directory aliases.
+Intentional review/mapping/model-in-place updates remain explicit. Review-kit generation refuses to reset
+review/timer history; the pipeline can explicitly refresh an untouched blank kit. Ordinary outputs retain their
+prior content; newly generated drawing manifests record the changed generator fingerprint. See
+[JOURNAL §109](JOURNAL.md#109-preserve-sources-across-the-remaining-output-writers).
+
+These are bounded checks on stable local files, not a transactional publication system or a concurrent-writer
+lock. The sweep does not make every research script safe for arbitrary inputs. The external-extraction skip
+message was also repaired; no model extraction was executed.
 
 **Repaired source-output collisions:** graph export, impact estimation and CSV-band generation now check all
 their active input paths and every output before creating directories or writing files. Exact/resolved names,
@@ -65,7 +75,7 @@ files, not product readiness, source completeness, usefulness or plant acceptanc
 | [Context register](FEATURES.md#context-register) | Local files retain supplied answers, disputes and ownership history; explicit refresh checks source revisions. | No automatic source watcher, shared authentication or company acceptance. Answers do not update the generator model. |
 | [Snapshot MCP](FEATURES.md#snapshot-mcp) | Read-only access to one selected startup snapshot; SDK/stdio/loopback checks exist. | No live process connector, analysis execution, shared company authentication or verified Copilot tenant. |
 | [Description workflow](FEATURES.md#description-workflow) | Prepare → authored answer → check → build joins a draft drawing, questions, graph and staging. | Interpretation and geometry remain authored. Quote/structure checks cannot establish correct engineering interpretation. No unfamiliar-description accuracy result. |
-| [Task/model benchmarks](FEATURES.md#task-benchmarks) | Re-scores saved attempts on matching task/source/key/scorer cohorts. | Only drawing extraction and selected native description facts have adapters. The false-shutdown control exposes unscored semantics. No automatic model execution or general model ranking. |
+| [Task/model benchmarks](FEATURES.md#task-benchmarks) | Re-scores saved attempts on matching task/source/key/scorer cohorts. | Three adapters: drawing extraction, selected native description facts, and fixed-claim labels. Claim-label results are synthetic controls on explicit paraphrases; reasons and source validity remain unscored. No automatic model execution or general model ranking. |
 
 ## Demonstrations are a separate track
 
@@ -100,10 +110,11 @@ are external responsibilities by design, not a proposed replacement application 
 
 ## Recommended order of work
 
-1. **Finish one bounded investigation journey.** Specify the supported files, human decisions and acceptance
+1. **Validate one bounded investigation journey.** Specify the supported files, human decisions and acceptance
    checks. Measure whether an engineer can complete it and whether the resulting packet helps its recipient.
-2. **Evaluate semantics.** Add independent source/claim keys and useful/unacceptable question rubrics before
-   increasing generalization claims. Preserve negative controls that a field-only score misses.
+2. **Evaluate useful questions and reasoning.** The fixed-claim label adapter supplies an initial source-key
+   contract, not a usefulness or reasoning score. Add reviewed expected/unacceptable question rubrics and
+   unfamiliar sources before increasing generalization claims. Keep field-only and wrong-reason controls.
 3. **Prove one company handoff.** Build and read back a scoped adapter in an approved environment, with source
    permissions and an accountable owner. Add operating data only through an allowed path.
 
@@ -116,8 +127,15 @@ Two independent coding agents inspected the implementations, guides and tests ac
 features and ran representative offline CLI chains on public/fictional fixtures. Private disposable copies
 preserved before/after bytes for the overwrite defects. The maintainer separately re-scored the saved prediction
 tables: 30 reproduce (seven with explicit historical formatting rules), while five report missing-prediction gaps.
-The current matrix was checked for freshness; it was not wholly rerun for this audit. Model calls, original-source
-downloads, live gateways, plant imports and company systems were not exercised. These checks establish bounded
-software observations, not a human engineering sign-off.
+The initial audit checked matrix freshness; subsequent repair runs are recorded separately in JOURNAL §109.
+Model calls, original-source downloads, live gateways, plant imports and company systems were not exercised.
+These checks establish bounded software observations, not a human engineering sign-off.
+
+The follow-up source-output probes above ran the actual report, loop-audit and line-enrichment CLIs, recording
+success exits and before/after hashes on disposable copies. Separate intake/report and assisted-description
+builds succeeded. A planted false-shutdown model again passed structure and five quotation checks, scored 27/27
+selected facts, and produced zero question findings. These results expose the difference between software
+execution, selected-field coverage and engineering meaning; the separate label scorer does not repair the
+question catalog or establish a question-coverage improvement.
 
 For numerical research evidence see [RESULTS.md](RESULTS.md); for runnable paths see [WORKFLOWS.md](WORKFLOWS.md).

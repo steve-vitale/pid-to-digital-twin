@@ -300,6 +300,28 @@ def main():
             p = cli(*args)
             check(f"a missing {missing} is refused without a traceback",
                   p.returncode == 2 and missing in p.stderr and "Traceback" not in p.stderr, p.stderr[-300:])
+        for role in ('model', 'sheet'):
+            for extension in ('md', 'json'):
+                guard = tmp / f'publication-{role}-{extension}'
+                guard.mkdir()
+                model, sheet, recs = guard / 'model.json', guard / 'review.csv', guard / 'receipts'
+                model.write_bytes((ROOT / 'data/te_process_model.json').read_bytes())
+                sheet.write_text('item_id,OPS_confirm_or_correct\nFT-101,confirm\n', encoding='utf-8')
+                recs.mkdir()
+                target = recs / f'2026-10-30-model.{extension}'
+                target.hardlink_to(model if role == 'model' else sheet)
+                before = {p: p.read_bytes() for p in guard.rglob('*') if p.is_file()}
+                p = subprocess.run([sys.executable, str(ROOT / 'scripts/apply_review.py'), str(model), str(sheet),
+                    '--reviewer', 'test', '--date', '2026-10-30', '--record-dir', str(recs)],
+                    capture_output=True, encoding='utf-8', env={**os.environ, 'PYTHONIOENCODING': 'utf-8'})
+                check(f'{extension} receipt preserves {role} before review model update',
+                      p.returncode == 2 and 'aliases an input' in p.stderr and
+                      before == {q: q.read_bytes() for q in guard.rglob('*') if q.is_file()}, p.stderr)
+        fresh = tmp / 'dry-receipts'
+        p = subprocess.run([sys.executable, str(ROOT / 'scripts/apply_review.py'), str(model), str(sheet),
+            '--reviewer', 'test', '--record-dir', str(fresh), '--dry-run'], capture_output=True, encoding='utf-8',
+            env={**os.environ, 'PYTHONIOENCODING': 'utf-8'})
+        check('dry review does not create a receipt directory', p.returncode == 0 and not fresh.exists(), p.stderr)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
     print("all passed" if all(results) else "FAILURES")

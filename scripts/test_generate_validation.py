@@ -38,6 +38,29 @@ def snapshot(path):
 
 
 class GenerationValidationTests(unittest.TestCase):
+    def test_twin_export_preserves_source_and_retirement_targets_and_sibling_aliases(self):
+        for name in ('review_queue.csv', 'svg/sheet_old.svg', 'pi/pi_builder_UNVALIDATED_candidate_v1.csv'):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as d:
+                folder = Path(d)
+                source = folder / name
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text(json.dumps(twin_fixture()), encoding='utf-8')
+                before = snapshot(folder)
+                with self.assertRaisesRegex(ValueError, 'aliases an input'):
+                    generate.export_twin(twin_fixture(), folder, source_path=source)
+                self.assertEqual(snapshot(folder), before)
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            a = folder / 'review_queue.csv'
+            a.write_bytes(b'retain companion')
+            b = folder / 'ignition/tags.json'
+            b.parent.mkdir()
+            b.hardlink_to(a)
+            before = snapshot(folder)
+            with self.assertRaisesRegex(ValueError, 'files alias each other'):
+                generate.export_twin(twin_fixture(), folder)
+            self.assertEqual(snapshot(folder), before)
+
     def test_instance_units_survive_beside_review_status_without_changing_shared_template(self):
         model = twin_fixture()
         a = model["instruments"][0]

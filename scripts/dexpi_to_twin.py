@@ -231,8 +231,13 @@ def write_outputs(sheet_id, prediction, out_dir, cfg, spec, png_path):
     out_dir = Path(out_dir)
     pred_path = out_dir / f"{sheet_id}.prediction.json"
     man_path = out_dir / f"{sheet_id}.intake-manifest.json"
-    if Path(png_path).resolve() in {pred_path.resolve(), man_path.resolve()}:
-        raise ValueError("generated output overlaps the source image; use a new output folder")
+    from output_paths import protect_outputs
+    retained = out_dir / intake_image_name(sheet_id)
+    sources = [png_path, *key_paths(sheet_id, Path(png_path).parent).values(), A.CONFIG, A.local_path(spec['xml'])]
+    # An identical retained image is reused, never rewritten. Keep it out of the generated-output list.
+    if retained.exists():
+        sources.append(retained)
+    protect_outputs([pred_path, man_path, *([] if retained.exists() else [retained])], sources)
     pred_text = json.dumps(prediction, indent=1, allow_nan=False) + "\n"
     manifest = {"schema_version": "site-drawing-intake-1", "drawing_id": sheet_id, "revision": "public",
                 "page": 1, "image": intake_image_name(sheet_id),

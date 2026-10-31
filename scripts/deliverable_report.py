@@ -26,6 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from generate import TWIN_REVIEW_COLS, _csv_text, twin_review_rows  # noqa: E402  (the queue's own writer)
+from output_paths import protect_outputs
 
 CLASS_COLOURS = {"tank": "#b45309", "pump": "#7c3aed", "valve": "#0f766e", "instrumentation": "#2563eb",
                  "inlet/outlet": "#be185d", "general": "#4b5563"}
@@ -291,13 +292,19 @@ def main(argv=None):
     out = Path(a.out) if a.out else Path(a.bundle) / "REPORT.html"
     try:
         text = build(a.bundle)
+        bundle = Path(a.bundle)
+        sources = [bundle / name for name in ("plant_model.json", "intake_manifest.json",
+                                              "review_queue.csv", "READ_ME.txt")]
+        # source/ holds the preserved originals, including extraction records not rendered in the HTML.
+        sources.extend(p for p in (bundle / "source").rglob("*") if p.is_file())
+        protect_outputs([out], sources)
+        out.write_text(text, encoding="utf-8", newline="\n")
     except BundleError as exc:
         print(f"{a.bundle}: {exc}", file=sys.stderr)
         return 1
     except (OSError, KeyError, ValueError) as exc:
         print(f"{a.bundle}: can't read the bundle ({type(exc).__name__}: {exc})", file=sys.stderr)
         return 1
-    out.write_text(text, encoding="utf-8", newline="\n")
     print(f"wrote {out} ({len(text) // 1024} KB)")
     return 0
 

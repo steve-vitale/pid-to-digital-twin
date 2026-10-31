@@ -51,14 +51,15 @@
    "inputs": {
     "data/bayer_rt/pid_layout.json": "f293228373d0e4cf8aa2593dc5439aa9daea5b160ab2f639cf399fa7a8f4a3ba",
     "data/bayer_rt/process_model.json": "171fd1d3c1b7ac7fa2a69b57197317a48978d545d61e4a4d8fec714225782928",
-    "scripts/draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28"
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939"
    },
    "outputs": {
     "data/bayer_rt/pid/RT1.graphml": "2d9dc3bb54c35f3e3fbfdab15f2faf68928c3ee1d6d2e769fd99aa55a685abd5",
     "data/bayer_rt/pid/RT1.png": "d083e625a563bc28641978e9c005285a2f8be86498de7427f552c10ab33c8164",
     "data/bayer_rt/pid/RT1.svg": "6cfb64ecc6d9b7cae468a70e5b00f6d40ae39ae1bf8054399ba3aa87ced8e9c6",
     "data/bayer_rt/pid/key.json": "2cdbb0ca77f241f4c8b91e8a364a8d69e0c791fac3a22ea413e43a4ea7fa51d8",
-    "data/bayer_rt/pid/manifest.json": "495b5dce3da1c8a50f8063d1698ca303d321c496c75d55e93d91e95f188f87e9",
+    "data/bayer_rt/pid/manifest.json": "7ca54b20208377bf90b8168d10752e7699e31554c753e00d1a343cd0a3f5a0b3",
     "data/bayer_rt/pid/sheet_register.csv": "d049d9fe38d511cd48bca76c2dfe30eee498c03e9065dc579670ef2f2e2c7297"
    }
   },
@@ -112,11 +113,12 @@
    "inputs": {
     "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
-    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_extraction.py": "73d5d5a6b35107089dd71d82b8022c79ebfa6e0377a0c7c94d9470f531df12a0",
     "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
     "scripts/score_tags.py": "a0ce303a7a8fe8de58030f4a518084fef8205380211c6afba418b2c5f9056cb5",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {
     "out/replicates_r5_dexpi.json": "782cc17bba10c89c7a6ff732d60508886e40627f8ecd26d8d475b93b9f0c2514",
@@ -238,7 +240,8 @@
   "open100.exports": {
    "inputs": {
     "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
-    "scripts/generate.py": "2f5d37d080e2baff223d072e517da9106394ada23e5df36ecad1b9e62ce8d36d",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433"
    },
@@ -280,10 +283,11 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.png": "d50d894f775e294a43658210464351b7c61e85c198117ab8306acf308f727d5c",
     "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/remerge_tiles.py": "623aab7cfee6e972217eea46f37da6207c8880969c050660645bb2986707698a",
-    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_extraction.py": "73d5d5a6b35107089dd71d82b8022c79ebfa6e0377a0c7c94d9470f531df12a0",
     "scripts/tiling.py": "c5f334f06f3377e46c67383b6eeac94fbebaeeda169cfb080bc412e249f227eb",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {}
   },
@@ -304,7 +308,8 @@
     "data/open100_direction_confidence.json": "d74f9d929d1d9bbc1f9671d7c95788596b5af0d5bc06495aab6805ccd4088b68",
     "out/twin/r2-tiles-trace/codex/plant_model.json": "a9b86e8f7b740fb735be15e02014cfbdbbed2dcdeedec3e231fd14d77ea000d8",
     "scripts/flow_direction.py": "8731cbe78469c59cdd223486fa383d580c6d77b065c78cd2fa832367aa6ef62e",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {
     "docs/screenshots/open100/flow-evidence-sheet5.png": "4b132d20aafeeedfc4d5bc459f4111065be42bbc75c1566272f2d90fe41a0fe0",
@@ -353,10 +358,11 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/9.graphml": "b187afadfa6382cb0c08046c78fbea8a010999ca4c6e02118f275251588dc309",
     "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/replicate_stats.py": "728a69212c6a405517518f324a636bbf77c552964ae20da43f646389e59e3b23",
-    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_extraction.py": "73d5d5a6b35107089dd71d82b8022c79ebfa6e0377a0c7c94d9470f531df12a0",
     "scripts/score_pid2graph.py": "decd9b48d8ae85c410aaabda34b99bc2b1caf2f3f5ffcb39e3a57a8329b9c787",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {
     "out/replicates_r5_holdout-a.json": "ffd955bbabf184082c9654b93b2d77c3b63d3d423d0d8fac4044b43dce3bf1df",
@@ -368,7 +374,8 @@
     "data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100/8.png": "3e618c63f11ea59ca96813ae3658ac878c09261a29b7df8f7b6fbef3778f4ed2",
     "out/twin/r2-tiles-trace/codex/review_queue.csv": "c55954db7f6b3651a400b493ec9706b8b6ee2aa65cbf75667fe8fae628a010ce",
     "out/twin/r2-tiles-trace/codex/svg/sheet_8.svg": "74b984968e281537abfd622b3f03933a630891b443c4b727127d40a4ded0ef4c",
-    "scripts/review_kit.py": "96594db7bd2b7960335bf192cd4861fd1f058978bf792946a4bd40b3542c0cea"
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
+    "scripts/review_kit.py": "4acd85e03f67593e1410fe9770a7f7f4a60b875031aba205921b298efe3a5089"
    },
    "outputs": {
     "out/review_kit/sheet-8/README.md": "09b4e88d5c214eb1e3004aed47c415e4b4b123ad49ae5d6e55890e8a8dfa6d2d",
@@ -529,7 +536,8 @@
   "te.exports": {
    "inputs": {
     "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
-    "scripts/generate.py": "2f5d37d080e2baff223d072e517da9106394ada23e5df36ecad1b9e62ce8d36d",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433"
    },
@@ -652,7 +660,8 @@
    "inputs": {
     "data/te_pid_layout.json": "d74afb2cb4a526acf52b022f53a5863d3ac3c940100d6cf8c79b1759fdfbe3af",
     "data/te_process_model.json": "7222ed15fa4b56ae0d38f6401160eef8881ccf1ba511380ba27161883f84921b",
-    "scripts/draw_pid_from_model.py": "848694abe1cef944245d514840751768143c388034815f67d89176b9e5d2cc28"
+    "scripts/draw_pid_from_model.py": "019f4a4903cba9e87db55fffe137c3303686df033aac2c86f3a5ff6838582cef",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939"
    },
    "outputs": {
     "data/sheet_registers/te_generated.csv": "61816a0cc39a56e7dbbd998909aceb7ea1173a1492b4c6029d92d65259170e48",
@@ -666,7 +675,7 @@
     "data/te_pid/103.png": "1f0f842c25cb1262ccc5d8786f862c2b0a36f8b2e36691047f0c5818faa891fd",
     "data/te_pid/103.svg": "0ddfe765967e6de120bd4421c474978b22ec3bf47b2b26fca5782f53996ee471",
     "data/te_pid/key.json": "99e26902138f0451cbf197306e28b61eb6af8baec0332c2da907534d675be03c",
-    "data/te_pid/manifest.json": "04b05a648c7343b0c79e08ba9711e60b8a9d6372dd1180d38dfd133b0f6bb17f"
+    "data/te_pid/manifest.json": "b46b41ef9343a4127d58f4aa9bdcee8492910621c047108a8e0c81cd02dd6a6d"
    }
   },
   "te.pid_diff": {
@@ -699,7 +708,8 @@
     "out/te_pid/twin/codex-L2-r1/plant_model.json": "496b3bf936104f092ef94e11463ccac51edecc30d7b53d9888d6199debcccb1b",
     "out/te_pid/twin/codex-clean-r1/plant_model.json": "5b1caec8f09ddf0aa8d35f4615b8924452ab5fdc5d5c84d1ffb3b582d69c92f3",
     "out/te_pid/twin/key/plant_model.json": "a715687c8bbd4a9f0072820d3b50a14344bdde2475aeb44539a446f2a6d74828",
-    "scripts/generate.py": "2f5d37d080e2baff223d072e517da9106394ada23e5df36ecad1b9e62ce8d36d",
+    "scripts/generate.py": "729c3081be3e1ec372d4538175d464eceedc7a6665c82a512728094268914307",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/pi_mapping.py": "c9007ef93990a5ab69a2addb0d64147d5133217a62cd8bc6fe4229404605d43e",
     "scripts/provenance.py": "69697be53c87ddd0efa92907847f14158512d2dfa2d337e79a6bb19145c98433"
    },
@@ -763,11 +773,12 @@
     "data/te_pid/rev-a/103.png": "2484a0483393d37e7c734e0c344a17513b62fea4a36f24c216819fe49dd8125e",
     "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
-    "scripts/degrade_scans.py": "95ff4b696e29205dacb0ff3776acf05a9f7ef8c40d0b15851f763c91799b5207",
+    "scripts/degrade_scans.py": "a9832914c45880487e69b05aba352e91246d2b355f39aac2ccdd57cbfc9193ad",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/remerge_tiles.py": "623aab7cfee6e972217eea46f37da6207c8880969c050660645bb2986707698a",
-    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_extraction.py": "73d5d5a6b35107089dd71d82b8022c79ebfa6e0377a0c7c94d9470f531df12a0",
     "scripts/tiling.py": "c5f334f06f3377e46c67383b6eeac94fbebaeeda169cfb080bc412e249f227eb",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {}
   },
@@ -778,12 +789,13 @@
     "data/te_pid/rev-c/103.png": "0d3564b813243824103b5d05ea6b9086c971882aecd11d57c4da3a51d3c79c45",
     "extraction/prompt_v2.md": "d98a6475c284b889be863b68fe09453f2aa8923954eee990bca21dc7aa600c65",
     "extraction/tile_preface.md": "642aec003b66a89e9d6bac72e65d1a6ec50cbf05831ed389284b7376f2dab4d3",
-    "scripts/degrade_scans.py": "95ff4b696e29205dacb0ff3776acf05a9f7ef8c40d0b15851f763c91799b5207",
+    "scripts/degrade_scans.py": "a9832914c45880487e69b05aba352e91246d2b355f39aac2ccdd57cbfc9193ad",
+    "scripts/output_paths.py": "16ace3cf89be6baffcac1be804ea4917c9db10caffe2b58c11ee0b9acd4d2939",
     "scripts/remerge_tiles.py": "623aab7cfee6e972217eea46f37da6207c8880969c050660645bb2986707698a",
-    "scripts/run_extraction.py": "a12188a721693f0559e182f93eb8a168ec09291cda641e7e979b8996c73c706d",
+    "scripts/run_extraction.py": "73d5d5a6b35107089dd71d82b8022c79ebfa6e0377a0c7c94d9470f531df12a0",
     "scripts/run_te_roundtrip.py": "68b63e9c7875b2ecf3d58456b8677506d2b6236c94026d5511bb44786f54c63a",
     "scripts/tiling.py": "c5f334f06f3377e46c67383b6eeac94fbebaeeda169cfb080bc412e249f227eb",
-    "scripts/trace_connections.py": "c79f1a7fbdd997b1a4b564da811ac81a9efeca80b920270832ea9156007ecba2"
+    "scripts/trace_connections.py": "13ffbef2b0cbbf1aea65c216b4d93731178ae068ebe577afbe0bc7f1be4f8f00"
    },
    "outputs": {}
   },

@@ -11,7 +11,8 @@ import statistics
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-TASKS = {'drawing-extraction': 'pid2graph-v1', 'description-facts': 'native-facts-v1'}
+TASKS = {'drawing-extraction': 'pid2graph-v1', 'description-facts': 'native-facts-v1',
+         'source-support': 'claim-judgments-v1'}
 TEXT = {'.json', '.graphml', '.xml', '.md', '.txt', '.csv', '.py'}
 FIELDS = {'units': ('id', ('type',)), 'streams': ('id', ('from', 'to')),
           'instruments': ('tag', ('unit', 'stream', 'variable', 'uom')),
@@ -172,6 +173,9 @@ def metrics(total):
 
 
 def score_case(task, files, prediction):
+    if task == 'source-support':
+        import source_support
+        return source_support.score(read_json(files['input']), read_json(files['key']), prediction)
     if task == 'drawing-extraction':
         import score_pid2graph as scorer
         value = prediction if prediction is not None else {'symbols': [], 'connections': []}
@@ -208,6 +212,8 @@ def evaluate(suite_path, root=ROOT):
     require(task in TASKS, 'Unsupported task; add a tested scorer adapter before registering this task')
     sources = ['benchmark.py'] + (['score_pid2graph.py', 'evaluate_vendor.py', 'replicate_stats.py',
                                  'score_tags.py', 'test_scorer_controls.py'] if task == 'drawing-extraction' else [])
+    if task == 'source-support':
+        sources.append('source_support.py')
     code_hashes = {p: file_hash(Path(__file__).parent / p) for p in sources}
     require(isinstance(suite.get('cases'), list) and suite['cases'], 'Suite needs cases')
     require(isinstance(suite.get('runs'), list) and suite['runs'], 'Suite needs run manifest paths')
@@ -237,6 +243,12 @@ def evaluate(suite_path, root=ROOT):
             require(not failures, 'Known-answer control failed: ' + '; '.join(failures))
             require(table['perfect']['key_items'] > 0, 'Drawing key has no scored items')
             controls[case['id']] = table
+        elif task == 'source-support':
+            import source_support
+            controls[case['id']] = source_support.controls(read_json(files['input']), read_json(files['key']))
+            positive = controls[case['id']]['reference']['judgments']
+            require(positive['tp'] == positive['predicted'] == positive['truth'] > 0,
+                    'Source judgment reference control must match every key label')
         else:
             golden, _ = score_case(task, files, read_json(files['expected']))
             row = golden['facts']
@@ -349,7 +361,10 @@ def evaluate(suite_path, root=ROOT):
                        'Each replicate pools counts over its cases; summary reports mean/range/stdev over replicates, not a significance test or winner.',
                        'Missing/failed attempted answers score empty; unattempted cases remain visible and create different comparison cohorts.',
                        'Public keys and retrospective registration do not establish blindness. Synthetic controls and corrected/development results are separate.',
-                       'Description facts grade literal selected fields only: no prose names, source validity, dimensions, limits, layout quality or plant truth.']}
+                       *(['Description facts grade literal selected fields only: no prose names, source validity, dimensions, limits, layout quality or plant truth.']
+                         if task != 'source-support' else [])] +
+                      (['Source-support grades labels for fixed supplied claims against a supplied key. It does not judge free-form reasoning, source validity, question usefulness or plant truth; cited IDs are checked structurally.']
+                       if task == 'source-support' else [])}
 
 
 def markdown(report):
@@ -357,14 +372,32 @@ def markdown(report):
         return str(value).replace('|', '\\|').replace('\n', ' ').replace('\r', ' ')
     lines = ['# Task results: ' + safe(report['suite']), '',
              'Task: `' + report['task'] + '`. ' + safe(report['registration']), '',
-             'Only rows with the same cohort are directly comparable. See JSON for exact cases, failures, fingerprints and configurations.', '',
+             'Only rows with the same cohort are directly comparable. See JSON for exact cases, failures, fingerprints and configurations.', '']
+    if report['task'] == 'source-support':
+        lines += ['## Fixed-claim label accuracy', '',
+                  'Correct / expected is the primary metric. Missing judgments remain in the denominator. '
+                  'A case contains several fixed claims; this is not a count of independent source families or model trials. '
+                  'Reasons and source support are not automatically assessed.', '',
+                  '| Run | Family | Correct / expected claims | Provided / expected claims | Exact label accuracy | Incorrect supported labels |',
+                  '|---|---|---|---|---|---|']
+        for row in report['results']:
+            count = row['counts']['judgments']
+            false_supported = row['counts']['supported']['predicted'] - row['counts']['supported']['tp']
+            lines.append('| ' + ' | '.join(safe(v) for v in [row['run'], row['family'],
+                str(count['tp']) + ' / ' + str(count['truth']),
+                str(count['predicted']) + ' / ' + str(count['truth']),
+                f"{count['tp'] / count['truth']:.4f}", false_supported]) + ' |')
+        lines += ['', 'The label F1 rows below are companion diagnostics. F1 differs from exact accuracy when judgments are missing. '
+                  'Inspect each claim and its reason; a correct label can accompany a false explanation.', '', '## Per-label diagnostics', '']
+    lines += [
              '| Model / version | Method / interface | Family / split / evidence | Cohort | Cases | Replicates | Metric | Mean F1 | Min–max | SD |',
              '|---|---|---|---|---|---|---|---|---|---|']
     def fmt(value):
         return 'unavailable' if value is None else f'{value:.4f}'
     for row in report['summary']:
         for metric, values in row['metrics'].items():
-            if values['mean_f1'] is None or (report['task'] == 'description-facts' and metric == 'facts'):
+            if values['mean_f1'] is None or (report['task'] == 'description-facts' and metric == 'facts') or \
+                    (report['task'] == 'source-support' and metric == 'judgments'):
                 continue
             model = row['model']['id'] + ' / ' + row['model']['version']
             lines.append('| ' + ' | '.join(safe(v) for v in [model, row['method'] + ' / ' + row['interface'],
@@ -378,7 +411,7 @@ def markdown(report):
                      '; suite-wide unattempted: ' + safe(', '.join(row['not_attempted']) or 'none') +
                      '; failed attempted answers: ' + safe(', '.join(bad) or 'none') + '.')
         for case in row['rows']:
-            for label in ('missing_facts', 'unexpected_facts'):
+            for label in ('missing_facts', 'unexpected_facts', 'missing_judgments', 'incorrect_judgments'):
                 facts = case['diagnostics'].get(label, [])
                 if facts:
                     lines.append('  ' + safe(case['case']) + ' ' + label + ': ' +

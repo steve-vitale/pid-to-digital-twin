@@ -1,0 +1,55 @@
+{
+  "schema": "source-support-projection-1",
+  "baseline": "15ea4c979beebaca77f70ee5a36cb8329df116bc",
+  "frozen_at_utc": "2026-10-30T23:08:20.393648+00:00",
+  "independent_key_timing": "Independent key frozen before any new candidate answer or source-support scorer was available to this reviewer.",
+  "development_only": true,
+  "source_freeze_raw_sha256": "e5e06acb8617d45413606a31caa69986304f6aa816a42c0fec16d41e262deedb",
+  "frozen_artifacts": [
+    {
+      "path": "sources.json",
+      "bytes": 12193,
+      "sha256": "bbae87de0362bbffd0861c419d568a51264ffede419958ced06dc5e37e32c421"
+    },
+    {
+      "path": "input.json",
+      "bytes": 18167,
+      "sha256": "0ca4fe8d403649c3c27d5635c25ab83a7f860a7862ae47407a9883a03e46f725"
+    },
+    {
+      "path": "key.json",
+      "bytes": 6239,
+      "sha256": "9553f75bcb08bf32da7f7c07219466ba781869368e66212dbc2a903dae55a210"
+    },
+    {
+      "path": "rubric.json",
+      "bytes": 2290,
+      "sha256": "33050202797e95ad395f981e28d71bf8fd72514d8f5e73485d4ee4dbe1bb5033"
+    },
+    {
+      "path": "review-notes.json",
+      "bytes": 1963,
+      "sha256": "402c2ab9b5f236d3d67d8b468d659b1108d91517ca15677e05f7dfe23f7abd2e"
+    }
+  ],
+  "projection": "Partition exact items/evidence by family; preserve all time scopes and multiple source_ids. Remove only private absolute_path metadata. Minimal scoring keys project exact frozen labels; full rationales retained in review_key.json. Fixture ID gets a family suffix.",
+  "public_projection_sha256_lf": {
+    "benchmarks/source-support/mgpi.input.json": "2e18d560cd3d10a7b95ec1a0b09c4e3664531d99c317d585680cd0c183385cc0",
+    "benchmarks/source-support/mgpi.key.json": "53ac5896121b31194a5d5841a32524633a8faebefb9a0405966877309bc9d5da",
+    "benchmarks/controls/source-support/mgpi-reference.json": "6315d03ec856dd316e5720f0141b6dc1090d51027d1fff42ac4d50e5e3c84d6d",
+    "benchmarks/controls/source-support/mgpi-empty.json": "e026601b5c4ad29501629669a4f49a214c2f7a65eee5de9dee6027f212d4e2a7",
+    "benchmarks/controls/source-support/mgpi-all-supported.json": "368453e601fe57ed380045448d721f70c9f21c64b88414188ce1691dbc733e8d",
+    "benchmarks/controls/source-support/mgpi-all-contradicted.json": "92f90e25a03ff161c36b445e294bf401a202d8d00f339b88264bbda4bce76de1",
+    "benchmarks/controls/source-support/mgpi-all-insufficient.json": "1318027cbb4e8f5a7180c12ebba6699600c981ff13a0d720f19677b3dc6a4451",
+    "benchmarks/source-support/nist.input.json": "364f4dff9b9cbf7ece673b113ce002fccfba8962e535910726c9dbe4fd4af868",
+    "benchmarks/source-support/nist.key.json": "6f2c0f733cddd938be7072b00951d281ce586243ded7417b674d69e1a54d8804",
+    "benchmarks/controls/source-support/nist-reference.json": "943786deafd0915b67f47e626f924bcf687eb6c21fe7c1e8ecc12985cf958ce5",
+    "benchmarks/controls/source-support/nist-empty.json": "e026601b5c4ad29501629669a4f49a214c2f7a65eee5de9dee6027f212d4e2a7",
+    "benchmarks/controls/source-support/nist-all-supported.json": "8636d02e8fb62f2e5c20f5eb68bf11dbf72cdc81d406c6ef93fc658b1f9718cf",
+    "benchmarks/controls/source-support/nist-all-contradicted.json": "3cdf722dc6102fe933ffe5aa32749394a32e6cb2496a8e2bb1d27c65c6d7c946",
+    "benchmarks/controls/source-support/nist-all-insufficient.json": "6cb98232e629f52f39d26873a7f44ab376ab69aeab807512f1ffbb5271d97442",
+    "benchmarks/source-support/review_key.json": "9553f75bcb08bf32da7f7c07219466ba781869368e66212dbc2a903dae55a210",
+    "benchmarks/source-support/source_inventory.json": "e847fd180e9e35892924ff5ccf81eae9d65bfad07cb757ad08427fafc8471ae4",
+    "benchmarks/source-support/rubric.json": "33050202797e95ad395f981e28d71bf8fd72514d8f5e73485d4ee4dbe1bb5033"
+  }
+}

@@ -161,6 +161,45 @@ class LoopAuditTest(unittest.TestCase):
         self.assertIn("19 of 19 loops drawn", out.with_suffix(".md").read_text(encoding="utf-8"))
         self.assertEqual(_load(out.with_suffix(".json"))["totals"]["drawn"], 19)
 
+    def test_cli_preserves_both_inputs_and_companions_for_exact_and_hardlink_aliases(self):
+        for role in ("loops", "drawing"):
+            for extension in ("md", "json"):
+                with self.subTest(role=role, extension=extension):
+                    folder = self.dir / f"{role}-{extension}"
+                    folder.mkdir()
+                    loops, drawing = folder / "loops.csv", folder / "drawing.json"
+                    loops.write_bytes(LOOPS.read_bytes())
+                    drawing.write_bytes(KEY_D.read_bytes())
+                    target = folder / f"audit.{extension}"
+                    target.hardlink_to(loops if role == "loops" else drawing)
+                    companion = folder / f"audit.{'json' if extension == 'md' else 'md'}"
+                    companion.write_bytes(b"retain earlier companion")
+                    before = {p: p.read_bytes() for p in (loops, drawing, target, companion)}
+                    with contextlib.redirect_stderr(io.StringIO()) as errors:
+                        code = la.main(["--loops", str(loops), "--drawing", str(drawing), "--out", str(target)])
+                    self.assertEqual(code, 2)
+                    self.assertIn("output aliases an input", errors.getvalue())
+                    self.assertEqual(before, {p: p.read_bytes() for p in before})
+        drawing = self.write("same-key.json", _load(KEY_D))
+        before = drawing.read_bytes()
+        with contextlib.redirect_stderr(io.StringIO()):
+            self.assertEqual(la.main(["--loops", str(LOOPS), "--drawing", str(drawing),
+                                      "--out", str(drawing)]), 2)
+        self.assertEqual(drawing.read_bytes(), before)
+        self.assertFalse(drawing.with_suffix(".md").exists())
+
+    def test_cli_refuses_aliased_outputs_before_creating_or_replacing_companions(self):
+        md = self.dir / "report.md"
+        md.write_bytes(b"retain result")
+        js = md.with_suffix(".json")
+        js.hardlink_to(md)
+        with contextlib.redirect_stderr(io.StringIO()) as errors:
+            code = la.main(["--loops", str(LOOPS), "--drawing", str(KEY_D), "--out", str(md)])
+        self.assertEqual(code, 2)
+        self.assertIn("files alias each other", errors.getvalue())
+        self.assertEqual(md.read_bytes(), b"retain result")
+        self.assertEqual(js.read_bytes(), b"retain result")
+
     # --- plant_model.json: tags only ------------------------------------------------------------------------
     def test_plant_model_checks_tags_only(self):
         key = _load(KEY_D)

@@ -244,10 +244,15 @@ def rel(path):
     return path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else f"{path.parent.name}/{path.name}"
 
 
-def write_record(log, model_path, reviewer, today, dry, rec_dir=None):
+def write_record(log, model_path, reviewer, today, dry, rec_dir=None, source_paths=(), model_write=False):
     rec_dir = Path(rec_dir) if rec_dir else ROOT / "out" / "review"
-    rec_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{today}-{model_path.parent.name if model_path.name == 'plant_model.json' else model_path.stem}"
+    if not dry:
+        from output_paths import protect_outputs
+        targets = [rec_dir / f"{stem}.md", rec_dir / f"{stem}.json"]
+        protect_outputs(targets, [model_path, *source_paths])
+        if model_write:
+            protect_outputs([model_path, *targets], source_paths)
     lines = [f"# Review applied: {rel(model_path)}", "",
              f"Reviewer: {reviewer} · Date: {today}{' · DRY RUN (nothing written)' if dry else ''}", "",
              f"Applied: {len(log['applied'])} · Unchanged: {log['unchanged']} · Refused: {len(log['refused'])} · "
@@ -266,6 +271,7 @@ def write_record(log, model_path, reviewer, today, dry, rec_dir=None):
         lines += ["## Needs a change review (not applied to alarms)", "", "| Item | Request | Why |", "|---|---|---|"]
         lines += [f"| {m['item']} | {m['request']} | {m['why']} |" for m in log["needs_moc"]] + [""]
     if not dry:  # LF on every OS, so a record is byte-identical wherever it is made
+        rec_dir.mkdir(parents=True, exist_ok=True)
         (rec_dir / f"{stem}.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
         (rec_dir / f"{stem}.json").write_text(json.dumps({"model": rel(model_path),
                                                           "reviewer": reviewer, "date": today, **log}, indent=1),
@@ -317,7 +323,11 @@ def main():
     for c in ("instruments", "final_elements"):
         for it in model.get(c, []):
             it.pop("alarm_setpoints", None)
-    print(write_record(log, model_path, a.reviewer, a.date, a.dry_run, a.record_dir))
+    try:
+        print(write_record(log, model_path, a.reviewer, a.date, a.dry_run, a.record_dir,
+                           source_paths=[a.sheet], model_write=bool(log['applied'])))
+    except (ValueError, OSError) as exc:
+        ap.exit(2, f"review not applied; nothing written: {exc}\n")
     if not a.dry_run and log["applied"]:
         model_path.write_text(json.dumps(model, indent=indent, ensure_ascii=ascii_only) + trailing, encoding="utf-8",
                               newline=newline)

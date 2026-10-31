@@ -1347,7 +1347,7 @@ def _seed_preflight(out_dir, model, bundle, source_path=None):
     return sorted(set(previous) - set(bundle)), json.dumps(inventory, indent=2) + "\n"
 
 
-def export_twin(model, out_dir, images_dir=None):
+def export_twin(model, out_dir, images_dir=None, source_path=None):
     """Write a structurally valid, fully rendered bundle; invalid models raise before writes.
 
     This is not engineering/operations approval or a multi-file filesystem transaction.
@@ -1365,6 +1365,13 @@ def export_twin(model, out_dir, images_dir=None):
         return bundle
 
     bundle = _prepare(model, validate_twin, render)
+    from output_paths import protect_outputs
+    retired = [p for p in (out_dir / "svg").glob("sheet_*.svg") if f"svg/{p.name}" not in bundle]
+    stale = out_dir / "pi" / "pi_builder_UNVALIDATED_candidate_v1.csv"
+    if stale.is_file():
+        retired.append(stale)
+    references = ([Path(images_dir) / s['image'] for s in model['systems']] if images_dir is not None else [])
+    protect_outputs([*(out_dir / name for name in bundle), *retired], [source_path, *references])
     _write_bundle(out_dir, bundle)
     for old in (out_dir / "svg").glob("sheet_*.svg"):
         if f"svg/{old.name}" not in bundle:
@@ -1425,7 +1432,7 @@ def main():
         model = json.loads(model_path.read_text(encoding="utf-8"))
         if isinstance(model, dict) and isinstance(model.get("meta"), dict) and model["meta"].get("model_kind") == "extracted_twin":
             target = model_path.parent if out_dir == OUT else out_dir
-            written = export_twin(model, target)
+            written = export_twin(model, target, source_path=model_path)
             print(f"twin: wrote {', '.join(written)} in {target}")
             return 0
         if isinstance(model, dict) and isinstance(model.get("units"), list) and isinstance(model.get("meta"), dict):

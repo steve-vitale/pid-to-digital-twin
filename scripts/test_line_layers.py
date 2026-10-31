@@ -4,9 +4,13 @@ junction; a crossing marked with a dot is a 4-arm junction; an in-line valve sit
 scorer is checked against known topologies, and, where the data is present, the generated-drawing and DEXPI truths
 are read the way their own keys say. Needs OpenCV and numpy (as the tracer does); no model calls, no network."""
 import json
+import contextlib
+import io
+import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import cv2
@@ -43,6 +47,39 @@ class Drawn(unittest.TestCase):
         # a 2 px outline is drawn 1 px outside the given box: the symbol's box holds all of it
         return [{"id": k, "class": (classes or {}).get(k, "valve"), "box": [b[0] - 1, b[1] - 1, b[2] + 1, b[3] + 1],
                  **({"tag": tags[k]} if k in (tags or {}) else {})} for k, b in boxes.items()]
+
+    def test_enrich_preserves_drawings_and_keeps_model_in_place_and_repeat_behavior(self):
+        syms = self.draw({"A": [100, 470, 160, 530], "B": [840, 470, 900, 530]},
+                         [((160, 500), (840, 500))])
+        folder = Path(self.tmp.name)
+        model = {"meta": {"model_kind": "extracted_twin"}, "units": [], "instruments": [],
+                 "offpage_connectors": [], "line_items": [
+                     {"id": s['id'], "provenance": [{"sheet": "0", "symbol": s['id'],
+                         "class": s['class'], "box_0_1000": s['box']}]} for s in syms],
+                 "streams": [{"id": "L1", "kind": "extracted_link", "sheet": "0",
+                              "from": "A", "to": "B", "from_symbol": "A", "to_symbol": "B"}]}
+        path = folder / 'model.json'
+        path.write_text(json.dumps(model), encoding='utf-8')
+        alias = folder / 'alias.json'
+        alias.hardlink_to(self.image)
+        replaced = folder / 'replaced.png'
+        replaced.write_bytes(self.image.read_bytes())
+        before = {p: p.read_bytes() for p in (path, self.image, alias, replaced)}
+        arguments = ['enrich', str(path), '--image', '0=' + str(self.image)]
+        for out, extra in ((self.image, []), (alias, []),
+                           (replaced, ['--image', '0=' + str(replaced), '--image', '0=' + str(self.image)])):
+            with self.subTest(out=out.name), contextlib.redirect_stderr(io.StringIO()) as errors:
+                self.assertEqual(ll.main(arguments + extra + ['--out', str(out)]), 1)
+                self.assertIn('output aliases an input', errors.getvalue())
+                self.assertEqual(before, {p: p.read_bytes() for p in before})
+        separate = folder / 'enriched.json'
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ll.main(arguments + ['--out', str(separate)]), 0)
+            self.assertEqual(ll.main(arguments + ['--out', str(path)]), 0)
+            self.assertEqual(path.read_bytes(), separate.read_bytes())
+            self.assertEqual(ll.main(arguments + ['--out', str(path)]), 0)
+        self.assertEqual(path.read_bytes(), separate.read_bytes())
+        self.assertEqual(self.image.read_bytes(), before[self.image])
 
     def test_a_tee_is_three_network_links_but_three_segments_to_one_junction(self):
         syms = self.draw({"A": [100, 470, 160, 530], "B": [840, 470, 900, 530], "C": [470, 840, 530, 900]},
@@ -492,6 +529,49 @@ class VendorRender(unittest.TestCase):
         self.assertEqual(rec["status"], "n/a")
         self.assertIn("the map fails its check", rec["reason"])
         self.assertFalse((self.dir / "keys" / "T1.graphml").exists())
+
+
+class ScorePublication(unittest.TestCase):
+    def test_cli_scores_preserve_all_sets_images_and_graphml(self):
+        public = ROOT / 'data/external/pid2graph/PID2Graph/Complete/PID2Graph OPEN100'
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            sets, sources = {}, []
+            for name in ('first', 'second'):
+                base = folder / name
+                base.mkdir()
+                for extension in ('png', 'graphml'):
+                    path = base / ('0.' + extension)
+                    shutil.copyfile(public / path.name, path)
+                    sources.append(path)
+                sets[name] = {'dir': str(base), 'sheets': ['0'], 'scope': 'all', 'truth': 'pid2graph'}
+            before = {p: p.read_bytes() for p in sources}
+            with mock.patch.dict(ll.SETS, sets):
+                for i, source in enumerate(sources):
+                    out = folder / f'alias-{i}.json'
+                    out.hardlink_to(source)
+                    with self.subTest(source=str(source)), contextlib.redirect_stdout(io.StringIO()), \
+                            contextlib.redirect_stderr(io.StringIO()) as errors:
+                        self.assertEqual(ll.main(['score', '--set', 'first', '--set', 'second', '--json', str(out)]), 1)
+                        self.assertIn('output aliases an input', errors.getvalue())
+                        self.assertEqual(before, {p: p.read_bytes() for p in before})
+                with contextlib.redirect_stdout(io.StringIO()):
+                    self.assertEqual(ll.main(['score', '--set', 'first', '--set', 'second',
+                                              '--json', str(folder / 'fresh.json')]), 0)
+                self.assertEqual(len(json.loads((folder / 'fresh.json').read_bytes())), 2)
+
+    def test_unmapped_selection_sidecars_are_still_preserved(self):
+        with tempfile.TemporaryDirectory() as d:
+            folder = Path(d)
+            source = folder / 'not-mapped.json'
+            source.write_text('{"status":"unmapped"}', encoding='utf-8')
+            before = source.read_bytes()
+            cfg = {'dir': str(folder), 'sheets': None, 'scope': 'process', 'truth': 'dexpi_sidecar'}
+            with mock.patch.dict(ll.SETS, {'selection': cfg}), contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(io.StringIO()) as errors:
+                self.assertEqual(ll.main(['score', '--set', 'selection', '--json', str(source)]), 1)
+            self.assertIn('output aliases an input', errors.getvalue())
+            self.assertEqual(source.read_bytes(), before)
 
 
 class Enrich(unittest.TestCase):

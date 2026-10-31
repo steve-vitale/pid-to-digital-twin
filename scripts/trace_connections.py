@@ -453,6 +453,14 @@ def main():
     if a.oracle and any(d not in {str(i) for i in range(6)} for d in drawings):
         sys.exit("--oracle reads answer-key symbols: development drawings 0-5 only (docs/GOAL.md)")
     tool = "oracle" if a.oracle else a.tool
+    from output_paths import protect_outputs
+    sources = [DATA / f"{d}.png" for d in drawings]
+    sources.extend(DATA / f"{d}.graphml" if a.oracle else RUNS / a.src_label / a.tool / f"{d}.json"
+                   for d in drawings)
+    try:
+        protect_outputs([RUNS / a.label / tool / f"{d}.json" for d in drawings], sources)
+    except ValueError as exc:
+        ap.exit(2, f"refused: {exc}\n")
     for d in drawings:
         image = DATA / f"{d}.png"
         if a.oracle:

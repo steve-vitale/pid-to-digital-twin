@@ -492,3 +492,8 @@ The generated question screen also has zero findings on this sparse case. Source
 question coverage and rendered engineering quality therefore remain separate assessments. No timed engineer
 trial, held-out accuracy, or broad description-to-P&ID success rate is claimed. The source inventory is agent
 work, not human approval. Existing historical criteria and results retain their original scopes.
+
+The separate [fixed-claim development exercise](../benchmarks/README.md) adds twelve supplied MGPI/NIST labels
+with synthetic controls. It grades labels on explicit paraphrases; reasons and citation support remain
+unscored. It supplies a bounded evaluation contract, not the unfamiliar-description or useful-question
+measurement above, and does not change the field scorer, question catalog or historical results.

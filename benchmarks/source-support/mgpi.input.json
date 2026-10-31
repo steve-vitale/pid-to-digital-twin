@@ -1,0 +1,148 @@
+{
+  "schema": "source-support-input-1",
+  "fixture_id": "original-source-judgment-dev-20261030-v1-mgpi",
+  "task": "Classify candidate engineering claims against bounded admitted original-source evidence.",
+  "labels": [
+    "supported",
+    "contradicted",
+    "insufficient-evidence"
+  ],
+  "instructions": [
+    "Judge evidence support, not whether an installation is safe or engineering-approved.",
+    "Supported requires evidence for all material parts at the claimed entity, time and configuration scope.",
+    "Contradicted requires an explicit incompatible fact for that same scope; a missing statement alone is insufficient-evidence.",
+    "Use insufficient-evidence if admitted sources leave the claim unresolved. Historical truth does not establish current installed truth.",
+    "Alarm/notification, automatic action and remote action have distinct meanings and endpoints.",
+    "Keep source literals, unavailable values, zero, blank fields, document revisions and individual timestamps distinct.",
+    "Do not infer deployment history, job execution or physical condition from publication metadata or filenames.",
+    "Use only each item's admitted evidence IDs and the source identity/time metadata; do not use external knowledge or other items's evidence."
+  ],
+  "expected_response": {
+    "schema": "source-support-answer-1",
+    "decisions": [
+      {
+        "id": "<item id>",
+        "judgment": "<one permitted label>",
+        "evidence_ids": [
+          "<admitted evidence id>"
+        ],
+        "reason": "<brief reason>"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.7, section 2.3, final narrative paragraph; printed p.8, section 2.3 continuation, first paragraph before 2.3.1.",
+      "paraphrase": "The report describes receiving 12.5% sodium hypochlorite into an outdoor bulk tank of 6,500 gallons at atmospheric pressure. Piping then transfers it to a smaller indoor Mod B day tank and subsequently to a process vessel when needed.",
+      "time_scope": "Historical/report-era process description associated with the October 2016 incident."
+    },
+    {
+      "id": "E02",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.23, section 5.2, right column paragraph beginning with MGPI tank level indicator, ending before emergency stop paragraph; read with left column opening of 5.2.",
+      "paraphrase": "A level indicator warned control-system operators near tank capacity. The configured alarm provided notification without automatically stopping transfer. The report places its activation at 7:59 AM during the incident, after sulfuric acid entered the sodium hypochlorite bulk tank. The section explicitly describes absence of automatic deviation-triggered transfer shutdown at incident time.",
+      "time_scope": "October 21, 2016 incident and configuration described by the December 2017 report, not a present-day inspection."
+    },
+    {
+      "id": "E03",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.23, section 5.2, right column emergency-stop paragraph and final paragraph of page.",
+      "paraphrase": "The two Mod B emergency-stop buttons affected equipment downstream of unloading. One could halt sodium hypochlorite movement from bulk storage to its day tank, but could not halt movement from the unloading area into bulk storage. The report explicitly states the unloading area lacked remote shutdown capability.",
+      "time_scope": "Historical incident conditions described by the report."
+    },
+    {
+      "id": "E04",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed pp.7-8 section 2.3 admitted process narrative and printed p.23 section 5.2 admitted narrative only.",
+      "paraphrase": "These admitted passages describe process transfers, the level alarm, absent automatic deviation-triggered transfer shutdown, and emergency-stop scope. They contain no statement about installation or absence of a pH sensor in the sodium hypochlorite bulk tank.",
+      "time_scope": "Bounded historical narrative only. No complete instrumentation inventory is admitted."
+    }
+  ],
+  "sources": [
+    {
+      "id": "MGPI-2017",
+      "family": "csb-mgpi",
+      "path": "data/external/csb-mgpi/csb-2017-01-i-ks.pdf",
+      "sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+      "title": "CSB, Key Lessons for Preventing Inadvertent Mixing During Chemical Unloading Operations",
+      "identity": "MGPI Processing, Inc.; Chemical Reaction and Release in Atchison, Kansas; No. 2017-01-I-KS; published December 2017",
+      "url": "https://www.csb.gov/file.aspx?DocumentId=6047",
+      "time_scope": "Report describing the October 21, 2016 incident and report-era conditions. No 2026 installation evidence.",
+      "admitted_scope": "Narrative in section 2.3 on printed pp.7-8 (p.8 only before 2.3.1), and section 5.2 on printed p.23. Printed page equals one-based PDF page.",
+      "bytes": 3268926,
+      "attribution": "U.S. Chemical Safety and Hazard Investigation Board"
+    }
+  ],
+  "items": [
+    {
+      "id": "SJ001",
+      "family": "csb-mgpi",
+      "candidate_claim": "The historical Mod B sodium hypochlorite path included an outdoor 6,500-gallon bulk tank followed by a smaller day tank inside the building before a process vessel.",
+      "claim_time_scope": "Process described by the December 2017 report in connection with the October 2016 incident.",
+      "admitted_evidence_ids": [
+        "E01"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ002",
+      "family": "csb-mgpi",
+      "candidate_claim": "The CSB report places a high-level alarm from the sodium hypochlorite bulk tank at 7:59 AM on the incident day.",
+      "claim_time_scope": "October 21, 2016, reported event time.",
+      "admitted_evidence_ids": [
+        "E02"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ003",
+      "family": "csb-mgpi",
+      "candidate_claim": "At the time of the incident the configured high-level alarm automatically stopped chemical transfer into the sodium hypochlorite bulk tank without operator action.",
+      "claim_time_scope": "October 21, 2016 installed/configured behavior as reported.",
+      "admitted_evidence_ids": [
+        "E02"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ004",
+      "family": "csb-mgpi",
+      "candidate_claim": "During the incident the Mod B emergency-stop capability could remotely stop chemical flow from the unloading area into the sodium hypochlorite bulk tank.",
+      "claim_time_scope": "October 21, 2016 reported remote shutdown scope.",
+      "admitted_evidence_ids": [
+        "E03"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ005",
+      "family": "csb-mgpi",
+      "candidate_claim": "On October 30, 2026 the installed MGPI sodium hypochlorite bulk-tank high-level protection still only notifies operators and does not automatically stop unloading.",
+      "claim_time_scope": "Current installed condition on October 30, 2026.",
+      "admitted_evidence_ids": [
+        "E02"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    },
+    {
+      "id": "SJ006",
+      "family": "csb-mgpi",
+      "candidate_claim": "No pH sensor was installed in the sodium hypochlorite bulk tank at incident time.",
+      "claim_time_scope": "October 21, 2016 physical instrumentation existence.",
+      "admitted_evidence_ids": [
+        "E04"
+      ],
+      "instruction": "Classify this candidate claim against only the admitted evidence. Return a label, cited evidence IDs and a concise reason."
+    }
+  ]
+}

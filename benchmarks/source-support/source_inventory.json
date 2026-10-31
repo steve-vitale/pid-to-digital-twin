@@ -1,0 +1,171 @@
+{
+  "schema": "source-support-sources-1",
+  "baseline": "15ea4c979beebaca77f70ee5a36cb8329df116bc",
+  "verified_at_utc": "2026-10-30T23:08:20.393648+00:00",
+  "originals": [
+    {
+      "id": "MGPI-2017",
+      "family": "csb-mgpi",
+      "path": "data/external/csb-mgpi/csb-2017-01-i-ks.pdf",
+      "sha256": "2e8f0ef9db7b9c65b790dbb3c1a2f12f90a9a7051e531189b5868ce2c2e6a07e",
+      "title": "CSB, Key Lessons for Preventing Inadvertent Mixing During Chemical Unloading Operations",
+      "identity": "MGPI Processing, Inc.; Chemical Reaction and Release in Atchison, Kansas; No. 2017-01-I-KS; published December 2017",
+      "url": "https://www.csb.gov/file.aspx?DocumentId=6047",
+      "time_scope": "Report describing the October 21, 2016 incident and report-era conditions. No 2026 installation evidence.",
+      "admitted_scope": "Narrative in section 2.3 on printed pp.7-8 (p.8 only before 2.3.1), and section 5.2 on printed p.23. Printed page equals one-based PDF page.",
+      "excluded": "All figures, photos, captions, footnotes, section 2.3 on p.6, section 2.3.1, all incident narrative in section 3, and continuation of 5.2 on p.24. No third-party photo evidence admitted.",
+      "extraction": "pypdf text, checked against Poppler render for admitted paragraphs on pp.7-8 and 23; figure areas not used as evidence.",
+      "bytes": 3268926,
+      "attribution": "U.S. Chemical Safety and Hazard Investigation Board"
+    },
+    {
+      "id": "SMS-DEV-2016",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/2016/Devices.xml",
+      "sha256": "c696155196da9a783efc1f5be6618db561a4f5a6dc8998a1120c3077e60c9998",
+      "title": "NIST SMS Hurco04 device configuration, 2016-10-06 commit",
+      "identity": "Official usnistgov/smstestbed mtconnect/agent/Devices.xml at git 1dab3278e05e4074c6cf3c5f167acce94f30a5a8",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/1dab3278e05e4074c6cf3c5f167acce94f30a5a8/mtconnect/agent/Devices.xml",
+      "time_scope": "Published historical configuration at the pinned git revision; not a deployment or live machine record.",
+      "admitted_scope": "Physical lines 691-692 and 724 only.",
+      "bytes": 61363,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    },
+    {
+      "id": "SMS-DEV-2017",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/2017/Devices.xml",
+      "sha256": "bb54e4eca7b65e50b026d02b785c3f905b66bd38493456569272540296f68166",
+      "title": "NIST SMS later Hurco04 device configuration, last changed 2017-07-11",
+      "identity": "Official usnistgov/smstestbed mtconnect/agent/Devices.xml at git 968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/mtconnect/agent/Devices.xml",
+      "time_scope": "Published historical configuration at the pinned git revision; not evidence this revision was deployed for the February log.",
+      "admitted_scope": "Physical lines 463-464 and 496 only.",
+      "bytes": 39450,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    },
+    {
+      "id": "SMS-RAW",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/raw/Hurco04-20170217-20170218.txt",
+      "sha256": "093a80ace21094a6c164e5ab8879ffd893c90fdf5902e18677f57d8bfa679b6a",
+      "title": "NIST SMS archived Hurco04 raw operating log",
+      "identity": "Official usnistgov/smstestbed raw/Hurco04/Hurco04-20170217-20170218.txt at git 968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/raw/Hurco04/Hurco04-20170217-20170218.txt",
+      "time_scope": "Exact timestamps in individual archived records. Filename is not a guarantee of temporal bounds or complete coverage.",
+      "admitted_scope": "Physical lines 3, 34, 37, 45, 81, 359, plus inspection of the three-field format of all 363 lines solely for the absent deployed-revision field.",
+      "bytes": 17314,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    },
+    {
+      "id": "SMS-NOTICE",
+      "family": "nist-smstestbed",
+      "path": "data/external/nist-smstestbed/README.md",
+      "sha256": "295bf123b805c8b3232702ed390a10ee77a5ebc159388b421781b55f76e31eaa",
+      "title": "NIST SMS repository description and reuse notice",
+      "identity": "Official usnistgov/smstestbed README.md at git 968279f14ebe96c03c8877eeb1901cf6b4c8fbab",
+      "url": "https://raw.githubusercontent.com/usnistgov/smstestbed/968279f14ebe96c03c8877eeb1901cf6b4c8fbab/README.md",
+      "time_scope": "Pinned repository notice only.",
+      "admitted_scope": "Physical lines 28-46; attribution/reuse context only, bound to no judgment item.",
+      "bytes": 3704,
+      "attribution": "National Institute of Standards and Technology, Smart Manufacturing Systems Test Bed; official usnistgov/smstestbed repository"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.7, section 2.3, final narrative paragraph; printed p.8, section 2.3 continuation, first paragraph before 2.3.1.",
+      "paraphrase": "The report describes receiving 12.5% sodium hypochlorite into an outdoor bulk tank of 6,500 gallons at atmospheric pressure. Piping then transfers it to a smaller indoor Mod B day tank and subsequently to a process vessel when needed.",
+      "time_scope": "Historical/report-era process description associated with the October 2016 incident."
+    },
+    {
+      "id": "E02",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.23, section 5.2, right column paragraph beginning with MGPI tank level indicator, ending before emergency stop paragraph; read with left column opening of 5.2.",
+      "paraphrase": "A level indicator warned control-system operators near tank capacity. The configured alarm provided notification without automatically stopping transfer. The report places its activation at 7:59 AM during the incident, after sulfuric acid entered the sodium hypochlorite bulk tank. The section explicitly describes absence of automatic deviation-triggered transfer shutdown at incident time.",
+      "time_scope": "October 21, 2016 incident and configuration described by the December 2017 report, not a present-day inspection."
+    },
+    {
+      "id": "E03",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed p.23, section 5.2, right column emergency-stop paragraph and final paragraph of page.",
+      "paraphrase": "The two Mod B emergency-stop buttons affected equipment downstream of unloading. One could halt sodium hypochlorite movement from bulk storage to its day tank, but could not halt movement from the unloading area into bulk storage. The report explicitly states the unloading area lacked remote shutdown capability.",
+      "time_scope": "Historical incident conditions described by the report."
+    },
+    {
+      "id": "E04",
+      "source_ids": [
+        "MGPI-2017"
+      ],
+      "locator": "Printed pp.7-8 section 2.3 admitted process narrative and printed p.23 section 5.2 admitted narrative only.",
+      "paraphrase": "These admitted passages describe process transfers, the level alarm, absent automatic deviation-triggered transfer shutdown, and emergency-stop scope. They contain no statement about installation or absence of a pH sensor in the sodium hypochlorite bulk tank.",
+      "time_scope": "Bounded historical narrative only. No complete instrumentation inventory is admitted."
+    },
+    {
+      "id": "E05",
+      "source_ids": [
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "2016 Devices.xml physical lines 691-692; 2017 Devices.xml physical lines 463-464; Device element and Description.",
+      "paraphrase": "Both pinned XML versions give the device name and id as Hurco04 and UUID as mtc_adapter008; the Description identifies manufacturer Hurco and model VMX24.",
+      "time_scope": "Comparison of the two published git versions, not deployed revision or live identity verification."
+    },
+    {
+      "id": "E06",
+      "source_ids": [
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "2016 Devices.xml physical line 724; 2017 Devices.xml physical line 496; Device[@id='Hurco04']//DataItem[@id='Hurco04-path_7'].",
+      "paraphrase": "In the older XML, Hurco04-path_7 is named current_tool and typed TOOL_NUMBER. In the later XML, that same id string is named Program_Runtime_Seconds and typed ACCUMULATED_TIME, with SECOND units.",
+      "time_scope": "Different published historical document revisions; their definitions are not simultaneous readings."
+    },
+    {
+      "id": "E07",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Archived raw log physical lines 3 and 34, preserving each timestamp, item and value.",
+      "paraphrase": "At 2017-02-14T16:12:54.968217Z the Spindle_Speed value is the literal UNAVAILABLE. At 2017-02-17T09:18:51.4531250Z the Spindle_Speed value is numeric 0. These are separate records with different timestamps and different literal values.",
+      "time_scope": "Only the two archived samples at their exact timestamps; no inferred interpolation."
+    },
+    {
+      "id": "E08",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Source filename Hurco04-20170217-20170218.txt and physical line 3.",
+      "paraphrase": "Despite the date strings in its filename, this archive includes a Spindle_Speed record timestamped 2017-02-14T16:12:54.968217Z, whose value is UNAVAILABLE.",
+      "time_scope": "An included timestamp predating February 17, 2017; no filename-derived completeness claim."
+    },
+    {
+      "id": "E09",
+      "source_ids": [
+        "SMS-RAW",
+        "SMS-DEV-2016",
+        "SMS-DEV-2017"
+      ],
+      "locator": "All 363 raw physical lines inspected for field format; example line 81; paired XML identities at 2016 lines 691-692 and 2017 lines 463-464.",
+      "paraphrase": "Each raw line has timestamp, item name and value separated by vertical bars; no deployed-configuration revision field appears. Line 81 records Spindle_Speed as 1000.000000 at 2017-02-17T09:26:08.0468750Z. The two published XML files share machine identity, but neither supplies deployment history for this log.",
+      "time_scope": "Historical archive and two published XML revisions; no installation or deployment record admitted."
+    },
+    {
+      "id": "E10",
+      "source_ids": [
+        "SMS-RAW"
+      ],
+      "locator": "Raw physical lines 37, 45 and 359, preserving the single-space program name value at line 37.",
+      "paraphrase": "At 2017-02-17T09:18:51.4531250Z Program_Name_Running contains one space, and Program_Status is READY. At 2017-02-17T09:40:46.755688Z Program_Status is UNAVAILABLE. None of these records names a production job or documents continuous execution.",
+      "time_scope": "The specific archived observations only; no complete production-state timeline."
+    }
+  ],
+  "reuse": "NIST selected source files have no copyright marking; upstream notice is preserved in the original cached README. Public-information reuse notice is not a blanket SPDX/public-domain declaration. MGPI original figures/photos are excluded. All task prose is newly authored paraphrase."
+}

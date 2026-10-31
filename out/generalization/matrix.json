@@ -1,9 +1,15 @@
 {
  "about": "Generalization matrix written by scripts/corpus_matrix.py; rendered as docs/GENERALIZATION.md.",
- "ran_at": "2026-10-30 22:52 UTC",
- "seconds": 1493.3,
+ "ran_at": "2026-10-31 00:10 UTC",
+ "seconds": 1528.0,
  "rows_run_this_time": [
-  2
+  1,
+  2,
+  3,
+  4,
+  5,
+  7,
+  8
  ],
  "tracer_pass_f1": 0.88,
  "pipe_pass_f1": 0.88,
@@ -26,7 +32,7 @@
       "predicted": 346,
       "truth": 359,
       "review_load_per_100": 3.3,
-      "seconds": 3.1,
+      "seconds": 2.9,
       "scan_cleaned": false
      },
      "1": {
@@ -38,7 +44,7 @@
       "predicted": 72,
       "truth": 60,
       "review_load_per_100": 11.9,
-      "seconds": 0.9,
+      "seconds": 1.6,
       "scan_cleaned": false
      },
      "2": {
@@ -50,7 +56,7 @@
       "predicted": 160,
       "truth": 153,
       "review_load_per_100": 8.3,
-      "seconds": 2.5,
+      "seconds": 3.0,
       "scan_cleaned": false
      },
      "3": {
@@ -62,7 +68,7 @@
       "predicted": 92,
       "truth": 98,
       "review_load_per_100": 8.2,
-      "seconds": 1.2,
+      "seconds": 1.1,
       "scan_cleaned": false
      },
      "4": {
@@ -74,7 +80,7 @@
       "predicted": 117,
       "truth": 130,
       "review_load_per_100": 7.5,
-      "seconds": 0.9,
+      "seconds": 1.8,
       "scan_cleaned": false
      },
      "5": {
@@ -86,7 +92,7 @@
       "predicted": 278,
       "truth": 341,
       "review_load_per_100": 18.5,
-      "seconds": 3.1,
+      "seconds": 4.8,
       "scan_cleaned": false
      }
     },
@@ -107,12 +113,13 @@
      "agrees": true
     }
    ],
-   "seconds": 12.1,
-   "ran_at": "2026-10-30 16:20 UTC",
+   "seconds": 15.9,
+   "ran_at": "2026-10-30 23:50 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -133,7 +140,7 @@
       "predicted": 121,
       "truth": 101,
       "review_load_per_100": 29.2,
-      "seconds": 3.3,
+      "seconds": 3.8,
       "scan_cleaned": false
      },
      "7": {
@@ -145,7 +152,7 @@
       "predicted": 150,
       "truth": 141,
       "review_load_per_100": 23.1,
-      "seconds": 3.1,
+      "seconds": 3.7,
       "scan_cleaned": false
      },
      "8": {
@@ -157,7 +164,7 @@
       "predicted": 47,
       "truth": 51,
       "review_load_per_100": 8.8,
-      "seconds": 2.4,
+      "seconds": 3.5,
       "scan_cleaned": false
      },
      "9": {
@@ -169,7 +176,7 @@
       "predicted": 161,
       "truth": 170,
       "review_load_per_100": 4.0,
-      "seconds": 2.8,
+      "seconds": 3.4,
       "scan_cleaned": false
      },
      "10": {
@@ -181,7 +188,7 @@
       "predicted": 212,
       "truth": 207,
       "review_load_per_100": 11.4,
-      "seconds": 2.8,
+      "seconds": 4.5,
       "scan_cleaned": false
      },
      "11": {
@@ -193,7 +200,7 @@
       "predicted": 140,
       "truth": 142,
       "review_load_per_100": 9.2,
-      "seconds": 1.7,
+      "seconds": 2.3,
       "scan_cleaned": false
      }
     },
@@ -206,12 +213,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 16.0,
-   "ran_at": "2026-10-30 16:20 UTC",
+   "seconds": 21.3,
+   "ran_at": "2026-10-30 23:50 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -232,7 +240,7 @@
       "predicted": 121,
       "truth": 101,
       "review_load_per_100": 29.2,
-      "seconds": 4.1,
+      "seconds": 6.2,
       "scan_cleaned": true
      },
      "7": {
@@ -244,7 +252,7 @@
       "predicted": 150,
       "truth": 141,
       "review_load_per_100": 23.1,
-      "seconds": 4.5,
+      "seconds": 6.4,
       "scan_cleaned": true
      },
      "8": {
@@ -256,7 +264,7 @@
       "predicted": 47,
       "truth": 51,
       "review_load_per_100": 8.8,
-      "seconds": 4.1,
+      "seconds": 6.4,
       "scan_cleaned": true
      },
      "9": {
@@ -268,7 +276,7 @@
       "predicted": 164,
       "truth": 170,
       "review_load_per_100": 3.5,
-      "seconds": 4.0,
+      "seconds": 6.2,
       "scan_cleaned": true
      },
      "10": {
@@ -280,7 +288,7 @@
       "predicted": 216,
       "truth": 207,
       "review_load_per_100": 8.5,
-      "seconds": 3.9,
+      "seconds": 7.7,
       "scan_cleaned": true
      },
      "11": {
@@ -292,7 +300,7 @@
       "predicted": 144,
       "truth": 142,
       "review_load_per_100": 10.9,
-      "seconds": 3.0,
+      "seconds": 4.2,
       "scan_cleaned": true
      }
     },
@@ -305,12 +313,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 23.6,
-   "ran_at": "2026-10-30 16:20 UTC",
+   "seconds": 37.4,
+   "ran_at": "2026-10-30 23:51 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -331,7 +340,7 @@
       "predicted": 130,
       "truth": 101,
       "review_load_per_100": 27.6,
-      "seconds": 5.0,
+      "seconds": 7.6,
       "scan_cleaned": true
      },
      "7": {
@@ -343,7 +352,7 @@
       "predicted": 154,
       "truth": 141,
       "review_load_per_100": 24.1,
-      "seconds": 7.2,
+      "seconds": 11.9,
       "scan_cleaned": true
      },
      "8": {
@@ -355,7 +364,7 @@
       "predicted": 56,
       "truth": 51,
       "review_load_per_100": 12.1,
-      "seconds": 5.8,
+      "seconds": 7.2,
       "scan_cleaned": true
      },
      "9": {
@@ -367,7 +376,7 @@
       "predicted": 164,
       "truth": 170,
       "review_load_per_100": 3.5,
-      "seconds": 10.1,
+      "seconds": 13.0,
       "scan_cleaned": true
      },
      "10": {
@@ -379,7 +388,7 @@
       "predicted": 238,
       "truth": 207,
       "review_load_per_100": 12.6,
-      "seconds": 21.3,
+      "seconds": 28.1,
       "scan_cleaned": true
      },
      "11": {
@@ -391,7 +400,7 @@
       "predicted": 228,
       "truth": 142,
       "review_load_per_100": 66.4,
-      "seconds": 5.3,
+      "seconds": 8.5,
       "scan_cleaned": true
      }
     },
@@ -404,12 +413,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 54.7,
-   "ran_at": "2026-10-30 16:20 UTC",
+   "seconds": 76.7,
+   "ran_at": "2026-10-30 23:51 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -430,7 +440,7 @@
       "predicted": 125,
       "truth": 101,
       "review_load_per_100": 26.0,
-      "seconds": 6.4,
+      "seconds": 9.2,
       "scan_cleaned": true
      },
      "7": {
@@ -442,7 +452,7 @@
       "predicted": 143,
       "truth": 141,
       "review_load_per_100": 38.7,
-      "seconds": 15.4,
+      "seconds": 21.3,
       "scan_cleaned": true
      },
      "8": {
@@ -454,7 +464,7 @@
       "predicted": 49,
       "truth": 51,
       "review_load_per_100": 11.0,
-      "seconds": 7.6,
+      "seconds": 9.6,
       "scan_cleaned": true
      },
      "9": {
@@ -466,7 +476,7 @@
       "predicted": 98,
       "truth": 170,
       "review_load_per_100": 33.6,
-      "seconds": 16.4,
+      "seconds": 22.7,
       "scan_cleaned": true
      },
      "10": {
@@ -478,7 +488,7 @@
       "predicted": 311,
       "truth": 207,
       "review_load_per_100": 33.4,
-      "seconds": 47.0,
+      "seconds": 56.7,
       "scan_cleaned": true
      },
      "11": {
@@ -490,7 +500,7 @@
       "predicted": 198,
       "truth": 142,
       "review_load_per_100": 40.3,
-      "seconds": 9.1,
+      "seconds": 11.3,
       "scan_cleaned": true
      }
     },
@@ -503,12 +513,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 102.1,
-   "ran_at": "2026-10-30 16:21 UTC",
+   "seconds": 131.1,
+   "ran_at": "2026-10-30 23:52 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -529,7 +540,7 @@
       "predicted": 478,
       "truth": 502,
       "review_load_per_100": 3.9,
-      "seconds": 22.4,
+      "seconds": 22.2,
       "scan_cleaned": false
      },
      "44": {
@@ -541,7 +552,7 @@
       "predicted": 262,
       "truth": 657,
       "review_load_per_100": 51.1,
-      "seconds": 22.1,
+      "seconds": 17.6,
       "scan_cleaned": false
      },
      "62": {
@@ -553,7 +564,7 @@
       "predicted": 655,
       "truth": 680,
       "review_load_per_100": 3.0,
-      "seconds": 24.2,
+      "seconds": 23.2,
       "scan_cleaned": false
      },
      "78": {
@@ -565,7 +576,7 @@
       "predicted": 592,
       "truth": 608,
       "review_load_per_100": 2.2,
-      "seconds": 22.6,
+      "seconds": 21.4,
       "scan_cleaned": false
      },
      "109": {
@@ -577,7 +588,7 @@
       "predicted": 732,
       "truth": 732,
       "review_load_per_100": 0.0,
-      "seconds": 22.6,
+      "seconds": 20.1,
       "scan_cleaned": false
      },
      "111": {
@@ -589,7 +600,7 @@
       "predicted": 1173,
       "truth": 1194,
       "review_load_per_100": 1.6,
-      "seconds": 21.6,
+      "seconds": 18.9,
       "scan_cleaned": false
      },
      "122": {
@@ -601,7 +612,7 @@
       "predicted": 290,
       "truth": 576,
       "review_load_per_100": 41.9,
-      "seconds": 20.3,
+      "seconds": 16.8,
       "scan_cleaned": false
      },
      "143": {
@@ -613,7 +624,7 @@
       "predicted": 649,
       "truth": 975,
       "review_load_per_100": 30.1,
-      "seconds": 19.7,
+      "seconds": 17.7,
       "scan_cleaned": false
      },
      "149": {
@@ -625,7 +636,7 @@
       "predicted": 739,
       "truth": 747,
       "review_load_per_100": 1.0,
-      "seconds": 22.9,
+      "seconds": 19.3,
       "scan_cleaned": false
      },
      "158": {
@@ -637,7 +648,7 @@
       "predicted": 516,
       "truth": 583,
       "review_load_per_100": 8.9,
-      "seconds": 25.1,
+      "seconds": 22.5,
       "scan_cleaned": false
      },
      "209": {
@@ -649,7 +660,7 @@
       "predicted": 410,
       "truth": 639,
       "review_load_per_100": 30.3,
-      "seconds": 24.8,
+      "seconds": 18.1,
       "scan_cleaned": false
      },
      "224": {
@@ -661,7 +672,7 @@
       "predicted": 364,
       "truth": 578,
       "review_load_per_100": 31.1,
-      "seconds": 23.2,
+      "seconds": 16.6,
       "scan_cleaned": false
      },
      "290": {
@@ -673,7 +684,7 @@
       "predicted": 406,
       "truth": 630,
       "review_load_per_100": 29.4,
-      "seconds": 22.2,
+      "seconds": 18.7,
       "scan_cleaned": false
      },
      "345": {
@@ -685,7 +696,7 @@
       "predicted": 1694,
       "truth": 1705,
       "review_load_per_100": 0.6,
-      "seconds": 20.0,
+      "seconds": 24.7,
       "scan_cleaned": false
      },
      "363": {
@@ -697,7 +708,7 @@
       "predicted": 713,
       "truth": 751,
       "review_load_per_100": 4.2,
-      "seconds": 23.8,
+      "seconds": 25.0,
       "scan_cleaned": false
      },
      "366": {
@@ -709,7 +720,7 @@
       "predicted": 650,
       "truth": 734,
       "review_load_per_100": 9.9,
-      "seconds": 23.7,
+      "seconds": 19.0,
       "scan_cleaned": false
      },
      "382": {
@@ -721,7 +732,7 @@
       "predicted": 534,
       "truth": 602,
       "review_load_per_100": 9.3,
-      "seconds": 21.7,
+      "seconds": 21.3,
       "scan_cleaned": false
      },
      "400": {
@@ -733,7 +744,7 @@
       "predicted": 668,
       "truth": 697,
       "review_load_per_100": 3.6,
-      "seconds": 22.3,
+      "seconds": 16.7,
       "scan_cleaned": false
      },
      "494": {
@@ -745,7 +756,7 @@
       "predicted": 506,
       "truth": 572,
       "review_load_per_100": 9.7,
-      "seconds": 18.9,
+      "seconds": 16.9,
       "scan_cleaned": false
      },
      "496": {
@@ -757,7 +768,7 @@
       "predicted": 540,
       "truth": 560,
       "review_load_per_100": 3.0,
-      "seconds": 22.7,
+      "seconds": 16.4,
       "scan_cleaned": false
      }
     },
@@ -770,12 +781,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 447.8,
-   "ran_at": "2026-10-30 16:23 UTC",
+   "seconds": 394.3,
+   "ran_at": "2026-10-30 23:55 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -796,7 +808,7 @@
       "predicted": 33,
       "truth": 37,
       "review_load_per_100": 16.1,
-      "seconds": 9.8,
+      "seconds": 4.6,
       "scan_cleaned": false
      },
      "dexpi-c02": {
@@ -808,7 +820,7 @@
       "predicted": 8,
       "truth": 13,
       "review_load_per_100": 19.2,
-      "seconds": 2.0,
+      "seconds": 1.3,
       "scan_cleaned": false
      },
      "dexpi-c03": {
@@ -820,7 +832,7 @@
       "predicted": 6,
       "truth": 10,
       "review_load_per_100": 19.0,
-      "seconds": 1.5,
+      "seconds": 0.9,
       "scan_cleaned": false
      }
     },
@@ -833,12 +845,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 13.3,
-   "ran_at": "2026-10-30 16:31 UTC",
+   "seconds": 6.8,
+   "ran_at": "2026-10-31 00:01 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -859,7 +872,7 @@
       "predicted": 59,
       "truth": 59,
       "review_load_per_100": 0.0,
-      "seconds": 4.3,
+      "seconds": 2.2,
       "scan_cleaned": false
      },
      "102": {
@@ -871,7 +884,7 @@
       "predicted": 34,
       "truth": 34,
       "review_load_per_100": 0.0,
-      "seconds": 2.6,
+      "seconds": 2.5,
       "scan_cleaned": false
      },
      "103": {
@@ -883,7 +896,7 @@
       "predicted": 24,
       "truth": 24,
       "review_load_per_100": 0.0,
-      "seconds": 3.4,
+      "seconds": 2.3,
       "scan_cleaned": false
      }
     },
@@ -896,12 +909,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 10.3,
-   "ran_at": "2026-10-30 16:31 UTC",
+   "seconds": 7.0,
+   "ran_at": "2026-10-31 00:01 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -922,7 +936,7 @@
       "predicted": 107,
       "truth": 107,
       "review_load_per_100": 0.0,
-      "seconds": 3.6,
+      "seconds": 3.0,
       "scan_cleaned": false
      },
      "102": {
@@ -934,7 +948,7 @@
       "predicted": 55,
       "truth": 55,
       "review_load_per_100": 0.0,
-      "seconds": 3.8,
+      "seconds": 2.6,
       "scan_cleaned": false
      },
      "103": {
@@ -946,7 +960,7 @@
       "predicted": 46,
       "truth": 46,
       "review_load_per_100": 0.0,
-      "seconds": 3.3,
+      "seconds": 2.5,
       "scan_cleaned": false
      }
     },
@@ -959,12 +973,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 10.7,
-   "ran_at": "2026-10-30 16:31 UTC",
+   "seconds": 8.2,
+   "ran_at": "2026-10-31 00:01 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -985,7 +1000,7 @@
       "predicted": 107,
       "truth": 107,
       "review_load_per_100": 0.0,
-      "seconds": 4.1,
+      "seconds": 3.0,
       "scan_cleaned": false
      },
      "102": {
@@ -997,7 +1012,7 @@
       "predicted": 55,
       "truth": 55,
       "review_load_per_100": 0.0,
-      "seconds": 4.7,
+      "seconds": 2.6,
       "scan_cleaned": false
      },
      "103": {
@@ -1009,7 +1024,7 @@
       "predicted": 46,
       "truth": 46,
       "review_load_per_100": 0.0,
-      "seconds": 3.9,
+      "seconds": 2.2,
       "scan_cleaned": false
      }
     },
@@ -1022,12 +1037,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 12.9,
-   "ran_at": "2026-10-30 16:31 UTC",
+   "seconds": 7.9,
+   "ran_at": "2026-10-31 00:02 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -1048,7 +1064,7 @@
       "predicted": 108,
       "truth": 107,
       "review_load_per_100": 0.6,
-      "seconds": 4.3,
+      "seconds": 4.5,
       "scan_cleaned": true
      },
      "102": {
@@ -1060,7 +1076,7 @@
       "predicted": 55,
       "truth": 55,
       "review_load_per_100": 0.0,
-      "seconds": 6.0,
+      "seconds": 4.2,
       "scan_cleaned": true
      },
      "103": {
@@ -1072,7 +1088,7 @@
       "predicted": 44,
       "truth": 46,
       "review_load_per_100": 4.8,
-      "seconds": 6.0,
+      "seconds": 5.6,
       "scan_cleaned": true
      }
     },
@@ -1085,12 +1101,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 16.4,
-   "ran_at": "2026-10-30 16:31 UTC",
+   "seconds": 14.4,
+   "ran_at": "2026-10-31 00:02 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -1111,7 +1128,7 @@
       "predicted": 52,
       "truth": 52,
       "review_load_per_100": 0.0,
-      "seconds": 5.6,
+      "seconds": 2.8,
       "scan_cleaned": false
      }
     },
@@ -1124,12 +1141,13 @@
     "scan_cleanup": "auto"
    },
    "published": [],
-   "seconds": 5.6,
-   "ran_at": "2026-10-30 16:32 UTC",
+   "seconds": 2.8,
+   "ran_at": "2026-10-31 00:02 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -1150,7 +1168,7 @@
       "predicted": 34,
       "truth": 29,
       "review_load_per_100": 25.0,
-      "seconds": 21.5,
+      "seconds": 26.8,
       "scan_cleaned": false
      },
      "C01V01-HEX.EX03": {
@@ -1162,7 +1180,7 @@
       "predicted": 32,
       "truth": 29,
       "review_load_per_100": 28.8,
-      "seconds": 19.4,
+      "seconds": 24.0,
       "scan_cleaned": false
      },
      "C01V01-SAG.EX02": {
@@ -1174,7 +1192,7 @@
       "predicted": 31,
       "truth": 18,
       "review_load_per_100": 57.4,
-      "seconds": 4.5,
+      "seconds": 6.7,
       "scan_cleaned": false
      },
      "C02V01-HEX.EX02": {
@@ -1186,7 +1204,7 @@
       "predicted": 24,
       "truth": 21,
       "review_load_per_100": 8.6,
-      "seconds": 17.4,
+      "seconds": 28.0,
       "scan_cleaned": false
      },
      "C03V01-HEX.EX02": {
@@ -1198,7 +1216,7 @@
       "predicted": 16,
       "truth": 15,
       "review_load_per_100": 4.0,
-      "seconds": 3.2,
+      "seconds": 6.0,
       "scan_cleaned": false
      },
      "C03V01-SAG.EX01": {
@@ -1210,7 +1228,7 @@
       "predicted": 11,
       "truth": 4,
       "review_load_per_100": 64.3,
-      "seconds": 4.1,
+      "seconds": 5.0,
       "scan_cleaned": false
      },
      "C04V01-HEX.EX02": {
@@ -1222,7 +1240,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 2.4,
+      "seconds": 2.6,
       "scan_cleaned": false
      },
      "C05V01-SAG.EX01": {
@@ -1234,7 +1252,7 @@
       "predicted": 3,
       "truth": 5,
       "review_load_per_100": 30.8,
-      "seconds": 2.1,
+      "seconds": 3.1,
       "scan_cleaned": false
      },
      "E05V01-SAG.EX01": {
@@ -1246,7 +1264,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 2.0,
+      "seconds": 2.6,
       "scan_cleaned": false
      },
      "E06V01-SAG.EX01": {
@@ -1258,7 +1276,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 2.1,
+      "seconds": 2.9,
       "scan_cleaned": false
      },
      "I01V02-HEX.EX03": {
@@ -1270,7 +1288,7 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 20.0,
-      "seconds": 2.3,
+      "seconds": 3.1,
       "scan_cleaned": false
      },
      "I02V01-HEX.EX03": {
@@ -1282,7 +1300,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 5.8,
+      "seconds": 9.2,
       "scan_cleaned": false
      },
      "I03V01-HEX.EX03": {
@@ -1294,7 +1312,7 @@
       "predicted": 1,
       "truth": 2,
       "review_load_per_100": 16.7,
-      "seconds": 6.7,
+      "seconds": 7.7,
       "scan_cleaned": false
      },
      "I04V01-HEX.EX05": {
@@ -1306,7 +1324,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 9.4,
+      "seconds": 10.0,
       "scan_cleaned": false
      },
      "I05V01-SAG.EX01": {
@@ -1330,7 +1348,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 7.3,
+      "seconds": 7.0,
       "scan_cleaned": false
      },
      "I11V01-HEX.EX03": {
@@ -1342,7 +1360,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 7.5,
+      "seconds": 8.0,
       "scan_cleaned": false
      },
      "I12V01-HEX.EX03": {
@@ -1354,7 +1372,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 5.2,
+      "seconds": 6.3,
       "scan_cleaned": false
      },
      "I12V01-SAG.EX01": {
@@ -1366,7 +1384,7 @@
       "predicted": 0,
       "truth": 0,
       "review_load_per_100": 0.0,
-      "seconds": 2.9,
+      "seconds": 3.4,
       "scan_cleaned": false
      },
      "P01V01-AVV.EX01": {
@@ -1378,7 +1396,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 0.3,
+      "seconds": 0.6,
       "scan_cleaned": false
      },
      "P01V01-HEX.EX03": {
@@ -1390,7 +1408,7 @@
       "predicted": 1,
       "truth": 1,
       "review_load_per_100": 0.0,
-      "seconds": 2.9,
+      "seconds": 3.1,
       "scan_cleaned": false
      },
      "P01V01-ING.EX01": {
@@ -1454,24 +1472,25 @@
     }
    },
    "published": [],
-   "seconds": 133.4,
-   "ran_at": "2026-10-30 20:40 UTC",
+   "seconds": 169.8,
+   "ran_at": "2026-10-31 00:03 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -1492,7 +1511,7 @@
       "predicted": 192,
       "truth": 99,
       "review_load_per_100": 75.5,
-      "seconds": 2.0,
+      "seconds": 1.6,
       "scan_cleaned": true
      }
     },
@@ -1515,12 +1534,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 2.6,
-   "ran_at": "2026-10-30 16:36 UTC",
+   "seconds": 2.2,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/omre-1958-pid/omre_q4.graphml": "sha256:6cb0e9db7871f0c6"
    }
   },
@@ -1554,7 +1574,7 @@
       "predicted": 26,
       "truth": 41,
       "review_load_per_100": 23.8,
-      "seconds": 1.5,
+      "seconds": 1.0,
       "scan_cleaned": false
      },
      "RI_Sample_ISO": {
@@ -1566,7 +1586,7 @@
       "predicted": 65,
       "truth": 65,
       "review_load_per_100": 14.9,
-      "seconds": 1.1,
+      "seconds": 0.7,
       "scan_cleaned": false
      },
      "Pump_with_tank_pid_en": {
@@ -1590,7 +1610,7 @@
       "predicted": 143,
       "truth": 264,
       "review_load_per_100": 36.2,
-      "seconds": 3.2,
+      "seconds": 1.2,
       "scan_cleaned": false
      }
     },
@@ -1619,12 +1639,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 8.0,
-   "ran_at": "2026-10-30 16:36 UTC",
+   "seconds": 4.9,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "sha256:43a4ebe740bc78b9",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "sha256:ac948b59d12183e4",
     "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "sha256:7b6b80b3a3886802",
@@ -1650,7 +1671,7 @@
       "predicted": 108,
       "truth": 112,
       "review_load_per_100": 11.4,
-      "seconds": 0.8,
+      "seconds": 0.4,
       "scan_cleaned": false
      }
     },
@@ -1672,12 +1693,13 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 16:36 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/scan_cleanup.py": "sha256:5f3e277434681cae",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
+    "scripts/scan_cleanup.py": "sha256:f396c492a2e6e894",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/pronto-fig1/fig1.graphml": "sha256:f4e0b59ebaea8b3a"
    }
   },
@@ -1704,10 +1726,11 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 1.7,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 1.8,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1752,10 +1775,11 @@
      "agrees": true
     }
    ],
-   "seconds": 1.8,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 2.2,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1787,10 +1811,11 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 2.2,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 2.6,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1822,10 +1847,11 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 1.7,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 2.5,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1857,10 +1883,11 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 1.6,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1890,10 +1917,11 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 7.3,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 7.9,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1924,9 +1952,10 @@
    },
    "published": [],
    "seconds": 0.5,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1957,9 +1986,10 @@
    },
    "published": [],
    "seconds": 0.5,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -1989,10 +2019,11 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2023,9 +2054,10 @@
    },
    "published": [],
    "seconds": 0.5,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2055,10 +2087,11 @@
     "control_failures": []
    },
    "published": [],
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 0.6,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2089,9 +2122,10 @@
    },
    "published": [],
    "seconds": 0.4,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2131,10 +2165,11 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.2,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2182,9 +2217,10 @@
    "published": [],
    "key": "agent-made",
    "seconds": 1.7,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2228,10 +2264,11 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 22:52 UTC",
+   "seconds": 0.5,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
-    "scripts/evaluate_vendor.py": "sha256:444d178db665b3db",
+    "scripts/evaluate_vendor.py": "sha256:304be06c4a31e852",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/replicate_stats.py": "sha256:728a69212c6a4055",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_tags.py": "sha256:a0ce303a7a8fe8de",
@@ -2260,20 +2297,21 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2298,19 +2336,20 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2337,19 +2376,20 @@
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
    "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2375,20 +2415,21 @@
    "published": [],
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2415,19 +2456,20 @@
    "key_only_duplicate_of": "open100-holdout",
    "note": "key-only input: this row reads only the answer key, which is open100-holdout's, so the cell is the same computation as open100-holdout and carries no scan-specific information (the scan pixels are not exercised here)",
    "seconds": 0.4,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2452,19 +2494,20 @@
    },
    "published": [],
    "seconds": 0.7,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2489,19 +2532,20 @@
    },
    "published": [],
    "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2526,19 +2570,20 @@
    },
    "published": [],
    "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2562,20 +2607,21 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2599,20 +2645,21 @@
     "report_written": true
    },
    "published": [],
-   "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2637,19 +2684,20 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2683,20 +2731,21 @@
      "agrees": true
     }
    ],
-   "seconds": 0.4,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -2730,20 +2779,21 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/omre-1958-pid/omre_q4.graphml": "sha256:6cb0e9db7871f0c6"
    }
   },
@@ -2784,20 +2834,21 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.9,
+   "ran_at": "2026-10-31 00:06 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "sha256:43a4ebe740bc78b9",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "sha256:ac948b59d12183e4",
     "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "sha256:7b6b80b3a3886802",
@@ -2836,19 +2887,20 @@
    "published": [],
    "key": "agent-made",
    "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/deliverable_report.py": "sha256:ec2f910d6b752cf5",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/deliverable_report.py": "sha256:6df4ee498e6544d8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
     "scripts/test_scorer_controls.py": "sha256:fd6bb754ae454700",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/pronto-fig1/fig1.graphml": "sha256:f4e0b59ebaea8b3a"
    }
   },
@@ -2881,9 +2933,10 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -2915,9 +2968,10 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -2949,9 +3003,10 @@
     }
    ],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -2997,10 +3052,11 @@
     ]
    },
    "published": [],
-   "seconds": 0.1,
-   "ran_at": "2026-10-30 16:37 UTC",
+   "seconds": 0.0,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -3047,21 +3103,22 @@
     "not_checked": "signal lines (the bundle has none); a separate measurement symbol (every loop here is a combined instrument: DEXPI nests the sensor in the controller bubble, so the measurement is the controller's own tag)"
    },
    "published": [],
-   "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.2,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3101,25 +3158,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 0.6,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.8,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3159,25 +3217,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 2.4,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.9,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3289,25 +3348,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 2.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.9,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3330,25 +3390,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 2.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 2.0,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3371,25 +3432,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 1.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.4,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3413,25 +3475,26 @@
     "drawing": "the reader's model.json for the same file (tags only; no signal lines)"
    },
    "published": [],
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.2,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -3620,8 +3683,8 @@
     }
    },
    "published": [],
-   "seconds": 0.2,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "seconds": 0.0,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
@@ -3639,9 +3702,10 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -3654,9 +3718,10 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 16:38 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/loop_audit.py": "sha256:d2f441f08d6b80dc"
+    "scripts/loop_audit.py": "sha256:ec7837928220abff",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf"
    }
   },
   {
@@ -3674,10 +3739,11 @@
     "stderr": ""
    },
    "published": [],
-   "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3705,10 +3771,11 @@
      "agrees": true
     }
    ],
-   "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.3,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3729,9 +3796,10 @@
    },
    "published": [],
    "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -3769,12 +3837,13 @@
    },
    "published": [],
    "seconds": 0.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
@@ -4304,13 +4373,14 @@
     "not_tested": "instruments, controllers and valves: DWSIM flowsheets are steady-state process models with no instrumentation; 2 solver Adjust/Spec blocks in all 42 (solver targets, not plant controllers) are not mapped"
    },
    "published": [],
-   "seconds": 12.4,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 16.1,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4"
@@ -4332,9 +4402,10 @@
    },
    "published": [],
    "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0"
    }
@@ -7361,20 +7432,21 @@
      "agrees": true
     }
    ],
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 0.4,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/confidence.py": "sha256:0fc9948199d89edf",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -8323,23 +8395,24 @@
    },
    "published": [],
    "seconds": 0.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -8689,24 +8762,25 @@
     }
    },
    "published": [],
-   "seconds": 0.7,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.0,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -10310,24 +10384,25 @@
     }
    },
    "published": [],
-   "seconds": 1.7,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.9,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -11557,24 +11632,25 @@
     }
    },
    "published": [],
-   "seconds": 2.1,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 2.7,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -12293,24 +12369,25 @@
     }
    },
    "published": [],
-   "seconds": 1.3,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.7,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -13850,24 +13927,25 @@
    },
    "published": [],
    "note": "the pass counts (primary and second reading) include 6 files the reader refused for a reason seen in the XML (I02V01_AUD.EX01.xml, I03V01_AUD.EX01.xml, I04V01_AUD.EX01.xml, I08V01_AUD.EX01.xml, I11V01_AUD.EX01I.xml, I12V01_AUD.EX01.xml); the criterion counts a confirmed refusal as a pass, so these files show the refusal is right, not that their content was read",
-   "seconds": 1.0,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 1.3,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15328,24 +15406,25 @@
     "xml_agrees": 37
    },
    "published": [],
-   "seconds": 5.2,
-   "ran_at": "2026-10-30 20:42 UTC",
+   "seconds": 4.7,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_reader.py": "sha256:e637a1a9e0972891",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_reader.py": "sha256:f7ce5038596c7f85",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15533,21 +15612,22 @@
     }
    },
    "published": [],
-   "seconds": 11.8,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "seconds": 11.9,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15736,21 +15816,22 @@
     "blindness": "A177 held these sheets out for the frozen A191-A195 rules (A196, seen once before as a baseline); not fully blind overall: A170's crossing error class was first noticed on sheet 6, then confirmed on development DEXPI C01. A191 changes the derived truth too (388 to 386 segments), so the change from 0.898 to 0.912 is not pure tracing gain"
    },
    "published": [],
-   "seconds": 14.6,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "seconds": 14.7,
+   "ran_at": "2026-10-31 00:07 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15858,21 +15939,22 @@
     "worst_sheet": "dexpi-c02"
    },
    "published": [],
-   "seconds": 8.6,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "seconds": 8.1,
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15885,20 +15967,21 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -15911,20 +15994,21 @@
    "detail": {},
    "published": [],
    "seconds": 0.0,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -16029,21 +16113,22 @@
     "worst_sheet": "101"
    },
    "published": [],
-   "seconds": 8.3,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "seconds": 8.8,
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -16098,21 +16183,22 @@
     "worst_sheet": "RT1"
    },
    "published": [],
-   "seconds": 3.5,
-   "ran_at": "2026-10-30 20:43 UTC",
+   "seconds": 2.9,
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -16753,23 +16839,24 @@
     }
    },
    "published": [],
-   "seconds": 137.2,
-   "ran_at": "2026-10-30 20:44 UTC",
+   "seconds": 133.9,
+   "ran_at": "2026-10-31 00:08 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
     "scripts/corpus_adapters.py": "sha256:c589799614ebb821",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
     "scripts/fetch_corpus.py": "sha256:fb9f6480a2209054",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1"
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a"
    }
   },
   {
@@ -16837,21 +16924,22 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 1.7,
-   "ran_at": "2026-10-30 20:47 UTC",
+   "seconds": 2.4,
+   "ran_at": "2026-10-31 00:10 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/omre-1958-pid/omre_q4.graphml": "sha256:6cb0e9db7871f0c6"
    }
   },
@@ -17030,21 +17118,22 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 4.8,
-   "ran_at": "2026-10-30 20:47 UTC",
+   "seconds": 6.2,
+   "ran_at": "2026-10-31 00:10 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID.graphml": "sha256:43a4ebe740bc78b9",
     "data/agent_keys/commons-pid-sheets/Sch_ma_P_ID1.graphml": "sha256:ac948b59d12183e4",
     "data/agent_keys/commons-pid-sheets/RI_Sample_ISO.graphml": "sha256:7b6b80b3a3886802",
@@ -17116,21 +17205,22 @@
    },
    "published": [],
    "key": "agent-made",
-   "seconds": 0.5,
-   "ran_at": "2026-10-30 20:47 UTC",
+   "seconds": 0.7,
+   "ran_at": "2026-10-31 00:10 UTC",
    "tool_files": {
     "scripts/adapt_dexpi.py": "sha256:519025621ad2df4a",
     "scripts/build_twin.py": "sha256:8e9a5e26b9938a8a",
-    "scripts/dexpi_to_twin.py": "sha256:f7ed3e07539eb3fb",
-    "scripts/draw_pid_from_model.py": "sha256:848694abe1cef944",
-    "scripts/generate.py": "sha256:2f5d37d080e2baff",
+    "scripts/dexpi_to_twin.py": "sha256:24920399a29e7556",
+    "scripts/draw_pid_from_model.py": "sha256:019f4a4903cba9e8",
+    "scripts/generate.py": "sha256:729c3081be3e1ec3",
     "scripts/import_site_drawing.py": "sha256:20127817b1f79e9f",
-    "scripts/line_layers.py": "sha256:ebd9766c44b86813",
+    "scripts/line_layers.py": "sha256:3b9644c94ea7fabd",
+    "scripts/output_paths.py": "sha256:16ace3cf89be6baf",
     "scripts/pi_mapping.py": "sha256:c9007ef93990a5ab",
     "scripts/provenance.py": "sha256:69697be53c87ddd0",
     "scripts/score_pid2graph.py": "sha256:decd9b48d8ae85c4",
     "scripts/score_twin.py": "sha256:3bdf5993e0e3eb4e",
-    "scripts/trace_connections.py": "sha256:c79f1a7fbdd997b1",
+    "scripts/trace_connections.py": "sha256:13ffbef2b0cbbf1a",
     "data/agent_keys/pronto-fig1/fig1.graphml": "sha256:f4e0b59ebaea8b3a"
    }
   }

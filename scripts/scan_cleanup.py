@@ -207,12 +207,18 @@ def trace(image_path, symbols, clean="auto", info=None, **opt):
         os.unlink(tmp)
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("image")
     ap.add_argument("--out")
     ap.add_argument("--clean", default="auto", choices=["auto", "on", "off"])
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    if a.out:
+        from output_paths import protect_outputs
+        try:
+            protect_outputs([a.out], [a.image])
+        except ValueError as exc:
+            ap.exit(2, f"refused: {exc}\n")
     gray = cv2.imread(a.image, cv2.IMREAD_GRAYSCALE)
     if gray is None:
         raise SystemExit(f"cannot read {a.image}")
@@ -221,7 +227,8 @@ def main():
     info["cleaned"] = cleaned
     print(json.dumps(info))
     if a.out:
-        cv2.imwrite(a.out, out)
+        if not cv2.imwrite(a.out, out):
+            ap.exit(2, f"cannot write {a.out}\n")
         print("wrote", Path(a.out))
 
 

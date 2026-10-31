@@ -65,6 +65,30 @@ class ClientReport(unittest.TestCase):
         r = report(self.base, Path(self.tmp.name) / "fresh.html")
         self.assertEqual(r.returncode, 0, r.stderr)
 
+    def test_outputs_preserve_bundle_inputs_and_originals_through_hardlinks(self):
+        b = self.copy("source-output-collisions")
+        companion = b / "REPORT.html"
+        companion.write_bytes(b"retain earlier report")
+        inputs = [b / p for p in ("plant_model.json", "intake_manifest.json", "review_queue.csv", "READ_ME.txt")]
+        inputs += sorted(p for p in (b / "source").rglob("*") if p.is_file())
+        before = {p: p.read_bytes() for p in inputs + [companion]}
+        for i, source in enumerate(inputs):
+            linked = b / f"alias-{i}.html"
+            linked.hardlink_to(source)
+            for out in (source, linked):
+                with self.subTest(source=source.name, out=out.name):
+                    r = report(b, out)
+                    self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+                    self.assertIn("output aliases an input", r.stderr)
+                    self.assertEqual(before, {p: p.read_bytes() for p in before})
+
+    def test_normal_report_replacement_remains_allowed(self):
+        out = Path(self.tmp.name) / "replace-report.html"
+        self.assertEqual(report(self.base, out).returncode, 0)
+        before = out.read_bytes()
+        self.assertEqual(report(self.base, out).returncode, 0)
+        self.assertEqual(out.read_bytes(), before)
+
     def test_an_edited_reason_is_refused(self):
         # Probe A: same ids, every reason rewritten to "routine check" -> was "0 to check first", exit 0.
         b = self.copy("edited-why")

@@ -1,0 +1,42 @@
+{
+  "id": "source-support-empty",
+  "ran_at": "2026-10-30",
+  "model": {
+    "provider": "none",
+    "id": "synthetic-control",
+    "version": "1"
+  },
+  "interface": "deterministic authored control",
+  "method": "empty",
+  "configuration": {
+    "model_call": false,
+    "key_exposure": "reference projects frozen labels/reasons; other controls are empty or uniform labels",
+    "provider_settings": null
+  },
+  "provenance": "Post-hoc development scorer control; not an AI model attempt, held-out trial or human acceptance.",
+  "recipe": [
+    {
+      "path": "benchmarks/source-support/prompt.md",
+      "sha256": "2f809ec2f819353865b00c4be495378730f8d80b2488edcca288b34f62e5d1a1",
+      "role": "main_prompt"
+    },
+    {
+      "path": "benchmarks/source-support/rubric.json",
+      "sha256": "33050202797e95ad395f981e28d71bf8fd72514d8f5e73485d4ee4dbe1bb5033"
+    }
+  ],
+  "cases": [
+    "mgpi-source-claims",
+    "nist-source-claims"
+  ],
+  "predictions": {
+    "mgpi-source-claims": {
+      "path": "benchmarks/controls/source-support/mgpi-empty.json",
+      "sha256": "e026601b5c4ad29501629669a4f49a214c2f7a65eee5de9dee6027f212d4e2a7"
+    },
+    "nist-source-claims": {
+      "path": "benchmarks/controls/source-support/nist-empty.json",
+      "sha256": "e026601b5c4ad29501629669a4f49a214c2f7a65eee5de9dee6027f212d4e2a7"
+    }
+  }
+}

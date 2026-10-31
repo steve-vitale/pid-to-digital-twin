@@ -74,6 +74,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+from output_paths import protect_outputs
 
 SCHEMA = "line-layers-2"
 ARM_FRAC = 0.25         # a run continuing at least this share of a symbol side past an overlap is an arm there
@@ -1339,23 +1340,28 @@ SETS = {
 }
 
 
-def sidecar(base, sheet):
+def sidecar(base, sheet, source_paths=None):
     """A keyed sheet's <sheet>.json (corpus_adapters.build_vendor_key), or {}."""
     f = Path(base) / f"{sheet}.json"
+    if source_paths is not None and f.is_file():
+        source_paths.append(f)
     return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else {}
 
 
-def set_sheets(name, base=None):
+def set_sheets(name, base=None, source_paths=None):
     cfg = SETS[name]
     if cfg["sheets"] is not None:
         return list(cfg["sheets"])
     base = Path(base) if base else ROOT / cfg["dir"]
-    return sorted(f.stem for f in base.glob("*.json") if sidecar(base, f.stem).get("status") == "mapped")
+    return sorted(f.stem for f in base.glob("*.json")
+                  if sidecar(base, f.stem, source_paths).get("status") == "mapped")
 
 
-def dexpi_xml(sheet):
+def dexpi_xml(sheet, source_paths=None):
     import adapt_dexpi as A
     import dexpi_to_twin as d2t
+    if source_paths is not None:
+        source_paths.append(A.CONFIG)
     _, spec = d2t.sheet_spec(sheet)
     return A.local_path(spec["xml"])
 
@@ -1367,18 +1373,23 @@ def key_symbols(graphml, png):
     return [{"id": k, "class": v["class"], "box": v["box"]} for k, v in nodes.items() if v["class"] in sc.SCORED]
 
 
-def score_set(name, sheets=None, base=None):
+def score_set(name, sheets=None, base=None, source_paths=None):
     """Trace each sheet of a set with the answer key's symbols and score its pipe layer against the topology truth.
     base: the set's folder, if not its usual one (a set read from sidecars). Returns {"set", "sheets": {sheet:
     score}, "total"}."""
     cfg = SETS[name]
     base = Path(base) if base else ROOT / cfg["dir"]
-    sheets = sheets or set_sheets(name, base)
+    source_paths = source_paths if source_paths is not None else []
+    sheets = sheets or set_sheets(name, base, source_paths)
+    if "model" in cfg:
+        source_paths.extend([ROOT / cfg["model"], ROOT / cfg["layout"],
+                             base / "manifest.json", base / "key.json", ROOT / "scripts/draw_pid_from_model.py"])
     truth_all = (drawn_truth(ROOT / cfg["model"], ROOT / cfg["layout"], base / "manifest.json", base / "key.json")
                  if "model" in cfg else None)
     per = {}
     for s in sheets:
         png, gml = base / f"{s}.png", base / f"{s}.graphml"
+        source_paths.extend([png, gml])
         syms = key_symbols(gml, png)
         skip = {x["id"] for x in syms if x["class"] == "instrumentation"} if cfg["scope"] == "process" else ()
         pred = traced_layers(png, syms, exclude=skip)
@@ -1387,7 +1398,9 @@ def score_set(name, sheets=None, base=None):
         elif cfg.get("truth") == "pid2graph":
             raw = pid2graph_truth(gml, png)
         else:
-            xml = dexpi_xml(s) if cfg.get("truth") != "dexpi_sidecar" else Path(sidecar(base, s)["xml"])
+            xml = (dexpi_xml(s, source_paths) if cfg.get("truth") != "dexpi_sidecar"
+                   else Path(sidecar(base, s, source_paths)["xml"]))
+            source_paths.append(xml if Path(xml).is_absolute() else ROOT / xml)
             raw = dexpi_truth(xml if Path(xml).is_absolute() else ROOT / xml, gml, png)
         truth = classify_truth(raw, pred["roles"])
         per[s] = score_pipe(pred, truth, pred["side"] or 20)
@@ -1421,28 +1434,33 @@ def main(argv=None):
     a = ap.parse_args(argv)
     if a.cmd == "enrich":
         images = {}
+        supplied_images = []
         for p in a.image:
             if "=" not in p:
                 ap.error(f"--image wants SHEET=PNG, got {p!r}")
             k, v = p.split("=", 1)
             images[k] = v
+            supplied_images.append(v)
         try:
+            # Updating the model in place is supported. Supplied drawings are always preserved,
+            # including an earlier --image later replaced by another entry for the same sheet.
+            protect_outputs([a.out], supplied_images)
             m = json.loads(Path(a.model).read_text(encoding="utf-8"))
             enrich(m, images)
+            Path(a.out).write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         except (OSError, ValueError) as exc:
             print(f"{a.model}: can't add line layers ({exc})", file=sys.stderr)
             return 1
-        Path(a.out).write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         ll = m["line_layers"]
         print(json.dumps({"networks": len(ll["networks"]), "junctions": len(ll["junctions"]),
                           "segments": len(ll["segments"]),
                           "pairwise_links": sum(v["pairwise_links"] for v in ll["sheets"].values()),
                           "crossings": {s: v["crossings"] for s, v in ll["sheets"].items()}}) + f" -> {a.out}")
         return 0
-    results = []
+    results, source_paths = [], []
     for name in a.set:
         try:
-            r = score_set(name)
+            r = score_set(name, source_paths=source_paths)
         except (OSError, ValueError) as exc:
             print(f"{name}: can't score ({exc})", file=sys.stderr)
             return 1
@@ -1466,7 +1484,12 @@ def main(argv=None):
                   f"{v['junctions']['tp']}/{v['junctions']['truth']} (same kind {jk.get('same_kind')}), "
                   f"crossings {v['crossings']}")
     if a.json:
-        Path(a.json).write_text(json.dumps(results, indent=1) + "\n", encoding="utf-8", newline="\n")
+        try:
+            protect_outputs([a.json], source_paths)
+            Path(a.json).write_text(json.dumps(results, indent=1) + "\n", encoding="utf-8", newline="\n")
+        except (OSError, ValueError) as exc:
+            print(f"can't write scores ({exc})", file=sys.stderr)
+            return 1
     return 0
 
 

@@ -26,6 +26,27 @@ def row(tag='FT-1', asset_id='', point='new'):
 
 
 class MappingTests(unittest.TestCase):
+    def test_mapping_receipt_alias_to_io_is_refused_before_model_write(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            model = root / 'plant_model.json'
+            model.write_text(json.dumps({'instruments': [instrument('I1', 'FT-1')]}), encoding='utf-8')
+            io_path = root / 'io.csv'
+            io_path.write_text('tag,server,base_path,point\nFT-1,OPC,path,new\n', encoding='utf-8')
+            out = root / 'out/mapping'
+            out.mkdir(parents=True)
+            stem = f'{root.parent.name}-{root.name}-io'
+            (out / (stem + '.md')).hardlink_to(io_path)
+            before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+            args = ['map_points', str(model), str(io_path)]
+            with patch.object(map_points, 'ROOT', root), patch.object(sys, 'argv', args), \
+                    contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as errors:
+                with self.assertRaises(SystemExit) as caught:
+                    map_points.main()
+            self.assertEqual(caught.exception.code, 2)
+            self.assertIn('aliases an input', errors.getvalue())
+            self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
     def setUp(self):
         self.model = {'instruments': [instrument('a', 'FT-1', point='a-old'),
                                       instrument('b', 'PT-2', point='b-old'),

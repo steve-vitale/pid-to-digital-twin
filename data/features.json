@@ -580,7 +580,10 @@
     "examples/from-description/mgpi/result/pid/ACID.png",
     "examples/from-description/mgpi/result/graph.json",
     "examples/from-description/mgpi/result/questions/questions.json",
-    "examples/from-description/mgpi/result/REVIEW.md"
+    "examples/from-description/mgpi/result/REVIEW.md",
+    "examples/from-description/mgpi/first-question.md",
+    "examples/from-description/mgpi/result/build.json",
+    "examples/from-description/mgpi/result/pid/manifest.json"
    ],
    "tests": [
     "scripts/test_description_workflow.py"
@@ -637,16 +640,50 @@
     "benchmarks/runs/mgpi-initial.json",
     "benchmarks/runs/mgpi-wrong-endpoint.json",
     "benchmarks/results/open100-validation-report-clarified.json",
-    "benchmarks/results/open100-validation-report-clarified.md"
+    "benchmarks/results/open100-validation-report-clarified.md",
+    "benchmarks/source-support-development.json",
+    "benchmarks/source-support/KEY_PROVENANCE.json",
+    "benchmarks/source-support/mgpi.input.json",
+    "benchmarks/source-support/mgpi.key.json",
+    "benchmarks/source-support/nist.input.json",
+    "benchmarks/source-support/nist.key.json",
+    "benchmarks/source-support/prompt.md",
+    "benchmarks/source-support/review_key.json",
+    "benchmarks/source-support/rubric.json",
+    "benchmarks/source-support/source_inventory.json",
+    "benchmarks/controls/source-support/mgpi-all-contradicted.json",
+    "benchmarks/controls/source-support/mgpi-all-insufficient.json",
+    "benchmarks/controls/source-support/mgpi-all-supported.json",
+    "benchmarks/controls/source-support/mgpi-empty.json",
+    "benchmarks/controls/source-support/mgpi-reference.json",
+    "benchmarks/controls/source-support/nist-all-contradicted.json",
+    "benchmarks/controls/source-support/nist-all-insufficient.json",
+    "benchmarks/controls/source-support/nist-all-supported.json",
+    "benchmarks/controls/source-support/nist-empty.json",
+    "benchmarks/controls/source-support/nist-reference.json",
+    "benchmarks/runs/source-support-all-contradicted.json",
+    "benchmarks/runs/source-support-all-insufficient.json",
+    "benchmarks/runs/source-support-all-supported.json",
+    "benchmarks/runs/source-support-empty.json",
+    "benchmarks/runs/source-support-reference.json",
+    "benchmarks/results/open100-validation-report-clarified-source-preserved.json",
+    "benchmarks/results/open100-validation-report-clarified-source-preserved.md",
+    "benchmarks/results/description-controls-source-preserved.json",
+    "benchmarks/results/description-controls-source-preserved.md",
+    "benchmarks/results/mgpi-development-source-preserved.json",
+    "benchmarks/results/mgpi-development-source-preserved.md",
+    "benchmarks/results/source-support-development.json",
+    "benchmarks/results/source-support-development.md"
    ],
    "tests": [
-    "scripts/test_benchmark.py"
+    "scripts/test_benchmark.py",
+    "scripts/test_source_support.py"
    ],
    "job": "Improve a toolkit task with source-backed corpus cases, reproducible model results and baseline regression evidence",
    "why": "New examples should expose failures and support tested generalizations. Matched task/source/key/scorer cohorts make comparisons inspectable without conflating model versions, methods, source families or incomplete coverage.",
    "you_need": "Cleared source and reviewed key with provenance, a supported versioned task, saved answers for declared attempts, model/interface/configuration and pinned recipe metadata; no model account needed to re-score",
    "time": "Offline rescoring; model execution and human source/key review are separate contributions",
-   "you_get": "Reproducible per-case task counts and failures, model/version/method groups, repeated-run mean/range/SD, coverage gaps and source/code fingerprints. Two adapters: historical drawing results and selected description facts, with synthetic controls and source-adapted development cases; other tasks still need evaluators"
+   "you_get": "Reproducible per-case counts/failures, model/version/method groups, repeated-run mean/range/SD, coverage and fingerprints. Three adapters: historical drawings, selected description facts and fixed-claim labels. Label results are synthetic controls on explicit development paraphrases; reasons/source validity unscored. Other tasks need evaluators"
   }
  ]
 }

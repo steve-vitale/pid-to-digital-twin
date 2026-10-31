@@ -271,6 +271,13 @@ def main():
     if not report["valid"]:
         raise SystemExit(1)
     if not a.dry_run:
+        from output_paths import protect_outputs
+        receipts = [out_dir / f"{stem}.md", out_dir / f"{stem}.json"]
+        try:
+            protect_outputs(receipts, [model_path, a.io_list])
+            protect_outputs([model_path, *receipts], [a.io_list])
+        except ValueError as exc:
+            ap.exit(2, f"mapping not applied; nothing written: {exc}\n")
         out_dir.mkdir(parents=True, exist_ok=True)
         (out_dir / f"{stem}.md").write_text(text, encoding="utf-8", newline="\n")
         (out_dir / f"{stem}.json").write_text(json.dumps(report, indent=1), encoding="utf-8", newline="\n")
