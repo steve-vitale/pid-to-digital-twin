@@ -14,6 +14,11 @@ uses Python, with no accounts, downloads or model calls.
 
 ## Choose a route before planning the pilot
 
+Use the [IT/OT decision guide](INTERNAL_CONNECTIVITY.md#choose-the-data-path-before-the-assistant) to choose
+between approved Copilot with cleared documents, controlled exports, a receiving-side replica, a managed hybrid
+service or local-only review. It compares requirements and tradeoffs; no new OT connection is needed for a
+document-only pilot. An approved cloud assistant does not imply approval to process operational data there.
+
 Use the [acceptance exercise](ACCEPTANCE.md) to record a recipient's reconstruction, receiving-system readback,
 approved-client access and a subsequent revision. Its status remains not run until real participants and the
 authorized environment supply observations.

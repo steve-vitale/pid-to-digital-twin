@@ -70,7 +70,7 @@ operations review, PI import or measured operational benefit is established. The
 specific to Tennessee Eastman; its build command does not build your plant.
 
 - **Use it:** [Documentation map](docs/README.md) · [Plan a company pilot](docs/AT_YOUR_PLANT.md)
-- **Connect it:** [Approved Copilot, internal MCP and data boundaries](docs/INTERNAL_CONNECTIVITY.md)
+- **Connect it:** [Choose an IT/OT path: approved Copilot, controlled exports or internal services](docs/INTERNAL_CONNECTIVITY.md)
 - **Assess it:** [Results and limits](docs/RESULTS.md) · [Review the evidence](docs/REVIEWING.md)
 - **Improve it:** [Contribute cases, model runs and tested changes](CONTRIBUTING.md)
 

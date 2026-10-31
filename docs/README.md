@@ -29,6 +29,7 @@ manual bridges and the recommended order of work. Numerical research evidence li
 | Keep department scopes and cross-team dependencies explicit | [Four owned packets](../examples/team-context/README.md) |
 | Retrieve a selected snapshot through an approved local MCP client | [MCP starter](../examples/internal-mcp/README.md) |
 | Plan team ownership, published dependencies and company access | [Lifecycle](CONTEXT_LIFECYCLE.md) · [Connectivity](INTERNAL_CONNECTIVITY.md) |
+| Choose an implementation for separated IT/OT, no-port plants or approved hybrid access | [Environment choices and tradeoffs](INTERNAL_CONNECTIVITY.md#choose-the-data-path-before-the-assistant) |
 | Test a real recipient, company handoff and next revision | [Acceptance exercise](ACCEPTANCE.md) |
 
 These tasks are optional branches, not prerequisites for every investigation. A plain source-question brief may
