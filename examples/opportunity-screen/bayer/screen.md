@@ -132,7 +132,7 @@ IAC/ITAC recommendation code: 2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,67
 
 **Data to collect**
 
-- Steam supply pressure and temperature [not on drawing]. Where: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list. How: Record supply conditions; saturation temperature follows from pressure.
+- Steam supply pressure and temperature [not on drawing]. U1 (stream:U1): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). TV-104C (TV-104C): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C. Where: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list. How: Record supply conditions; saturation temperature follows from pressure.
 - Temperature the user actually needs [not on drawing]. Where: DCS/PLC configuration: the temperature setpoint. How: Note setpoint and normal range.
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity [not on drawing]. Where: site records: site steam balance; then a walkdown: headers and hot streams near this user. How: List sources whose temperature exceeds the need with a practical approach.
 

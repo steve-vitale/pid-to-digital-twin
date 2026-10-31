@@ -106,7 +106,26 @@ CAPACITY, DISCHARGE, RPM and HP (or OD, LENGTH and MATERIAL) and leaves them bla
 "not on the drawing" would send you to the nameplate for a number the drawing was designed to hold.
 
 A request with several parts (rated flow and head, motor power and speed) stays open until every part is found:
-the parts on the drawing are quoted as evidence and the request lists what is still needed.
+the parts on the drawing are quoted as evidence and the request lists what is still needed **for each subject**.
+By default, `field_scope: anchors` checks each triggering model record independently. Pressure on one steam
+supply cannot combine with temperature on another, and a complete supply cannot hide an unknown sibling.
+Related equipment or instruments remain context, without filling another subject's fields. The
+[two-supply regression example](../examples/opportunity-screen/field-coverage/README.md) shows this distinction.
+
+A catalog author can explicitly choose `field_scope: unit` when the request concerns the finding's owning
+equipment record. H4 uses that scope for cooling-water supply temperature and cooler duty. Only the actual
+equipment owner selected by unit grouping is checked; related role names do not select an owner. If no owner
+is identified, every field remains requested with a scope note. This declares where to look, without proving
+common physical conditions, timing, units or the correctness of the supplied value.
+
+Open field requests retain `field_scope`, `field_coverage` (subject identity, each field's present/blank/absent
+state and locator) and `still_needed`. `already_on_drawing` names fields supplied on at least one subject;
+it can overlap the remaining list when another subject lacks that field. Read the subject coverage rather than
+treating either list as a plant-wide answer. Null, empty/whitespace and recognized placeholder values are blank;
+zero and false remain supplied values. Conflicting facts/schedules and duplicate case variants are not resolved.
+This accounting covers the fields encoded in a request, not everything its prose may require. E5's fan curve
+and H3's hours/power contract remain [open catalog gaps](STATUS.md#known-defects); field completion alone does
+not establish that the full engineering collection task is satisfied.
 
 Historian names come from the model: TE's recorded signal indices (`XMEAS(n)`, `XMV(n)`), the Bayer model's
 digitized Fig 11 series, and an extracted twin's mapped data points (`data_point`). Where none is mapped the request
@@ -124,8 +143,9 @@ list row (in `data/io_lists/`) describes it as synthetic is labelled SYNTHETIC, 
   extracted drawing has no controllers, so without this the controller questions (C2, C6) are reported as
   "not checked".
 - `--schedule` (repeatable): equipment schedule entries per sheet, `{"sheets": {"2": [{"tag", "service",
-  "fields"}]}}`. `fields` maps each printed field to its value, with `null` for a printed blank. Later files add to
-  earlier ones, so a tag-and-service list and a printed-fields transcription can be kept apart.
+  "fields"}]}}`. `fields` maps each printed field to its value, with `null` for a printed blank. A later file's
+  fields object replaces the earlier fields object for a matching entry; it does not merge individual field
+  keys. Supply a complete replacement when combining a tag/service list with a fields transcription.
 - `--question ID` (repeatable): run only these questions.
 
 A missing, empty or malformed file, a model with no units or instruments, a loop list without the
@@ -158,7 +178,8 @@ anywhere, listed once, with the sites and assets it fired on (`finding_id`, `abo
 asked and found nothing (`quiet_at`), could not be checked (`not_checked_at`) or was not run (`not_run_at`), and its
 data requests merged by item. Per site, the places every finding there shares are listed once (`where`) and the rest
 per finding (`where_by_finding`), so a request such as "utility flow to this user" can be planned across all sites at
-once. Questions are ordered by how many sites they fired at, then by findings, then catalog order. That order says
+once. Field coverage and partial answers remain under each site's `coverage_by_finding`; subjects and values are
+never pooled across findings or sites. Questions are ordered by how many sites they fired at, then by findings, then catalog order. That order says
 where a question is common, not where the money is: the roll-up computes no savings and ranks nothing by value. A
 folder with no `questions.json`, a file that is not a screen, a screen with question ids this catalog does not know,
 or the same site named twice is refused (exit code 2). Example:
@@ -169,6 +190,9 @@ Before combining findings, the engine refuses disagreement with the selected cat
 family, decision rule, typical-benefit record or limits, and emitted collection items/instructions. Findings must
 identify a catalog question; request lists must contain records with matching item/instruction strings. Conflicting
 instructions for one selected-catalog request item are also refused before publication.
+New field coverage must agree with the selected catalog's effective field scope. Malformed coverage is refused.
+Legacy screens without scope/coverage remain readable, but cannot establish which subject policy produced them;
+regenerate them under the reviewed catalog before using them as evidence of the current completeness behavior.
 
 This checks visible finding conflicts, not complete catalog equivalence. The input JSON does not retain all trigger
 rules, exclusions, source URLs/licenses or the meaning of quiet/unrun questions. A request omitted from a screen may

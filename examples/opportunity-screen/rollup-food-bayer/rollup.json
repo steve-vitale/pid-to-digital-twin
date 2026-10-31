@@ -666,6 +666,31 @@
        "states": [
         "not_on_drawing"
        ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E11@stream:U1",
+         "field_scope": "anchors",
+         "field_coverage": [
+          {
+           "id": "stream:U1",
+           "label": "U1",
+           "fields": [
+            {
+             "name": "normal_temperature_C",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "normal_temperature_C"
+           ]
+          }
+         ],
+         "still_needed": [
+          "normal_temperature_C"
+         ]
+        }
+       ],
        "where": [
         "a walkdown: surface thermometer"
        ],
@@ -1522,6 +1547,38 @@
        "states": [
         "not_on_drawing"
        ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E1@P-1",
+         "field_scope": "anchors",
+         "field_coverage": [
+          {
+           "id": "P-1",
+           "label": "P-1",
+           "fields": [
+            {
+             "name": "CAPACITY",
+             "state": "absent",
+             "where": null
+            },
+            {
+             "name": "DISCHARGE",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "CAPACITY",
+            "DISCHARGE"
+           ]
+          }
+         ],
+         "still_needed": [
+          "CAPACITY",
+          "DISCHARGE"
+         ]
+        }
+       ],
        "where": [
         "the vendor datasheet: pump curve and rated duty point",
         "the pump nameplate on P-1"
@@ -1538,6 +1595,38 @@
        "site": "bayer",
        "states": [
         "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "E1@P-1",
+         "field_scope": "anchors",
+         "field_coverage": [
+          {
+           "id": "P-1",
+           "label": "P-1",
+           "fields": [
+            {
+             "name": "HP",
+             "state": "absent",
+             "where": null
+            },
+            {
+             "name": "RPM",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "HP",
+            "RPM"
+           ]
+          }
+         ],
+         "still_needed": [
+          "HP",
+          "RPM"
+         ]
+        }
        ],
        "where": [
         "the motor nameplate on P-1",
@@ -1930,6 +2019,58 @@
        "states": [
         "not_on_drawing"
        ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "H2@E-2",
+         "field_scope": "anchors",
+         "field_coverage": [
+          {
+           "id": "stream:U1",
+           "label": "U1",
+           "fields": [
+            {
+             "name": "steam_pressure",
+             "state": "absent",
+             "where": null
+            },
+            {
+             "name": "steam_temperature_C",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "steam_pressure",
+            "steam_temperature_C"
+           ]
+          },
+          {
+           "id": "TV-104C",
+           "label": "TV-104C",
+           "fields": [
+            {
+             "name": "steam_pressure",
+             "state": "absent",
+             "where": null
+            },
+            {
+             "name": "steam_temperature_C",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "steam_pressure",
+            "steam_temperature_C"
+           ]
+          }
+         ],
+         "still_needed": [
+          "steam_pressure",
+          "steam_temperature_C"
+         ]
+        }
+       ],
        "where": [
         "a walkdown: pressure gauge and thermometer at the supply",
         "site records: steam header list"
@@ -2062,6 +2203,31 @@
        "site": "bayer",
        "states": [
         "not_on_drawing"
+       ],
+       "coverage_by_finding": [
+        {
+         "finding_id": "H4@E-3",
+         "field_scope": "unit",
+         "field_coverage": [
+          {
+           "id": "E-3",
+           "label": "E-3",
+           "fields": [
+            {
+             "name": "CAPACITY",
+             "state": "absent",
+             "where": null
+            }
+           ],
+           "still_needed": [
+            "CAPACITY"
+           ]
+          }
+         ],
+         "still_needed": [
+          "CAPACITY"
+         ]
+        }
        ],
        "where": [
         "the vendor datasheet: exchanger datasheet",

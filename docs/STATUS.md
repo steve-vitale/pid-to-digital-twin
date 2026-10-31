@@ -16,6 +16,17 @@ that the same output is available for arbitrary company inputs. Test scripts are
 
 ## Known defects
 
+**Question-request completeness (N070):** repaired field accounting keeps each triggering subject's bundle
+separate, including entirely unknown siblings. Explicit unit-scoped requests use only the finding's owning
+equipment. Field coverage survives readable screens, graph/context handoff and per-site roll-up; empty schedule
+strings count as blanks. The [two-supply control](../examples/opportunity-screen/field-coverage/README.md) shows
+the failure this fixes. It establishes software accounting, without validating supplied values or useful questions.
+
+**Question-catalog gaps (N071, open):** E5's fan-curve request can be discharged by HP/RPM without a curve;
+H3's rating-and-hours request encodes both kW and HP but no hours. Their field/request contracts need separate
+engineering review. Schedule files replace an entry's field object rather than merging keys, and conflicts
+between facts/schedules or case-variant keys remain unresolved. The field-scope repair does not fix these limits.
+
 **Repaired additional output writers (N069):** actual copied-input probes first reproduced collisions in the
 report, loop-audit and line-enrichment commands, then eleven more tools. The fourteen repaired writers now
 preflight their consumed source files, generated/retired targets and companion aliases before writing. Tests

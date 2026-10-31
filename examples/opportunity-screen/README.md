@@ -15,6 +15,9 @@ How the engine works, the three evidence states and how to add a question: [`doc
 | [`millard/`](millard/) | Two source-authored records from a historical refrigeration bulletin; E30 only, deliberately incomplete model | 1 | [Screen and first-question brief](millard/README.md) |
 | [`rollup-food-bayer/`](rollup-food-bayer/) | Roll-up of the `food` and `bayer` screens as two sites | 36 across 24 questions | [`rollup-food-bayer/rollup.md`](rollup-food-bayer/rollup.md) |
 
+The separate [two-supply regression](field-coverage/README.md) shows why grouping questions by unit must not
+combine different assets' partial answers. It is a fictional software control, not another public source family.
+
 Regenerate (the test checks these outputs byte for byte):
 
 ```sh
@@ -43,7 +46,8 @@ the other refrigeration/oven questions, real food-plant P&ID reading, or the com
 every OPEN100 equipment schedule entry, read by eye from `data/drawings/open100_<sheet>.jpg` (one reader,
 unverified). Rotating-style entries print CAPACITY, DISCHARGE, RPM and HP; vessel-style entries print OD, LENGTH and
 MATERIAL; the two deaerator entries print design data as `XXX`. Every value is blank or a placeholder, because these
-are template drawings. `data/open100_equipment_schedule.json` holds the tags and services; the engine merges the two.
+are template drawings. `data/open100_equipment_schedule.json` holds the tags and services; the second file
+supplies each entry's complete fields object, replacing any earlier fields for that entry.
 
 ## How the findings were checked
 

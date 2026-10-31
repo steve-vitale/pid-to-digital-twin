@@ -332,6 +332,7 @@ Fired at 1 of 2 sites. Asked and quiet at: food.
 
 - Steam supply pressure and temperature. How: Record supply conditions; saturation temperature follows from pressure.
   - bayer [not on drawing]: a walkdown: pressure gauge and thermometer at the supply; then site records: steam header list
+    - For `H2@E-2`: U1 (stream:U1): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). TV-104C (TV-104C): supplied none; still needed steam_pressure (absent), steam_temperature_C (absent). Remaining across subjects (including additional evidence): steam_pressure, steam_temperature_C.
 - Temperature the user actually needs. How: Note setpoint and normal range.
   - bayer [not on drawing]: DCS/PLC configuration: the temperature setpoint
 - A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity. How: List sources whose temperature exceeds the need with a practical approach.

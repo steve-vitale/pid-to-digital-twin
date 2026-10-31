@@ -367,6 +367,49 @@ class ContextRegister(unittest.TestCase):
                     for field in ("data_requests", "decision_rule", "limits"):
                         self.assertEqual(enriched["questions"][0][field], expected[field])
 
+    def test_subject_field_coverage_survives_context_without_becoming_an_answer(self):
+        fixture = Path(__file__).resolve().parent.parent / "examples/opportunity-screen/field-coverage/questions.json"
+        screen = json.loads(fixture.read_text(encoding="utf-8"))
+        request = copy.deepcopy(screen["questions"][0]["data_requests"][0])
+        # Add the fictional subjects explicitly; coverage must not invent unreferenced graph assets.
+        for tag in ("TV-101", "TV-102"):
+            self.graph["nodes"].append({"id": tag, "kind": "instrument", "status": "unverified"})
+            self.questions["questions"][0]["assets"].append({"id": tag})
+        request["still_needed"].append("Operating hours")
+        self.questions["questions"][0]["data_requests"] = [request]
+        self.save_inputs()
+        self.prepared()
+        report = (self.root / "bundle/context.md").read_text(encoding="utf-8")
+        self.assertIn("Field scope: anchors", report)
+        self.assertIn("Subject: TV-101 (TV-101)", report)
+        self.assertIn("steam_pressure: present = 8 bar; header A", report)
+        self.assertIn("Still needed for this subject: steam_temperature_C", report)
+        self.assertIn("Subject: TV-102 (TV-102)", report)
+        self.assertIn("Still needed for this subject: steam_pressure", report)
+        self.assertIn("including additional evidence): steam_pressure, steam_temperature_C, Operating hours", report)
+        enriched = self.read("bundle/enriched_questions.json")
+        self.assertEqual(enriched["questions"][0]["data_requests"], [request])
+        self.assertEqual(self.state(self.read("bundle/context.json"))["state"], "unanswered")
+
+    def test_malformed_collection_coverage_refuses_without_changing_packet(self):
+        fields = [{"name": "pressure", "state": "absent", "where": None}]
+        valid = {"id": "P-1", "label": "P-1", "fields": fields, "still_needed": ["pressure"]}
+        changes = [{"field_coverage": 17}, {"field_coverage": [17]},
+                   {"field_coverage": [dict(valid, fields=17)]},
+                   {"field_coverage": [dict(valid, still_needed=17)]}, {"still_needed": 17},
+                   {"field_coverage": [dict(valid, id="OUTSIDE")]}]
+        self.prepared()
+        before = {p.name: p.read_bytes() for p in (self.root / "bundle").iterdir() if p.is_file()}
+        for change in changes:
+            with self.subTest(change=change):
+                request = {"item": "Pressure", "field_scope": "anchors", "field_coverage": [valid],
+                           "still_needed": ["pressure"], **change}
+                self.questions["questions"][0]["data_requests"] = [request]
+                self.save_inputs()
+                _, err = self.invoke("prepare", expected=2)
+                self.assertIn("collection", err)
+                self.assertEqual({p.name: p.read_bytes() for p in (self.root / "bundle").iterdir() if p.is_file()}, before)
+
     def test_source_and_plant_truth_are_separate_and_checked_in_order(self):
         self.prepared()
         self.answers(self.row(source_match="mismatch", plant_truth="unknown", answer_state="partial"))

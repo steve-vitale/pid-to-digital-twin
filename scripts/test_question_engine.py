@@ -478,6 +478,207 @@ class EvidenceStates(unittest.TestCase):
             self.assertEqual(motor["state"], "not_on_drawing")
 
 
+class FieldSubjects(unittest.TestCase):
+    """Independent supplies must not answer each other's missing fields."""
+
+    def model(self, supplies):
+        return {"meta": {"name": "Fictional independent supplies"},
+                "units": [{"id": "H-1", "type": "heater", "name": "Process water heater"}],
+                "streams": [], "instruments": [], "controllers": [],
+                "final_elements": [{"tag": f"TV-{101 + i}", "unit": "H-1",
+                                    "description": f"Steam supply from independent header {i + 1}", "facts": facts}
+                                   for i, facts in enumerate(supplies)]}
+
+    def screen(self, model, tmp, catalog=None):
+        path = Path(tmp) / "model.json"
+        path.write_text(json.dumps(model), encoding="utf-8")
+        args = ["--model", str(path), "--question", "H2"]
+        if catalog:
+            cp = Path(tmp) / "catalog.json"
+            cp.write_text(json.dumps(catalog), encoding="utf-8")
+            args += ["--catalog", str(cp)]
+        doc = run(args, tmp)[1]
+        f = finding(doc, "H2@H-1")
+        request = next((r for r in f["data_requests"] if r["item"] == "Steam supply pressure and temperature"), None)
+        return doc, request
+
+    def test_split_values_and_unknown_siblings_stay_open_with_each_obligation(self):
+        p, t = "steam_pressure", "steam_temperature_C"
+        cases = [([{p: "8 bar"}, {t: 140}], [[t], [p]]),
+                 ([{p: "8 bar", t: 140}, {}], [[], [p, t]]),
+                 ([{p: None}, {p: "8 bar", t: 140}], [[p, t], []]),
+                 ([{}, {}], [[p, t], [p, t]])]
+        for supplies, needed in cases:
+            for reverse in (False, True):
+                with self.subTest(supplies=supplies, reverse=reverse), tempfile.TemporaryDirectory() as tmp:
+                    model = self.model(supplies)
+                    if reverse:
+                        model["final_elements"].reverse()
+                    _, req = self.screen(model, tmp)
+                    self.assertIsNotNone(req)
+                    self.assertEqual(req["field_scope"], "anchors")
+                    by_id = {s["id"]: s for s in req["field_coverage"]}
+                    for i, missing in enumerate(needed):
+                        self.assertEqual(by_id[f"TV-{101 + i}"]["still_needed"], missing)
+                    self.assertEqual(set(req["still_needed"]), set(f for fs in needed for f in fs))
+                    md = (Path(tmp) / "screen.md").read_text(encoding="utf-8")
+                    for i in range(2):
+                        self.assertIn(f"TV-{101 + i} (TV-{101 + i}): supplied", md)
+
+    def test_context_cannot_complete_a_supply_but_is_not_an_extra_subject(self):
+        p, t = "steam_pressure", "steam_temperature_C"
+        with tempfile.TemporaryDirectory() as tmp:
+            model = self.model([{p: "8 bar"}])
+            model["units"][0]["facts"] = {t: 140}
+            model["instruments"] = [{"tag": "TT-1", "unit": "H-1", "variable": "temperature",
+                                      "description": "Process outlet temperature", "facts": {t: 140}}]
+            _, req = self.screen(model, tmp)
+            self.assertEqual(req["still_needed"], [t])
+            self.assertEqual([s["id"] for s in req["field_coverage"]], ["TV-101"])
+            model["final_elements"][0]["facts"][t] = 140
+            self.assertIsNone(self.screen(model, tmp)[1])
+
+    def test_complete_subjects_zero_false_and_case_are_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            complete = {"STEAM_PRESSURE": 0, "Steam_Temperature_C": False}
+            doc, req = self.screen(self.model([complete, complete]), tmp)
+            self.assertIsNone(req)
+            evidence = finding(doc, "H2@H-1")["evidence"]
+            fields = {e["field"] for e in evidence if e["role"] == "on drawing"}
+            self.assertEqual(len(fields), 4)
+            self.assertTrue(any(" = False" in e["text"] for e in evidence))
+
+    def test_schedule_empty_strings_are_blank_without_losing_zero_false(self):
+        for value in (None, "", "  ", "XXX", 0, False):
+            with self.subTest(value=value), tempfile.TemporaryDirectory() as tmp:
+                args = EvidenceStates().tiny_twin(tmp, {"hp": value, "rpm": 1780})
+                _, doc = run(args, tmp)
+                f = finding(doc, "E1@S1-PU001")
+                req = next((r for r in f["data_requests"] if r["item"] == "Motor rating and speed"), None)
+                if value is False or value == 0:
+                    self.assertIsNone(req)
+                else:
+                    self.assertEqual(req["state"], "blank_on_drawing")
+                    self.assertEqual(req["still_needed"], ["HP"])
+
+    def test_unit_scope_requires_actual_group_owner_and_also_needs_remains_open(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = copy.deepcopy(CAT)
+            q = next(q for q in catalog["questions"] if q["id"] == "H2")
+            r = q["data_requests"][0]
+            r["field_scope"] = "unit"
+            model = self.model([{}, {}])
+            model["units"][0]["facts"] = {"steam_pressure": "8 bar", "steam_temperature_C": 140}
+            self.assertIsNone(self.screen(model, tmp, catalog)[1])
+            r["also_needs"] = ["Operating hours"]
+            _, req = self.screen(model, tmp, catalog)
+            self.assertEqual(req["still_needed"], ["Operating hours"])
+            # Item grouping has no selected owning unit: proximity is not an ownership contract.
+            q["applies_when"]["group_by"] = "item"
+            path = Path(tmp) / "catalog.json"
+            path.write_text(json.dumps(catalog), encoding="utf-8")
+            _, doc = run(["--model", str(Path(tmp) / "model.json"), "--question", "H2", "--catalog", str(path)], tmp)
+            for f in doc["questions"]:
+                req = f["data_requests"][0]
+                self.assertEqual(req["field_coverage"], [])
+                self.assertEqual(req["still_needed"], r["fields"] + ["Operating hours"])
+                self.assertIn("No owning equipment unit", req["scope_note"])
+
+    def test_rollup_keeps_scope_and_missing_fields_per_site_and_finding(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            site = base / "site"
+            site.mkdir()
+            _, req = self.screen(self.model([{"steam_pressure": "8 bar"}, {"steam_temperature_C": 140}]), site)
+            doc = qe.rollup([f"A={site}", f"B={site}"], CAT)
+            r = doc["questions"][0]["data_requests"][0]
+            for s in r["sites"]:
+                detail = s["coverage_by_finding"][0]
+                self.assertEqual(detail["field_coverage"], req["field_coverage"])
+                self.assertEqual(detail["field_scope"], "anchors")
+            md = qe.render_rollup_md(doc, CAT)
+            self.assertEqual(md.count("TV-101 (TV-101): supplied steam_pressure; still needed steam_temperature_C (absent)"), 2)
+            graph = gx.build(site / "model.json", questions=site / "questions.json")
+            self.assertIn("field_coverage", json.dumps(graph))
+
+    def test_scope_and_coverage_conflicts_refuse_before_replacing_reports(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            site = base / "site"
+            site.mkdir()
+            self.screen(self.model([{}, {}]), site)
+            catalog = copy.deepcopy(CAT)
+            request = next(q for q in catalog["questions"] if q["id"] == "H2")["data_requests"][0]
+            catalog_path = base / "catalog.json"
+            out = base / "reports"
+            out.mkdir()
+            (out / "rollup.json").write_text("prior JSON", encoding="utf-8")
+            (out / "rollup.md").write_text("prior Markdown", encoding="utf-8")
+            before = {p.name: p.read_bytes() for p in out.iterdir()}
+            for scope, message in (("unit", "field_scope"), ("pool", "field_scope must be")):
+                request["field_scope"] = scope
+                catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
+                with contextlib.redirect_stderr(io.StringIO()) as err:
+                    self.assertEqual(qe.main(["--rollup", str(site), "--catalog", str(catalog_path), "--out", str(out)]), 2)
+                self.assertIn(message, err.getvalue())
+                self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+            doc = json.loads((site / "questions.json").read_text(encoding="utf-8"))
+            doc["questions"][0]["data_requests"][0]["field_coverage"][0]["still_needed"] = []
+            (site / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+            with contextlib.redirect_stderr(io.StringIO()) as err:
+                self.assertEqual(qe.main(["--rollup", str(site), "--out", str(out)]), 2)
+            self.assertIn("field_coverage", err.getvalue())
+            self.assertEqual({p.name: p.read_bytes() for p in out.iterdir()}, before)
+
+    def test_committed_split_supply_example_reproduces(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run(["--model", str(EX / "field-coverage/model.json"), "--question", "H2"], tmp)
+            for name in ("questions.json", "screen.md"):
+                self.assertEqual((Path(tmp) / name).read_text(encoding="utf-8"),
+                                 (EX / "field-coverage" / name).read_text(encoding="utf-8"))
+
+    def test_rollup_rejects_incomplete_or_invented_subject_coverage(self):
+        def missing_coverage(r):
+            del r["field_coverage"]
+
+        def unknown_subject(r):
+            r["field_coverage"][0]["id"] = "NOT-AN-ASSET"
+
+        def missing_value(r):
+            del r["field_coverage"][0]["fields"][0]["value"]
+
+        def missing_locator(r):
+            del r["field_coverage"][0]["fields"][0]["where"]
+
+        changes = [missing_coverage, unknown_subject, missing_value, missing_locator,
+                   lambda r: r.update(field_coverage=[]), lambda r: r.update(already_on_drawing=17),
+                   lambda r: r["field_coverage"][0]["fields"][0].update(value=None)]
+        with tempfile.TemporaryDirectory() as tmp:
+            site = Path(tmp)
+            original, _ = self.screen(self.model([{"steam_pressure": "8 bar"}, {"steam_temperature_C": 140}]), tmp)
+            for change in changes:
+                with self.subTest(change=change.__name__):
+                    doc = copy.deepcopy(original)
+                    change(doc["questions"][0]["data_requests"][0])
+                    (site / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                    with self.assertRaisesRegex(qe.InputError, "field_coverage"):
+                        qe.rollup([str(site)], CAT)
+
+    def test_rollup_cannot_erase_a_known_unit_or_dereference_a_scalar_subject(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            site = Path(tmp)
+            original = copy.deepcopy(load("bayer"))
+            for coverage in ([], [None], [17], ["subject"], [[]]):
+                with self.subTest(coverage=coverage):
+                    doc = copy.deepcopy(original)
+                    request = next(r for r in finding(doc, "H4@E-3")["data_requests"] if r["item"] == "Cooler duty")
+                    request["field_coverage"] = coverage
+                    request["scope_note"] = "No owning equipment unit is identified."
+                    (site / "questions.json").write_text(json.dumps(doc), encoding="utf-8")
+                    with self.assertRaisesRegex(qe.InputError, "field_coverage"):
+                        qe.rollup([str(site)], CAT)
+
+
 class ReviewFixes(unittest.TestCase):
     """One regression test per finding of the two independent reviews (2026-10-29)."""
 

@@ -338,7 +338,34 @@
       "a walkdown: pressure gauge and thermometer at the supply",
       "site records: steam header list"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure."
+     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "FV-119",
+       "label": "FV-119",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "steam_pressure",
+        "steam_temperature_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "steam_pressure",
+      "steam_temperature_C"
+     ]
     },
     {
      "item": "Temperature the user actually needs",
@@ -436,7 +463,27 @@
      "where": [
       "a walkdown: thermometer on the supply"
      ],
-     "how": "Record at normal operation."
+     "how": "Record at normal operation.",
+     "field_scope": "unit",
+     "field_coverage": [
+      {
+       "id": "R-101",
+       "label": "R-101",
+       "fields": [
+        {
+         "name": "cooling_water_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "cooling_water_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "cooling_water_C"
+     ]
     },
     {
      "item": "Cooling water return temperature",
@@ -463,7 +510,27 @@
       "the vendor datasheet: exchanger datasheet",
       "site records: heat and material balance"
      ],
-     "how": "Duty = flow x heat capacity x temperature rise."
+     "how": "Duty = flow x heat capacity x temperature rise.",
+     "field_scope": "unit",
+     "field_coverage": [
+      {
+       "id": "R-101",
+       "label": "R-101",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "A heat user that needs heat below the return temperature",
@@ -541,7 +608,27 @@
      "where": [
       "a walkdown: thermometer on the supply"
      ],
-     "how": "Record at normal operation."
+     "how": "Record at normal operation.",
+     "field_scope": "unit",
+     "field_coverage": [
+      {
+       "id": "E-101",
+       "label": "E-101",
+       "fields": [
+        {
+         "name": "cooling_water_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "cooling_water_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "cooling_water_C"
+     ]
     },
     {
      "item": "Cooling water return temperature",
@@ -567,7 +654,27 @@
       "the vendor datasheet: exchanger datasheet",
       "site records: heat and material balance"
      ],
-     "how": "Duty = flow x heat capacity x temperature rise."
+     "how": "Duty = flow x heat capacity x temperature rise.",
+     "field_scope": "unit",
+     "field_coverage": [
+      {
+       "id": "E-101",
+       "label": "E-101",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "A heat user that needs heat below the return temperature",

@@ -1,0 +1,33 @@
+{
+ "meta": {
+  "name": "Fictional independent steam supplies; software regression control, not plant data"
+ },
+ "units": [
+  {
+   "id": "H-1",
+   "type": "heater",
+   "name": "Process water heater"
+  }
+ ],
+ "streams": [],
+ "instruments": [],
+ "final_elements": [
+  {
+   "tag": "TV-101",
+   "unit": "H-1",
+   "description": "Steam supply from independent header A",
+   "facts": {
+    "steam_pressure": "8 bar; header A"
+   }
+  },
+  {
+   "tag": "TV-102",
+   "unit": "H-1",
+   "description": "Steam supply from independent header B",
+   "facts": {
+    "steam_temperature_C": 140
+   }
+  }
+ ],
+ "controllers": []
+}

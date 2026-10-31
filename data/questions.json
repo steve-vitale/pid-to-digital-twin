@@ -13,7 +13,7 @@
   "applies_when": "absent_note: a sentence quoted as evidence saying what was looked for and not found. anchor: a selector (or list of selectors, any may match) for the item that triggers the question. with: clauses that must all find a related item. without: clauses of which none may find one. also_show: related items quoted as evidence if present. group_by: unit | item | model. needs_model: item kinds the model must contain, else the question is reported as not checked. min_anchors: fewest triggering items per group.",
   "selector": "kind (equipment, instrument, valve = control valve, final_element = other operated valve or speed element, hand_valve, relief, controller, interlock, stream, line_item, offpage), type (exact), type_text (regex over type and text), isa (regex over ISA letters), variable, text (regex over tag, name, description and schedule service), text_all (all regexes), not_text, tagged, control_valve, fact_C_min / fact_C_max (a stated temperature fact), schedule_field (the drawing prints this field, filled or blank).",
   "relation": "same_unit, same_stream, same_unit_same_medium (same unit and same utility: steam, cooling water, air...), other_unit, discharge_side (streams leaving the anchor's unit; on an extracted twin, within max_hops drawn links on the same sheet, direction unknown), near (same unit or stream; on a twin within max_hops links), drives (a controller writing to the anchor), reads (a controller or interlock reading the anchor), anywhere, linked (on a hand-built model: a stream drawn from or to the anchor's unit, an item on such a stream, or the equipment at its other end; on an extracted twin, within max_hops drawn links like near). twin_only / hand_only: true limits a clause to extracted twins / hand-built models. anchor_kind: the clause applies only to anchors of these kinds.",
-  "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any of its fields is still missing), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how.",
+  "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any subject lacks a field; field_scope defaults to anchors, requiring each triggering record separately; unit explicitly selects only the finding's owning equipment record, not related context or a join of sources), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how.",
   "typical_benefit": "wording copied from the source, source keys, arc = DOE IAC/ITAC recommendation code where mapped. Never a figure for a specific plant."
  },
  "screen_exclusions": [
@@ -2254,7 +2254,8 @@
        "what": "thermometer on the supply"
       }
      ],
-     "how": "Record at normal operation."
+     "how": "Record at normal operation.",
+     "field_scope": "unit"
     },
     {
      "item": "Cooling water return temperature",
@@ -2309,7 +2310,8 @@
        "what": "heat and material balance"
       }
      ],
-     "how": "Duty = flow x heat capacity x temperature rise."
+     "how": "Duty = flow x heat capacity x temperature rise.",
+     "field_scope": "unit"
     },
     {
      "item": "A heat user that needs heat below the return temperature",

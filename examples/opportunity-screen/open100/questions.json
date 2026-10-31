@@ -198,7 +198,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-162"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU001",
+       "label": "CND-PU-162",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-162, field CAPACITY"
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-162, field DISCHARGE"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -209,7 +236,34 @@
       "the motor nameplate on CND-PU-162",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU001",
+       "label": "CND-PU-162",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-162, field HP"
+        },
+        {
+         "name": "RPM",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-162, field RPM"
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -363,7 +417,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-163"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU002",
+       "label": "CND-PU-163",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-163, field CAPACITY"
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-163, field DISCHARGE"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -374,7 +455,34 @@
       "the motor nameplate on CND-PU-163",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU002",
+       "label": "CND-PU-163",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-163, field HP"
+        },
+        {
+         "name": "RPM",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-163, field RPM"
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -528,7 +636,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on CND-PU-164"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU003",
+       "label": "CND-PU-164",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-164, field CAPACITY"
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-164, field DISCHARGE"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -539,7 +674,34 @@
       "the motor nameplate on CND-PU-164",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU003",
+       "label": "CND-PU-164",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-164, field HP"
+        },
+        {
+         "name": "RPM",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-164, field RPM"
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -648,7 +810,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on FWS-PU-170A"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU001",
+       "label": "FWS-PU-170A",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170A, field CAPACITY"
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170A, field DISCHARGE"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -659,7 +848,34 @@
       "the motor nameplate on FWS-PU-170A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU001",
+       "label": "FWS-PU-170A",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170A, field HP"
+        },
+        {
+         "name": "RPM",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170A, field RPM"
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -768,7 +984,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on FWS-PU-170B"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU002",
+       "label": "FWS-PU-170B",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170B, field CAPACITY"
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170B, field DISCHARGE"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -779,7 +1022,34 @@
       "the motor nameplate on FWS-PU-170B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU002",
+       "label": "FWS-PU-170B",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170B, field HP"
+        },
+        {
+         "name": "RPM",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170B, field RPM"
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -837,7 +1107,27 @@
       "the motor nameplate on ACC-PU-151",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S1-PU013",
+       "label": "ACC-PU-151",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 1 equipment schedule, entry ACC-PU-151, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -894,7 +1184,27 @@
       "the motor nameplate on ACC-PU-152",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S1-PU014",
+       "label": "ACC-PU-152",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 1 equipment schedule, entry ACC-PU-152, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -951,7 +1261,27 @@
       "the motor nameplate on ACC-PU-153",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S1-PU015",
+       "label": "ACC-PU-153",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 1 equipment schedule, entry ACC-PU-153, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1008,7 +1338,27 @@
       "the motor nameplate on CND-PU-162",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU001",
+       "label": "CND-PU-162",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-162, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1065,7 +1415,27 @@
       "the motor nameplate on CND-PU-163",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU002",
+       "label": "CND-PU-163",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-163, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1122,7 +1492,27 @@
       "the motor nameplate on CND-PU-164",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S2-PU003",
+       "label": "CND-PU-164",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 2 equipment schedule, entry CND-PU-164, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1179,7 +1569,27 @@
       "the motor nameplate on FWS-PU-170A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU001",
+       "label": "FWS-PU-170A",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170A, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1236,7 +1646,27 @@
       "the motor nameplate on FWS-PU-170B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S3-PU002",
+       "label": "FWS-PU-170B",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 3 equipment schedule, entry FWS-PU-170B, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1293,7 +1723,27 @@
       "the motor nameplate on ACW-PU-211A",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S7-PU001",
+       "label": "ACW-PU-211A",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 7 equipment schedule, entry ACW-PU-211A, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1350,7 +1800,27 @@
       "the motor nameplate on ACW-PU-211B",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S7-PU002",
+       "label": "ACW-PU-211B",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 7 equipment schedule, entry ACW-PU-211B, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1407,7 +1877,27 @@
       "the motor nameplate on ACW-PU-211C",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, full-load amps and efficiency."
+     "how": "Copy rated power, full-load amps and efficiency.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S7-PU003",
+       "label": "ACW-PU-211C",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "blank",
+         "where": "sheet 7 equipment schedule, entry ACW-PU-211C, field HP"
+        }
+       ],
+       "still_needed": [
+        "HP"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP"
+     ]
     },
     {
      "item": "Measured input power or current at normal load",
@@ -1536,7 +2026,27 @@
       "the blank CAPACITY field on the sheet 4 equipment schedule, entry ESS-HTR-180",
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow."
+     "how": "Copy rated flow.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S4-TK001",
+       "label": "ESS-HTR-180",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "blank",
+         "where": "sheet 4 equipment schedule, entry ESS-HTR-180, field CAPACITY"
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "When the station is used",
@@ -1640,7 +2150,27 @@
      "where": [
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow."
+     "how": "Copy rated flow.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S0-OP005",
+       "label": "\"MAIN STEAM BY-PASS\" (S0-OP005)",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "When the station is used",
@@ -1710,7 +2240,27 @@
      "where": [
       "the vendor datasheet: station or desuperheater datasheet"
      ],
-     "how": "Copy rated flow."
+     "how": "Copy rated flow.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S1-OP002",
+       "label": "\"MSS PID 140-1 (E-1) MAIN STEAM BYPASS\" (S1-OP002)",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "When the station is used",
@@ -1764,7 +2314,34 @@
       "a walkdown: pressure gauge and thermometer at the supply",
       "site records: steam header list"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure."
+     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "S4-OP005",
+       "label": "\"MSS PID 140-1 PEGGING STEAM\" (S4-OP005)",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "steam_pressure",
+        "steam_temperature_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "steam_pressure",
+      "steam_temperature_C"
+     ]
     },
     {
      "item": "Temperature the user actually needs",

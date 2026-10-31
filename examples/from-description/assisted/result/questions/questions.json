@@ -142,7 +142,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on P-1"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "P-1",
+       "label": "P-1",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -151,7 +178,34 @@
       "the motor nameplate on P-1",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "P-1",
+       "label": "P-1",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "RPM",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",

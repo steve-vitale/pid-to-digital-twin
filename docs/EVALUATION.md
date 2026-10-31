@@ -497,3 +497,9 @@ The separate [fixed-claim development exercise](../benchmarks/README.md) adds tw
 with synthetic controls. It grades labels on explicit paraphrases; reasons and citation support remain
 unscored. It supplies a bounded evaluation contract, not the unfamiliar-description or useful-question
 measurement above, and does not change the field scorer, question catalog or historical results.
+
+The [field-coverage controls](../examples/opportunity-screen/field-coverage/README.md) separately test whether
+each subject's missing evidence stays requested through screening and handoff. They use fictional values and
+actual offline CLIs; no new question trigger or benefit is inferred. Correct completeness accounting does not
+establish source support, useful investigations or a complete catalog. E5's curve and H3's hours/power-field
+contracts remain open in [STATUS](STATUS.md#known-defects).

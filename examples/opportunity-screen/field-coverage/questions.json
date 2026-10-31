@@ -1,0 +1,171 @@
+{
+ "schema": "opportunity-questions-1",
+ "source_model": "examples/opportunity-screen/field-coverage/model.json",
+ "catalog": "data/questions.json",
+ "loops": null,
+ "loop_rows_unmatched": [],
+ "schedules": [],
+ "questions_run": [
+  "H2"
+ ],
+ "note": "A screen, not an audit: questions worth asking and the data needed to answer them. No savings are computed; typical benefits are the cited sources' general wording.",
+ "counts": {
+  "findings": 1,
+  "by_family": {
+   "heat_grade": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "H2@H-1",
+   "question_id": "H2",
+   "family": "heat_grade",
+   "question": "Is high-grade (or unknown-grade) steam doing a low-temperature job?",
+   "about": "H-1",
+   "assets": [
+    {
+     "id": "H-1",
+     "tag": "H-1"
+    },
+    {
+     "id": "TV-101",
+     "tag": "TV-101"
+    },
+    {
+     "id": "TV-102",
+     "tag": "TV-102"
+    }
+   ],
+   "evidence": [
+    {
+     "role": "trigger",
+     "id": "TV-101",
+     "tag": "TV-101",
+     "text": "valve TV-101 reads \"TV-101 Steam supply from independent header A\" at H-1",
+     "field": "final_elements[TV-101]"
+    },
+    {
+     "role": "trigger",
+     "id": "TV-102",
+     "tag": "TV-102",
+     "text": "valve TV-102 reads \"TV-102 Steam supply from independent header B\" at H-1",
+     "field": "final_elements[TV-102]"
+    },
+    {
+     "role": "equipment",
+     "id": "H-1",
+     "tag": "H-1",
+     "text": "equipment H-1 reads \"H-1 Process water heater\"",
+     "field": "units[H-1]"
+    },
+    {
+     "role": "on drawing",
+     "text": "Steam supply pressure and temperature: TV-101 steam_pressure = 8 bar; header A",
+     "field": "final_elements[TV-101].facts.steam_pressure"
+    },
+    {
+     "role": "on drawing",
+     "text": "Steam supply pressure and temperature: TV-102 steam_temperature_C = 140",
+     "field": "final_elements[TV-102].facts.steam_temperature_C"
+    }
+   ],
+   "data_requests": [
+    {
+     "item": "Steam supply pressure and temperature",
+     "state": "not_on_drawing",
+     "where": [
+      "a walkdown: pressure gauge and thermometer at the supply",
+      "site records: steam header list"
+     ],
+     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "already_on_drawing": [
+      "steam_pressure",
+      "steam_temperature_C"
+     ],
+     "still_needed": [
+      "steam_pressure",
+      "steam_temperature_C"
+     ],
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "TV-101",
+       "label": "TV-101",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "present",
+         "where": "final_elements[TV-101].facts.steam_pressure",
+         "value": "8 bar; header A"
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "steam_temperature_C"
+       ]
+      },
+      {
+       "id": "TV-102",
+       "label": "TV-102",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "present",
+         "where": "final_elements[TV-102].facts.steam_temperature_C",
+         "value": 140
+        }
+       ],
+       "still_needed": [
+        "steam_pressure"
+       ]
+      }
+     ]
+    },
+    {
+     "item": "Temperature the user actually needs",
+     "state": "not_on_drawing",
+     "where": [
+      "DCS/PLC configuration: the temperature setpoint"
+     ],
+     "how": "Note setpoint and normal range."
+    },
+    {
+     "item": "A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity",
+     "state": "not_on_drawing",
+     "where": [
+      "site records: site steam balance",
+      "a walkdown: headers and hot streams near this user"
+     ],
+     "how": "List sources whose temperature exceeds the need with a practical approach."
+    }
+   ],
+   "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
+   "typical_benefit": {
+    "wording": "Closest source wordings: pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management\" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.",
+    "source": [
+     "S19",
+     "S6"
+    ],
+    "arc": null,
+    "source_titles": [
+     "S19: Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+     "S6: Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)"
+    ]
+   },
+   "limits": "Where the model does not state the steam grade, the question is first 'what grade is it?'.",
+   "status": "asked"
+  }
+ ],
+ "not_checked": [],
+ "did_not_fire": [],
+ "left_out": {}
+}

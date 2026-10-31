@@ -5137,3 +5137,39 @@ qualified by report scope, with current installed evidence unknown and recipient
 no trial, benefit or company acceptance. This makes the human handoff concrete without building a company
 governance service. The question catalog is unchanged; N065 still needs useful/unacceptable question keys and
 false-positive checks across other sources. A small label task does not close that gap.
+
+
+## 111. Keep each subject's unanswered fields in the investigation
+
+A source-first question review exposed a prerequisite software defect: H2 could combine header A's pressure
+with header B's temperature and remove the supply-condition request. A complete supply could also hide an
+entirely unknown sibling; a blank subject alongside a complete one could retain a request with an empty
+remaining-fields list. The independent baseline review retained twenty-three actual CLI controls before the
+repair. Existing tests passed despite these failures.
+
+Field requests now default to each triggering record independently. Explicit unit scope reads only the finding's
+selected owning equipment, with H4's supply temperature and cooler duty declared that way. Supporting context
+cannot silently complete an anchor. No owner leaves every unit field unresolved. Every open field request
+retains its scope, each subject/field state and locator, and the remaining obligations. Supplied values stay
+attributed; a value on one subject can coexist with the same field missing on another. Empty/whitespace schedule
+values now count as blanks, while zero, false and case-insensitive lookup remain supported.
+
+Readable screens, graph attachment, context reports and per-site/finding roll-ups preserve those distinctions.
+Roll-up controls reject missing/invented subject coverage and scope conflicts before changing reports. Legacy
+screens remain readable without claiming that their omitted scope proves the current behavior; regenerate them
+under the reviewed catalog. New fictional regression fixtures establish software behavior, not source truth,
+useful questions or physical/temporal equivalence. No trigger, benefit or decision rule is added.
+
+The actual prior screens and both description bundles are regenerated from unchanged models/sources/answers.
+Earlier bytes are retained in Git and private comparison evidence; existing context proposals/decision history
+are unchanged. The MCP sample is read again from the graph with the refreshed questions. The broader useful-
+question rubric remains open: original-source review does not justify a universal alarm checklist. E5 can
+settle a fan-curve request from HP/RPM alone, and H3's hours/power fields need separate review (N071). Schedule
+replacement and unresolved fact/schedule conflicts remain documented limits. This repair closes N070 only.
+
+Final independent retests retain eighty-six actual CLI calls and thirty-nine assertions; fourteen public
+screen/roll-up reports reproduce. The question suite passes 76 tests with one Windows symlink skip; the context
+suite passes 45. The full cached-data runner reports 63/63 scripts, five unittest skips and two explanatory
+platform notices. Four registered benchmark suites reproduce; the unchanged matrix/pipeline inventories remain
+fresh. A separate reader independently rebuilds all sixty-three description files and checks the application
+snapshot fingerprint. These are bounded software observations, not an engineer trial or native plant acceptance.

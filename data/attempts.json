@@ -3644,6 +3644,23 @@
         "benchmarks/README.md",
         "examples/from-description/mgpi/first-question.md"
       ]
+    },
+    {
+      "id": "A245",
+      "function": "intake_and_reuse",
+      "date": "2026-10-30",
+      "change": "Resolve each request field bundle within its declared subject scope and retain missing obligations through screen, graph, context and per-site roll-up.",
+      "hypothesis": "Grouping an investigation by unit must not let distinct supplies complement missing values or hide an unknown sibling; explicit owning-unit facts need a separate declared scope.",
+      "evidence": "Independent baseline23actualCLIcontrols expose cross-record completion, complete-plus-unknown suppression, empty remaining lists and schedule-whitespace presence. Default anchors require each subject; H4 explicitly uses actual owning-unit scope. New fictional two-supply outputs, permutations, complete/unknown/blank, zero/false, also-needs, no-owner and refusal controls preserve values/locators. Existing screens and both description bundles actually regenerated from unchanged inputs; scope metadata and generator inventory changes are not new engineering evidence. Final independent86actualCLIcalls/39assertions and14publicreport comparisons pass; question76tests1Windowsskip/context45tests. Full cached-data runner63/63scripts,5unittestskips/2platformnotices; no new engineering result.",
+      "runs": "Offline actual CLI controls, targeted regression suites and independent software/reader review; no new model/source-family/human or company trial.",
+      "verdict": "kept",
+      "why": "Close N070 field-accounting defect without changing question triggers/decision rules or claiming useful/complete catalog coverage. N065 and N071 remain open.",
+      "source": [
+        "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation",
+        "docs/OPPORTUNITY_SCREEN.md#the-three-evidence-states",
+        "examples/opportunity-screen/field-coverage/README.md",
+        "docs/STATUS.md#known-defects"
+      ]
     }
   ],
   "not_tried": [
@@ -4370,6 +4387,28 @@
         "docs/STATUS.md#known-defects",
         "docs/JOURNAL.md#108-audit-delivery-state-and-remaining-source-output-writers",
         "docs/JOURNAL.md#109-preserve-sources-across-the-remaining-output-writers"
+      ]
+    },
+    {
+      "id": "N070",
+      "function": "intake_and_reuse",
+      "status": "done",
+      "idea": "Keep data-request completeness bound to each subject rather than the union of fields found in one grouped question.",
+      "why_not_yet": "Completed 2026-10-30: default per-anchor bundles include unknown siblings; explicit unit scope resolves only actual owning equipment; no owner stays open. Subject coverage and remaining obligations retained through readable screens, graph/context and cross-site roll-up. Empty schedules are blank. Fictional actual-CLI controls and independent reviews establish software accounting only, not source/engineering truth or question usefulness.",
+      "source": [
+        "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation",
+        "examples/opportunity-screen/field-coverage/README.md"
+      ]
+    },
+    {
+      "id": "N071",
+      "function": "intake_and_reuse",
+      "status": "not-done",
+      "idea": "Review catalog field/request adequacy: E5 needs a fan curve beyond HP/RPM, and H3 needs an explicit hours and alternative power-unit contract.",
+      "why_not_yet": "Source/code audit found that fields do not encode the full collection wording. Correct per-subject accounting does not repair semantic request adequacy. Separate source-grounded expected/missing-evidence cases and engineering review are needed before changing these rules. Fact/schedule conflicts and replacement-file semantics also remain limited; no automatic merge or conflict resolution is claimed.",
+      "source": [
+        "docs/STATUS.md#known-defects",
+        "docs/JOURNAL.md#111-keep-each-subjects-unanswered-fields-in-the-investigation"
       ]
     }
   ]

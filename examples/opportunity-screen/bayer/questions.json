@@ -167,7 +167,34 @@
       "the vendor datasheet: pump curve and rated duty point",
       "the pump nameplate on P-1"
      ],
-     "how": "Copy the rated flow and head and get the pump curve."
+     "how": "Copy the rated flow and head and get the pump curve.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "P-1",
+       "label": "P-1",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "DISCHARGE",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY",
+        "DISCHARGE"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY",
+      "DISCHARGE"
+     ]
     },
     {
      "item": "Motor rating and speed",
@@ -176,7 +203,34 @@
       "the motor nameplate on P-1",
       "maintenance records: motor record card"
      ],
-     "how": "Copy rated power, speed and efficiency from the motor nameplate."
+     "how": "Copy rated power, speed and efficiency from the motor nameplate.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "P-1",
+       "label": "P-1",
+       "fields": [
+        {
+         "name": "HP",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "RPM",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "HP",
+        "RPM"
+       ]
+      }
+     ],
+     "still_needed": [
+      "HP",
+      "RPM"
+     ]
     },
     {
      "item": "Static head versus friction head",
@@ -306,7 +360,27 @@
      "where": [
       "a walkdown: surface thermometer"
      ],
-     "how": "Surfaces over 120 F (49 C) qualify."
+     "how": "Surfaces over 120 F (49 C) qualify.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "stream:U1",
+       "label": "U1",
+       "fields": [
+        {
+         "name": "normal_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "normal_temperature_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "normal_temperature_C"
+     ]
     }
    ],
    "decision_rule": "Insulate bare lengths over 120 F (49 C) unless they are deliberately bare (for example a line that must cool); closes if the line is already insulated.",
@@ -510,7 +584,54 @@
       "a walkdown: pressure gauge and thermometer at the supply",
       "site records: steam header list"
      ],
-     "how": "Record supply conditions; saturation temperature follows from pressure."
+     "how": "Record supply conditions; saturation temperature follows from pressure.",
+     "field_scope": "anchors",
+     "field_coverage": [
+      {
+       "id": "stream:U1",
+       "label": "U1",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "steam_pressure",
+        "steam_temperature_C"
+       ]
+      },
+      {
+       "id": "TV-104C",
+       "label": "TV-104C",
+       "fields": [
+        {
+         "name": "steam_pressure",
+         "state": "absent",
+         "where": null
+        },
+        {
+         "name": "steam_temperature_C",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "steam_pressure",
+        "steam_temperature_C"
+       ]
+      }
+     ],
+     "still_needed": [
+      "steam_pressure",
+      "steam_temperature_C"
+     ]
     },
     {
      "item": "Temperature the user actually needs",
@@ -618,7 +739,27 @@
       "the vendor datasheet: exchanger datasheet",
       "site records: heat and material balance"
      ],
-     "how": "Duty = flow x heat capacity x temperature rise."
+     "how": "Duty = flow x heat capacity x temperature rise.",
+     "field_scope": "unit",
+     "field_coverage": [
+      {
+       "id": "E-3",
+       "label": "E-3",
+       "fields": [
+        {
+         "name": "CAPACITY",
+         "state": "absent",
+         "where": null
+        }
+       ],
+       "still_needed": [
+        "CAPACITY"
+       ]
+      }
+     ],
+     "still_needed": [
+      "CAPACITY"
+     ]
     },
     {
      "item": "A heat user that needs heat below the return temperature",

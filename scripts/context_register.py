@@ -85,6 +85,36 @@ def semantic(value):
     return value
 
 
+def coverage_subjects(request):
+    """Validate the new collection metadata's shape, without re-running its catalog or resolving answers."""
+    for key in ("already_on_drawing", "still_needed"):
+        if key in request and (not isinstance(request[key], list)
+                               or any(not isinstance(f, str) for f in request[key])):
+            raise InputError(f"collection {key} must be a list of field names")
+    if "field_coverage" not in request and "field_scope" not in request:
+        return set()  # historical/unstructured collection prompts remain readable
+    if request.get("field_scope") not in ("anchors", "unit") or not isinstance(request.get("field_coverage"), list):
+        raise InputError("collection field_coverage needs a list and field_scope anchors or unit")
+    if "scope_note" in request and not isinstance(request["scope_note"], str):
+        raise InputError("collection scope_note must be text")
+    subjects = set()
+    for subject in request["field_coverage"]:
+        if (not isinstance(subject, dict) or not isinstance(subject.get("id"), str)
+                or not isinstance(subject.get("label"), str) or not isinstance(subject.get("fields"), list)
+                or not isinstance(subject.get("still_needed"), list)
+                or any(not isinstance(f, str) for f in subject["still_needed"])):
+            raise InputError("collection field_coverage subjects need identity, fields and still_needed lists")
+        if subject["id"] in subjects:
+            raise InputError("collection field_coverage repeats a subject")
+        subjects.add(subject["id"])
+        for entry in subject["fields"]:
+            if (not isinstance(entry, dict) or not isinstance(entry.get("name"), str)
+                    or entry.get("state") not in ("present", "blank", "absent")
+                    or (entry.get("where") is not None and not isinstance(entry["where"], str))):
+                raise InputError("collection field_coverage fields need a name, state and text/null locator")
+    return subjects
+
+
 def load_inputs(model_path, question_path):
     graph = read_json(model_path, "model")
     if graph.get("schema") != "twin-graph-1":
@@ -155,6 +185,12 @@ def load_inputs(model_path, question_path):
             raise InputError(f"question {qid} evidence must be a list of objects")
         ids = sorted(set(ids) | {identifier(r["id"], f"question {qid} evidence asset id")
                                  for r in evidence if "id" in r})
+        covered = set()
+        for request in question.get("data_requests") or []:
+            if isinstance(request, dict):
+                covered |= coverage_subjects(request)
+        if not covered <= set(ids):
+            raise InputError(f"question {qid} collection field_coverage refers to an asset outside its references")
         for aid in ids:
             if aid not in assets:
                 raise InputError(f"question {qid} has unknown asset id {aid}; use an exact graph id")
@@ -540,6 +576,29 @@ def report(register):
                     lines += [f"- {md(request)}", ""]
                     continue
                 lines.append(f"- **{md(request.get('item', 'Collection prompt'))}**")
+                coverage_subjects(request)
+                if request.get("field_scope"):
+                    lines.append(f"  Field scope: {md(request['field_scope'])}")
+                if request.get("scope_note"):
+                    lines.append(f"  Scope note: {md(request['scope_note'])}")
+                for subject in request.get("field_coverage") or []:
+                    if not isinstance(subject, dict):
+                        continue
+                    lines.append(f"  Subject: {md(subject.get('label', ''))} ({md(subject.get('id', ''))})")
+                    for entry in subject.get("fields") or []:
+                        if not isinstance(entry, dict):
+                            continue
+                        detail = f"  {md(entry.get('name', ''))}: {md(entry.get('state', 'unknown'))}"
+                        if "value" in entry:
+                            detail += f" = {md(entry['value'])}"
+                        if entry.get("where"):
+                            detail += f"; source: {md(entry['where'])}"
+                        lines.append(detail)
+                    lines.append("  Still needed for this subject: " +
+                                 (", ".join(md(f) for f in subject.get("still_needed") or []) or "none"))
+                if "still_needed" in request:
+                    lines.append("  Remaining across subjects (including additional evidence): " +
+                                 (", ".join(md(f) for f in request["still_needed"]) or "none"))
                 fields = request.get("fields") or []
                 for field in fields if isinstance(fields, list) else [fields]:
                     lines.append(f"  Field: {md(field)}")

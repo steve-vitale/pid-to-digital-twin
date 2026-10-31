@@ -642,7 +642,7 @@ def field_state(item, name):
         for k, v in sch["fields"].items():
             if k.upper() == name.upper():
                 where = f"sheet {sch['sheet']} equipment schedule, entry {sch['tag']}, field {k}"
-                if v is None or (isinstance(v, str) and PLACEHOLDER.match(v)):
+                if v is None or (isinstance(v, str) and (not v.strip() or PLACEHOLDER.match(v))):
                     return ("blank", v, where)
                 return ("present", v, where)
     return ("absent", None, None)
@@ -706,13 +706,35 @@ def render_historian(place, ctx):
     return "; ".join(parts) or None
 
 
+def validate_field_scopes(catalog):
+    """Scope is part of a request's contract, independent of finding grouping."""
+    for q in catalog["questions"]:
+        for r in q.get("data_requests", []):
+            scope = r.get("field_scope", "anchors")
+            if scope not in ("anchors", "unit") or ("field_scope" in r and not r.get("fields")):
+                raise InputError(f"catalog question {q['id']} request {r['item']!r}: field_scope must be "
+                                 "anchors or unit on a request with fields")
+
+
 def resolve_requests(q, ctx):
     evidence, reqs = [], []
     for r in q.get("data_requests", []):
         state, where_fields, found, have = "not_on_drawing", [], [], set()
-        for fname in r.get("fields", []):
-            for it in OrderedDict((i["id"], i) for i in ctx["anchors"] + ctx["roles"].get("equipment", [])).values():
+        fields = r.get("fields", [])
+        scope = r.get("field_scope", "anchors")
+        subjects = ([ctx["unit"]] if ctx.get("unit") else []) if scope == "unit" else ctx["anchors"]
+        subjects = list(OrderedDict((i["id"], i) for i in subjects).values())
+        coverage = [{"id": it["id"], "label": it.label(), "fields": [], "still_needed": []}
+                    for it in subjects]
+        for fname in fields:
+            for it, subject in zip(subjects, coverage):
                 st, val, where = field_state(it, fname)
+                entry = {"name": fname, "state": st, "where": where}
+                if st == "present":
+                    entry["value"] = val
+                else:
+                    subject["still_needed"].append(fname)
+                subject["fields"].append(entry)
                 if st == "present":
                     found.append((f"{r['item']}: {it.label()} {fname} = {val}", where))
                     have.add(fname)
@@ -720,8 +742,9 @@ def resolve_requests(q, ctx):
                     shown = f" (printed as {val!r})" if val else ""
                     where_fields.append(f"the blank {fname} field{shown} on the {where.rsplit(', field', 1)[0]}")
         evidence += [{"item": r["item"], "text": t, "where": w} for t, w in found]
-        if r.get("fields") and have >= set(r["fields"]) and not r.get("also_needs") and not where_fields:
-            continue  # every part is on the drawing
+        missing = [f for f in fields if not subjects or any(f in s["still_needed"] for s in coverage)]
+        if fields and subjects and not missing and not r.get("also_needs"):
+            continue  # every subject has its own complete bundle
         places = list(dict.fromkeys(where_fields))
         if places:
             state = "blank_on_drawing"
@@ -732,7 +755,13 @@ def resolve_requests(q, ctx):
         req = {"item": r["item"], "state": state, "where": places, "how": r["how"]}
         if have:
             req["already_on_drawing"] = sorted(have)
-            req["still_needed"] = [f for f in r["fields"] if f not in have] + list(r.get("also_needs") or [])
+            req["still_needed"] = missing + list(r.get("also_needs") or [])
+        if fields:
+            req["field_scope"] = scope
+            req["field_coverage"] = coverage
+            req["still_needed"] = missing + list(r.get("also_needs") or [])
+            if not subjects:
+                req["scope_note"] = "No owning equipment unit is identified for this finding; no unit fields are resolved."
         reqs.append(req)
     return evidence, reqs
 
@@ -841,7 +870,7 @@ def run_question(model, q, catalog):
             roles.setdefault("equipment", [unit])
         label = unit.label() if unit else ", ".join(a.label() for a in anchors[:6]) + \
             (f" and {len(anchors) - 6} more" if len(anchors) > 6 else "")
-        ctx = {"anchors": anchors, "roles": roles, "label": label}
+        ctx = {"anchors": anchors, "roles": roles, "label": label, "unit": unit}
         ev = [evidence_line(model, a, aw.get("anchor_role", "trigger")) for a in anchors]
         for r, its in roles.items():
             ev += [evidence_line(model, i, r) for i in its if i["id"] not in {a["id"] for a in anchors}]
@@ -872,6 +901,7 @@ def benefit(q, catalog):
 
 
 def screen(model, catalog, only=None):
+    validate_field_scopes(catalog)
     qs = [q for q in catalog["questions"] if not only or q["id"] in only]
     found, not_checked, quiet = [], [], []
     for q in qs:
@@ -937,6 +967,24 @@ def count_by(found, key):
     return c
 
 
+def request_progress(r):
+    """Readable coverage, also used for per-finding roll-up details."""
+    if "field_coverage" in r and (len(r["field_coverage"]) != 1 or r.get("scope_note")):
+        parts = [r["scope_note"]] if r.get("scope_note") else []
+        for subject in r["field_coverage"]:
+            present = [f["name"] for f in subject["fields"] if f["state"] == "present"]
+            missing = [f"{f['name']} ({f['state']})" for f in subject["fields"] if f["state"] != "present"]
+            parts.append(f"{subject['label']} ({subject['id']}): supplied " + (", ".join(present) or "none")
+                         + "; still needed " + (", ".join(missing) or "none"))
+        if r.get("still_needed"):
+            parts.append("Remaining across subjects (including additional evidence): " + ", ".join(r["still_needed"]))
+        return " ".join(p + "." for p in parts)
+    if r.get("already_on_drawing"):
+        return (f"Already on the drawing: {', '.join(r['already_on_drawing'])}; still needed: "
+                f"{', '.join(r['still_needed'])}.")
+    return ""
+
+
 def render_md(model, catalog, doc):
     title = (f"extracted drawing set, {len(model.m.get('systems', []))} sheets" if model.twin
              else model.m.get("meta", {}).get("title", doc["source_model"]))
@@ -980,8 +1028,8 @@ def render_md(model, catalog, doc):
                   for e in f["evidence"]]
             L += ["", "**Data to collect**", ""]
             for r in f["data_requests"]:
-                part = (f" Already on the drawing: {', '.join(r['already_on_drawing'])}; still needed: "
-                        f"{', '.join(r['still_needed'])}." if r.get("already_on_drawing") else "")
+                progress = request_progress(r)
+                part = " " + progress if progress else ""
                 L.append(f"- {r['item']} [{r['state'].replace('_', ' ')}].{part} Where: " + "; then ".join(r["where"])
                          + f". How: {r['how']}")
             tb = f["typical_benefit"]
@@ -1052,12 +1100,20 @@ def load_site(arg, catalog):
         conflicts = [key for key, value in expected.items() if finding.get(key) != value]
         requests = finding.get("data_requests")
         pairs = {(r["item"], r["how"]) for r in q.get("data_requests", [])}
+        definitions = {r["item"]: r for r in q.get("data_requests", [])}
         if len({item for item, _ in pairs}) != len(pairs):
             raise InputError(f"catalog question {q['id']} gives conflicting instructions for the same request item")
         if not isinstance(requests, list) or any(
                 not isinstance(r, dict) or not isinstance(r.get("item"), str) or
                 not isinstance(r.get("how"), str) or (r["item"], r["how"]) not in pairs for r in requests):
             conflicts.append("data_requests")
+        else:
+            for r in requests:
+                definition = definitions[r["item"]]
+                if "field_scope" in r and r["field_scope"] != definition.get("field_scope", "anchors"):
+                    conflicts.append("data_requests.field_scope")
+                if not valid_coverage(r, definition, finding, q):
+                    conflicts.append("data_requests.field_coverage")
         if conflicts:
             raise InputError(f"{shown_path(f)} finding {finding.get('id', q['id'])!r} conflicts with catalog "
                              f"question {q['id']} ({', '.join(conflicts)}); reconcile the catalog and regenerate "
@@ -1065,10 +1121,89 @@ def load_site(arg, catalog):
     return name, shown_path(f), d
 
 
+def valid_coverage(request, definition, finding, question):
+    """Check new coverage metadata before a roll-up consumes it; legacy screens may omit it."""
+    for key in ("already_on_drawing", "still_needed"):
+        if key in request and (not isinstance(request[key], list)
+                               or any(not isinstance(f, str) for f in request[key])):
+            return False
+    if "field_coverage" not in request and "field_scope" not in request:
+        return True  # historical output cannot establish per-subject completeness
+    if "field_coverage" not in request:
+        return False
+    coverage = request["field_coverage"]
+    fields = definition.get("fields", [])
+    if not isinstance(coverage, list) or not fields or "field_scope" not in request:
+        return False
+    if request.get("scope_note") is not None and not isinstance(request["scope_note"], str):
+        return False
+    if not isinstance(request.get("still_needed"), list) or any(
+            not isinstance(f, str) for f in request["still_needed"]):
+        return False
+    assets = finding.get("assets")
+    evidence = finding.get("evidence")
+    if not isinstance(assets, list) or not isinstance(evidence, list):
+        return False
+    asset_ids = {a["id"] for a in assets if isinstance(a, dict) and isinstance(a.get("id"), str)}
+    if request["field_scope"] == "anchors":
+        role = question["applies_when"].get("anchor_role", "trigger")
+        expected = {e["id"] for e in evidence if isinstance(e, dict) and e.get("role") == role
+                    and isinstance(e.get("id"), str)}
+        if not coverage or not expected:
+            return False
+    elif len(coverage) > 1 or (not coverage and not request.get("scope_note")):
+        return False
+    elif coverage and (not isinstance(coverage[0], dict)
+                       or question["applies_when"].get("group_by", "unit") != "unit"
+                       or coverage[0].get("id") != finding.get("id", "").partition("@")[2]):
+        return False
+    if request["field_scope"] == "unit" and not coverage:
+        owner_id = finding.get("id", "").partition("@")[2]
+        if question["applies_when"].get("group_by", "unit") == "unit" and any(
+                isinstance(e, dict) and e.get("id") == owner_id
+                and isinstance(e.get("field"), str) and e["field"].startswith("units[") for e in evidence):
+            return False
+    seen = set()
+    for subject in coverage:
+        if (not isinstance(subject, dict) or not isinstance(subject.get("id"), str)
+                or not isinstance(subject.get("label"), str) or subject["id"] in seen
+                or not isinstance(subject.get("fields"), list)):
+            return False
+        seen.add(subject["id"])
+        if subject["id"] not in asset_ids:
+            return False
+        entries = subject["fields"]
+        if (len(entries) != len(fields) or any(not isinstance(e, dict) for e in entries)
+                or [e.get("name") for e in entries] != fields):
+            return False
+        if any(e.get("state") not in ("present", "blank", "absent")
+               or (e.get("where") is not None and not isinstance(e["where"], str)) for e in entries):
+            return False
+        for entry in entries:
+            if entry["state"] in ("present", "blank") and not entry.get("where"):
+                return False
+            if entry["state"] == "present":
+                value = entry.get("value")
+                if value is None or (isinstance(value, str) and (not value.strip() or PLACEHOLDER.match(value))):
+                    return False
+            elif "value" in entry or (entry["state"] == "absent" and entry.get("where") is not None):
+                return False
+        if subject.get("still_needed") != [e["name"] for e in entries if e["state"] != "present"]:
+            return False
+    if request["field_scope"] == "anchors" and seen != expected:
+        return False
+    missing = [f for f in fields if not coverage or any(f in s["still_needed"] for s in coverage)]
+    supplied = sorted({e["name"] for s in coverage for e in s["fields"] if e["state"] == "present"})
+    state = "blank_on_drawing" if any(e["state"] == "blank" for s in coverage for e in s["fields"]) else "not_on_drawing"
+    return (request["still_needed"] == missing + list(definition.get("also_needs") or [])
+            and request.get("already_on_drawing", []) == supplied and request.get("state") == state)
+
+
 def rollup(site_args, catalog, *, catalog_path=CATALOG):
     """Combine several sites' screens: per question, the sites and assets it fired on and the data requests merged
     by item (each site's places kept, duplicates dropped). Ordered by how many sites a question fired at, then by
     findings, then catalog order. Nothing is ranked by value and no saving is computed."""
+    validate_field_scopes(catalog)
     sites, seen = [], {}
     for a in site_args:
         name, path, d = load_site(a, catalog)
@@ -1092,6 +1227,10 @@ def rollup(site_args, catalog, *, catalog_path=CATALOG):
                     s["states"].append(r["state"])
                 s["per"].setdefault(f["id"], [])
                 s["per"][f["id"]] += [w for w in r["where"] if w not in s["per"][f["id"]]]
+                detail = {k: r[k] for k in ("field_scope", "field_coverage", "already_on_drawing",
+                                            "still_needed", "scope_note") if k in r}
+                if detail:
+                    s.setdefault("coverage_by_finding", []).append({"finding_id": f["id"], **detail})
     for e in per.values():  # places every finding at a site shares are listed once; the rest per finding
         for req in e["requests"].values():
             for s in req["sites"].values():
@@ -1165,6 +1304,10 @@ def render_rollup_md(doc, catalog):
                     parts.append(("Then, for all of them: " if parts else "") + "; then ".join(s["where"]))
                 L.append(f"  - {s['site']} [{', '.join(x.replace('_', ' ') for x in s['states'])}]: "
                          + ". ".join(parts))
+                for detail in s.get("coverage_by_finding", []):
+                    progress = request_progress(detail)
+                    if progress:
+                        L.append(f"    - For `{detail['finding_id']}`: " + progress)
         tb = q["typical_benefit"]
         L += ["", f"**How it is decided:** {q['decision_rule']}", "",
               f"**What the source says ({', '.join(tb.get('source') or []) or 'no source'}):** {tb['wording']}", ""]
@@ -1214,6 +1357,11 @@ def main(argv=None):
                          "the site is named after the folder unless NAME= is given. Writes rollup.json and rollup.md")
     a = ap.parse_args(argv)
     catalog = json.loads(Path(a.catalog).read_text(encoding="utf-8"))
+    try:
+        validate_field_scopes(catalog)
+    except InputError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
     if a.list:
         print(list_questions(catalog))
         return 0
