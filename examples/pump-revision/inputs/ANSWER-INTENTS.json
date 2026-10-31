@@ -1,0 +1,46 @@
+{
+  "note": "Not an executable answers file. Fill actual prepared source/locator fingerprints after separate gate.",
+  "fictional_actors": {
+    "owner": "training-pump-owner",
+    "reviewer": "training-source-reviewer",
+    "assigned_by": "training-coordinator",
+    "date": "2026-10-31"
+  },
+  "A": [
+    {
+      "question_id": "PUMP-NOTE@P-1",
+      "answer_id": "pump-note",
+      "claim_key": "supplied-head",
+      "value": "12 m",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "answer": "Invented source says12m; typed zero/false/null/unknown remain supplied records. BX-UNKNOWN is unmapped. Operating suitability is unresolved."
+    },
+    {
+      "question_id": "TANK-SERVICE@TK-1",
+      "answer_id": "tank-service",
+      "claim_key": "service",
+      "value": "water",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "answer": "The separate invented tank note states water; installed service is not checked."
+    }
+  ],
+  "B": [
+    {
+      "question_id": "PUMP-NOTE@P-1",
+      "answer_id": "pump-note",
+      "claim_key": "supplied-head",
+      "value": "12 kPa",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "answer": "Invented revision B says12kPa, not a conversion from12m. Typed zero/false/null/unknown persist. BX-REVISED is unmapped. Operating suitability is unresolved."
+    }
+  ]
+}

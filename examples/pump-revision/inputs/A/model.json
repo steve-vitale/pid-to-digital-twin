@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "model_id": "illustrative-water",
+    "title": "Illustrative water utility",
+    "source_document": "source.txt",
+    "source_sha256": "4b36c932249a9db29c782771dd2cf6b76466a390e3565faf2a55aaa5ad4a196f",
+    "unknowns": [
+      "Flow engineering unit, valve fail position, line sizes, operating limits and trips are unspecified."
+    ],
+    "assumptions": [
+      "Symbol dimensions and locations are proposed drafting geometry, not plant dimensions."
+    ],
+    "fixture_notice": "Fictional revision exercise based on the authored illustrative utility."
+  },
+  "units": [
+    {
+      "id": "TK-1",
+      "name": "Water tank",
+      "type": "tank",
+      "source": "source.txt:L2-L2"
+    },
+    {
+      "id": "P-1",
+      "name": "Water pump",
+      "type": "pump",
+      "source": "source.txt:L3-L3",
+      "facts": {
+        "rated_flow": {
+          "value": 0,
+          "uom": "m3/h",
+          "source": "pump-note.txt:L2-L2"
+        },
+        "reset_enabled": {
+          "value": false,
+          "source": "pump-note.txt:L3-L3"
+        },
+        "inspection_date": {
+          "value": null,
+          "source": "pump-note.txt:L4-L4"
+        },
+        "uncertainty": {
+          "value": "unknown",
+          "source": "pump-note.txt:L5-L5"
+        },
+        "supplied_head": {
+          "value": 12,
+          "uom": "m",
+          "source": "pump-note.txt:L6-L6"
+        }
+      }
+    }
+  ],
+  "streams": [
+    {
+      "id": "S1",
+      "name": "Water feed",
+      "from": "BL",
+      "to": "TK-1",
+      "source": "source.txt:L4-L4"
+    },
+    {
+      "id": "S2",
+      "name": "Pump suction",
+      "from": "TK-1",
+      "to": "P-1",
+      "source": "source.txt:L4-L4"
+    },
+    {
+      "id": "S3",
+      "name": "Water discharge",
+      "from": "P-1",
+      "to": "BL",
+      "source": "source.txt:L4-L4"
+    }
+  ],
+  "instruments": [
+    {
+      "tag": "FT-101",
+      "unit": "P-1",
+      "stream": "S3",
+      "variable": "flow",
+      "uom": "",
+      "description": "Discharge flow measurement",
+      "source": "source.txt:L5-L5"
+    }
+  ],
+  "final_elements": [
+    {
+      "tag": "FV-101",
+      "unit": "P-1",
+      "stream": "S3",
+      "uom": "",
+      "description": "Discharge flow control valve",
+      "source": "source.txt:L6-L6"
+    }
+  ],
+  "controllers": [
+    {
+      "tag": "FIC-101",
+      "unit": "P-1",
+      "measurement": "FT-101",
+      "output": {
+        "final_element": "FV-101"
+      },
+      "source": "source.txt:L7-L7"
+    }
+  ]
+}

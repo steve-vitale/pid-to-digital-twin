@@ -1,0 +1,214 @@
+{
+  "id": "E1",
+  "family": "energy",
+  "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+  "applies_when": {
+    "absent_note": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+    "anchor": {
+      "kind": [
+        "equipment"
+      ],
+      "type_text": "pump",
+      "not_text": "POSITIVE DISPLACEMENT|VACUUM|METERING",
+      "tagged": true
+    },
+    "group_by": "unit",
+    "with": [
+      {
+        "select": {
+          "kind": [
+            "valve"
+          ],
+          "isa": "^(F|P|L)C?V$"
+        },
+        "relation": "discharge_side",
+        "max_hops": 4,
+        "as": "control valve on the discharge"
+      }
+    ],
+    "without": [
+      {
+        "select": {
+          "kind": [
+            "instrument",
+            "final_element",
+            "valve",
+            "equipment"
+          ],
+          "text": "\\bVFD\\b|\\bVSD\\b|VARIABLE.SPEED|\\bS(C|IC|Y)-\\d"
+        },
+        "relation": "near",
+        "max_hops": 2
+      }
+    ],
+    "also_show": [
+      {
+        "select": {
+          "kind": [
+            "valve"
+          ]
+        },
+        "relation": "discharge_side",
+        "max_hops": 4,
+        "as": "other control valve on the discharge"
+      },
+      {
+        "select": {
+          "kind": [
+            "instrument"
+          ],
+          "variable": [
+            "flow"
+          ]
+        },
+        "relation": "near",
+        "max_hops": 3,
+        "as": "flow measurement"
+      }
+    ]
+  },
+  "evidence_fields": [
+    "pump tag and type",
+    "control valve tag on the discharge",
+    "no speed control (SC/SIC/VFD) shown"
+  ],
+  "data_requests": [
+    {
+      "item": "Control valve position (% open) over normal operation",
+      "where": [
+        {
+          "place": "historian",
+          "for": "control valve on the discharge",
+          "quantity": "position"
+        },
+        {
+          "place": "dcs",
+          "what": "the valve's controller output"
+        },
+        {
+          "place": "walkdown",
+          "what": "read the positioner stroke indicator at several rates"
+        }
+      ],
+      "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+    },
+    {
+      "item": "Flow over the same period (a flow-duration curve)",
+      "where": [
+        {
+          "place": "historian",
+          "for": "flow measurement",
+          "quantity": "flow"
+        },
+        {
+          "place": "records",
+          "what": "production rate records"
+        }
+      ],
+      "how": "Bin the flow into ranges and count the hours in each."
+    },
+    {
+      "item": "Pump rated flow and head",
+      "where": [
+        {
+          "place": "vendor",
+          "what": "pump curve and rated duty point"
+        },
+        {
+          "place": "nameplate",
+          "what": "pump"
+        }
+      ],
+      "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
+      "fields": [
+        "CAPACITY",
+        "DISCHARGE"
+      ]
+    },
+    {
+      "item": "Motor rating and speed",
+      "where": [
+        {
+          "place": "nameplate",
+          "what": "motor"
+        },
+        {
+          "place": "maintenance",
+          "what": "motor record card"
+        }
+      ],
+      "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
+      "fields": [
+        "HP",
+        "RPM"
+      ]
+    },
+    {
+      "item": "Static head versus friction head",
+      "where": [
+        {
+          "place": "walkdown",
+          "what": "elevations and pressures at the suction source and the delivery point"
+        },
+        {
+          "place": "records",
+          "what": "line list or isometrics for pipe lengths and sizes"
+        }
+      ],
+      "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+    },
+    {
+      "item": "Matched pump curve, rated duty and system operating points",
+      "where": [
+        {
+          "place": "vendor",
+          "what": "pump curve and rated duty point"
+        },
+        {
+          "place": "nameplate",
+          "what": "pump"
+        }
+      ],
+      "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+      "show_fields": [
+        "pump_curve",
+        "pump_curve_uri",
+        "pump_curve_asset",
+        "pump_curve_readable",
+        "BEP_flow",
+        "BEP_head"
+      ]
+    },
+    {
+      "item": "Motor nameplate, efficiency and drive basis",
+      "where": [
+        {
+          "place": "nameplate",
+          "what": "motor"
+        },
+        {
+          "place": "maintenance",
+          "what": "motor record card"
+        }
+      ],
+      "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+      "show_fields": [
+        "kW",
+        "motor_rated_output_kW",
+        "motor_efficiency",
+        "full_load_efficiency",
+        "full_load_current"
+      ]
+    }
+  ],
+  "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+  "typical_benefit": {
+    "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+    "source": [
+      "S15",
+      "S24"
+    ],
+    "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)"
+  },
+  "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+}

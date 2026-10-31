@@ -25,8 +25,9 @@ manual bridges and the recommended order of work. Numerical research evidence li
 | Calculate impact from an actual measured change | [Impact estimate](IMPACT_ESTIMATE.md) |
 | Prepare a portable graph or inspect sourced statements | [Graph format](GRAPH_EXPORT.md) · [Statement review](STATEMENT_REVIEW.md) |
 | Retain answers and source-revision dependencies in a local packet | [Context register](CONTEXT_REGISTER.md) |
+| Follow a revised source through questions, review history and snapshot readback | [Worked revision example](../examples/pump-revision/README.md) |
 | Retrieve a selected snapshot through an approved local MCP client | [MCP starter](../examples/internal-mcp/README.md) |
-| Plan company access and ongoing responsibility | [Connectivity](INTERNAL_CONNECTIVITY.md) · [Lifecycle](CONTEXT_LIFECYCLE.md) |
+| Plan team ownership, published dependencies and company access | [Lifecycle](CONTEXT_LIFECYCLE.md) · [Connectivity](INTERNAL_CONNECTIVITY.md) |
 | Test a real recipient, company handoff and next revision | [Acceptance exercise](ACCEPTANCE.md) |
 
 These tasks are optional branches, not prerequisites for every investigation. A plain source-question brief may

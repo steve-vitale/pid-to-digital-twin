@@ -51,9 +51,15 @@ The [feature reference](docs/FEATURES.md) lists the individual tools and reviewe
 ## From a first packet to company context
 
 Use the packet to make one investigation understandable to another engineer. As people rely on it, the company
-needs to maintain source revisions, accepted decisions, owners, access and history in its shared systems.
+needs clear record owners, published revisions and explicit dependencies between departments. Process, controls
+and maintenance can own separate scopes while referring to the same reviewed engineering identities. Equal tags
+at different sites must stay distinct; conflicting proposals need review before a new version is released.
 The toolkit supplies the starting workflow and portable files. Company-system adapters and continuing document
 updates require separate integration and acceptance. See the [handoff and lifecycle](docs/CONTEXT_LIFECYCLE.md).
+
+[Follow a source revision](examples/pump-revision/README.md) through a complete local example: the affected answer
+reopens, an independently sourced answer stays current, earlier decisions remain, and selected MCP readback
+changes only after restart. This is the local foundation for the cross-team handoff, using fictional records.
 
 ## Status
 

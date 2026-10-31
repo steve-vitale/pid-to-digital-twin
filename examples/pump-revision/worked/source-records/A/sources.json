@@ -1,0 +1,35 @@
+{
+  "schema": "context-sources-1",
+  "documents": [
+    {
+      "id": "PUMP-NOTE",
+      "revision": "A",
+      "path": "pump-note.txt",
+      "sha256": "95511507159507c8b194e3fa542b1faa580c5ffbfa8488667814e5ff2483ecba",
+      "locators": [
+        {
+          "id": "pump-basis",
+          "locator": "pump-note.txt lines2-8; supplied values and unresolved scope",
+          "questions": [
+            "PUMP-NOTE@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TANK-NOTE",
+      "revision": "A",
+      "path": "tank-note.txt",
+      "sha256": "40ad4bca4f5e87aa9eab5e9216a45e45da417979e5b680389a60dd4666de53a8",
+      "locators": [
+        {
+          "id": "tank-service",
+          "locator": "tank-note.txt lines2-3; supplied service, plant check absent",
+          "questions": [
+            "TANK-SERVICE@TK-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

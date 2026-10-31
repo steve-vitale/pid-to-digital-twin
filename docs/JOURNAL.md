@@ -5657,3 +5657,44 @@ The seven repository checks also pass:41numeric claims agree with their evidence
 
 No provider/model call, new original-source download, company write, live native import, firewall/tunnel change
 or LinkedIn publication is performed.
+
+## 121. Make owned revisions the foundation for cross-team work
+
+**A262.** The lifecycle guide now organizes company context into owned published scopes with explicit
+dependencies. Record-type authority can remain in existing systems. Native IDs are packet-local; source-revision
+identities are not engineering merge keys. The company supplies reviewed engineering identities, access and
+release authority. Conflicting proposals and outdated bases need reconciliation, not a last-writer decision.
+The guide distinguishes this intended company pattern from the toolkit's current local mechanisms and caps.
+
+A connected fictional pump example follows a note from revision A to B through actual questions, source-bound
+decisions, explicit refresh and selected snapshot readback. A dependent answer becomes stale while a separately
+sourced answer stays current; earlier evidence, ownership and decisions remain. The real generated E1 finding
+is unanswered. The manual source questions, invented actors and incompatible raw units are labeled explicitly.
+This is software accounting, not a reviewed engineering correction or company acceptance.
+
+An initial portable packet worked after local copying but changed ten raw-byte comparisons under normal Git
+text conversion. Its bounded earlier acceptance and original failing controls remain preserved. The revised
+example pins raw input/worked bytes locally and retains all original notes, the selected catalog, native models,
+context history and exact handoff hashes. Independent Windows review verifies108index and216checkout comparisons
+with no mutations,12selected-pair validations,20product CLIs and4actual stdio sessions/62responses, including
+4mixed-pair startup refusals. These counts describe the example's controls, not human or organizational trials.
+
+Root integration also exposed a different-drive Windows output failure: os.path.relpath cannot represent an
+output on another drive. That original failure and a separate root-test API harness mistake are retained.
+The narrow output-path correction, persistent source-change/Git regression and optional SDK CI step are reviewed
+separately before release. Existing product model, graph, question, context and MCP implementations are unchanged.
+
+**Open N094.** Integration owns a four-packet Process/E&I/Maintenance and second-site exercise, with independent
+Context/retrieval criteria and actual review. It must show explicit company-supplied identities, genuinely
+selective dependency refresh, preserved same-field conflicts and complete bounded handoffs. The company route's
+simultaneous-writer, stale-head, permissions, release, recovery and real-recipient tests remain external work.
+The exercise is not yet included in the public toolkit or evidence of large-team capacity. N062/N063 and N086 remain open.
+
+Root integration runs all65cached test scripts successfully in350.55s, with five explicit Windows unittest skips,
+two platform notices and no additional skipped-check notices. Every tracked and new public input stays exact
+during the run. The new persistent regression actually runs the revision journey, checks complete selected-pair
+bindings/history and protects54raw inputs/worked files through108Git-index and216checkout comparisons plus12pair
+validations. A separate different-drive run performs17producer CLIs and two pinned stdio sessions/31responses,
+including both mixed-pair startup refusals. This is a local fictional workload, not company capacity or benefit.
+Subsequent edits are documentation and append-only review metadata; product code, fixtures and worked raw pins
+remain the tested bytes. No matrix method/input/output changes or model reruns are required for this example.

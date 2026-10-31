@@ -1,0 +1,26 @@
+{
+  "schema": "opportunity-questions-1",
+  "fixture_note": "Two authored source questions; keep them separate from actual generated E1 findings.",
+  "questions": [
+    {
+      "id": "PUMP-NOTE@P-1",
+      "question": "What does the supplied pump note state, and what remains unresolved?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ],
+      "status": "asked"
+    },
+    {
+      "id": "TANK-SERVICE@TK-1",
+      "question": "What service is stated in the separate tank note?",
+      "assets": [
+        {
+          "id": "TK-1"
+        }
+      ],
+      "status": "asked"
+    }
+  ]
+}

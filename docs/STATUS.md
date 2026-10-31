@@ -49,6 +49,14 @@ preserves the original failures and independently reviewed repairs. N086 source-
 
 ## What exists, and what remains manual
 
+The current design priority is [engineering context across teams](CONTEXT_LIFECYCLE.md): separately owned
+scopes, explicit published dependencies, reviewed company identities and preserved conflicting proposals.
+The [worked source revision](../examples/pump-revision/README.md) exercises one local maintenance loop with
+fictional records. A multi-department, multi-site composition exercise is open as **N094**, owned by Integration
+with independent Context/retrieval review. Neither local registers nor selected MCP packets provide concurrent
+editing, company permissions or organizational release. Large-team capacity and actual recipient effort remain
+unmeasured; a larger combined file is not evidence of scalability.
+
 The [workflow map](WORKFLOWS.md) owns exact format contracts; [FEATURES.md](FEATURES.md) owns individual evidence.
 
 | Piece | Contribution | Boundary |

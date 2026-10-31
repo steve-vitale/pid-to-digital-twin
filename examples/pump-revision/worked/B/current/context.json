@@ -1,0 +1,876 @@
+{
+  "schema": "context-register-1",
+  "decisions": [
+    {
+      "question_id": "PUMP-NOTE@P-1",
+      "answer_id": "pump-note",
+      "claim_key": "supplied-head",
+      "value": "12 m",
+      "answer": "Invented source says12m; typed zero/false/null/unknown remain supplied records. BX-UNKNOWN is unmapped. Operating suitability is unresolved.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Synthetic local source decision; no company authorization or observed plant truth.",
+      "evidence_fingerprint": "722a207adfe366f41cd27464bb817dcbc71efca629650ca3316e7760c3391a36",
+      "owner": "training-pump-owner",
+      "evidence": {
+        "question": {
+          "id": "PUMP-NOTE@P-1",
+          "question": "What does the supplied pump note state, and what remains unresolved?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Water pump",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "inspection_date.value",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L4-L4"
+                  }
+                },
+                {
+                  "name": "rated_flow.uom",
+                  "value": "m3/h",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L2-L2"
+                  }
+                },
+                {
+                  "name": "rated_flow.value",
+                  "value": 0,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L2-L2"
+                  }
+                },
+                {
+                  "name": "reset_enabled.value",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L3-L3"
+                  }
+                },
+                {
+                  "name": "supplied_head.uom",
+                  "value": "m",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L6-L6"
+                  }
+                },
+                {
+                  "name": "supplied_head.value",
+                  "value": 12,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L6-L6"
+                  }
+                },
+                {
+                  "name": "uncertainty.value",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L5-L5"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Water pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L3-L3"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L3-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "source.txt:L3-L3"
+              },
+              "citations": {
+                "source": "source.txt:L3-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "connects",
+                "from": "TK-1",
+                "to": "P-1",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Pump suction",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "connects",
+                "from": "P-1",
+                "to": "BL",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Water discharge",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L3-L3"
+                },
+                "citations": {
+                  "source": "source.txt:L3-L3"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L5-L5"
+                },
+                "citations": {
+                  "source": "source.txt:L5-L5"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "FV-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L6-L6"
+                },
+                "citations": {
+                  "source": "source.txt:L6-L6"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PUMP-NOTE",
+          "revision": "A",
+          "sha256": "95511507159507c8b194e3fa542b1faa580c5ffbfa8488667814e5ff2483ecba",
+          "locator_id": "pump-basis",
+          "locator": "pump-note.txt lines2-8; supplied values and unresolved scope"
+        }
+      },
+      "previous": null,
+      "id": "d-9696de30418ac5446c533f0ac0ed07f041e2fc6642f60ccbbea1a3e2d9f0b850"
+    },
+    {
+      "question_id": "TANK-SERVICE@TK-1",
+      "answer_id": "tank-service",
+      "claim_key": "service",
+      "value": "water",
+      "answer": "The separate invented tank note states water; installed service is not checked.",
+      "answer_state": "answered",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Synthetic local source decision; no company authorization or observed plant truth.",
+      "evidence_fingerprint": "c8a9308a9c426684ad70ca7f42e7f9ff1bb21a14bc6b4c4fbc305bfde8801efa",
+      "owner": "training-pump-owner",
+      "evidence": {
+        "question": {
+          "id": "TANK-SERVICE@TK-1",
+          "question": "What service is stated in the separate tank note?",
+          "assets": [
+            {
+              "id": "TK-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "TK-1",
+            "content": {
+              "id": "TK-1",
+              "kind": "equipment",
+              "tag": "TK-1",
+              "name": "Water tank",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "name",
+                  "value": "Water tank",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L2-L2"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "tank",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L2-L2"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "source.txt:L2-L2"
+              },
+              "citations": {
+                "source": "source.txt:L2-L2"
+              }
+            },
+            "relations": [
+              {
+                "type": "connects",
+                "from": "TK-1",
+                "to": "P-1",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Pump suction",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "connects",
+                "from": "BL",
+                "to": "TK-1",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Water feed",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "TK-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L2-L2"
+                },
+                "citations": {
+                  "source": "source.txt:L2-L2"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "TANK-NOTE",
+          "revision": "A",
+          "sha256": "40ad4bca4f5e87aa9eab5e9216a45e45da417979e5b680389a60dd4666de53a8",
+          "locator_id": "tank-service",
+          "locator": "tank-note.txt lines2-3; supplied service, plant check absent"
+        }
+      },
+      "previous": null,
+      "id": "d-14b5087e3e92cf0b27d34ae5397a4373419a03fec4e3fc168485d4316fb19742"
+    },
+    {
+      "question_id": "PUMP-NOTE@P-1",
+      "answer_id": "pump-note",
+      "claim_key": "supplied-head",
+      "value": "12 kPa",
+      "answer": "Invented revision B says12kPa, not a conversion from12m. Typed zero/false/null/unknown persist. BX-REVISED is unmapped. Operating suitability is unresolved.",
+      "answer_state": "partial",
+      "decision": "accepted",
+      "reviewer": "training-source-reviewer",
+      "reviewed_on": "2026-10-31",
+      "source_match": "match",
+      "plant_truth": "unknown",
+      "note": "Synthetic local source decision; no company authorization or observed plant truth.",
+      "evidence_fingerprint": "76de95c029ebaaf3ccd3eb9d49d5a3d18e1ee675d45eda25e686d35dcdbeae2d",
+      "owner": "training-pump-owner",
+      "evidence": {
+        "question": {
+          "id": "PUMP-NOTE@P-1",
+          "question": "What does the supplied pump note state, and what remains unresolved?",
+          "assets": [
+            {
+              "id": "P-1"
+            }
+          ]
+        },
+        "assets": [
+          {
+            "id": "P-1",
+            "content": {
+              "id": "P-1",
+              "kind": "equipment",
+              "tag": "P-1",
+              "name": "Water pump",
+              "aliases": [],
+              "attributes": [
+                {
+                  "name": "inspection_date.value",
+                  "value": null,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L4-L4"
+                  }
+                },
+                {
+                  "name": "rated_flow.uom",
+                  "value": "m3/h",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L2-L2"
+                  }
+                },
+                {
+                  "name": "rated_flow.value",
+                  "value": 0,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L2-L2"
+                  }
+                },
+                {
+                  "name": "reset_enabled.value",
+                  "value": false,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L3-L3"
+                  }
+                },
+                {
+                  "name": "supplied_head.uom",
+                  "value": "kPa",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L6-L6"
+                  }
+                },
+                {
+                  "name": "supplied_head.value",
+                  "value": 12,
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L6-L6"
+                  }
+                },
+                {
+                  "name": "uncertainty.value",
+                  "value": "unknown",
+                  "source": {
+                    "kind": "document",
+                    "document": "pump-note.txt:L5-L5"
+                  }
+                },
+                {
+                  "name": "name",
+                  "value": "Water pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L3-L3"
+                  }
+                },
+                {
+                  "name": "type",
+                  "value": "pump",
+                  "source": {
+                    "kind": "document",
+                    "document": "source.txt:L3-L3"
+                  }
+                }
+              ],
+              "source": {
+                "kind": "document",
+                "document": "source.txt:L3-L3"
+              },
+              "citations": {
+                "source": "source.txt:L3-L3"
+              }
+            },
+            "relations": [
+              {
+                "type": "connects",
+                "from": "TK-1",
+                "to": "P-1",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Pump suction",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "connects",
+                "from": "P-1",
+                "to": "BL",
+                "direction": "known",
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L4-L4"
+                },
+                "citations": {
+                  "source": "source.txt:L4-L4"
+                },
+                "layer": "stream",
+                "attributes": [
+                  {
+                    "name": "name",
+                    "value": "Water discharge",
+                    "source": {
+                      "kind": "document",
+                      "document": "source.txt:L4-L4"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "contains",
+                "from": "PLANT",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L3-L3"
+                },
+                "citations": {
+                  "source": "source.txt:L3-L3"
+                }
+              },
+              {
+                "type": "measures",
+                "from": "FT-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L5-L5"
+                },
+                "citations": {
+                  "source": "source.txt:L5-L5"
+                }
+              },
+              {
+                "type": "acts_on",
+                "from": "FV-101",
+                "to": "P-1",
+                "direction": null,
+                "source": {
+                  "kind": "document",
+                  "document": "source.txt:L6-L6"
+                },
+                "citations": {
+                  "source": "source.txt:L6-L6"
+                }
+              }
+            ]
+          }
+        ],
+        "source": {
+          "id": "PUMP-NOTE",
+          "revision": "B",
+          "sha256": "f99be783177789cc92463e7efd9402f8959ed83afe0c9c1ab0e40c1bda8dc20c",
+          "locator_id": "pump-basis",
+          "locator": "pump-note.txt lines2-8; supplied values and unresolved scope"
+        }
+      },
+      "previous": "d-9696de30418ac5446c533f0ac0ed07f041e2fc6642f60ccbbea1a3e2d9f0b850",
+      "id": "d-628ee02bfb8247c670bd8b6e632f7535ea2621ac3c401dd1e2a3df71e52a650c"
+    }
+  ],
+  "ownership_history": [
+    {
+      "question_id": "PUMP-NOTE@P-1",
+      "owner": "training-pump-owner",
+      "by": "training-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-ae026f33158bef30bbc8297567a57f8f4061e2d6f056369704207c23d8b3e0b8"
+    },
+    {
+      "question_id": "TANK-SERVICE@TK-1",
+      "owner": "training-pump-owner",
+      "by": "training-coordinator",
+      "on": "2026-10-31",
+      "previous": null,
+      "id": "o-04fa91c3cb3dc61744e1da36c59e35694c2fba481d53732d6cba7d62a751b498"
+    }
+  ],
+  "current": {
+    "E1@P-1": {
+      "present": true,
+      "question": {
+        "id": "E1@P-1",
+        "question_id": "E1",
+        "family": "energy",
+        "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+        "about": "P-1",
+        "assets": [
+          {
+            "id": "FT-101",
+            "tag": "FT-101"
+          },
+          {
+            "id": "FV-101",
+            "tag": "FV-101"
+          },
+          {
+            "id": "P-1",
+            "tag": "P-1"
+          }
+        ],
+        "evidence": [
+          {
+            "role": "trigger",
+            "id": "P-1",
+            "tag": "P-1",
+            "text": "equipment P-1 reads \"P-1 Water pump\"",
+            "field": "units[P-1]"
+          },
+          {
+            "role": "control valve on the discharge",
+            "id": "FV-101",
+            "tag": "FV-101",
+            "text": "valve FV-101 reads \"FV-101 Discharge flow control valve\" at P-1",
+            "field": "final_elements[FV-101]"
+          },
+          {
+            "role": "flow measurement",
+            "id": "FT-101",
+            "tag": "FT-101",
+            "text": "instrument FT-101 reads \"FT-101 Discharge flow measurement\" at P-1",
+            "field": "instruments[FT-101]"
+          },
+          {
+            "role": "checked, none found",
+            "text": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+            "field": "applies_when.without"
+          }
+        ],
+        "data_requests": [
+          {
+            "item": "Control valve position (% open) over normal operation",
+            "state": "not_on_drawing",
+            "where": [
+              "historian or DCS trend for FV-101 (no historian tag is mapped in this model for these)",
+              "DCS/PLC configuration: the valve's controller output",
+              "a walkdown: read the positioner stroke indicator at several rates"
+            ],
+            "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+          },
+          {
+            "item": "Flow over the same period (a flow-duration curve)",
+            "state": "not_on_drawing",
+            "where": [
+              "historian or DCS trend for FT-101 (no historian tag is mapped in this model for these)",
+              "site records: production rate records"
+            ],
+            "how": "Bin the flow into ranges and count the hours in each."
+          },
+          {
+            "item": "Pump rated flow and head",
+            "state": "not_on_drawing",
+            "where": [
+              "the vendor datasheet: pump curve and rated duty point",
+              "the pump nameplate on P-1"
+            ],
+            "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
+            "field_scope": "anchors",
+            "field_coverage": [
+              {
+                "id": "P-1",
+                "label": "P-1",
+                "fields": [
+                  {
+                    "name": "CAPACITY",
+                    "state": "absent",
+                    "where": null
+                  },
+                  {
+                    "name": "DISCHARGE",
+                    "state": "absent",
+                    "where": null
+                  }
+                ],
+                "still_needed": [
+                  "CAPACITY",
+                  "DISCHARGE"
+                ]
+              }
+            ],
+            "still_needed": [
+              "CAPACITY",
+              "DISCHARGE"
+            ]
+          },
+          {
+            "item": "Motor rating and speed",
+            "state": "not_on_drawing",
+            "where": [
+              "the motor nameplate on P-1",
+              "maintenance records: motor record card"
+            ],
+            "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
+            "field_scope": "anchors",
+            "field_coverage": [
+              {
+                "id": "P-1",
+                "label": "P-1",
+                "fields": [
+                  {
+                    "name": "HP",
+                    "state": "absent",
+                    "where": null
+                  },
+                  {
+                    "name": "RPM",
+                    "state": "absent",
+                    "where": null
+                  }
+                ],
+                "still_needed": [
+                  "HP",
+                  "RPM"
+                ]
+              }
+            ],
+            "still_needed": [
+              "HP",
+              "RPM"
+            ]
+          },
+          {
+            "item": "Static head versus friction head",
+            "state": "not_on_drawing",
+            "where": [
+              "a walkdown: elevations and pressures at the suction source and the delivery point",
+              "site records: line list or isometrics for pipe lengths and sizes"
+            ],
+            "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+          },
+          {
+            "item": "Matched pump curve, rated duty and system operating points",
+            "state": "not_on_drawing",
+            "where": [
+              "the vendor datasheet: pump curve and rated duty point",
+              "the pump nameplate on P-1"
+            ],
+            "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+            "candidate_scope": "anchors",
+            "candidate_facts": []
+          },
+          {
+            "item": "Motor nameplate, efficiency and drive basis",
+            "state": "not_on_drawing",
+            "where": [
+              "the motor nameplate on P-1",
+              "maintenance records: motor record card"
+            ],
+            "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+            "candidate_scope": "anchors",
+            "candidate_facts": []
+          }
+        ],
+        "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+        "typical_benefit": {
+          "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+          "source": [
+            "S15",
+            "S24"
+          ],
+          "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)",
+          "source_titles": [
+            "S15: Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+            "S24: DOE IAC/ITAC database: browse pages, download, schema document"
+          ]
+        },
+        "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+      },
+      "owner": null,
+      "ownership": "needs_owner",
+      "assigned_by": null,
+      "assigned_on": null,
+      "state": "unanswered",
+      "disputed_claims": [],
+      "answers": []
+    },
+    "PUMP-NOTE@P-1": {
+      "present": true,
+      "question": {
+        "id": "PUMP-NOTE@P-1",
+        "question": "What does the supplied pump note state, and what remains unresolved?",
+        "assets": [
+          {
+            "id": "P-1"
+          }
+        ]
+      },
+      "owner": "training-pump-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "partial",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-628ee02bfb8247c670bd8b6e632f7535ea2621ac3c401dd1e2a3df71e52a650c",
+          "answer_id": "pump-note",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    },
+    "TANK-SERVICE@TK-1": {
+      "present": true,
+      "question": {
+        "id": "TANK-SERVICE@TK-1",
+        "question": "What service is stated in the separate tank note?",
+        "assets": [
+          {
+            "id": "TK-1"
+          }
+        ]
+      },
+      "owner": "training-pump-owner",
+      "ownership": "assigned",
+      "assigned_by": "training-coordinator",
+      "assigned_on": "2026-10-31",
+      "state": "answered",
+      "disputed_claims": [],
+      "answers": [
+        {
+          "decision_id": "d-14b5087e3e92cf0b27d34ae5397a4373419a03fec4e3fc168485d4316fb19742",
+          "answer_id": "tank-service",
+          "freshness": "current",
+          "changed": []
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "PUMP-NOTE",
+      "revision": "B",
+      "sha256": "f99be783177789cc92463e7efd9402f8959ed83afe0c9c1ab0e40c1bda8dc20c",
+      "locators": [
+        {
+          "id": "pump-basis",
+          "locator": "pump-note.txt lines2-8; supplied values and unresolved scope",
+          "questions": [
+            "PUMP-NOTE@P-1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TANK-NOTE",
+      "revision": "A",
+      "sha256": "40ad4bca4f5e87aa9eab5e9216a45e45da417979e5b680389a60dd4666de53a8",
+      "locators": [
+        {
+          "id": "tank-service",
+          "locator": "tank-note.txt lines2-3; supplied service, plant check absent",
+          "questions": [
+            "TANK-SERVICE@TK-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -38,3 +38,7 @@ jobs:
         run: pip install -r requirements-mcp.txt
       - name: Check public snapshot over local SDK, stdio and loopback HTTP
         run: python scripts/check_snapshot_mcp.py
+      - name: Reproduce source revision and selected snapshot restart
+        run: |
+          python examples/pump-revision/reproduce.py --out "$RUNNER_TEMP/pump-revision"
+          python examples/pump-revision/reproduce.py --out "$RUNNER_TEMP/pump-revision" --sdk-only

@@ -1,0 +1,4685 @@
+{
+  "about": "Questions an engineer or operator asks of a plant drawing, as data. scripts/question_engine.py runs them over a process model or an extracted twin and writes, for each item a question applies to, the evidence found, the data still needed and where to get it, how the data settles the question, and what a public source says the typical benefit is. A screen, not an audit: it computes no savings for any plant. Rules E1-E26 and C1-C10 follow a research review of public DOE, LBNL, EPA and HSE sources (wording copied from text extracts of those documents); H1-H4 (high-grade heat used for low-grade duty) were added on request and cite the closest source wording, saying so where no number exists. E27-E32, H5, H6, C11 and C12 (refrigeration, ovens, dryers and fryers) were added from a food manufacturer's walkthrough; each quotes S25-S28 with a page, checked word for word against the PDF named in the source's 'checked' note. IAC/ITAC statistics are browse-page averages read through a summarizing fetch, not re-verified against the download; average dollar figures are deliberately left out. See docs/OPPORTUNITY_SCREEN.md.",
+  "schema": "question-catalog-1",
+  "families": {
+    "energy": "Energy",
+    "heat_grade": "Heat grade (high-grade heat for low-grade duty)",
+    "metering": "Metering",
+    "controls": "Controls and automation",
+    "emissions": "Emissions",
+    "safety_question": "Safety questions to verify"
+  },
+  "fields_help": {
+    "applies_when": "absent_note: a sentence quoted as evidence saying what was looked for and not found. anchor: a selector (or list of selectors, any may match) for the item that triggers the question. with: clauses that must all find a related item. without: clauses of which none may find one. also_show: related items quoted as evidence if present. group_by: unit | item | model. needs_model: item kinds the model must contain, else the question is reported as not checked. min_anchors: fewest triggering items per group.",
+    "selector": "kind (equipment, instrument, valve = control valve, final_element = other operated valve or speed element, hand_valve, relief, controller, interlock, stream, line_item, offpage), type (exact), type_text (regex over type and text), isa (regex over ISA letters), variable, text (regex over tag, name, description and schedule service), text_all (all regexes), not_text, tagged, control_valve, fact_C_min / fact_C_max (a stated temperature fact), schedule_field (the drawing prints this field, filled or blank).",
+    "relation": "same_unit, same_stream, same_unit_same_medium (same unit and same utility: steam, cooling water, air...), other_unit, discharge_side (streams leaving the anchor's unit; on an extracted twin, within max_hops drawn links on the same sheet, direction unknown), near (same unit or stream; on a twin within max_hops links), drives (a controller writing to the anchor), reads (a controller or interlock reading the anchor), anywhere, linked (on a hand-built model: a stream drawn from or to the anchor's unit, an item on such a stream, or the equipment at its other end; on an extracted twin, within max_hops drawn links like near). twin_only / hand_only: true limits a clause to extracted twins / hand-built models. anchor_kind: the clause applies only to anchors of these kinds.",
+    "data_requests": "item, fields (names looked up in the model's facts and the equipment schedule: present = quoted as evidence; printed but blank = the request names that field on that sheet's schedule; a request stays open while any subject lacks a field; field_scope defaults to anchors, requiring each triggering record separately; unit explicitly selects only the finding's owning equipment record, not related context or a join of sources), where (ordered, most direct first: historian (for a role; quantity = flow, temperature, pressure, power, composition or position names only signals that measure it, so a valve position is never offered as a flow; match = a regex the item must match), dcs, nameplate, vendor, maintenance, records, bills, walkdown, or free text), how. show_fields: optional distinct evidence-only fact/schedule names, resolved on the same subjects; present values are unverified candidates and never discharge a collection/review request. Keep required fields and show_fields separate.",
+    "typical_benefit": "wording copied from the source, source keys, arc = DOE IAC/ITAC recommendation code where mapped. Never a figure for a specific plant."
+  },
+  "screen_exclusions": [
+    {
+      "system_code": "^(RCS|RC|CVCS|RHRS?)$",
+      "text": "REACTOR COOLANT|RESIDUAL HEAT|PRESSURIZER|CHARGING PUMP|LETDOWN HEAT",
+      "reason": "nuclear reactor coolant, chemical and volume control and residual heat removal systems: safety-related design changes go through the licensing basis, not an energy or controls screen"
+    }
+  ],
+  "sources": {
+    "S1": {
+      "title": "DOE AMO Steam Tip Sheet #2, Insulate Steam Distribution and Condensate Return Lines (DOE/GO-102012-3404, Jan 2012)",
+      "url": "https://www.energy.gov/sites/default/files/2014/05/f16/steam2_insulate.pdf",
+      "license": "Public domain (US federal)"
+    },
+    "S2": {
+      "title": "Steam Tip #17, Install Removable Insulation on Valves and Fittings (DOE/GO-102012-3403)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam17_valves_fittings.pdf",
+      "license": "Public domain"
+    },
+    "S3": {
+      "title": "Steam Tip #1, Inspect and Repair Steam Traps (DOE/GO-102012-3401)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam1_traps.pdf",
+      "license": "Public domain"
+    },
+    "S4": {
+      "title": "Steam Tip #3, Use Feedwater Economizers for Waste Heat Recovery",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam3_recovery.pdf",
+      "license": "Public domain"
+    },
+    "S5": {
+      "title": "Steam Tip #9, Minimize Boiler Blowdown (DOE/GO-102012-3406)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam9_blowdown.pdf",
+      "license": "Public domain"
+    },
+    "S6": {
+      "title": "Steam Tip #20, Replace Pressure-Reducing Valves with Backpressure Turbogenerators (DOE/GO-102012-3409)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam20_turbogenerators.pdf",
+      "license": "Public domain"
+    },
+    "S7": {
+      "title": "Steam Tip #26B, Considerations When Selecting a Condensing Economizer (DOE/GO-102012-3397)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/steam26b_condensing.pdf",
+      "license": "Public domain"
+    },
+    "S8": {
+      "title": "Improving Steam System Performance: A Sourcebook for Industry, 2nd ed. (DOE/GO-102012-3423, rev. Oct 2012)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f15/steamsourcebook.pdf",
+      "license": "Public domain"
+    },
+    "S9": {
+      "title": "Compressed Air Tip #3, Minimize Compressed Air Leaks (DOE/GO-102004-1964, Aug 2004)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/compressed_air3.pdf",
+      "license": "Public domain; the sheet cites Compressed Air Challenge material"
+    },
+    "S10": {
+      "title": "Compressed Air Tip #9, Compressed Air Storage Strategies (DOE/GO-102004-1965)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/compressed_air9.pdf",
+      "license": "Public domain"
+    },
+    "S11": {
+      "title": "Improving Compressed Air System Performance: A Sourcebook for Industry, 3rd ed. (DOE + Compressed Air Challenge)",
+      "url": "https://www.energy.gov/sites/default/files/2016/03/f30/Improving%20Compressed%20Air%20Sourcebook%20version%203.pdf",
+      "license": "DOE publication co-produced with CAC; mostly federal, reuse of CAC content unclear"
+    },
+    "S13": {
+      "title": "Improving Pumping System Performance: A Sourcebook for Industry, 2nd ed. (DOE + Hydraulic Institute; DOE/GO-102006-2079)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/pump.pdf",
+      "license": "Federal, co-developed with HI: unclear for HI content"
+    },
+    "S14": {
+      "title": "Pumping Systems Tip #6, Match Pumps to System Requirements (DOE/GO-102005-2160)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/match_pumps_to_system.pdf",
+      "license": "Public domain"
+    },
+    "S15": {
+      "title": "Variable Speed Pumping: A Guide to Successful Applications, Executive Summary (DOE ITP with Europump/HI, DOE/GO-102004-1913, May 2004)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/variable_speed_pumping.pdf",
+      "license": "Unclear (joint with Europump/HI)"
+    },
+    "S16": {
+      "title": "Improving Motor and Drive System Performance: A Sourcebook for Industry (DOE/GO-102014-4356, Feb 2014; prepared by WSU Energy Program + NREL)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/04/f15/amo_motors_sourcebook_web.pdf",
+      "license": "Federal publication; contractor-prepared, so unclear but citable"
+    },
+    "S17": {
+      "title": "Improving Fan System Performance: A Sourcebook for Industry (DOE/GO-102003-1294)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/fan_sourcebook.pdf",
+      "license": "Public domain / federal (co-produced with AMCA; unclear for AMCA content)"
+    },
+    "S18": {
+      "title": "Process Heating Tip #8, Install Waste Heat Recovery Systems for Fuel-Fired Furnaces (DOE/GO-102005-2181, Sep 2005)",
+      "url": "https://www.energy.gov/sites/prod/files/2014/05/f16/install_waste_heat_process_htgts8.pdf",
+      "license": "Public domain"
+    },
+    "S19": {
+      "title": "Worrell & Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for Petroleum Refineries: An ENERGY STAR Guide (LBNL-56183, Feb 2005)",
+      "url": "https://www.osti.gov/servlets/purl/862119",
+      "license": "DOE-lab (contractor) report: unclear, but freely citable. Its tables quote older secondary sources, so figures are cited as reported in LBNL-56183"
+    },
+    "S20": {
+      "title": "EPA Natural Gas STAR Lessons Learned, Installing Vapor Recovery Units on Storage Tanks",
+      "url": "https://19january2017snapshot.epa.gov/sites/production/files/2016-06/documents/ll_final_vap.pdf",
+      "license": "Public domain (archived EPA snapshot)"
+    },
+    "S21": {
+      "title": "DOE FEMP, Best Management Practice #10: Cooling Tower Management",
+      "url": "https://www.energy.gov/cmei/femp/best-management-practice-10-cooling-tower-management",
+      "license": "Public domain"
+    },
+    "S22": {
+      "title": "FEMP Metering Best Practices: A Guide to Achieving Utility Resource Efficiency, Release 3.0 (PNNL-23892, Mar 2015)",
+      "url": "https://www.wbdg.org/FFC/DOE/NLCRIT/mbpg_2015.pdf",
+      "license": "Contractor-prepared federal guide: unclear. Its savings figures are buildings-focused"
+    },
+    "S23": {
+      "title": "UK HSE, Better Alarm Handling, Chemicals Information Sheet No. 6 (CHIS6, 3/00)",
+      "url": "https://www.hse.gov.uk/PuBns/chis6.pdf",
+      "license": "Crown copyright; HSE content is generally under the Open Government Licence, but verify"
+    },
+    "S24": {
+      "title": "DOE IAC/ITAC database: browse pages, download, schema document",
+      "url": "https://itac.university/index/arc/2.",
+      "license": "No license or terms stated: unclear"
+    },
+    "S25": {
+      "title": "Brush, Masanet and Worrell, Energy Efficiency Improvement and Cost Saving Opportunities for the Dairy Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-6261E, Oct 2011)",
+      "url": "https://www.osti.gov/servlets/purl/1171534",
+      "license": "DOE-lab report sponsored by US EPA: unclear, freely citable; its figures from older sources are quoted as reported there",
+      "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 5ec369a1e6c10ac9e046c484705e1eab9d05ba284b13a98a294727a774d7655d. Page numbers are the report's printed page numbers (PDF page = printed page + 6)."
+    },
+    "S26": {
+      "title": "Masanet, Worrell, Graus and Galitsky, Energy Efficiency Improvement and Cost Saving Opportunities for the Fruit and Vegetable Processing Industry: An ENERGY STAR Guide for Energy and Plant Managers (LBNL-59289-Revision, Mar 2008)",
+      "url": "https://eta-publications.lbl.gov/sites/default/files/lbnl-59289-rev.pdf",
+      "license": "DOE-lab report sponsored by US EPA: unclear, freely citable; its figures from older sources are quoted as reported there",
+      "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 68dffe9422854aa7d716093bbdbd8e23d4bcd9d167ed117e63e8f2d76063d35a. Page numbers are the report's printed page numbers (PDF page = printed page + 8)."
+    },
+    "S27": {
+      "title": "DOE Industrial Technologies Program, Process Heating Tip Sheet #2, Check Burner Air to Fuel Ratios (Nov 2007)",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/42110.pdf",
+      "license": "Public domain (US federal)",
+      "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 bc541d8b0b3fe511bad519b65073afbe092872e4d2902f199b1311662d5b786a. Page numbers are PDF pages."
+    },
+    "S28": {
+      "title": "DOE Industrial Technologies Program, Process Heating Tip Sheet #10, Using Waste Heat for External Processes (DOE/GO-102006-2225, Jan 2006)",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/38853.pdf",
+      "license": "Public domain (US federal)",
+      "checked": "Quotes checked 2026-10-29 word for word against a text extract (pdftotext) of the PDF at the URL, SHA-256 5a22ead317624a47b4bb731f274d63ff1cbd37283cd03ad207ed7aa7597a36f2. Page numbers are PDF pages."
+    }
+  },
+  "source_notes": "S12 is not used (no citable sheet survived review). Figures marked 'as reported in LBNL-56183' come from that report's tables, which quote older secondary sources. Where a source quotes dollar figures they are deliberately not copied: they assume one plant's prices and hours.\n\nCollection-contract review (2026-10-30): E1/E2 distinguish generic ratings from matched curves and BEP; E4 retains efficiency and measured-input basis; H4 keeps generic CAPACITY separate from heat duty. Supplied candidate facts cannot close those collection/review tasks. DOE pumping sourcebook S13, printed pp.37-39 and55-61; S14 p.1; DOE Determining Electric Motor Load and Efficiency, https://www.energy.gov/sites/default/files/2014/04/f15/10097517.pdf, printed pp.3-4. This is source-informed development review, not whole-catalog engineering validation.\n\nCollection follow-up (2026-10-30): E11 separates stated process/design temperature from applicable surface/insulation evidence; H1 separates generic capacity, matched steam-throughput rating and actual duration; H2 retains source/reference/state/location/period review beyond named pressure/temperature fields. Source-informed development contract: S1 pp.1-2, S6 pp.1-2 and S8 printed pp.5,9,18-19,54. No additional rule/source-family accuracy or human usefulness result is claimed.",
+  "questions": [
+    {
+      "id": "E1",
+      "family": "energy",
+      "question": "Is this pump throttled by a control valve when it could run on a variable speed drive?",
+      "applies_when": {
+        "absent_note": "no speed control (SC, SIC, SY tag, VFD or VSD) on or next to the pump",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "pump",
+          "not_text": "POSITIVE DISPLACEMENT|VACUUM|METERING",
+          "tagged": true
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "valve"
+              ],
+              "isa": "^(F|P|L)C?V$"
+            },
+            "relation": "discharge_side",
+            "max_hops": 4,
+            "as": "control valve on the discharge"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "instrument",
+                "final_element",
+                "valve",
+                "equipment"
+              ],
+              "text": "\\bVFD\\b|\\bVSD\\b|VARIABLE.SPEED|\\bS(C|IC|Y)-\\d"
+            },
+            "relation": "near",
+            "max_hops": 2
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "valve"
+              ]
+            },
+            "relation": "discharge_side",
+            "max_hops": 4,
+            "as": "other control valve on the discharge"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "flow"
+              ]
+            },
+            "relation": "near",
+            "max_hops": 3,
+            "as": "flow measurement"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "pump tag and type",
+        "control valve tag on the discharge",
+        "no speed control (SC/SIC/VFD) shown"
+      ],
+      "data_requests": [
+        {
+          "item": "Control valve position (% open) over normal operation",
+          "where": [
+            {
+              "place": "historian",
+              "for": "control valve on the discharge",
+              "quantity": "position"
+            },
+            {
+              "place": "dcs",
+              "what": "the valve's controller output"
+            },
+            {
+              "place": "walkdown",
+              "what": "read the positioner stroke indicator at several rates"
+            }
+          ],
+          "how": "Take a month or more of valve output at normal sampling; note the typical and the lowest % open, and the hours at each."
+        },
+        {
+          "item": "Flow over the same period (a flow-duration curve)",
+          "where": [
+            {
+              "place": "historian",
+              "for": "flow measurement",
+              "quantity": "flow"
+            },
+            {
+              "place": "records",
+              "what": "production rate records"
+            }
+          ],
+          "how": "Bin the flow into ranges and count the hours in each."
+        },
+        {
+          "item": "Pump rated flow and head",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "pump curve and rated duty point"
+            },
+            {
+              "place": "nameplate",
+              "what": "pump"
+            }
+          ],
+          "how": "Copy the stated rated flow/head and units. These scalar fields do not establish a matching performance curve or actual operating duty.",
+          "fields": [
+            "CAPACITY",
+            "DISCHARGE"
+          ]
+        },
+        {
+          "item": "Motor rating and speed",
+          "where": [
+            {
+              "place": "nameplate",
+              "what": "motor"
+            },
+            {
+              "place": "maintenance",
+              "what": "motor record card"
+            }
+          ],
+          "how": "Copy stated rated output and speed in their original units. Efficiency, identity and drive basis are separate review tasks.",
+          "fields": [
+            "HP",
+            "RPM"
+          ]
+        },
+        {
+          "item": "Static head versus friction head",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "elevations and pressures at the suction source and the delivery point"
+            },
+            {
+              "place": "records",
+              "what": "line list or isometrics for pipe lengths and sizes"
+            }
+          ],
+          "how": "Static head = lift plus pressure difference between source and destination; the rest of the pump head at duty is friction plus the valve drop."
+        },
+        {
+          "item": "Matched pump curve, rated duty and system operating points",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "pump curve and rated duty point"
+            },
+            {
+              "place": "nameplate",
+              "what": "pump"
+            }
+          ],
+          "how": "Retain supplied ratings as unverified candidates. Review the curve against pump identity, installed impeller, speed, fluid, axes/units and revision; distinguish rated duty, BEP and actual operating points. A rating, URI or readability flag does not establish a matching curve or system suitability.",
+          "show_fields": [
+            "pump_curve",
+            "pump_curve_uri",
+            "pump_curve_asset",
+            "pump_curve_readable",
+            "BEP_flow",
+            "BEP_head"
+          ]
+        },
+        {
+          "item": "Motor nameplate, efficiency and drive basis",
+          "where": [
+            {
+              "place": "nameplate",
+              "what": "motor"
+            },
+            {
+              "place": "maintenance",
+              "what": "motor record card"
+            }
+          ],
+          "how": "Review existing nameplate or motor records for identity, rated shaft output in original units, speed, full-load efficiency and drive/bypass basis. HP/RPM alone do not establish efficiency or measured electrical input; retain missing or ambiguous evidence.",
+          "show_fields": [
+            "kW",
+            "motor_rated_output_kW",
+            "motor_efficiency",
+            "full_load_efficiency",
+            "full_load_current"
+          ]
+        }
+      ],
+      "decision_rule": "Worth a drive quote when the valve normally runs well throttled for long hours and most of the head is friction rather than static lift (VSDs suit friction-dominated systems best). Close it if the valve normally runs near fully open, the head is mostly static, or the pump runs few hours.",
+      "typical_benefit": {
+        "wording": "\"With rotodynamic pump installations, savings of between 30% and 50% have been achieved in many installations by installing VSDs.\" Also: \"It is estimated that 75% of pump systems are oversized, many by more than 20%.\"",
+        "source": [
+          "S15",
+          "S24"
+        ],
+        "arc": "2.4146 (IAC/ITAC browse page: 5,227 recommendations, 3.0 yr average payback, 31.4% implemented; average dollar figure omitted)"
+      },
+      "limits": "On a hand-built model the valve sits on a stream leaving the pump. On an extracted drawing the links have no direction, so the rule takes a control valve within four drawn links that do not pass through other equipment; it may still be on a branch or the suction side, so check the drawing. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E2",
+      "family": "energy",
+      "question": "Is this pump oversized, given a bypass line around it or its valve?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "pump",
+          "not_text": "POSITIVE DISPLACEMENT|VACUUM|METERING",
+          "tagged": true
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "hand_valve",
+                "valve",
+                "final_element",
+                "stream",
+                "line_item",
+                "offpage"
+              ],
+              "text": "\\bBY-?PASS\\b",
+              "not_text": "STEAM|\\bSTM\\b|TURBINE"
+            },
+            "relation": "near",
+            "max_hops": 2,
+            "as": "bypass"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "pump tag",
+        "bypass line or valve near the pump"
+      ],
+      "data_requests": [
+        {
+          "item": "Measured flow and head at normal operation",
+          "where": [
+            {
+              "place": "historian",
+              "for": "equipment",
+              "quantity": [
+                "flow",
+                "pressure"
+              ]
+            },
+            {
+              "place": "walkdown",
+              "what": "suction and discharge pressure gauges plus a clamp-on ultrasonic flow meter"
+            }
+          ],
+          "how": "Read flow and suction and discharge pressure at steady operation."
+        },
+        {
+          "item": "Pump stated rated flow and head",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "pump curve"
+            }
+          ],
+          "how": "Retain the stated rating and original units as model evidence; generic CAPACITY/DISCHARGE do not identify BEP.",
+          "fields": [
+            "CAPACITY",
+            "DISCHARGE"
+          ]
+        },
+        {
+          "item": "How often the bypass is open",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "valve position and line temperature"
+            },
+            {
+              "place": "records",
+              "what": "operator logs"
+            }
+          ],
+          "how": "Record bypass position over several shifts."
+        },
+        {
+          "item": "Matched pump curve and best-efficiency-point (BEP) duty",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "pump curve"
+            }
+          ],
+          "how": "Review the matching curve for installed impeller, speed, fluid and units, then identify its BEP flow/head with source revision and locator. Keep generic CAPACITY/DISCHARGE as rated candidates, not BEP. Retain unknown or unsuitable curve evidence and compare with representative measured operation.",
+          "show_fields": [
+            "pump_curve",
+            "pump_curve_uri",
+            "pump_curve_asset",
+            "pump_curve_readable",
+            "BEP_flow",
+            "BEP_head"
+          ]
+        }
+      ],
+      "decision_rule": "Prioritize the pump if it runs at a flow 30% or more away from BEP or the bypass is used routinely; otherwise close it.",
+      "typical_benefit": {
+        "wording": "Five indications: \"excessive flow noise, highly throttled flow control valves, heavy use of bypass lines, frequent replacements of bearings and seals, and intermittent pump operation.\" Prioritize pumps \"with flow rates of 30% or more from the BEP flow rates, or with system imbalances greater than 20%.\" No % saving stated.",
+        "source": [
+          "S13",
+          "S14"
+        ],
+        "arc": null
+      },
+      "limits": "A drawn bypass may be normally closed; the drawing cannot show how it is used."
+    },
+    {
+      "id": "E3",
+      "family": "energy",
+      "question": "Does this pump recirculate flow continuously through a minimum-flow line?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "pump",
+          "not_text": "POSITIVE DISPLACEMENT|VACUUM|METERING",
+          "tagged": true
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "instrument",
+                "valve",
+                "final_element",
+                "hand_valve",
+                "stream",
+                "line_item",
+                "offpage"
+              ],
+              "text": "MIN(IMUM)?[ -]?FLOW|SPILL-?BACK|\\bRO\\b|RESTRICTION ORIFICE|AUTO(MATIC)? RECIRC"
+            },
+            "relation": "near",
+            "max_hops": 2,
+            "as": "minimum-flow line"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "pump tag",
+        "restriction orifice, MIN FLOW or automatic recirculation valve on a line from discharge back to suction or tank"
+      ],
+      "data_requests": [
+        {
+          "item": "Recirculation flow versus forward flow",
+          "where": [
+            {
+              "place": "historian",
+              "for": "minimum-flow line",
+              "quantity": "flow"
+            },
+            {
+              "place": "walkdown",
+              "what": "clamp-on ultrasonic flow meter on the recirculation line"
+            }
+          ],
+          "how": "Measure both flows at normal operation."
+        },
+        {
+          "item": "Hours the recirculation is open",
+          "where": [
+            {
+              "place": "historian",
+              "for": "minimum-flow line",
+              "quantity": "flow"
+            },
+            {
+              "place": "records",
+              "what": "operator logs"
+            }
+          ],
+          "how": "Count hours with recirculation flow."
+        }
+      ],
+      "decision_rule": "Worth action when recirculation flows continuously at normal throughput (an orifice that is always open, or a valve that never closes); an automatic valve that only opens at low forward flow is doing its job.",
+      "typical_benefit": {
+        "wording": "\"the energy needed to push fluid through bypass lines is wasted.\" No % stated.",
+        "source": [
+          "S13"
+        ],
+        "arc": null
+      },
+      "limits": "Minimum flow protects the pump; never remove it without the pump vendor's minimum continuous flow."
+    },
+    {
+      "id": "E4",
+      "family": "energy",
+      "question": "Is this motor oversized for its load?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "pump|\\bfan\\b|blower|compressor|agitator",
+          "tagged": true,
+          "schedule_field": "HP"
+        },
+        "group_by": "unit"
+      },
+      "evidence_fields": [
+        "equipment tag",
+        "motor rating field on the drawing (value or blank)"
+      ],
+      "data_requests": [
+        {
+          "item": "Motor rated power",
+          "where": [
+            {
+              "place": "nameplate",
+              "what": "motor"
+            },
+            {
+              "place": "maintenance",
+              "what": "motor record card"
+            }
+          ],
+          "how": "Copy stated rated shaft output in original units. Full-load efficiency and representative input/load evidence remain separate requests.",
+          "fields": [
+            "HP"
+          ]
+        },
+        {
+          "item": "Measured input power or current at normal load",
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing motor input-power and representative load/production records"
+            }
+          ],
+          "how": "Retain representative period, coverage, load timing and measurement basis. Prefer documented input kW; three-phase watts derived from voltage/current also need power factor and phase basis. Current alone is unreliable at low load. No new live measurements are instructed; record unavailable evidence.",
+          "show_fields": [
+            "input_power_kW",
+            "operating_hours",
+            "run_hours",
+            "current_A",
+            "voltage_V",
+            "power_factor"
+          ]
+        },
+        {
+          "item": "Motor nameplate, rated output and full-load efficiency",
+          "where": [
+            {
+              "place": "nameplate",
+              "what": "motor"
+            },
+            {
+              "place": "maintenance",
+              "what": "motor record card"
+            }
+          ],
+          "how": "Review identity, rated shaft output in original units, full-load efficiency, rated speed/current and source revision. HP alone cannot settle the efficiency needed by the load calculation. Stated output is not measured electrical input; retain unknown efficiency rather than supplying a default.",
+          "show_fields": [
+            "kW",
+            "motor_rated_output_kW",
+            "RPM",
+            "motor_efficiency",
+            "full_load_efficiency",
+            "full_load_current"
+          ]
+        }
+      ],
+      "decision_rule": "Load factor = measured input power divided by (rated output divided by rated efficiency). A motor running well below about 40% of full load is worth a resize question; one oversized slightly is fine.",
+      "typical_benefit": {
+        "wording": "\"At loads below 40% of full load, motor efficiency begins to decline dramatically.\" \"Slightly oversizing a motor (up to 25%) can actually increase efficiency.\" No % saving stated.",
+        "source": [
+          "S16",
+          "S24"
+        ],
+        "arc": "2.41xx (category only) (IAC/ITAC browse page: motors: 18,002 recommendations, 2.5 yr average payback, 52.3% implemented; average dollar figure omitted)"
+      },
+      "limits": "Fires only where the drawing carries a motor rating field (filled or blank); a drawing without one gives no trigger. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E5",
+      "family": "energy",
+      "question": "Is fan airflow controlled by a damper or inlet vanes instead of speed?",
+      "applies_when": {
+        "absent_note": "no speed control on or next to the fan",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "\\bfan\\b|blower",
+          "tagged": true
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "text": "DAMPER|INLET VANE|\\bIGV\\b"
+            },
+            "relation": "near",
+            "max_hops": 2,
+            "as": "damper"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "instrument",
+                "final_element",
+                "valve",
+                "equipment"
+              ],
+              "text": "\\bVFD\\b|\\bVSD\\b|VARIABLE.SPEED|\\bS(C|IC|Y)-\\d"
+            },
+            "relation": "near",
+            "max_hops": 2
+          }
+        ]
+      },
+      "evidence_fields": [
+        "fan tag",
+        "damper or inlet-vane actuator",
+        "no speed control shown"
+      ],
+      "data_requests": [
+        {
+          "item": "Damper position, control mode and operating period",
+          "show_fields": [
+            "damper_position",
+            "control_mode"
+          ],
+          "where": [
+            {
+              "place": "historian",
+              "for": "damper",
+              "quantity": "position"
+            },
+            {
+              "place": "records",
+              "what": "existing control narratives, drive settings and operating logs"
+            }
+          ],
+          "how": "Use approved existing records. Identify damper/vanes type, fixed or variable speed, bypass/manual modes and representative dates/hours; retain unknown modes and gaps. A drawn device does not establish how it is used."
+        },
+        {
+          "item": "Matched fan curves and system operating points",
+          "show_fields": [
+            "fan_curve",
+            "fan_curve_uri",
+            "fan_curve_readable",
+            "fan_curve_asset"
+          ],
+          "where": [
+            {
+              "place": "vendor",
+              "what": "fan pressure/flow and available power/efficiency curves for the installed configuration"
+            },
+            {
+              "place": "records",
+              "what": "system resistance or required airflow/pressure, operating points and process constraints"
+            }
+          ],
+          "how": "Review the document itself against fan identity/size, speed, gas conditions, axes/units and static/total pressure basis. Retain source revision, locator and suitability gaps; a URI or present/readable flag does not establish a usable matching curve."
+        },
+        {
+          "item": "Motor nameplate rating and drive basis",
+          "show_fields": [
+            "HP",
+            "RPM",
+            "kW",
+            "motor_rated_output_kW"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "existing motor nameplate/datasheet and drive/bypass configuration"
+            }
+          ],
+          "how": "Retain original power units, rated speed, asset identity, source and rating basis. Review whether power denotes rated shaft output or electrical input. Do not demand a second unit representation or treat a conversion as measured input."
+        },
+        {
+          "item": "Fan electrical-input and load history",
+          "show_fields": [
+            "input_power_kW",
+            "operating_hours",
+            "run_hours",
+            "energy_kWh",
+            "airflow",
+            "pressure",
+            "operating_speed_rpm"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing electrical-input metering and representative fan/process operating records"
+            }
+          ],
+          "how": "Retain period/coverage and coincident airflow, pressure, actual speed/control mode and load timing where available. Distinguish measured electrical input, stated motor output, energy over a period and assumed hours. Record unavailable evidence; this request does not instruct live measurements."
+        }
+      ],
+      "decision_rule": "Worth further study when representative records show sustained part-load control and required airflow/pressure can be maintained. A drive quote needs reviewed fan/system curves, operating constraints and electrical-input/load history; the cube-speed relationship alone is not a site estimate.",
+      "typical_benefit": {
+        "wording": "Dampers \"remain closed so often that they can be found rusted or locked in a restrictive position... the system continually operates against an unnecessary load.\" Fan \"power is related to the cube of fan speed.\" No % stated.",
+        "source": [
+          "S17"
+        ],
+        "arc": "2.4146 (by description)"
+      },
+      "limits": "Damper or drive presence does not establish actual control mode. Fan/system conditions and process requirements need qualified review. Similarity relationships are conditional, not a universal drive recommendation or a quantified benefit for this plant."
+    },
+    {
+      "id": "E6",
+      "family": "energy",
+      "question": "Is this compressor spilling flow back (recycle or blow-off) more than surge protection needs?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "compressor"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "valve",
+                "final_element",
+                "hand_valve"
+              ],
+              "text": "RECYCLE|SPILL|ANTI-?SURGE|BLOW-?OFF|SURGE"
+            },
+            "relation": "same_unit",
+            "as": "recycle valve"
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "compressor power"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "compressor",
+        "recycle / spill-back / blow-off valve on it",
+        "its controller and power measurement if drawn"
+      ],
+      "data_requests": [
+        {
+          "item": "Recycle (or blow-off) valve opening over normal operation",
+          "where": [
+            {
+              "place": "historian",
+              "for": "recycle valve",
+              "quantity": "position"
+            },
+            {
+              "place": "dcs",
+              "what": "anti-surge or recycle controller output"
+            }
+          ],
+          "how": "Take a month or more of valve position; note the hours it is open at normal throughput."
+        },
+        {
+          "item": "Surge margin at normal operation",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "compressor map with the surge line"
+            },
+            {
+              "place": "dcs",
+              "what": "the anti-surge controller's surge-line settings"
+            }
+          ],
+          "how": "Compare the normal operating point with the surge line plus the controller's margin."
+        },
+        {
+          "item": "Compressor power",
+          "where": [
+            {
+              "place": "historian",
+              "for": "compressor power",
+              "quantity": "power"
+            },
+            {
+              "place": "walkdown",
+              "what": "power meter at the drive"
+            }
+          ],
+          "how": "Record power with the valve at its normal opening."
+        }
+      ],
+      "decision_rule": "Worth a look when the recycle or blow-off valve is open at normal throughput, or the controller margin is wider than the vendor map needs. If it only opens during upsets or turndown, close it.",
+      "typical_benefit": {
+        "wording": "Blow-off \"is a waste of energy and should be used only where necessary to avoid surge.\" Inlet throttling: \"Capacity can typically be reduced from 100 percent capacity to about 70-80 percent with reasonable energy reduction.\" No % saving stated.",
+        "source": [
+          "S11"
+        ],
+        "arc": null
+      },
+      "limits": "Surge protection is a machine-protection function: any change goes through the compressor vendor and a change review."
+    },
+    {
+      "id": "E7",
+      "family": "energy",
+      "question": "Does a steam pressure-reducing valve between headers pass enough steam to drive a backpressure turbogenerator instead?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "valve",
+            "final_element",
+            "offpage",
+            "stream",
+            "hand_valve"
+          ],
+          "text_all": [
+            "\\bPRV\\b|\\bPCV\\b|PRESSURE.REDUC|LETDOWN",
+            "\\b(HP|MP|LP)\\b.{0,20}HEADER|\\d+ ?#|HEADER"
+          ],
+          "not_text": "FEEDWATER|^FWS"
+        },
+        "group_by": "item"
+      },
+      "evidence_fields": [
+        "PRV / letdown valve tag",
+        "header text on both sides (HP/MP/LP or pressure rating)"
+      ],
+      "data_requests": [
+        {
+          "item": "Steam flow through the station over a year",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "flow"
+            },
+            {
+              "place": "records",
+              "what": "steam balance"
+            }
+          ],
+          "how": "\"Develop steam flow/duration curves for each PRV station\"."
+        },
+        {
+          "item": "Upstream and downstream pressures",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "gauges either side of the station"
+            },
+            {
+              "place": "records",
+              "what": "header design pressures"
+            }
+          ],
+          "how": "Record both at normal operation."
+        }
+      ],
+      "decision_rule": "Consider a backpressure turbogenerator only if the station passes a constant flow of at least 3,000 lb/hr with a pressure drop of at least 100 psi (S6's condition); otherwise close it.",
+      "typical_benefit": {
+        "wording": "Consider when a PRV has \"constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi.\" Installation costs \"typically average 75% of equipment costs\".",
+        "source": [
+          "S6"
+        ],
+        "arc": null
+      },
+      "limits": "S6 also quotes cost per kW figures; they are deliberately not repeated here. No IAC code maps to turbines (2.2134 covers PRV-station leaks)."
+    },
+    {
+      "id": "E8",
+      "family": "energy",
+      "question": "Is there a steam trap population large enough to justify a trap survey program?",
+      "applies_when": {
+        "anchor": {
+          "text": "STEAM TRAP|\\bTRAP\\b|\\bST-\\d"
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "count and tags of trap symbols"
+      ],
+      "data_requests": [
+        {
+          "item": "Trap inventory and last survey date",
+          "where": [
+            {
+              "place": "records",
+              "what": "trap list"
+            },
+            {
+              "place": "maintenance",
+              "what": "trap survey history"
+            }
+          ],
+          "how": "Count traps by type and service."
+        },
+        {
+          "item": "Trap condition",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "ultrasonic or thermal survey of each trap"
+            }
+          ],
+          "how": "Classify each trap working / failed open / failed closed."
+        }
+      ],
+      "decision_rule": "A survey is likely worthwhile above about 500 traps or when no survey has been done in 3 to 5 years; otherwise fold traps into routine maintenance.",
+      "typical_benefit": {
+        "wording": "Unmaintained 3-5 years: \"between 15% to 30% of the installed steam traps may have failed.\" With a program, \"less than 5%.\" LBNL refinery table (as reported in LBNL-56183): trap maintenance 10-15% fuel saved, 0.5 yr payback.",
+        "source": [
+          "S3",
+          "S19",
+          "S24"
+        ],
+        "arc": "2.2113 (IAC/ITAC browse page: 445 recommendations, 0.6 yr average payback, 80.1% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E9",
+      "family": "energy",
+      "question": "Is condensate going to drain instead of back to the boiler?",
+      "applies_when": {
+        "anchor": {
+          "text_all": [
+            "CONDENSATE|\\bTRAP\\b",
+            "TO (DRAIN|SEWER|GRADE)"
+          ]
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "trap or condensate outlets marked to drain, sewer or grade"
+      ],
+      "data_requests": [
+        {
+          "item": "Condensate return percentage and makeup flow",
+          "where": [
+            {
+              "place": "records",
+              "what": "boiler house makeup and feedwater meters"
+            },
+            {
+              "place": "bills",
+              "what": "water and fuel"
+            }
+          ],
+          "how": "Return % = 1 - makeup flow / feedwater flow."
+        },
+        {
+          "item": "Contamination risk of each drained stream",
+          "where": [
+            {
+              "place": "records",
+              "what": "process knowledge of possible leaks into the condensate"
+            }
+          ],
+          "how": "List what could contaminate it."
+        }
+      ],
+      "decision_rule": "Worth returning where the drained condensate is clean and the flow is steady; contaminated or tiny streams stay at drain.",
+      "typical_benefit": {
+        "wording": "Enthalpy difference \"generally over 120 Btu/lb, an amount of energy that is often more than 10% of the energy in the boiler generated steam.\" LBNL (as reported in LBNL-56183): \"Condensate Return Alone 10%\", 1.1 yr.",
+        "source": [
+          "S8",
+          "S19",
+          "S24"
+        ],
+        "arc": "2.2121 (IAC/ITAC browse page: 354 recommendations, 1.2 yr average payback, 50.9% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E10",
+      "family": "energy",
+      "question": "Is high-pressure condensate flashing to atmosphere when the flash steam could be used?",
+      "applies_when": {
+        "anchor": {
+          "text": "FLASH (TANK|VESSEL|DRUM)"
+        },
+        "group_by": "item"
+      },
+      "evidence_fields": [
+        "flash or vented receiver tag and its vent"
+      ],
+      "data_requests": [
+        {
+          "item": "Condensate pressure and flow into the receiver",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": [
+                "pressure",
+                "flow"
+              ]
+            },
+            {
+              "place": "walkdown",
+              "what": "pressure gauge and vent plume"
+            }
+          ],
+          "how": "Record pressure and estimate flow."
+        },
+        {
+          "item": "A low-pressure steam user nearby",
+          "where": [
+            {
+              "place": "records",
+              "what": "steam users list"
+            },
+            {
+              "place": "walkdown",
+              "what": "nearby LP users"
+            }
+          ],
+          "how": "List LP users within reach."
+        }
+      ],
+      "decision_rule": "Worth a look when a steady high-pressure condensate flow vents and a low-pressure user is close by.",
+      "typical_benefit": {
+        "wording": "Flash vessels allow \"recovery of steam... used in low-pressure steam applications.\" No % stated.",
+        "source": [
+          "S8",
+          "S24"
+        ],
+        "arc": "2.2127 (IAC/ITAC browse page: 31 recommendations, 1.0 yr average payback, 39.3% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E11",
+      "family": "energy",
+      "question": "Is this hot line insulated?",
+      "applies_when": {
+        "absent_note": "no insulation code recorded for the line",
+        "anchor": [
+          {
+            "kind": [
+              "stream",
+              "line_item"
+            ],
+            "fact_C_min": 49
+          },
+          {
+            "kind": [
+              "stream"
+            ],
+            "text": "\\bSTEAM\\b",
+            "not_text": "CONDENSATE|RETURN"
+          }
+        ],
+        "group_by": "item",
+        "without": [
+          {
+            "select": {
+              "text": "INSUL|\\bIH\\b|\\bIC\\b|\\bPP\\b"
+            },
+            "relation": "same_stream"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "line and its stated temperature or steam service",
+        "no insulation code recorded"
+      ],
+      "data_requests": [
+        {
+          "item": "Insulation condition and length of bare pipe",
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing line list, insulation survey and inspection records"
+            }
+          ],
+          "how": "Retain the identified line/location, survey date/revision, condition, length and pipe-size basis. Missing insulation metadata does not establish a bare line. Record unavailable or unsuitable evidence; new observations require the receiving organization's approved process."
+        },
+        {
+          "item": "Stated line/process temperature",
+          "fields": [
+            "normal_temperature_C"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "identified source temperature field and its stated basis"
+            }
+          ],
+          "how": "Retain the stated temperature and original source/basis. A process-fluid or design temperature is not an actual surface-temperature measurement or a completed insulation evaluation."
+        },
+        {
+          "item": "Applicable surface-temperature and insulation evidence",
+          "show_fields": [
+            "normal_temperature_C",
+            "surface_temperature_C",
+            "surface_temperature_basis",
+            "insulation_condition",
+            "insulation_survey",
+            "insulation_survey_asset",
+            "insulation_survey_readable",
+            "ambient_temperature_C",
+            "operating_period",
+            "pipe_length",
+            "pipe_diameter"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing surface/insulation records or suitable documented analysis for this line"
+            }
+          ],
+          "how": "Review line identity/location, source revision/date, surface versus fluid/design meaning, geometry and operating/ambient/time basis. Retain unreadable, wrong-asset, Boolean and unknown candidates without treating them as applicable evidence. Identify deliberate cooling or process constraints; no new live inspection, insulation installation or saving is established."
+        }
+      ],
+      "decision_rule": "Refer for engineering investigation when applicable evidence shows bare or damaged insulation on a hot line and no deliberate cooling or process constraint rules it out. The cited surface-temperature criterion is a source screening reference, not an automatic site instruction. Close only the bounded investigation when reviewed evidence settles its scope; this screen does not authorize insulation work.",
+      "typical_benefit": {
+        "wording": "\"Insulation can typically reduce energy losses by 90%.\" \"Any surface over 120°F should be insulated.\" LBNL (as reported in LBNL-56183): insulation 3-13%, 1.1 yr.",
+        "source": [
+          "S1",
+          "S19",
+          "S24"
+        ],
+        "arc": "2.2136 (IAC/ITAC browse page: 1,647 recommendations, 2.2 yr average payback, 61.5% implemented; average dollar figure omitted)"
+      },
+      "limits": "Many models and P&IDs never record insulation: a finding means not recorded, not bare. Stated process/design temperature is not surface evidence. Collection and source applicability need review. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E12",
+      "family": "energy",
+      "question": "Are large valves and flanges on hot service left bare?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "hand_valve",
+            "valve",
+            "final_element"
+          ],
+          "fact_C_min": 49
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "valve on a line with a stated hot temperature"
+      ],
+      "data_requests": [
+        {
+          "item": "Bare valves and flanges by size",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "count bare valves and flanges by size; infrared camera"
+            }
+          ],
+          "how": "Count by size and temperature."
+        }
+      ],
+      "decision_rule": "Fit removable jackets on bare hot valves and flanges that are not opened often.",
+      "typical_benefit": {
+        "wording": "\"a 6-inch gate valve may have more than 6 square feet of surface area.\" The source tabulates heat saved by valve size and temperature. No % stated.",
+        "source": [
+          "S1",
+          "S2"
+        ],
+        "arc": "2.2136 (by description)"
+      },
+      "limits": null
+    },
+    {
+      "id": "E13",
+      "family": "energy",
+      "question": "Is boiler blowdown manual, with no automatic control or heat recovery?",
+      "applies_when": {
+        "absent_note": "no conductivity element or controller near the boiler",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "text": "BLOW-?DOWN"
+            },
+            "relation": "near",
+            "max_hops": 3,
+            "as": "blowdown"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "isa": "^(CE|CT|CIC|AIC|AT)$"
+            },
+            "relation": "near",
+            "max_hops": 3
+          }
+        ]
+      },
+      "evidence_fields": [
+        "boiler",
+        "blowdown line",
+        "no conductivity element or controller"
+      ],
+      "data_requests": [
+        {
+          "item": "Blowdown rate and TDS",
+          "where": [
+            {
+              "place": "records",
+              "what": "water treatment log"
+            },
+            {
+              "place": "walkdown",
+              "what": "conductivity of boiler water and feedwater"
+            }
+          ],
+          "how": "Blowdown % = feedwater TDS / boiler TDS."
+        }
+      ],
+      "decision_rule": "Automate when blowdown is manual and above what the water treatment needs; add heat recovery on steady continuous blowdown.",
+      "typical_benefit": {
+        "wording": "\"Blowdown rates typically range from 4% to 8% of boiler feedwater flow rate, but can be as high as 10%.\" LBNL (as reported in LBNL-56183): blowdown heat recovery 1.3%, 1-2.7 yr.",
+        "source": [
+          "S5",
+          "S19",
+          "S24"
+        ],
+        "arc": "2.124x (IAC/ITAC browse page: 334 recommendations, 1.6 yr average payback, 36.7% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E14",
+      "family": "energy",
+      "question": "Does this boiler stack have no feedwater economizer?",
+      "applies_when": {
+        "absent_note": "no economizer anywhere in the model",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "ECONOMI[SZ]ER"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "boiler",
+        "no economizer anywhere on the model"
+      ],
+      "data_requests": [
+        {
+          "item": "Stack temperature",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "temperature"
+            },
+            {
+              "place": "walkdown",
+              "what": "flue gas thermometer at the stack"
+            }
+          ],
+          "how": "Record at normal firing."
+        },
+        {
+          "item": "Fuel sulfur content",
+          "where": [
+            {
+              "place": "bills",
+              "what": "fuel specification"
+            }
+          ],
+          "how": "Limits how low the flue gas can be cooled."
+        }
+      ],
+      "decision_rule": "Worth a quote when stack temperature is high and the fuel allows cooling the flue gas.",
+      "typical_benefit": {
+        "wording": "Efficiency \"can be increased by 1% for every 40°F reduction in flue gas temperature.\" An economizer \"can often reduce fuel requirements by 5% to 10% and pay for itself in less than 2 years.\"",
+        "source": [
+          "S4",
+          "S24"
+        ],
+        "arc": "2.242x (by description) (IAC/ITAC browse page: 635 recommendations, 2.1 yr average payback, 24.3% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E15",
+      "family": "energy",
+      "question": "Could a condensing economizer serve a cold makeup or process-water heating load?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR",
+          "text": "GAS"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "text": "MAKE-?UP WATER|PROCESS WATER|HOT WATER"
+            },
+            "relation": "anywhere",
+            "as": "low-temperature water load"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "gas-fired boiler",
+        "cold makeup or process water heating load"
+      ],
+      "data_requests": [
+        {
+          "item": "Stack temperature and moisture",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "flue gas analysis"
+            }
+          ],
+          "how": "Record at normal firing."
+        },
+        {
+          "item": "Size of the low-temperature heat sink",
+          "where": [
+            {
+              "place": "historian",
+              "for": "low-temperature water load",
+              "quantity": "flow"
+            },
+            {
+              "place": "records",
+              "what": "makeup water flow"
+            }
+          ],
+          "how": "Flow and temperature rise needed."
+        }
+      ],
+      "decision_rule": "Worth a quote when a steady cold water load exists near the stack.",
+      "typical_benefit": {
+        "wording": "Can \"increase overall heat recovery and steam system efficiency by up to 10%.\" \"Simple paybacks... are often less than 2 years.\"",
+        "source": [
+          "S7"
+        ],
+        "arc": "2.242x (by description)"
+      },
+      "limits": null
+    },
+    {
+      "id": "E16",
+      "family": "energy",
+      "question": "Does this boiler or fired heater run without O2 trim?",
+      "applies_when": {
+        "absent_note": "no O2 analyzer near the fired equipment",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "isa": "^A",
+              "text": "O2|OXYGEN"
+            },
+            "relation": "near",
+            "max_hops": 3
+          }
+        ]
+      },
+      "evidence_fields": [
+        "fired equipment",
+        "no O2 analyzer on the flue"
+      ],
+      "data_requests": [
+        {
+          "item": "Flue O2 and CO",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "portable combustion analyzer at several firing rates"
+            }
+          ],
+          "how": "Record O2 and CO across the firing range."
+        }
+      ],
+      "decision_rule": "Worth trim when excess air is well above what the burner needs across the firing range.",
+      "typical_benefit": {
+        "wording": "LBNL boiler table (as reported in LBNL-56183): \"1% improvement for each 15% less excess air.\"",
+        "source": [
+          "S19",
+          "S24"
+        ],
+        "arc": "2.12xx / 2.121x (category only) (IAC/ITAC browse page: boilers: 4,622 recommendations, 1.3 yr average payback, 56.5% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E17",
+      "family": "energy",
+      "question": "Does this furnace or fired heater send hot flue gas straight to the stack?",
+      "applies_when": {
+        "absent_note": "no recuperator, air preheater, economizer or waste heat recovery anywhere in the model",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "RECUPERAT|AIR PREHEAT|ECONOMI[SZ]ER|WASTE HEAT"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "fired equipment",
+        "no recuperator, air preheater or load preheat"
+      ],
+      "data_requests": [
+        {
+          "item": "Flue temperature and cleanliness",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "flue gas thermometer"
+            }
+          ],
+          "how": "Record at normal firing."
+        },
+        {
+          "item": "Continuous or batch operation",
+          "where": [
+            {
+              "place": "records",
+              "what": "production schedule"
+            }
+          ],
+          "how": "Load preheating suits continuous furnaces."
+        }
+      ],
+      "decision_rule": "Worth a look for continuous furnaces with hot, clean flue gas.",
+      "typical_benefit": {
+        "wording": "\"Energy consumption can typically be reduced 5% to 30%.\" Load preheating is \"best suited for continuous rather than batch furnaces.\"",
+        "source": [
+          "S18",
+          "S24"
+        ],
+        "arc": "2.241x (IAC/ITAC browse page: 1,936 recommendations, 2.0 yr average payback, 20.0% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E18",
+      "family": "energy",
+      "question": "Is heat rejected to cooling water in one place while steam heats a colder stream in another (a heat-integration question)?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "valve",
+            "final_element",
+            "hand_valve",
+            "instrument",
+            "stream"
+          ],
+          "text": "COOLING WATER|\\bCW[SR]?\\b",
+          "not_text": "RETURN"
+        },
+        "group_by": "model",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "valve",
+                "final_element",
+                "stream",
+                "hand_valve",
+                "instrument"
+              ],
+              "text": "\\bSTEAM\\b",
+              "not_text": "CONDENSATE|OUTLET|DRAIN|TRAP|RETURN|LEAKOFF|QUENCH|BY-?PASS"
+            },
+            "relation": "other_unit",
+            "as": "steam-heated user"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "equipment cooled with cooling water and its temperature tags",
+        "equipment heated with steam and its temperature tags"
+      ],
+      "data_requests": [
+        {
+          "item": "Temperatures and duties of the cooled and the heated streams",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "historian",
+              "for": "steam-heated user",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "records",
+              "what": "heat and material balance"
+            }
+          ],
+          "how": "For each stream: supply and target temperature and duty."
+        },
+        {
+          "item": "Whether the duties overlap in time",
+          "where": [
+            {
+              "place": "records",
+              "what": "operating sequence: are both duties needed at the same time?"
+            }
+          ],
+          "how": "Mark each duty continuous, batch or startup-only."
+        },
+        {
+          "item": "Layout distance and fouling",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "distance between the two exchangers"
+            },
+            {
+              "place": "maintenance",
+              "what": "cleaning history"
+            }
+          ],
+          "how": "Note pipe run and fouling service."
+        }
+      ],
+      "decision_rule": "Worth a pinch or exchanger study only when the hot stream's temperature range sits above the cold stream's with a practical approach, both run at the same time for long hours, and they are close enough to connect. Otherwise close it.",
+      "typical_benefit": {
+        "wording": "Pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated in that section.",
+        "source": [
+          "S19",
+          "S24"
+        ],
+        "arc": "2.243x; 2.244x (IAC/ITAC browse page: 2.243x: 3,673 recommendations, 1.4 yr average payback, 31.2% implemented; 2.244x: 1,466 recommendations, 1.7 yr, 28.6%; average dollar figure omitted)"
+      },
+      "limits": "A screen pairs any cooling-water-cooled item with any steam-heated item; the temperatures decide. On a reactive system any heat-integration change needs a hazard review first. IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E19",
+      "family": "energy",
+      "question": "Is the compressed air header pressure higher than the end users need?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+          "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "isa": "^P(I?C|CV|RV)$"
+            },
+            "relation": "anywhere",
+            "as": "pressure control or regulator"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "air compressor and its pressure control",
+        "point-of-use regulators"
+      ],
+      "data_requests": [
+        {
+          "item": "Header pressure profile and the minimum end-use pressure",
+          "where": [
+            {
+              "place": "historian",
+              "for": "pressure control or regulator",
+              "quantity": "pressure"
+            },
+            {
+              "place": "walkdown",
+              "what": "pressure at the farthest and most demanding users"
+            }
+          ],
+          "how": "Find the highest pressure any user truly needs."
+        }
+      ],
+      "decision_rule": "Lower the setpoint toward the highest true end-use need plus distribution losses.",
+      "typical_benefit": {
+        "wording": "\"for every 2 psi decrease in discharge pressure, energy consumption will decrease by approximately 1 percent at full output flow.\" With 30-50% unregulated usage, \"about 1 to 1.6 percent for every 2 psi.\"",
+        "source": [
+          "S11",
+          "S24"
+        ],
+        "arc": "2.4231 (IAC/ITAC browse page: 6,522 recommendations, 0.5 yr average payback, 51.6% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E20",
+      "family": "energy",
+      "question": "Are compressed air leaks likely, given many quick-disconnects, hose drops or timer drains?",
+      "applies_when": {
+        "anchor": {
+          "text": "QUICK.?DISCONNECT|HOSE DROP|\\bFRL\\b|TIMER DRAIN"
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "count of quick-disconnects, hose drops, FRLs, timer drains (proxy evidence only)"
+      ],
+      "data_requests": [
+        {
+          "item": "Leak rate",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "ultrasonic leak survey; a no-load test with production stopped"
+            }
+          ],
+          "how": "Leakage % from load/unload times at no demand."
+        }
+      ],
+      "decision_rule": "Run a leak program when leakage is well above the 5-10% target.",
+      "typical_benefit": {
+        "wording": "Leaks are \"often wasting as much as 20%-30% of the compressor's output\"; target \"5%-10% of total system flow.\"",
+        "source": [
+          "S9",
+          "S24"
+        ],
+        "arc": "2.4236 (IAC/ITAC browse page: 11,223 recommendations, 0.5 yr average payback, 81.4% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E21",
+      "family": "energy",
+      "question": "Is compressed air used for open blowing, sparging, venturi vacuum or cabinet cooling?",
+      "applies_when": {
+        "anchor": {
+          "text_all": [
+            "\\bAIR\\b",
+            "BLOW|SPARG|VENTURI|EDUCTOR|VORTEX|CABINET COOL"
+          ],
+          "not_text": "BLOWDOWN|BLOWER"
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "compressed air line to an open-blowing, sparging, venturi or cooling use"
+      ],
+      "data_requests": [
+        {
+          "item": "End-use inventory with flow",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "list every air end use and estimate its flow"
+            }
+          ],
+          "how": "Flag uses a blower, pump or fan could do."
+        }
+      ],
+      "decision_rule": "Replace inappropriate uses with a blower, vacuum pump or fan where practical.",
+      "typical_benefit": {
+        "wording": "\"unregulated usage is commonly as high as 30 to 50 percent of air demand.\"",
+        "source": [
+          "S11",
+          "S24"
+        ],
+        "arc": "2.4239; 2.4237; 2.4238 (IAC/ITAC browse page: 2.4239: 2,697 recommendations, 1.0 yr average payback, 48.4% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E22",
+      "family": "energy",
+      "question": "Does the air compressor lack enough storage for intermittent large users?",
+      "applies_when": {
+        "absent_note": "no receiver or air storage anywhere in the model",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+          "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "RECEIVER|AIR TANK|STORAGE",
+              "not_text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b|COLD STOR"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "air compressor",
+        "no receiver drawn"
+      ],
+      "data_requests": [
+        {
+          "item": "Demand profile",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "data-log compressor load and header pressure for a week"
+            }
+          ],
+          "how": "Find short high-demand events."
+        }
+      ],
+      "decision_rule": "Add storage when short peaks force an extra compressor on.",
+      "typical_benefit": {
+        "wording": "Storage \"may allow such a compressor to be turned off.\" No % stated.",
+        "source": [
+          "S10",
+          "S24"
+        ],
+        "arc": "2.422x (category only) (IAC/ITAC browse page: 8,589 recommendations, 1.2 yr average payback, 46.5% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "E23",
+      "family": "energy",
+      "question": "Is air compressor heat rejected when it could heat something?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+          "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
+        },
+        "group_by": "unit"
+      },
+      "evidence_fields": [
+        "air compressor",
+        "its cooling medium"
+      ],
+      "data_requests": [
+        {
+          "item": "Load hours and a nearby heat sink",
+          "where": [
+            {
+              "place": "records",
+              "what": "compressor run hours"
+            },
+            {
+              "place": "walkdown",
+              "what": "space or water heating needs nearby"
+            }
+          ],
+          "how": "List heat users within reach."
+        }
+      ],
+      "decision_rule": "Worth a look when the compressor runs long hours and a low-temperature heat user is nearby.",
+      "typical_benefit": {
+        "wording": "\"As much as 80 to 93 percent of the electrical energy\" becomes heat; recovery \"anywhere from 50 to 90 percent of this\".",
+        "source": [
+          "S11"
+        ],
+        "arc": "2.243x (by description)"
+      },
+      "limits": null
+    },
+    {
+      "id": "E24",
+      "family": "energy",
+      "question": "Is cooling tower blowdown manual, with no conductivity control or makeup and blowdown metering?",
+      "applies_when": {
+        "absent_note": "no conductivity element or controller near the tower",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "text": "COOLING TOWER"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "isa": "^(CE|CT|CIC|AIC|AT)$"
+            },
+            "relation": "near",
+            "max_hops": 3
+          }
+        ]
+      },
+      "evidence_fields": [
+        "cooling tower",
+        "no conductivity controller",
+        "no flow meter on makeup or blowdown"
+      ],
+      "data_requests": [
+        {
+          "item": "Cycles of concentration",
+          "where": [
+            {
+              "place": "records",
+              "what": "water treatment log"
+            },
+            {
+              "place": "walkdown",
+              "what": "conductivity of makeup and tower water"
+            }
+          ],
+          "how": "Cycles = tower conductivity / makeup conductivity."
+        }
+      ],
+      "decision_rule": "Raise cycles with a conductivity controller where the water chemistry allows.",
+      "typical_benefit": {
+        "wording": "\"Increasing cycles from three to six reduces cooling tower make-up water by 20% and cooling tower blowdown by 50%.\" Recommends a conductivity controller and makeup/blowdown flow meters. No energy % stated.",
+        "source": [
+          "S21",
+          "S24"
+        ],
+        "arc": "2.2611 (IAC/ITAC browse page: 55 recommendations, 0.9 yr average payback, 45.7% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "H1",
+      "family": "heat_grade",
+      "question": "Is high-grade steam let down, bypassed or desuperheated for a duty a lower grade could serve?",
+      "applies_when": {
+        "anchor": [
+          {
+            "kind": [
+              "equipment"
+            ],
+            "text": "DE-? ?SUPERHEAT|ATTEMPERAT"
+          },
+          {
+            "kind": [
+              "offpage",
+              "stream",
+              "valve",
+              "final_element",
+              "hand_valve"
+            ],
+            "text": "(STEAM|\\bSTM\\b).{0,12}BY-?PASS|BY-?PASS.{0,12}(STEAM|\\bSTM\\b)|LETDOWN|PRESSURE.REDUC|DE-? ?SUPERHEAT",
+            "not_text": "^FWS|FEEDWATER|\\bFW\\b|QUENCH"
+          }
+        ],
+        "group_by": "item",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "valve",
+                "final_element"
+              ],
+              "isa": "^(PCV|PRV|MSBV|TCV|FCV|PV|TV)$"
+            },
+            "relation": "near",
+            "max_hops": 4,
+            "anchor_kind": [
+              "equipment"
+            ],
+            "as": "station valve"
+          },
+          {
+            "select": {
+              "kind": [
+                "valve",
+                "final_element"
+              ],
+              "isa": "^(PCV|PRV|MSBV|TCV|FCV|PV|TV)$"
+            },
+            "relation": "near",
+            "max_hops": 2,
+            "anchor_kind": [
+              "offpage",
+              "stream"
+            ],
+            "as": "station valve"
+          },
+          {
+            "select": {
+              "kind": [
+                "offpage"
+              ],
+              "text": "PEGGING|EXTRACTION STEAM|MAIN STEAM"
+            },
+            "relation": "near",
+            "max_hops": 4,
+            "anchor_kind": [
+              "equipment"
+            ],
+            "as": "steam source or user"
+          },
+          {
+            "select": {
+              "kind": [
+                "offpage"
+              ],
+              "text": "QUENCH|SPRAY|^FWS TO|CONDENSATE"
+            },
+            "relation": "near",
+            "max_hops": 4,
+            "anchor_kind": [
+              "equipment"
+            ],
+            "as": "spray or quench water"
+          },
+          {
+            "select": {
+              "kind": [
+                "offpage"
+              ],
+              "text": "QUENCH|SPRAY|^FWS TO"
+            },
+            "relation": "near",
+            "max_hops": 3,
+            "anchor_kind": [
+              "offpage",
+              "stream"
+            ],
+            "as": "spray or quench water"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "desuperheater, letdown or bypass station",
+        "its valves",
+        "where the steam comes from and goes to"
+      ],
+      "data_requests": [
+        {
+          "item": "Steam flow through the station, with hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "station valve",
+              "quantity": "flow"
+            },
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "flow"
+            },
+            {
+              "place": "records",
+              "what": "steam balance"
+            }
+          ],
+          "how": "Build a flow-duration curve: how many hours at each flow."
+        },
+        {
+          "item": "Upstream and downstream pressure and temperature",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "gauges and thermometers either side of the station"
+            },
+            {
+              "place": "records",
+              "what": "header design conditions"
+            }
+          ],
+          "how": "Record at normal operation."
+        },
+        {
+          "item": "Stated station capacity",
+          "fields": [
+            "CAPACITY"
+          ],
+          "where": [
+            {
+              "place": "vendor",
+              "what": "station or desuperheater datasheet"
+            }
+          ],
+          "how": "Retain the generic CAPACITY field and its original units/basis. A volume, heat capacity or unqualified scalar does not identify rated steam throughput; the matched rating and actual operating history remain separate review tasks."
+        },
+        {
+          "item": "When the station is used",
+          "where": [
+            {
+              "place": "records",
+              "what": "operating procedures: startup, trip, normal duty"
+            }
+          ],
+          "how": "Mark the station startup-only, trip-only or normal duty."
+        },
+        {
+          "item": "Matched station steam-throughput rating and conditions",
+          "show_fields": [
+            "CAPACITY",
+            "rated_steam_flow",
+            "rated_steam_flow_uom",
+            "rating_conditions",
+            "rating_asset",
+            "rating_document",
+            "rating_document_readable"
+          ],
+          "where": [
+            {
+              "place": "vendor",
+              "what": "existing station/desuperheater datasheet matched to the equipment and configuration"
+            }
+          ],
+          "how": "Review source revision/locator, asset identity, steam-throughput units and rating conditions. Retain generic capacity, unreadable references, wrong-asset records and unknown basis as unverified candidates. Even a suitable-looking mass-flow rating is not actual flow-duration evidence or proof of turbine suitability; this request authorizes no plant action."
+        }
+      ],
+      "decision_rule": "If the station passes steam only at startup or trips, close this screening investigation; this is not an instruction to operate the station. If it passes steady flow in normal duty, ask whether a lower-grade source (an extraction or exhaust at the right pressure) could serve the user, or whether the pressure drop could do work: S6's condition for a backpressure turbogenerator is a constant flow of at least 3,000 lb/hr and a drop of at least 100 psi.",
+      "typical_benefit": {
+        "wording": "Closest source wording (for the pressure-reducing part, S6): consider a backpressure turbogenerator when a PRV has \"constant steam flows of at least 3,000 pounds per hour (lb/hr), and when the steam pressure drop is at least 100 psi.\" No source found with a number for desuperheater or bypass stations themselves.",
+        "source": [
+          "S6"
+        ],
+        "arc": null
+      },
+      "limits": "Turbine bypass and pegging stations exist for startup, trips and low load; the question concerns normal-duty flow. Generic capacity, vendor rating, actual throughput/duration and available pressure drop are distinct. The cited applicability conditions support further study, not a turbine decision or an operating instruction."
+    },
+    {
+      "id": "H2",
+      "family": "heat_grade",
+      "question": "Is high-grade (or unknown-grade) steam doing a low-temperature job?",
+      "applies_when": {
+        "anchor": [
+          {
+            "kind": [
+              "offpage",
+              "stream",
+              "valve",
+              "final_element"
+            ],
+            "text_all": [
+              "MAIN STEAM|\\bMSS\\b|\\bHP STEAM|HIGH PRESSURE STEAM|\\bHPS\\b",
+              "PEGGING|HEATING|TRACING|DEAERAT|SPACE HEAT"
+            ],
+            "not_text": "DRAIN"
+          },
+          {
+            "kind": [
+              "valve",
+              "stream"
+            ],
+            "text": "\\bSTEAM\\b",
+            "not_text": "CONDENSATE|OUTLET|DRAIN|TRAP|RETURN|BY-?PASS|EXTRACTION"
+          }
+        ],
+        "group_by": "unit",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature"
+              ]
+            },
+            "relation": "same_unit",
+            "hand_only": true,
+            "as": "temperature measurement at the user"
+          },
+          {
+            "select": {
+              "kind": [
+                "controller"
+              ]
+            },
+            "relation": "drives",
+            "as": "controller"
+          },
+          {
+            "select": {
+              "kind": [
+                "offpage"
+              ],
+              "text": "EXTRACTION STEAM|\\bLP\\b"
+            },
+            "relation": "near",
+            "max_hops": 3,
+            "as": "lower-grade steam already nearby"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "steam supply into the user",
+        "the user's temperature measurement or setpoint",
+        "any lower-grade steam on the same sheet"
+      ],
+      "data_requests": [
+        {
+          "item": "Steam supply pressure and temperature",
+          "fields": [
+            "steam_pressure",
+            "steam_temperature_C"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "approved supply/header list and existing pressure/temperature records"
+            }
+          ],
+          "how": "Retain the stated pressure/temperature fields and exact source basis. Their presence does not establish representative actual supply conditions; pressure reference, steam state and operating applicability remain separate review tasks."
+        },
+        {
+          "item": "Temperature the user actually needs",
+          "where": [
+            {
+              "place": "historian",
+              "for": "temperature measurement at the user",
+              "quantity": "temperature"
+            },
+            {
+              "place": "dcs",
+              "what": "the temperature setpoint"
+            }
+          ],
+          "how": "Note setpoint and normal range."
+        },
+        {
+          "item": "A lower-grade heat source on site (a lower steam header, exhaust or waste heat) with spare capacity",
+          "where": [
+            {
+              "place": "records",
+              "what": "site steam balance"
+            },
+            {
+              "place": "walkdown",
+              "what": "headers and hot streams near this user"
+            }
+          ],
+          "how": "List sources whose temperature exceeds the need with a practical approach."
+        },
+        {
+          "item": "Applicable steam-supply conditions and operating basis",
+          "show_fields": [
+            "steam_pressure",
+            "steam_temperature_C",
+            "steam_pressure_reference",
+            "steam_state",
+            "steam_supply_asset",
+            "steam_conditions_source",
+            "steam_conditions_readable",
+            "steam_conditions_period",
+            "operating_mode"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing supply/user configuration and coincident operating-condition records"
+            }
+          ],
+          "how": "Review supply/user identity and location, source revision, pressure units and gauge/absolute reference, steam condition, coincident period/mode and design-versus-actual basis. Unknown, Boolean, wrong-asset or noncoincident candidates remain unresolved. Saturation temperature is only a conditional reference after the pressure basis/state are established; never infer actual superheated temperature from pressure alone. No new live measurement or change is instructed."
+        }
+      ],
+      "decision_rule": "Worth a change only if a lower-grade source can meet the needed temperature with margin, for the hours the user runs; if the steam is already the lowest grade available, close it.",
+      "typical_benefit": {
+        "wording": "Closest source wordings: pinch potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management\" (S19, no % stated); for letdown to the lower pressure, S6's turbogenerator condition. No source gives a number for matching steam grade to duty.",
+        "source": [
+          "S19",
+          "S6"
+        ],
+        "arc": null
+      },
+      "limits": "Where the model does not state the steam grade, first identify its source and applicable conditions. Design limits and generic named fields do not establish coincident operation, current user demand or an available alternative source. Supplied candidates need explicit suitability review; no default state, pressure conversion or change recommendation is inferred."
+    },
+    {
+      "id": "H3",
+      "family": "heat_grade",
+      "question": "Is electric resistance heat serving a low-temperature load another heat source could carry?",
+      "applies_when": {
+        "anchor": {
+          "text": "ELECTRIC HEAT|ELEC(\\.|TRIC)? ?HTR|HEAT TRAC|\\bEHT\\b",
+          "fact_C_max": 150
+        },
+        "group_by": "item"
+      },
+      "evidence_fields": [
+        "electric heater or heat tracing with a stated load temperature at or below 150 C"
+      ],
+      "data_requests": [
+        {
+          "item": "Heater nameplate/design rating and basis",
+          "show_fields": [
+            "kW",
+            "HP",
+            "heater_rated_input_kW"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "existing heater nameplate or design/vendor record"
+            }
+          ],
+          "how": "Identify heater/service and confirm the heating method. Retain stated rating in original units, source/locator and whether it denotes electrical input or delivered heat. Generic kW/HP fields remain candidates; ambiguous HP or a unit conversion does not establish rated electrical input."
+        },
+        {
+          "item": "Heater operating hours and load history",
+          "show_fields": [
+            "operating_hours",
+            "run_hours",
+            "input_power_kW",
+            "energy_kWh"
+          ],
+          "where": [
+            {
+              "place": "records",
+              "what": "approved existing heater energization, power/energy and production/load records"
+            }
+          ],
+          "how": "State the representative period, coverage and load/stage/cycling basis. Distinguish enabled, energized, full-load-equivalent and calendar hours, and measured versus estimated values. Retain missing periods/gaps; nameplate rating or a bare hours scalar does not establish actual consumption. No live measurement is requested."
+        },
+        {
+          "item": "Waste or low-grade heat nearby",
+          "where": [
+            {
+              "place": "records",
+              "what": "documented process demand and candidate source conditions/availability"
+            },
+            {
+              "place": "walkdown",
+              "what": "approved observations of candidate sources and distance; no equipment changes"
+            }
+          ],
+          "how": "Review required load temperature/range and demand timing alongside source temperature, available quantity/flow, timing overlap, medium/contamination and distance. Keep unknown availability and compatibility explicit; nearby heat alone does not establish a usable match.",
+          "show_fields": [
+            "load_temperature_C",
+            "normal_temperature_C",
+            "temperature_C"
+          ]
+        }
+      ],
+      "decision_rule": "Worth a look when the heater runs long hours and a lower-grade source above the load temperature is close by.",
+      "typical_benefit": {
+        "wording": "No source in the reviewed set gives wording or a number for replacing electric heat with recovered heat.",
+        "source": [],
+        "arc": null
+      },
+      "limits": "Fires only when the model states a load temperature at or below 150 C, a catalog screening heuristic rather than a validated feasibility cutoff. Without a stated temperature the load remains unknown and this question does not fire. Rated power, actual operation and source compatibility need separate review; no recovered energy or saving is established."
+    },
+    {
+      "id": "H4",
+      "family": "heat_grade",
+      "question": "Is heat rejected to cooling water at a temperature another user could use?",
+      "applies_when": {
+        "anchor": [
+          {
+            "kind": [
+              "valve",
+              "final_element",
+              "hand_valve",
+              "instrument",
+              "stream"
+            ],
+            "text": "COOLING WATER|\\bCW[SR]?\\b",
+            "not_text": "RETURN"
+          },
+          {
+            "kind": [
+              "equipment"
+            ],
+            "text_all": [
+              "COOLER|CONDENSER|EXCHANG",
+              "COOLING WATER|\\bWATER\\b"
+            ],
+            "not_text": "COOLING WATER (COOLER|TANK|PUMP|EXCHANGER)|AIR.?COOLED|\\bAXC\\b|COOLING TOWER"
+          }
+        ],
+        "group_by": "unit",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "temperature measurement"
+          }
+        ],
+        "unit_not_text": "COOLING WATER (COOLER|TANK|PUMP|EXCHANGER)|AIR.?COOLED|\\bAXC\\b|COOLING TOWER"
+      },
+      "evidence_fields": [
+        "exchanger or user cooled with cooling water",
+        "cooling water temperature tags or stated temperatures"
+      ],
+      "data_requests": [
+        {
+          "item": "Cooling water supply temperature",
+          "fields": [
+            "cooling_water_C"
+          ],
+          "where": [
+            {
+              "place": "historian",
+              "for": "temperature measurement",
+              "quantity": "temperature",
+              "match": "(COOLING WATER|\\bCW[SR]?\\b).*(SUPPLY|INLET)|(SUPPLY|INLET).*(COOLING WATER|\\bCW)"
+            },
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "temperature",
+              "match": "(COOLING WATER|\\bCW[SR]?\\b).*(SUPPLY|INLET)|(SUPPLY|INLET).*(COOLING WATER|\\bCW)"
+            },
+            {
+              "place": "walkdown",
+              "what": "thermometer on the supply"
+            }
+          ],
+          "how": "Record at normal operation.",
+          "field_scope": "unit"
+        },
+        {
+          "item": "Cooling water return temperature",
+          "where": [
+            {
+              "place": "historian",
+              "for": "temperature measurement",
+              "quantity": "temperature",
+              "match": "(COOLING WATER|\\bCW[SR]?\\b).*(OUTLET|RETURN)|(OUTLET|RETURN).*(COOLING WATER|\\bCW)"
+            },
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "temperature",
+              "match": "(COOLING WATER|\\bCW[SR]?\\b).*(OUTLET|RETURN)|(OUTLET|RETURN).*(COOLING WATER|\\bCW)"
+            },
+            {
+              "place": "walkdown",
+              "what": "thermometer on the return"
+            }
+          ],
+          "how": "Record at normal operation; the return temperature is the grade of the heat on offer."
+        },
+        {
+          "item": "Temperature of the stream being cooled (in and out)",
+          "where": [
+            {
+              "place": "historian",
+              "for": "temperature measurement",
+              "quantity": "temperature",
+              "not_match": "COOLING WATER|\\bCW[SR]?\\b"
+            },
+            {
+              "place": "records",
+              "what": "heat and material balance"
+            }
+          ],
+          "how": "Record at normal operation."
+        },
+        {
+          "item": "Cooler duty",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "exchanger datasheet"
+            },
+            {
+              "place": "records",
+              "what": "heat and material balance"
+            }
+          ],
+          "how": "Review exchanger identity, units and rated-versus-actual basis. A generic CAPACITY may denote flow or design capacity, not heat duty. Retain coincident flow, heat-capacity basis and inlet/return temperatures over a stated period, or a documented heat balance; supplied scalars do not establish usable recovered heat.",
+          "field_scope": "unit",
+          "show_fields": [
+            "CAPACITY",
+            "heat_duty_kW",
+            "cooling_water_flow",
+            "heat_capacity",
+            "operating_period"
+          ]
+        },
+        {
+          "item": "A heat user that needs heat below the return temperature",
+          "where": [
+            {
+              "place": "records",
+              "what": "list of heating duties with temperatures"
+            },
+            {
+              "place": "walkdown",
+              "what": "users nearby"
+            }
+          ],
+          "how": "Match by temperature, hours and distance."
+        }
+      ],
+      "decision_rule": "Worth a study only if the heat leaves hotter than a nearby user needs, for overlapping hours; cooling water returning only a few degrees above ambient closes it.",
+      "typical_benefit": {
+        "wording": "Closest source wording (S19, pinch): potential \"far exceeds that from well-known conventional techniques such as heat recovery from boiler flue gas, insulation and steam trap management.\" No % stated. For air compressors S11 says recovery \"anywhere from 50 to 90 percent\" of the heat, which applies to compressors only.",
+        "source": [
+          "S19",
+          "S11"
+        ],
+        "arc": "2.243x (by description)"
+      },
+      "limits": "Does not fire on equipment that cools the cooling water itself (a cooling water cooler, air-cooled exchanger or cooling tower): that equipment rejects the loop's heat, it does not receive process heat."
+    },
+    {
+      "id": "C1",
+      "family": "metering",
+      "question": "Is utility use (steam, cooling water, air, fuel, makeup water) metered at this user?",
+      "applies_when": {
+        "absent_note": "no flow measurement on the same stream, none on the same user for the same utility, and (on an extracted drawing) no flow element within three drawn links on the same sheet",
+        "anchor": [
+          {
+            "kind": [
+              "stream"
+            ],
+            "type": [
+              "utility"
+            ],
+            "not_text": "DRAIN|VENT|SAMPLE|LEAKOFF|QUENCH|RETURN|OUTLET|CONDENSATE|BY-?PASS|^FWS"
+          },
+          {
+            "kind": [
+              "valve",
+              "final_element",
+              "hand_valve"
+            ],
+            "text": "\\bSTEAM\\b|COOLING WATER|\\bCW[SR]?\\b|MAKE-?UP WATER|SERVICE WATER|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR|NITROGEN|FUEL (GAS|OIL)\\b|NATURAL GAS",
+            "not_text": "DRAIN|VENT|SAMPLE|LEAKOFF|QUENCH|RETURN|OUTLET|CONDENSATE|BY-?PASS|^FWS"
+          },
+          {
+            "kind": [
+              "offpage"
+            ],
+            "text": "\\bSTEAM\\b|COOLING WATER|\\bCW[SR]?\\b|MAKE-?UP WATER|SERVICE WATER|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR|NITROGEN|FUEL (GAS|OIL)\\b|NATURAL GAS",
+            "not_text": "DRAIN|VENT|SAMPLE|LEAKOFF|QUENCH|RETURN|OUTLET|CONDENSATE|BY-?PASS|^FWS"
+          }
+        ],
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "flow"
+              ]
+            },
+            "relation": "same_stream"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "flow"
+              ]
+            },
+            "relation": "same_unit_same_medium"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^F(T|E|IT|I|O|Q|QI)$"
+            },
+            "relation": "near",
+            "max_hops": 3,
+            "twin_only": true
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature",
+                "pressure"
+              ]
+            },
+            "relation": "same_unit_same_medium",
+            "as": "utility temperature or pressure"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "utility supply (stream, valve or off-page connector) into a user",
+        "no flow meter on it"
+      ],
+      "data_requests": [
+        {
+          "item": "Utility flow to this user",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "flow"
+            },
+            {
+              "place": "walkdown",
+              "what": "clamp-on ultrasonic flow meter (water) or a vortex/orifice spool piece (steam, air) for a temporary reading"
+            },
+            {
+              "place": "bills",
+              "what": "site-level meter readings to apportion"
+            }
+          ],
+          "how": "Measure flow over a representative period and compare with production."
+        },
+        {
+          "item": "Who would use the reading",
+          "where": [
+            {
+              "place": "records",
+              "what": "energy or production reporting"
+            }
+          ],
+          "how": "Name the report the meter would feed."
+        }
+      ],
+      "decision_rule": "Meter where the user is large enough that its use would change decisions; a meter nobody reads saves nothing.",
+      "typical_benefit": {
+        "wording": "\"You can't manage what do don't measure\" [sic]. Buildings: \"efficiency improvements of 10-20%.\" The guide warns \"only success stories are published\" and that savings come only if action is taken. LBNL Monitoring & Targeting (as reported in LBNL-56183): \"Typical savings 4-17%, average 8%\" (UK experience).",
+        "source": [
+          "S22",
+          "S19"
+        ],
+        "arc": null
+      },
+      "limits": "On an extracted drawing the check is 'no flow element within three drawn links on this sheet'; the meter may be on the sheet the line comes from."
+    },
+    {
+      "id": "C2",
+      "family": "controls",
+      "question": "Which measurements have no controller (read by people, or by nothing)?",
+      "applies_when": {
+        "absent_note": "no controller in the model or loop list reads these measurements",
+        "anchor": {
+          "kind": [
+            "instrument"
+          ],
+          "variable": [
+            "flow",
+            "pressure",
+            "level",
+            "temperature",
+            "composition",
+            "power"
+          ]
+        },
+        "group_by": "model",
+        "needs_model": [
+          "controller"
+        ],
+        "needs_reason": "the model holds no controllers; give a loop list with --loops (controller,measurement,output) to check this",
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "controller"
+              ]
+            },
+            "relation": "reads"
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "interlock"
+              ]
+            },
+            "relation": "reads",
+            "as": "interlock that reads it"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "measurement tags not read by any controller in the model or loop list"
+      ],
+      "data_requests": [
+        {
+          "item": "Whether operators adjust anything by hand from these readings",
+          "where": [
+            {
+              "place": "records",
+              "what": "operator logs and round sheets"
+            },
+            {
+              "place": "text",
+              "text": "ask the operators which of these they act on, and how often"
+            }
+          ],
+          "how": "Note manual adjustments per shift tied to each reading."
+        },
+        {
+          "item": "The control system's own loop list",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "export the loop and point list"
+            }
+          ],
+          "how": "Confirm the reading is indication-only and not read by logic the model lacks."
+        }
+      ],
+      "decision_rule": "Worth automating a reading that operators adjust by hand often, on a service where steadier control saves energy or quality; indication-only readings nobody acts on close the question.",
+      "typical_benefit": {
+        "wording": "\"energy and cost savings are around 5% or more for many industrial applications of process control systems\" (for plants without updated controls). Process control: \"Typically 2-18% savings.\" The source says these figures \"cannot be added\".",
+        "source": [
+          "S19"
+        ],
+        "arc": null
+      },
+      "limits": "The model or loop list may be incomplete; an uncontrolled reading may be read by logic not in the model."
+    },
+    {
+      "id": "C3",
+      "family": "controls",
+      "question": "Do these control valves lack position feedback?",
+      "applies_when": {
+        "absent_note": "no position transmitter or indicator (ZT, ZI) drawn on these valves",
+        "anchor": {
+          "kind": [
+            "valve"
+          ]
+        },
+        "group_by": "model",
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^Z"
+            },
+            "relation": "near",
+            "max_hops": 1
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^Z"
+            },
+            "relation": "same_stream"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "control valve tags with no ZT/ZI or positioner feedback drawn"
+      ],
+      "data_requests": [
+        {
+          "item": "Positioner type and diagnostics available",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "valve positioner configuration (smart positioner? HART/fieldbus diagnostics?)"
+            },
+            {
+              "place": "maintenance",
+              "what": "valve records"
+            }
+          ],
+          "how": "List which valves report position."
+        },
+        {
+          "item": "Valve stiction or backlash",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "position"
+            },
+            {
+              "place": "walkdown",
+              "what": "a small step test on each loop in manual"
+            }
+          ],
+          "how": "Compare controller output with measured response."
+        }
+      ],
+      "decision_rule": "Add feedback or diagnostics first on valves in energy- or safety-significant loops that show stiction or hunting.",
+      "typical_benefit": {
+        "wording": "\"Control valve backlash and stiction... are major contributors to process variability.\" No % stated.",
+        "source": [
+          "S13"
+        ],
+        "arc": null
+      },
+      "limits": "P&IDs often omit positioners; the model saying 'none drawn' does not mean none fitted."
+    },
+    {
+      "id": "C4",
+      "family": "controls",
+      "question": "Is a control valve bypassed, or oversized for its line?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "valve"
+          ]
+        },
+        "group_by": "item",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "hand_valve",
+                "final_element"
+              ],
+              "text": "BY-?PASS"
+            },
+            "relation": "same_stream",
+            "as": "bypass valve"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "control valve",
+        "globe bypass around it not marked NC/CSC"
+      ],
+      "data_requests": [
+        {
+          "item": "Valve %-open history and bypass position",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": "position"
+            },
+            {
+              "place": "walkdown",
+              "what": "bypass valve position"
+            }
+          ],
+          "how": "Note typical opening."
+        }
+      ],
+      "decision_rule": "Resize or trim when the valve normally runs well under half open or the bypass is cracked open.",
+      "typical_benefit": {
+        "wording": "\"Many control valves normally operate at less than 50% open... a high degree of nonlinearity and thus inconsistent control performance.\" No % stated.",
+        "source": [
+          "S13"
+        ],
+        "arc": null
+      },
+      "limits": null
+    },
+    {
+      "id": "C5",
+      "family": "controls",
+      "question": "Does the boiler lack O2 trim or three-element drum level control?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "BOILER|FIRED HEATER|FURNACE|\\bKILN\\b",
+          "not_text": "STEAM GENERATOR|REACTOR"
+        },
+        "group_by": "unit"
+      },
+      "evidence_fields": [
+        "boiler",
+        "its combustion and level control"
+      ],
+      "data_requests": [
+        {
+          "item": "Control narrative",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "combustion and drum level configuration"
+            }
+          ],
+          "how": "Note O2 trim and level control elements."
+        }
+      ],
+      "decision_rule": "Worth an upgrade where O2 trim or feed/steam flow in the level loop is missing on a large boiler.",
+      "typical_benefit": {
+        "wording": "LBNL boiler table (as reported in LBNL-56183): \"Improved Process Control 3%\", 0.6 yr payback.",
+        "source": [
+          "S19",
+          "S24"
+        ],
+        "arc": "2.121x (category only)"
+      },
+      "limits": null
+    },
+    {
+      "id": "C6",
+      "family": "controls",
+      "question": "Does a temperature controller write straight to a steam valve with no flow controller underneath (a cascade candidate)?",
+      "applies_when": {
+        "absent_note": "no flow controller between the temperature controller and the valve",
+        "anchor": {
+          "kind": [
+            "valve"
+          ],
+          "text": "\\bSTEAM\\b"
+        },
+        "group_by": "item",
+        "needs_model": [
+          "controller"
+        ],
+        "needs_reason": "the model holds no controllers; give a loop list with --loops to check this",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "controller"
+              ],
+              "isa": "^T"
+            },
+            "relation": "drives",
+            "as": "temperature controller"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "controller"
+              ],
+              "isa": "^F"
+            },
+            "relation": "drives"
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "flow"
+              ],
+              "text": "\\bSTEAM\\b"
+            },
+            "relation": "same_stream",
+            "as": "steam flow measurement"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "steam valve",
+        "temperature controller driving it directly",
+        "steam flow measurement if one exists"
+      ],
+      "data_requests": [
+        {
+          "item": "Loop behaviour",
+          "where": [
+            {
+              "place": "historian",
+              "for": "temperature controller"
+            },
+            {
+              "place": "dcs",
+              "what": "controller tuning and output history"
+            }
+          ],
+          "how": "Look for oscillation or slow recovery after steam pressure changes."
+        },
+        {
+          "item": "Steam header pressure swings",
+          "where": [
+            {
+              "place": "records",
+              "what": "steam header pressure trend"
+            }
+          ],
+          "how": "Note how often supply pressure moves."
+        }
+      ],
+      "decision_rule": "A flow slave helps when steam supply pressure swings disturb the temperature; a steady header and a well-behaved loop close it.",
+      "typical_benefit": {
+        "wording": "No public numeric source found. Report as qualitative only.",
+        "source": [],
+        "arc": null
+      },
+      "limits": "Also covers heating and cooling valves on one exchanger with separate controllers that could fight; that pattern is not detected automatically yet."
+    },
+    {
+      "id": "C7",
+      "family": "controls",
+      "question": "Do several air compressors run with no master sequencer?",
+      "applies_when": {
+        "absent_note": "no sequencer or master controller anywhere in the model",
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|COMPRESSED AIR",
+          "not_text": "DRYER|DRIER|FILTER|SEPARATOR|RECEIVER|AFTERCOOLER"
+        },
+        "group_by": "model",
+        "min_anchors": 2,
+        "without": [
+          {
+            "select": {
+              "text": "SEQUENC|MASTER"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "two or more air compressors",
+        "no sequencer or master controller"
+      ],
+      "data_requests": [
+        {
+          "item": "Control narrative and load/unload history",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "compressor control settings"
+            },
+            {
+              "place": "walkdown",
+              "what": "data-log each compressor's load state"
+            }
+          ],
+          "how": "Look for several compressors part-loaded at once."
+        }
+      ],
+      "decision_rule": "Add sequencing when several machines part-load together.",
+      "typical_benefit": {
+        "wording": "Control objective \"is also to shut off unneeded compressors or delay bringing on additional compressors until needed.\" No % stated.",
+        "source": [
+          "S11",
+          "S24"
+        ],
+        "arc": "2.423x (operations, category only) (IAC/ITAC browse page: 20,819 recommendations, 0.5 yr average payback, 67.4% implemented; average dollar figure omitted)"
+      },
+      "limits": "IAC/ITAC figures are browse-page averages read through a summarizing fetch and not re-verified against the downloadable database; averages are skewed by outliers."
+    },
+    {
+      "id": "C10",
+      "family": "controls",
+      "question": "Are critical steam traps monitored automatically?",
+      "applies_when": {
+        "absent_note": "no trap monitoring shown",
+        "anchor": {
+          "text": "STEAM TRAP|\\bTRAP\\b"
+        },
+        "group_by": "model",
+        "without": [
+          {
+            "select": {
+              "text": "TRAP MONITOR|\\bUT\\b"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "steam traps",
+        "no monitoring shown"
+      ],
+      "data_requests": [
+        {
+          "item": "Which traps are critical",
+          "where": [
+            {
+              "place": "records",
+              "what": "trap list with service"
+            }
+          ],
+          "how": "Mark traps whose failure costs most."
+        }
+      ],
+      "decision_rule": "Monitor the most important traps online; survey the rest.",
+      "typical_benefit": {
+        "wording": "LBNL (as reported in LBNL-56183): \"Automatic Steam Trap Monitoring 5%\", 1 yr. DOE tip sheet: \"Consider online monitoring of the most important steam traps\".",
+        "source": [
+          "S19",
+          "S3",
+          "S24"
+        ],
+        "arc": "2.211x (category only)"
+      },
+      "limits": null
+    },
+    {
+      "id": "C8",
+      "family": "safety_question",
+      "question": "Are there more alarms per operator area than an operator can handle?",
+      "applies_when": {
+        "anchor": {
+          "isa": "^[A-Z]A(H|L|HH|LL)$"
+        },
+        "group_by": "model"
+      },
+      "evidence_fields": [
+        "alarm tags (xAH/xAL/xAHH/xALL)"
+      ],
+      "data_requests": [
+        {
+          "item": "Alarm rate, floods and standing alarms",
+          "where": [
+            {
+              "place": "records",
+              "what": "alarm journal export"
+            }
+          ],
+          "how": "Count alarms per 10 minutes in normal operation and after upsets."
+        }
+      ],
+      "decision_rule": "Rationalize when the long-term rate or the upset flood exceeds the HSE guidance.",
+      "typical_benefit": {
+        "wording": "HSE: \"the long-term average alarm rate during normal operation should be no more than one every ten minutes; and no more than ten displayed in the first ten minutes following a major plant upset.\"",
+        "source": [
+          "S23"
+        ],
+        "arc": null
+      },
+      "limits": "ISA-18.2 / IEC 62682 are not openly accessible; HSE CHIS6 is the citable open alternative."
+    },
+    {
+      "id": "C9",
+      "family": "safety_question",
+      "question": "What source-labelled trip or interlock records apply to each rotating or fired machine, and what remains unverified?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "pump|compressor|fired heater|furnace|boiler",
+          "not_text": "VACUUM",
+          "tagged": true
+        },
+        "group_by": "model",
+        "also_show": [
+          {
+            "select": {
+              "isa": "^[A-Z]S(LL|HH|L|H)$|^[A-Z]SHH|^[A-Z]SLL|^BMS|^BE$"
+            },
+            "relation": "near",
+            "max_hops": 2,
+            "as": "drawn switch candidate (function applicability unverified)"
+          },
+          {
+            "select": {
+              "kind": [
+                "interlock"
+              ]
+            },
+            "relation": "anywhere",
+            "as": "supplied interlock record (machine/target scope unverified)"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "rotating or fired equipment identities",
+        "supplied nearby switches and interlock records, with machine/function applicability unverified"
+      ],
+      "data_requests": [
+        {
+          "item": "Cause-and-effect matrix and HAZOP/LOPA records",
+          "where": [
+            {
+              "place": "records",
+              "what": "cause-and-effect matrix, HAZOP and LOPA reports"
+            },
+            {
+              "place": "dcs",
+              "what": "safety system configuration"
+            }
+          ],
+          "how": "Review existing cause-and-effect, governing requirements and configuration records for each named machine, with their revisions and applicability. Retain supplied trip/switch indications as candidates; a drawing label or an unrelated function does not settle the records or establish effective, tested protection. Missing model information is not evidence that installed protection is absent."
+        },
+        {
+          "item": "Machine/function association and current evidence",
+          "where": [
+            {
+              "place": "records",
+              "what": "source-labelled function identifiers, initiating measurements, final elements and protected-machine targets, shared scope and revisions; governing requirements and validation/test evidence where applicable"
+            },
+            {
+              "place": "dcs",
+              "what": "existing configuration and its documented measurement/action/final-element identities, read through the approved site process"
+            }
+          ],
+          "how": "Keep each machine in the review even where a switch or trip is supplied. Retain all explicit shared targets and supplied qualifiers; unknown or contradictory targets remain unresolved. Same-model text or nearby equipment does not prove function coverage. Record a responsible person or authority separately from protected-machine association; neither is inferred here. This requests record review, not a new test, safety design or operating action."
+        }
+      ],
+      "decision_rule": "A qualified site review may resolve the source-labelled machine/function associations and remaining record requests using applicable current evidence. A supplied trip, switch, cause/effect row or shared-function label alone establishes neither complete coverage nor installed protection adequacy. This screen grants no acceptance or authority and performs no safety validation.",
+      "typical_benefit": {
+        "wording": "Safety benefit; no energy source. Present it as a question to verify, not a finding.",
+        "source": [],
+        "arc": null
+      },
+      "limits": "P&IDs often leave trips to separate cause-and-effect records. Missing or unknown model evidence does not establish missing installed protection. Supplied associations, shared targets, revisions and contradictions require review; no machine, person owner, approval, tested condition or effective protection is inferred. C9 has no primary safety-design source cited in the catalog and remains a question for record review, not safety design, SIL assignment, a legal-compliance assessment or an operating recommendation."
+    },
+    {
+      "id": "E25",
+      "family": "emissions",
+      "question": "Are tank vapors vented to atmosphere with no vapor recovery?",
+      "applies_when": {
+        "absent_note": "no vapor recovery or blanket gas anywhere in the model",
+        "anchor": {
+          "text_all": [
+            "TANK|VESSEL",
+            "TO ATM|ATMOSPHER"
+          ]
+        },
+        "group_by": "item",
+        "without": [
+          {
+            "select": {
+              "text": "\\bVRU\\b|VAPOU?R RECOVERY|BLANKET"
+            },
+            "relation": "anywhere"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "atmospheric tank vent to atmosphere",
+        "no VRU or blanket-gas recovery"
+      ],
+      "data_requests": [
+        {
+          "item": "Vapor volume and composition",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "vent flow measurement and a gas sample"
+            },
+            {
+              "place": "records",
+              "what": "tank throughput and product vapor pressure"
+            }
+          ],
+          "how": "Estimate vented volume from throughput and breathing."
+        }
+      ],
+      "decision_rule": "Worth a VRU study when hydrocarbon vapor volume is steady and large.",
+      "typical_benefit": {
+        "wording": "\"VRUs can recover over 95 percent of the hydrocarbon...\" vapors; \"payback in as little as two months\" (partner experience).",
+        "source": [
+          "S20"
+        ],
+        "arc": null
+      },
+      "limits": "The source also quotes a partner's annual dollar figure; it is deliberately not repeated."
+    },
+    {
+      "id": "E26",
+      "family": "emissions",
+      "question": "Are relief and vent flows to the flare or atmosphere unmetered?",
+      "applies_when": {
+        "absent_note": "no flow measurement on these streams",
+        "anchor": {
+          "kind": [
+            "stream",
+            "offpage",
+            "relief"
+          ],
+          "text": "FLARE|TO ATM|VENT HEADER|PROCESS VENT",
+          "not_text": "EXHAUST AIR|DRYER|\\bOVEN|FRYER"
+        },
+        "group_by": "model",
+        "without": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "flow"
+              ]
+            },
+            "relation": "same_stream"
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "relief"
+              ]
+            },
+            "relation": "anywhere",
+            "as": "relief device"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "streams or reliefs to the flare, vent header or atmosphere",
+        "no flow meter or analyzer on them"
+      ],
+      "data_requests": [
+        {
+          "item": "Flare or vent flow and composition",
+          "where": [
+            {
+              "place": "historian",
+              "for": "trigger",
+              "quantity": [
+                "flow",
+                "composition"
+              ]
+            },
+            {
+              "place": "walkdown",
+              "what": "ultrasonic flare-gas meter or a temporary vent flow measurement"
+            },
+            {
+              "place": "records",
+              "what": "relief valve lift records"
+            }
+          ],
+          "how": "Separate continuous (background) flow from relief events."
+        }
+      ],
+      "decision_rule": "Worth metering when background flow is continuous; relief-only lines that seldom lift close the question.",
+      "typical_benefit": {
+        "wording": "Background flaring \"can be as much as 50% of all flared gases (Miles, 2001).\" In refineries it \"will generally be less than 50%.\" No recovery % stated.",
+        "source": [
+          "S19"
+        ],
+        "arc": null
+      },
+      "limits": "Relief paths are safety systems; metering or recovery changes go through a hazard review."
+    },
+    {
+      "id": "E27",
+      "family": "energy",
+      "question": "Is this refrigeration condenser train's head pressure appropriate for its weather, operating limits and actual reset coverage?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "CONDENSER",
+          "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER"
+        },
+        "group_by": "unit",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "pressure",
+                "temperature"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "head pressure or condensing temperature"
+          },
+          {
+            "select": {
+              "kind": [
+                "controller"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "head pressure control"
+          },
+          {
+            "select": {
+              "kind": [
+                "equipment"
+              ],
+              "type_text": "COMPRESSOR",
+              "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+              "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+            },
+            "relation": "anywhere",
+            "as": "refrigeration compressor"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power"
+              ]
+            },
+            "relation": "anywhere",
+            "as": "compressor power"
+          },
+          {
+            "select": {
+              "text": "FLOATING HEAD|WET.?BULB (RESET|COMPENSAT)|HEAD PRESSURE RESET"
+            },
+            "relation": "anywhere",
+            "as": "supplied head-pressure/reset record (train/mode coverage unverified)"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration condenser",
+        "head pressure measurement and its controller, if drawn",
+        "the compressors it serves"
+      ],
+      "data_requests": [
+        {
+          "item": "Head (discharge) pressure and condensing temperature, hourly over a year",
+          "where": [
+            {
+              "place": "historian",
+              "for": "head pressure or condensing temperature",
+              "quantity": [
+                "pressure",
+                "temperature"
+              ]
+            },
+            {
+              "place": "dcs",
+              "what": "the head pressure setpoint and its low limit in the refrigeration plant controls"
+            }
+          ],
+          "how": "Convert pressure to saturated condensing temperature with the refrigerant's tables; see whether it falls in cool weather or sits at the setpoint."
+        },
+        {
+          "item": "Ambient wet-bulb temperature (dry-bulb for an air-cooled condenser) at the same times",
+          "where": [
+            {
+              "place": "records",
+              "what": "the site weather station, or the nearest public weather station's hourly record"
+            }
+          ],
+          "how": "Line it up hour by hour with the condensing temperature."
+        },
+        {
+          "item": "The lowest head pressure the plant can run at",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "the minimum needed for hot gas defrost, liquid injection oil cooling and liquid feed to the farthest evaporator"
+            },
+            {
+              "place": "vendor",
+              "what": "compressor and expansion valve minimum pressure difference"
+            }
+          ],
+          "how": "This is the floor a floating setpoint may not go below."
+        },
+        {
+          "item": "Compressor and condenser fan and pump power",
+          "where": [
+            {
+              "place": "historian",
+              "for": "compressor power",
+              "quantity": "power"
+            },
+            {
+              "place": "walkdown",
+              "what": "power logger on the compressor motors and on the condenser fan and spray pump motors"
+            }
+          ],
+          "how": "Floating the head pressure moves load from the compressors to the condenser fans; count both."
+        },
+        {
+          "item": "Condenser-train coverage and applicable head-pressure operating basis",
+          "where": [
+            {
+              "place": "records",
+              "what": "source-labelled compressor discharge/header, condenser, sensor, controller, fan/pump and served-demand membership; actual reset scope, enabled/as-operated mode, revision and unknown or contradictory targets for this train"
+            },
+            {
+              "place": "dcs",
+              "what": "existing representative coincident head-pressure/condensing-temperature, ambient and power records; stated minimum-pressure constraints and applicable periods before further collection through the approved site process"
+            }
+          ],
+          "how": "Keep this condenser train in the review even when local, shared, unrelated, negated or disabled reset text is supplied. Such records are candidates, not proof of current mode, complete coverage or suitable data. Verify exact train membership, pressure units/reference, refrigerant and saturation basis, appropriate wet-bulb or dry-bulb weather/sensor basis, coincident periods and relevant defrost, oil-cooling, feed and vendor constraints. Retain raw targets, revisions and qualifiers; unknown or contradictory scope stays unresolved. Compare total affected compressor and condenser fan/pump demand before drawing an economic conclusion. This requests existing records and qualified review, not a setpoint change, control design or operating action."
+        }
+      ],
+      "decision_rule": "Review only after source-qualified train membership, actual operating/reset mode, coincident representative observations, applicable pressure limits and total affected power are established. Fixed-head behavior may justify investigation, while an operating reset may narrow the question, but a supplied label or one scalar does not close coverage or suitability. No setpoint or operating change is inferred.",
+      "typical_benefit": {
+        "wording": "Floating head pressure (S25, p. 62) \"allows compressor head pressures to move up or down with variations in ambient wet-bulb temperature, saving energy compared to fixed head pressure operation.\" Condensing pressure (S25, p. 65): \"Lowering the condensing temperature can reduce compressor energy use by around 2% to 3% for every degree Celsius (1.8 degrees Fahrenheit) of temperature reduction (SenterNovem 2003).\" Condenser fans (S25, p. 65): \"On systems where floating head operation is stable, ASDs can lower condenser fan energy consumption by up to 40% compared to operating a fixed-speed condenser fan in on/off fashion (IRC 2004b).\"",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "S25 (p. 62) warns that condenser fan energy rises as head pressure falls and that head pressure must not go below what defrost or liquid injection oil cooling need. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not. All shown measurements, compressors, power readings and reset labels remain source candidates; the screen does not infer condenser-train membership, actual mode, constraints or data suitability. Arbitrary source facts/qualifiers are not all rendered by the screen: retain its source record pointers and the original model, and inspect complete graph/context records for supported values. Even an explicitly shared reset does not discharge the applicable operating-basis request."
+    },
+    {
+      "id": "E28",
+      "family": "energy",
+      "question": "Does each refrigeration suction level match the conditions required by every coincident load it serves?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "COMPRESSOR",
+          "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+        },
+        "group_by": "model",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "pressure"
+              ],
+              "text": "SUCTION"
+            },
+            "relation": "same_unit",
+            "as": "suction pressure"
+          },
+          {
+            "select": {
+              "kind": [
+                "equipment"
+              ],
+              "type_text": "EVAPORATOR|UNIT COOLER|FREEZER|COLD STORE|COLD ROOM|BLAST|CHILLER",
+              "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|EVAPORATIVE CONDENSER|FALLING FILM|MULTIPLE.?EFFECT|\\bMVR\\b|\\bTVR\\b"
+            },
+            "relation": "anywhere",
+            "as": "refrigeration load"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature"
+              ],
+              "text": "FREEZER|FROZEN|COLD STORE|COLD ROOM|\\bSTORE\\b|CHILL|BLAST|\\bROOM\\b|PRODUCT"
+            },
+            "relation": "anywhere",
+            "as": "refrigerated space temperature"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "compressor power"
+          },
+          {
+            "select": {
+              "text": "FLOATING SUCTION|SUCTION (PRESSURE )?RESET"
+            },
+            "relation": "anywhere",
+            "as": "drawn suction reset candidate (coverage unverified)"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration compressors and their suction pressure measurements",
+        "the freezers, cold stores and chillers they serve"
+      ],
+      "data_requests": [
+        {
+          "item": "Suction pressure at each suction level, hourly",
+          "where": [
+            {
+              "place": "historian",
+              "for": "suction pressure",
+              "quantity": "pressure"
+            },
+            {
+              "place": "dcs",
+              "what": "suction pressure setpoints per compressor or suction level"
+            }
+          ],
+          "how": "Retain refrigerant identity, pressure reference and measurement location before relating suction pressure to saturated evaporating temperature. Match the operating periods of pressures, setpoints and loads; distinguish stages and pressure drops. No setpoint is calculated here."
+        },
+        {
+          "item": "The temperature each load actually needs",
+          "where": [
+            {
+              "place": "records",
+              "what": "room and product temperature specifications for each freezer, cold store and chiller, and which suction level serves it"
+            },
+            {
+              "place": "historian",
+              "for": "refrigerated space temperature",
+              "quantity": "temperature"
+            }
+          ],
+          "how": "For every coincident load, establish its required temperature and required heat-transfer approach, and the suction level actually serving it. The most demanding admissible evaporating condition across those loads constrains a shared level; the warmest load alone does not govern. This is an engineering constraint to review, not a quotation from the cited two-stage example or a plant setpoint recommendation."
+        },
+        {
+          "item": "Compressor power and run hours per suction level",
+          "where": [
+            {
+              "place": "historian",
+              "for": "compressor power",
+              "quantity": "power"
+            },
+            {
+              "place": "records",
+              "what": "compressor run hours from the refrigeration plant controls"
+            }
+          ],
+          "how": "A month or more at normal production."
+        },
+        {
+          "item": "Suction-level membership and reset coverage",
+          "where": [
+            {
+              "place": "records",
+              "what": "source-labelled compressor, suction header and served-load membership; reset strategy and coverage for each level, with stage and pressure-regulation boundaries"
+            }
+          ],
+          "how": "Drawn reset indications are candidates only. Confirm ownership and shared-level coverage; a reset on another compressor does not settle these loads. Unknown connections, applicable approaches and product or quality constraints remain open for qualified review."
+        }
+      ],
+      "decision_rule": "Study a level only after mapping every coincident served load and reviewing its required temperature, approach and operating constraints against the actual level and reset coverage. A colder-than-required level may warrant investigation, but the most demanding admissible evaporating condition across all served loads constrains any change. A drawn reset, ambient change or warm load alone does not settle the question. The cited benefit remains a conditional two-stage low-stage example; no setpoint or savings is calculated.",
+      "typical_benefit": {
+        "wording": "Two-stage systems (S25, p. 63): \"a simple way to save energy is to raise the suction pressure and temperature of the low-stage compressor when ambient temperatures decrease. It has been estimated that energy savings of about 8% can be realized in two-stage systems when suction temperatures are raised from -30 °F to -20 °F (ISU 2005).\" No figure is given there for single-stage systems.",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "Product temperature and food-safety limits set the floor: a suction change changes how product is held and needs the quality owner's sign-off. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not. Drawn reset text does not prove usable operating observations or all-load coverage. Shared headers, different approaches, pressure regulation, stages, transients and equipment limits can change the governing condition; keep topology and applicability unverified until reviewed."
+    },
+    {
+      "id": "E29",
+      "family": "energy",
+      "question": "Does this refrigeration compressor carry part load on its slide valve (or hot gas bypass) with no speed control?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "COMPRESSOR",
+          "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "\\bVFD\\b|\\bVSD\\b|\\bASD\\b|VARIABLE.?SPEED|ADJUSTABLE.?SPEED|VARIABLE.?FREQUENCY"
+            },
+            "relation": "same_unit"
+          },
+          {
+            "select": {
+              "isa": "^S(C|IC|Y|V)$"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no variable speed drive or speed controller drawn on this compressor",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument",
+                "final_element",
+                "valve"
+              ],
+              "text": "SLIDE|CAPACITY|HOT GAS BYPASS"
+            },
+            "relation": "same_unit",
+            "as": "capacity control"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "compressor power"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration compressor",
+        "its capacity control, if drawn",
+        "no speed control"
+      ],
+      "data_requests": [
+        {
+          "item": "Slide valve (capacity) position over normal operation",
+          "where": [
+            {
+              "place": "historian",
+              "for": "capacity control",
+              "quantity": "position"
+            },
+            {
+              "place": "dcs",
+              "what": "slide valve position or percent capacity per compressor from the refrigeration plant controls, a month or more"
+            }
+          ],
+          "how": "Hours spent below full load, by load band."
+        },
+        {
+          "item": "Compressor power and run hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "compressor power",
+              "quantity": "power"
+            },
+            {
+              "place": "walkdown",
+              "what": "power logger on the compressor motor across a normal week"
+            }
+          ],
+          "how": "Power at each load band, so part-load efficiency can be seen."
+        },
+        {
+          "item": "How the compressors are sequenced",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "which compressor trims, and the order and pressures at which they load and unload"
+            }
+          ],
+          "how": "Note whether more than one machine trims at the same time."
+        }
+      ],
+      "decision_rule": "Worth a look when screws spend long hours part-loaded on the slide valve while another could be off, or when no machine on a suction level has speed control to trim. Close it if each runs near full load or a sequencer already keeps one machine trimming.",
+      "typical_benefit": {
+        "wording": "Among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003): \"Slide valve unloading of oversized screw compressors.\" and \"Hot gas bypass of compressors.\" Speed control (S25, p. 63): \"ASDs used on compressors below a part-load ratio of about 95% will deliver performance equal to a fixed speed compressor but with lower electricity requirements. However, at near full (i.e., 100%) load, ASDs are approximately 3% less efficient than fixed speed drives\".",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "A drive or sequencing change goes through the compressor vendor (minimum speed, oil management, vibration). Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not."
+    },
+    {
+      "id": "E30",
+      "family": "energy",
+      "question": "Are these evaporators defrosted on a fixed timer rather than when frost is actually there?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "EVAPORATOR|UNIT COOLER|AIR COOLER|FREEZER|BLAST",
+          "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b|FREEZER|COLD STORE|COLD ROOM|CHILL|BLAST|DEFROST",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|EVAPORATIVE CONDENSER|FALLING FILM|MULTIPLE.?EFFECT|\\bMVR\\b|\\bTVR\\b"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "text": "DEFROST|HOT GAS"
+            },
+            "relation": "same_unit",
+            "as": "defrost"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "text": "DEMAND DEFROST|DEFROST ON DEMAND|ON-?DEMAND|FROST (SENSOR|DETECT)"
+            },
+            "relation": "same_unit"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^PD(T|I|IT|S)$"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no demand defrost initiation (coil differential pressure, frost sensor) drawn on this evaporator",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "room or coil temperature"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration evaporator with defrost drawn",
+        "no demand defrost initiation"
+      ],
+      "data_requests": [
+        {
+          "item": "Defrost schedule per evaporator",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "defrost initiation (timer or demand), defrosts per day, duration and termination (time or coil temperature) per evaporator"
+            }
+          ],
+          "how": "List defrosts per day by season."
+        },
+        {
+          "item": "Frost on the coil when a scheduled defrost starts",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "look at the coil just before a few scheduled defrosts, in a dry week and a humid week"
+            }
+          ],
+          "how": "Note clear, light or heavy frost."
+        },
+        {
+          "item": "Hot gas use and room temperature rise per defrost",
+          "where": [
+            {
+              "place": "historian",
+              "for": "defrost",
+              "quantity": "position"
+            },
+            {
+              "place": "historian",
+              "for": "room or coil temperature",
+              "quantity": "temperature"
+            }
+          ],
+          "how": "The heat put in to defrost comes back as refrigeration load afterwards."
+        }
+      ],
+      "decision_rule": "Worth a look when coils are clear at scheduled defrosts, or the count per day is the same in dry weeks as in humid ones. Close it if defrost is already started on demand.",
+      "typical_benefit": {
+        "wording": "Demand defrost (S25, p. 66): \"Evaporators should be defrosted only when necessary, as opposed to on timed schedules where defrosting occurs regardless of need.\" \"Too frequent defrosts.\" is listed among control strategies that \"may compromise system energy efficiency\" (S25, p. 59, citing Pearson 2003). No % stated.",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "A coil differential pressure instrument on the evaporator is taken as demand defrost; check that it is used for that. A P&ID rarely shows the defrost timer itself, so the schedule always comes from the controls."
+    },
+    {
+      "id": "E31",
+      "family": "energy",
+      "question": "Does this oven, dryer or fryer send its hot exhaust to atmosphere with no heat recovery on it?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "linked"
+          },
+          {
+            "select": {
+              "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no heat recovery exchanger, recuperator, run-around coil or exhaust recirculation on this unit or on a stream drawn from it",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "stream",
+                "instrument",
+                "valve",
+                "final_element"
+              ],
+              "text": "EXHAUST|STACK|FLUE|\\bVENT"
+            },
+            "relation": "linked",
+            "as": "exhaust"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "text": "EXHAUST|STACK|FLUE"
+            },
+            "relation": "same_unit",
+            "as": "exhaust"
+          },
+          {
+            "select": {
+              "kind": [
+                "stream",
+                "valve",
+                "final_element",
+                "instrument"
+              ],
+              "text": "BURNER|NATURAL GAS|FUEL (GAS|OIL)|PROPANE|\\bLPG\\b|\\bSTEAM\\b|THERMAL OIL|HOT OIL"
+            },
+            "relation": "same_unit",
+            "as": "fuel or heat supply"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "oven, dryer or fryer",
+        "its exhaust and heat supply",
+        "no heat recovery on the exhaust"
+      ],
+      "data_requests": [
+        {
+          "item": "Exhaust temperature and flow",
+          "where": [
+            {
+              "place": "historian",
+              "for": "exhaust",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "walkdown",
+              "what": "thermometer and a pitot or anemometer traverse in the exhaust duct, at normal production"
+            }
+          ],
+          "how": "Record both at normal production; heat on offer = mass flow x specific heat x (exhaust temperature minus the temperature it could be cooled to)."
+        },
+        {
+          "item": "Exhaust moisture and contaminants",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "humidity or dew point probe in the exhaust; note fat, flour, sugar or product dust"
+            },
+            {
+              "place": "maintenance",
+              "what": "duct and stack cleaning history"
+            }
+          ],
+          "how": "Moist exhaust carries latent heat but condenses; fat and dust foul exchangers unless filtered or washed."
+        },
+        {
+          "item": "Fuel or heat input and operating hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "fuel or heat supply",
+              "quantity": "flow"
+            },
+            {
+              "place": "bills",
+              "what": "gas sub-meter readings for this line"
+            },
+            {
+              "place": "records",
+              "what": "production schedule: hours per week the line runs"
+            }
+          ],
+          "how": "A month of input at a known production rate."
+        },
+        {
+          "item": "Where the heat could go in the unit itself",
+          "where": [
+            {
+              "place": "records",
+              "what": "inlet (drying or combustion) air temperature and flow"
+            },
+            {
+              "place": "walkdown",
+              "what": "room next to the unit for ductwork or a run-around coil"
+            }
+          ],
+          "how": "Preheating the unit's own inlet air comes first; H6 asks about users elsewhere."
+        }
+      ],
+      "decision_rule": "Worth a study when the exhaust leaves hot, the line runs long hours, and the exhaust is clean enough or can be filtered or washed. Close it for short or intermittent runs, or when there is no room for the ductwork.",
+      "typical_benefit": {
+        "wording": "Dryers (S26, p. 104): \"A simple form of heat recovery in retrofit applications is to utilize the exhaust air of a dryer to preheat the inlet air stream, thereby saving energy.\" Spray dryers (S25, p. 90): \"It is estimated that up to 30% of the heat from the dryer exhaust can be recovered.\" Fryers (S26, p. 107): \"Conditioning of the exhaust gas is required, however, to remove fats and to reduce fouling of the heat exchange system.\" No source in this set gives a figure for ovens.",
+        "source": [
+          "S26",
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "S26 (p. 104) notes that recirculating saturated exhaust can raise the inlet humidity and cut drying capacity. A heat recovery item on the unit, or at the other end of a stream drawn from it, quiets the question; recovery drawn elsewhere does not. Ovens and dryers that drive off solvents, or carry combustible dust, need a safety review before any exhaust change."
+    },
+    {
+      "id": "E32",
+      "family": "energy",
+      "question": "Is the burner air-fuel ratio on this oven, dryer or fryer checked and set, with no flue O2 measurement drawn?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "text": "BURNER|NATURAL GAS|FUEL (GAS|OIL)|PROPANE|\\bLPG\\b|GAS.?FIRED|DIRECT.?FIRED"
+            },
+            "relation": "same_unit",
+            "as": "burner or fuel supply"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "text": "\\bO2\\b|OXYGEN|EXCESS AIR|COMBUSTION ANALY|FLUE GAS ANALY"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no flue O2 analyser or excess air measurement drawn on this unit"
+      },
+      "evidence_fields": [
+        "gas- or oil-fired oven, dryer or fryer",
+        "its burner or fuel supply",
+        "no flue O2 measurement"
+      ],
+      "data_requests": [
+        {
+          "item": "Flue O2 and CO at high and low fire",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "portable combustion analyser in the flue or exhaust at high and low fire"
+            },
+            {
+              "place": "records",
+              "what": "the last burner tuning report"
+            }
+          ],
+          "how": "Compare with the burner maker's recommended O2 for this equipment."
+        },
+        {
+          "item": "Air-fuel ratio settings and how they are held",
+          "where": [
+            {
+              "place": "dcs",
+              "what": "burner management and ratio control settings"
+            },
+            {
+              "place": "vendor",
+              "what": "burner datasheet: recommended excess air across the turndown range"
+            }
+          ],
+          "how": "Note whether the ratio is fixed linkage, electronic ratio or trimmed."
+        },
+        {
+          "item": "Fuel use",
+          "where": [
+            {
+              "place": "historian",
+              "for": "burner or fuel supply",
+              "quantity": "flow"
+            },
+            {
+              "place": "bills",
+              "what": "gas sub-meter readings for this unit"
+            }
+          ],
+          "how": "A month of fuel use at a known production rate."
+        },
+        {
+          "item": "Excess air the process needs",
+          "where": [
+            {
+              "place": "records",
+              "what": "the oven or dryer maker's minimum exhaust and excess air for moisture and solvent removal, and any flammable-vapour (LEL) limit"
+            }
+          ],
+          "how": "This is a floor: the burner may not be tuned below it."
+        }
+      ],
+      "decision_rule": "Worth a tune-up when measured flue O2 is above what the burner maker recommends and the process does not need the extra air. On ovens and dryers that drive off water or solvent the dilution and drying air are part of the process: never cut below the maker's or the safety minimum.",
+      "typical_benefit": {
+        "wording": "S27 (p. 1): \"Periodic checking and resetting of air-fuel ratios for burners is one of the simplest ways to get maximum efficiency out of fuel-fired process heating equipment such as furnaces, ovens, heaters, and boilers.\" And: \"Processes that evaporate moisture or solvents need large amounts of excess air to dilute flammable solvents to noncombustible levels, to ensure adequate drying rates, and to carry vapors out of the oven. Lowering excess air to minimal levels can slow down the process and create an explosion hazard.\" No typical % stated (the sheet's worked example is one furnace).",
+        "source": [
+          "S27"
+        ],
+        "arc": null
+      },
+      "limits": "Burner adjustment is a combustion-safety change, done by a qualified burner technician under the site's burner management procedures. Indirect (steam or thermal oil) heated units have no burner on them and do not fire this question."
+    },
+    {
+      "id": "H5",
+      "family": "heat_grade",
+      "question": "Is refrigeration condenser heat rejected while a low-grade heating duty nearby is met with fuel or steam?",
+      "applies_when": {
+        "anchor": [
+          {
+            "kind": [
+              "equipment"
+            ],
+            "type_text": "CONDENSER",
+            "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+            "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER"
+          },
+          {
+            "kind": [
+              "equipment"
+            ],
+            "type_text": "COMPRESSOR",
+            "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+            "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+          }
+        ],
+        "group_by": "model",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "equipment",
+                "stream"
+              ],
+              "text": "HOT WATER|WASH WATER|\\bCIP\\b|CLEAN.?IN.?PLACE|SPACE HEAT|UNDER.?FLOOR|SUB.?FLOOR|FLOOR HEAT|BOILER FEED|BOILER MAKE-?UP",
+              "not_text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "anywhere",
+            "as": "low-grade heating duty"
+          }
+        ],
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "temperature",
+                "pressure"
+              ],
+              "text": "DISCHARGE|HEAD|CONDENS"
+            },
+            "relation": "same_unit",
+            "as": "discharge or condensing measurement"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "compressor power"
+          },
+          {
+            "select": {
+              "text": "HEAT RECLAIM|(REFRIGERA|AMMONIA|\\bNH3\\b|\\bR-?717\\b|HOT GAS).{0,40}(HEAT RECOVERY|DESUPERHEAT)|(HEAT RECOVERY|DESUPERHEAT).{0,40}(REFRIGERA|AMMONIA|\\bNH3\\b|\\bR-?717\\b|HOT GAS)"
+            },
+            "relation": "anywhere",
+            "as": "drawn refrigeration recovery candidate (coverage unverified)"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration condenser and compressors",
+        "a low-grade heating duty (hot water, CIP, wash water, floor or space heating)",
+        "drawn recovery indications, if any, with train and heating-duty coverage still unverified"
+      ],
+      "data_requests": [
+        {
+          "item": "Discharge and condensing temperatures",
+          "where": [
+            {
+              "place": "historian",
+              "for": "discharge or condensing measurement",
+              "quantity": [
+                "temperature",
+                "pressure"
+              ]
+            },
+            {
+              "place": "dcs",
+              "what": "discharge temperature and head pressure readings in the refrigeration plant controls"
+            }
+          ],
+          "how": "Discharge superheat is the hotter, smaller part; condensing heat is larger but only at the condensing temperature."
+        },
+        {
+          "item": "Compressor power and run hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "compressor power",
+              "quantity": "power"
+            },
+            {
+              "place": "records",
+              "what": "compressor run hours from the refrigeration plant controls"
+            }
+          ],
+          "how": "Heat rejected is about the compressor power plus the refrigeration load at the same time."
+        },
+        {
+          "item": "The low-grade duty: temperature needed, load and hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "low-grade heating duty",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "records",
+              "what": "temperatures and loads of the hot water, CIP, wash water, floor heating and space heating users, by hour"
+            }
+          ],
+          "how": "Match by temperature, hours and distance."
+        },
+        {
+          "item": "Effect on head pressure",
+          "where": [
+            {
+              "place": "vendor",
+              "what": "whether a heat recovery exchanger would need a higher condensing pressure than now"
+            }
+          ],
+          "how": "Recovery that raises the head pressure in cool weather costs compressor power (see E27); count it."
+        },
+        {
+          "item": "Recovery coverage by refrigeration train and heating duty",
+          "where": [
+            {
+              "place": "records",
+              "what": "source-labelled connections, heat delivered and operating periods for each existing refrigeration recovery device and served heating duty"
+            },
+            {
+              "place": "walkdown",
+              "what": "confirm boundaries, distance and separation or contamination constraints for the candidate source and sink"
+            }
+          ],
+          "how": "A recovery device elsewhere does not establish coverage here. Retain drawn indications as candidates and verify which train and sink they serve, whether useful duty is already met, and remaining coincident heat. Keep temperatures, isolation, compressor-power/head-pressure effects and required site review explicit; no installation mandate or savings is inferred."
+        }
+      ],
+      "decision_rule": "Worth a study when the refrigeration plant runs at the same times as a duty that needs heat below the discharge or condensing temperature, and recovery does not force the head pressure up. Close it if the duties do not overlap or recovery would need a higher condensing pressure all year.",
+      "typical_benefit": {
+        "wording": "S25 (p. 64), refrigeration compressors: \"Where economically feasible, rejected heat can be recovered from compressors and used in other facility applications, such as space heating or water heating.\" No % stated there for refrigeration (the air compressor heat recovery figures quoted under E23 do not apply).",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "The with-clause finds any low-grade duty in the model, not one next to the plant: distance is for the walkdown. Fires only where the equipment's own name, type or service names the refrigerant (ammonia, NH3, R-717, a refrigerant number) or says refrigeration; an air compressor, a process recycle compressor, a process condenser on cooling water or a power-plant air-cooled condenser does not. Existing recovery anywhere in the model is candidate evidence, not proof that every train or heating duty is served. Membership, delivered heat, contamination/isolation, simultaneous operation and receiving-site review remain unresolved until supported."
+    },
+    {
+      "id": "H6",
+      "family": "heat_grade",
+      "question": "Could this oven's, dryer's or fryer's exhaust heat serve a low-grade heating duty elsewhere (hot water, CIP, space heating)?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bFRYERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+        },
+        "group_by": "unit",
+        "with": [
+          {
+            "select": {
+              "kind": [
+                "equipment",
+                "stream"
+              ],
+              "text": "HOT WATER|WASH WATER|\\bCIP\\b|CLEAN.?IN.?PLACE|SPACE HEAT|UNDER.?FLOOR|SUB.?FLOOR|FLOOR HEAT|BOILER FEED|BOILER MAKE-?UP",
+              "not_text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "anywhere",
+            "as": "low-grade heating duty"
+          }
+        ],
+        "without": [
+          {
+            "select": {
+              "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "linked"
+          },
+          {
+            "select": {
+              "text": "HEAT RECOVERY|RECUPERAT|RUN-?AROUND|ECONOMI[SZ]ER|VAPOU?R CONDENSER|EXHAUST (AIR )?RECIRC|HEAT PIPE|HEAT WHEEL|WASTE HEAT"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no heat recovery on this unit or on a stream drawn from it",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "stream",
+                "instrument"
+              ],
+              "text": "EXHAUST|STACK|FLUE|\\bVENT"
+            },
+            "relation": "linked",
+            "as": "exhaust"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "text": "EXHAUST|STACK|FLUE"
+            },
+            "relation": "same_unit",
+            "as": "exhaust"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "oven, dryer or fryer exhaust",
+        "a low-grade heating duty in the model"
+      ],
+      "data_requests": [
+        {
+          "item": "Exhaust temperature, flow and hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "exhaust",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "walkdown",
+              "what": "thermometer and a pitot or anemometer traverse in the exhaust duct"
+            },
+            {
+              "place": "records",
+              "what": "production schedule"
+            }
+          ],
+          "how": "At normal production."
+        },
+        {
+          "item": "The low-grade duty: temperature needed, load and hours",
+          "where": [
+            {
+              "place": "historian",
+              "for": "low-grade heating duty",
+              "quantity": [
+                "temperature",
+                "flow"
+              ]
+            },
+            {
+              "place": "records",
+              "what": "hot water, CIP, wash water and space heating loads by hour"
+            }
+          ],
+          "how": "Match by temperature, hours and distance."
+        },
+        {
+          "item": "Distance and exhaust cleanliness",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "duct or pipe run from the stack to the user; fat, dust or product carry-over in the exhaust"
+            }
+          ],
+          "how": "The closer and cleaner, the better."
+        }
+      ],
+      "decision_rule": "Worth a study when the exhaust is well above the temperature the duty needs, the two run at the same times, and they are close enough to connect. Otherwise close it.",
+      "typical_benefit": {
+        "wording": "S28 (p. 1): \"many companies install heat exchangers on the exhaust stacks of furnaces and ovens to produce hot water or to generate hot air for space heating.\" The same sheet: \"The temperature difference between the primary and secondary process should be high enough (at least 200°F), and there should be a sufficient amount of usable waste heat.\" Fryers (S26, p. 107): \"Heat can be recovered indirectly from a fryer's fat-laden exhaust gases via a heat exchange system and used for pre-heating air and water for use in other facility processes.\" No % stated.",
+        "source": [
+          "S28",
+          "S26"
+        ],
+        "arc": null
+      },
+      "limits": "Overlaps E31, which asks about the unit's own inlet air first. The with-clause finds any low-grade duty in the model, not one next to the unit."
+    },
+    {
+      "id": "C11",
+      "family": "controls",
+      "question": "Is this dryer's or oven's exhaust (and make-up air) rate set by hand rather than by exhaust humidity?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "\\bOVENS?\\b|\\bDRYERS?\\b|\\bDRIERS?\\b|\\bROASTERS?\\b|DEHYDRATOR|\\bTOASTERS?\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|STEAM DRYER|GAS DRYER|HAND DRYER|MOISTURE SEPARATOR|COKE OVEN"
+        },
+        "group_by": "unit",
+        "without": [
+          {
+            "select": {
+              "text": "HUMIDITY|DEW ?POINT|MOISTURE|WET.?BULB|\\bRH\\b"
+            },
+            "relation": "same_unit"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^M(T|E|I|IT|IC|IK)$"
+            },
+            "relation": "same_unit"
+          }
+        ],
+        "absent_note": "no humidity, dew point or moisture measurement drawn on this unit",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "text": "EXHAUST|STACK|FLUE"
+            },
+            "relation": "same_unit",
+            "as": "exhaust measurement"
+          },
+          {
+            "select": {
+              "kind": [
+                "valve",
+                "final_element",
+                "hand_valve"
+              ],
+              "text": "DAMPER|EXHAUST|FAN"
+            },
+            "relation": "same_unit",
+            "as": "exhaust damper or fan"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "dryer or oven",
+        "no humidity measurement or control on its exhaust"
+      ],
+      "data_requests": [
+        {
+          "item": "Exhaust humidity and temperature over a production run",
+          "where": [
+            {
+              "place": "historian",
+              "for": "exhaust measurement",
+              "quantity": "temperature"
+            },
+            {
+              "place": "walkdown",
+              "what": "humidity or dew point logger in the exhaust duct for a full run"
+            }
+          ],
+          "how": "Compare the exhaust humidity with what the product and the process allow."
+        },
+        {
+          "item": "Exhaust damper or fan setting and how it is set",
+          "where": [
+            {
+              "place": "historian",
+              "for": "exhaust damper or fan",
+              "quantity": "position"
+            },
+            {
+              "place": "dcs",
+              "what": "exhaust damper position or fan speed, and whether anything adjusts it"
+            },
+            {
+              "place": "walkdown",
+              "what": "damper position marks"
+            }
+          ],
+          "how": "Note whether it moves with production rate or product."
+        },
+        {
+          "item": "Product moisture at the exit and its specification",
+          "where": [
+            {
+              "place": "records",
+              "what": "quality records: product moisture out of the dryer or oven against specification"
+            }
+          ],
+          "how": "Over-drying shows as moisture well below specification."
+        }
+      ],
+      "decision_rule": "Worth a look when the exhaust leaves well below the humidity the product and the safety limits allow, so heated air is thrown away unsaturated. Close it if the exhaust is already near the allowed humidity or the rate is set by a solvent (LEL) or dust limit.",
+      "typical_benefit": {
+        "wording": "S26 (p. 104): \"Process controls, such as feedback controllers, feed forward controllers, and model-based predictive controllers, can help to minimize dryer energy consumption by more precisely controlling energy inputs to meet the needs of the product being processed.\" The sensors it lists include \"absorption capacitive sensors (for air humidity)\". No % stated.",
+        "source": [
+          "S26"
+        ],
+        "arc": null
+      },
+      "limits": "Exhaust rates on ovens that bake off solvents, or dryers with combustible dust, are set by safety limits: any change goes through the safety review. Fryers are left out: their exhaust is set by the vapour they boil off."
+    },
+    {
+      "id": "C12",
+      "family": "metering",
+      "question": "Is representative real input power available for each refrigeration compressor, with a usable coincident load and operating basis?",
+      "applies_when": {
+        "anchor": {
+          "kind": [
+            "equipment"
+          ],
+          "type_text": "COMPRESSOR",
+          "text": "AMMONIA|\\bNH3\\b|\\bR-?717\\b|REFRIGERA|\\bFREON\\b|\\bR-?(134A|404A|407[ACF]|410A|448A|449A|507A?|744)\\b",
+          "not_text": "AIR COMPRESSOR|INSTRUMENT AIR|PLANT AIR|SERVICE AIR|COMPRESSED AIR|AIR DRYER|DESICCANT|REFRIGERATED (COMPRESSED )?(AIR )?DRYER|RECYCLE|PROCESS GAS|BOOSTER GAS"
+        },
+        "group_by": "model",
+        "also_show": [
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "pressure"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "suction or discharge pressure"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "isa": "^(J|E|W|I)(T|I|IT|Q|QI)$"
+            },
+            "relation": "same_unit",
+            "as": "electrical quantity candidate (real-power basis unverified)"
+          },
+          {
+            "select": {
+              "kind": [
+                "instrument"
+              ],
+              "variable": [
+                "power",
+                "current",
+                "voltage",
+                "energy",
+                "apparent power",
+                "reactive power",
+                "apparent_power",
+                "reactive_power",
+                "electrical power"
+              ]
+            },
+            "relation": "same_unit",
+            "as": "supplied electrical reading (real-input suitability unverified)"
+          }
+        ]
+      },
+      "evidence_fields": [
+        "refrigeration compressors and any supplied electrical quantity candidates",
+        "original instrument attribution and source text, with real-input basis still requiring review"
+      ],
+      "data_requests": [
+        {
+          "item": "Compressor power",
+          "where": [
+            {
+              "place": "walkdown",
+              "what": "the drive's or motor protection relay's kW reading, or a temporary power logger, per compressor"
+            },
+            {
+              "place": "bills",
+              "what": "site interval meter data to apportion"
+            }
+          ],
+          "how": "Retain the original reading type, units and source claim for each named compressor; collect a representative coincident period at known production. A field labelled power or kW remains a supplied candidate and does not prove representative real input power. Amperes, volts, apparent kVA, reactive kvar and a bare cumulative kWh tag are different quantities. Appropriate voltage/current/power-factor and phase evidence, or an energy difference over an explicit matching interval, may support a documented conversion; no conversion or suitability acceptance is automated."
+        },
+        {
+          "item": "Suction and discharge pressures logged at the same times",
+          "where": [
+            {
+              "place": "historian",
+              "for": "suction or discharge pressure",
+              "quantity": "pressure"
+            },
+            {
+              "place": "dcs",
+              "what": "suction and discharge pressure per compressor in the refrigeration plant controls"
+            }
+          ],
+          "how": "Logged together with power, these show how the plant runs."
+        },
+        {
+          "item": "What to normalise against",
+          "where": [
+            {
+              "place": "records",
+              "what": "production throughput or freezer and cold store loads by day"
+            }
+          ],
+          "how": "kW per unit of product or per unit of refrigeration."
+        },
+        {
+          "item": "Applicable real-input-power and coincident operating basis",
+          "where": [
+            {
+              "place": "records",
+              "what": "source-labelled quantity and units, circuit or compressor identity, phase and conversion basis, matching measurement interval, and data suitability review for each supplied electrical reading"
+            },
+            {
+              "place": "dcs",
+              "what": "availability and meaning of existing actual real-power readings and synchronized operating/load records before arranging any further collection"
+            }
+          ],
+          "how": "Keep current, voltage, uncertain power, apparent, reactive, cumulative-energy and explicitly real-kW-labelled candidates visible. Correct attribution, quantity, time/conversion basis and representative operating conditions must be reviewed even where a real-power instrument is drawn. A supplied label or rating cannot settle actual collection or confer approval; use existing records where suitable."
+        }
+      ],
+      "decision_rule": "Review the attributed real-input quantity, matching observations, production or refrigeration load and operating conditions before deciding whether additional collection would improve a concrete decision. Existing electrical readings are candidates, including supplied real-kW claims; no tag or quantity field automatically validates the actual basis. A reading nobody reviews establishes no benefit.",
+      "typical_benefit": {
+        "wording": "S25 (p. 58): \"A basic monitoring system should include ongoing measurement and logging of compressor suction and discharge pressures; a drop in suction pressure typically indicates a refrigerant leak, while a rise in discharge pressure can indicate a blocked condenser (EEBPP 2000a).\" \"In a review of energy efficiency opportunities for refrigeration systems in wineries, the energy savings associated with the installation of monitoring systems were estimated at 3% (Galitsky et al. 2005b).\"",
+        "source": [
+          "S25"
+        ],
+        "arc": null
+      },
+      "limits": "The 3% is one review of winery refrigeration, as reported in S25. Electrical quantity labels, including power or kW, do not validate actual representative input power, circuit identity, conversion or time basis. Keep original claims and uncertainty; no conversion, measurement validity, collection completion or company approval is automated. Fires only where the equipment name, type or service names refrigeration or a supported refrigerant; air, instrument-air, process-recycle compressors and power-plant cooling equipment remain outside this rule."
+    }
+  ]
+}

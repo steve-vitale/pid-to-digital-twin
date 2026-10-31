@@ -513,7 +513,8 @@
    ],
    "tests": [
     "scripts/test_context_register.py",
-    "scripts/test_context_examples.py"
+    "scripts/test_context_examples.py",
+    "scripts/test_pump_revision.py"
    ],
    "job": "Build a first evidence and decision packet for company handoff",
    "why": "A first investigation should leave its question, source revisions, competing evidence and reasons together. Another person can review that packet; a shared company system takes over ongoing ownership and coordination.",

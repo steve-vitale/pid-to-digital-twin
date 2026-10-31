@@ -1,0 +1,148 @@
+{
+  "revisions": [
+    {
+      "revision": "A",
+      "source_sha256": "95511507159507c8b194e3fa542b1faa580c5ffbfa8488667814e5ff2483ecba",
+      "facts": {
+        "rated_flow": {
+          "value": 0,
+          "uom": "m3/h",
+          "source": "pump-note.txt:L2-L2"
+        },
+        "reset_enabled": {
+          "value": false,
+          "source": "pump-note.txt:L3-L3"
+        },
+        "inspection_date": {
+          "value": null,
+          "source": "pump-note.txt:L4-L4"
+        },
+        "uncertainty": {
+          "value": "unknown",
+          "source": "pump-note.txt:L5-L5"
+        },
+        "supplied_head": {
+          "value": 12,
+          "uom": "m",
+          "source": "pump-note.txt:L6-L6"
+        }
+      },
+      "unmapped": {
+        "kind": "demo-fixture-omission-accounting",
+        "product_schema": false,
+        "source_id": "PUMP-NOTE",
+        "revision": "A",
+        "raw_sha256": "95511507159507c8b194e3fa542b1faa580c5ffbfa8488667814e5ff2483ecba",
+        "locator": "pump-note.txt:L7-L7",
+        "raw_value": "BX-UNKNOWN",
+        "disposition": "retained original text; not represented by this fixture native model; no inferred identity"
+      },
+      "pump_answer_state": "partial",
+      "E1_state": "unanswered",
+      "graph_sha256": "cb2874e6c707518ef149dd0ff03b75d4cf823f7df66a0ae9a6db05c51381891f",
+      "context_sha256": "0169e81c9718442d8cbe7521feebaf7884f8bacad9431837e70f8515e203601f"
+    },
+    {
+      "revision": "B",
+      "source_sha256": "f99be783177789cc92463e7efd9402f8959ed83afe0c9c1ab0e40c1bda8dc20c",
+      "facts": {
+        "rated_flow": {
+          "value": 0,
+          "uom": "m3/h",
+          "source": "pump-note.txt:L2-L2"
+        },
+        "reset_enabled": {
+          "value": false,
+          "source": "pump-note.txt:L3-L3"
+        },
+        "inspection_date": {
+          "value": null,
+          "source": "pump-note.txt:L4-L4"
+        },
+        "uncertainty": {
+          "value": "unknown",
+          "source": "pump-note.txt:L5-L5"
+        },
+        "supplied_head": {
+          "value": 12,
+          "uom": "kPa",
+          "source": "pump-note.txt:L6-L6"
+        }
+      },
+      "unmapped": {
+        "kind": "demo-fixture-omission-accounting",
+        "product_schema": false,
+        "source_id": "PUMP-NOTE",
+        "revision": "B",
+        "raw_sha256": "f99be783177789cc92463e7efd9402f8959ed83afe0c9c1ab0e40c1bda8dc20c",
+        "locator": "pump-note.txt:L7-L7",
+        "raw_value": "BX-REVISED",
+        "disposition": "retained original text; not represented by this fixture native model; no inferred identity"
+      },
+      "pump_answer_state": "partial",
+      "E1_state": "unanswered",
+      "graph_sha256": "a91250979b282c8c225e3ca935d8e5fe7bf170574615d12247003007d9cbf33b",
+      "context_sha256": "ac43401db4f48663db8245eda1fc6d39ac0109cd236b300d686ced9f0f60ca4d"
+    }
+  ],
+  "source_decision_scope": "Synthetic partial source answer only",
+  "refresh_B_pump": {
+    "present": true,
+    "question": {
+      "id": "PUMP-NOTE@P-1",
+      "question": "What does the supplied pump note state, and what remains unresolved?",
+      "assets": [
+        {
+          "id": "P-1"
+        }
+      ]
+    },
+    "owner": "training-pump-owner",
+    "ownership": "assigned",
+    "assigned_by": "training-coordinator",
+    "assigned_on": "2026-10-31",
+    "state": "unanswered",
+    "disputed_claims": [],
+    "answers": [
+      {
+        "decision_id": "d-9696de30418ac5446c533f0ac0ed07f041e2fc6642f60ccbbea1a3e2d9f0b850",
+        "answer_id": "pump-note",
+        "freshness": "stale",
+        "changed": [
+          "assets content",
+          "source revision/bytes/locator"
+        ]
+      }
+    ]
+  },
+  "independent_tank": {
+    "present": true,
+    "question": {
+      "id": "TANK-SERVICE@TK-1",
+      "question": "What service is stated in the separate tank note?",
+      "assets": [
+        {
+          "id": "TK-1"
+        }
+      ]
+    },
+    "owner": "training-pump-owner",
+    "ownership": "assigned",
+    "assigned_by": "training-coordinator",
+    "assigned_on": "2026-10-31",
+    "state": "answered",
+    "disputed_claims": [],
+    "answers": [
+      {
+        "decision_id": "d-14b5087e3e92cf0b27d34ae5397a4373419a03fec4e3fc168485d4316fb19742",
+        "answer_id": "tank-service",
+        "freshness": "current",
+        "changed": []
+      }
+    ]
+  },
+  "physical_checks": "not run",
+  "safety_checks": "not run",
+  "company_acceptance": "not performed",
+  "recipient_acceptance": "not performed"
+}

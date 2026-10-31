@@ -1,16 +1,46 @@
-# One reviewed context, several engineering outputs
+# Engineering context across teams
 
-The toolkit's role is to help an engineer start this process on one problem and produce a portable evidence and
-decision packet. The shared company system becomes the place to maintain organizational context as participation
-and responsibility grow. The local examples demonstrate the handoff requirements; they are not a company-wide
-governance application. Start with [one source question or bounded pilot](../examples/first-pilot/README.md), then
-establish that shared home.
+Start with one useful engineering question and a portable evidence and decision packet. As more departments
+participate, organize context into owned, versioned scopes that other teams can depend on. Process engineering,
+maintenance and controls can keep their working tools while the company establishes which records and decisions
+each team owns. The local examples prepare that handoff; they do not provide a shared governance application.
+Begin with the [bounded pilot](../examples/first-pilot/README.md) and establish the company acceptance route.
 
-The intended organizational pattern is a central record of reviewed engineering context, with specialized tools
-working from versioned snapshots. That record holds asset identities, sourced claims, unresolved questions,
-responsibility and decisions. A generator produces a view of that context; a reviewer decides whether an output
-or proposed correction should be accepted. The tools in this repository supply parts of this workflow. A hosted
-hub, authenticated approval process and live integration are not implemented here.
+The intended organizational pattern is coherent context assembled from published versions of those owned scopes.
+It needs consistent identities, sourced claims, unresolved questions, responsibility and decision history. A
+generator consumes a declared snapshot and produces a draft for review. Shared context can reference several
+authoritative company systems; it does not require one department to maintain every record or one file to hold
+the whole organization. A hosted hub, authenticated approval process and live integration are not implemented here.
+
+## Make team boundaries explicit
+
+The scalable unit is an owned scope with a published revision and declared dependencies. Choose boundaries that
+match actual engineering responsibility, such as a process unit, package or discipline. Keep working drafts
+separate from versions other teams may rely on. The company decides how those versions are accepted and released.
+This is an integration pattern, not a new file format or a multi-user service supplied by the toolkit.
+
+| Boundary | What a team hands over | Current toolkit limit |
+|---|---|---|
+| Ownership | Scope, responsible role, source owners, unresolved decisions and intended use | Local owner/reviewer text records attribution; it grants no organizational authority. |
+| Identity | Site/project namespace, engineering identity and reviewed aliases, alongside exact source document revisions | Native IDs are local to a selected model. Equal tags in different packets do not establish the same equipment. Source-revision identities are not engineering merge keys. |
+| Dependencies | Exact published input versions, hashes, locators and unsupported fields used by a draft | Pinned byte mismatches refuse first. After source reconciliation, explicit refresh reopens decisions citing changed documents together; field-level impact analysis is not implemented. |
+| Parallel work | Separate team drafts, their base versions, competing claims and proposed changes | Local registers have no concurrent-write control. Teams must not use one register file as a shared editing database. |
+| Acceptance | The receiving record owner, reconciliation outcome and newly released version | The company system must detect an outdated base and resolve conflicts before acceptance. The toolkit does not merge department histories or choose the last writer. |
+| Access and capacity | Only the approved source scope needed by the recipient, with a bounded retrieval route | Snapshot MCP serves its selected packet. It supplies neither user authorization nor a whole-company search service. |
+
+Publish references to accepted versions rather than repeatedly copying another team's working state. Preserve
+conflicting claims until the responsible reviewers resolve them. A changed flow basis may reopen a maintenance
+or controls investigation; it does not transfer authority to edit that team's released equipment or logic records.
+Keep the previous evidence and distinguish a proposed change from an authorized company decision.
+
+Use natural document and package boundaries to contain review work. Do not remove source pins, ignore changed
+content or equate unchanged displayed values with unchanged engineering meaning to reduce the review queue.
+The generation receipt below records the selected scope and versions; the company acceptance route owns release.
+
+The local snapshot reader limits each input to 32 MiB and each result to 2 MiB. These are bounded prototype
+limits, not demonstrated organizational capacity. Keep selected packets manageable, retain full evidence outside
+projections and measure representative load, refresh and retrieval work before claiming scale. A shared service
+needs the separate [identity, permission and connectivity checks](INTERNAL_CONNECTIVITY.md#connect-the-approved-client).
 
 ## The return path is part of the design
 
@@ -18,7 +48,7 @@ hub, authenticated approval process and live integration are not implemented her
 flowchart LR
     A[Source records and new evidence] --> B[Proposed facts and changes]
     B --> C[Engineering review]
-    C --> D[Central reviewed context]
+    C --> D[Published context versions]
     D --> E[Versioned snapshot]
     E --> F[Generation and checks]
     F --> G[Draft outputs and findings]
@@ -26,12 +56,12 @@ flowchart LR
     C --> H[Released documents and accepted decisions]
 ```
 
-Use one organizational authority for accepted changes. A local model, CSV review sheet or context register is a
+Assign one authoritative acceptance route for each released record or scope. A local model, CSV review sheet or context register is a
 working copy with evidence to return through that authority. Importing its user-entered reviewer name or
 `accepted` field must not grant organizational approval. Preserve that local history as provenance and make the
 receiving system's approval a separate, authorized decision.
 
-Single authority also permits uncertainty. Competing claims, unknown plant truth and unanswered questions belong
+An authoritative record can still contain uncertainty. Competing claims, unknown plant truth and unanswered questions belong
 in the record. A central location does not make a claim correct or justify selecting one value without review.
 
 ## When execution stays in the existing system
@@ -132,20 +162,29 @@ Use the [acceptance plan](ACCEPTANCE.md) to distinguish these offline controls f
 
 ## Prove one complete loop before promising ongoing synchronization
 
-1. Select one unit and one useful decision with a named engineer, operational counterpart and source owner. Use
-   the [pilot brief](../examples/first-pilot/README.md) to establish the baseline and intended outcome.
-2. Prepare a source-backed packet, including an appropriate generator model, graph, context, source manifest and
-   reviewed identity mappings. Keep unsupported fields and unknowns visible.
-3. Stage that packet in the receiving system. Read it back and compare assets, typed relationships, source
-   locators, owners, questions, disputes and history. Resolve mappings and losses before organizational acceptance.
-4. Export a versioned snapshot through a declared projection. Run one existing generator and a check appropriate
-   to its output. Retain the receipt and draft differences, then have the responsible person review release.
-5. Introduce one actual subsequent source revision or engineering change. Confirm that affected claims and
-   outputs are flagged, that an owner receives the review, and that accepting the correction rebuilds only the
-   outputs declared to depend on it. Keep the previous version and unsuccessful attempts.
-6. Reconcile a manual edit or concurrent context change without losing it. Demonstrate a repeated job, a rejected
-   proposal, an interrupted job and a rollback. Measure the human effort and whether the intended user benefited.
+First establish one useful investigation with a named engineer, operational counterpart and source owner through
+the [pilot brief](../examples/first-pilot/README.md). Then rehearse process engineering, maintenance and controls
+as three participant roles. These are proposed integration acceptance cases, not completed company or large-team
+performance tests:
 
-This loop is the acceptance target for an eventual hub integration. Public software examples are not evidence
-that a company has completed it. The current repository has no live organizational snapshot exporter, automatic
-document synchronization, managed-section update service or verified organizational-context round trip.
+1. Prepare independently identifiable, source-backed packets with model/graph/context, pinned source versions,
+   reviewed identity mappings and visible unknowns. Equal tags in different sites cannot silently join equipment.
+2. Introduce a subsequent source revision, reconcile its pin and explicitly refresh. Dependent consumers reopen;
+   independently sourced work stays current. Keep complete previous evidence and decisions and show why answers
+   reopened. A changed source cannot authorize editing another team's controlled originals.
+3. Stage each packet in the receiving system. Its owner reads back identities, typed relationships, locators,
+   owners, questions, disputes and history, and resolves mappings and omissions before organizational acceptance.
+4. Submit two proposals from the same base. The company acceptance route must preserve both conflicting claims
+   and detect an outdated target before replacing it. Demonstrate manual-edit reconciliation, repeated and rejected
+   jobs, interruption recovery and restoration of the previous version without losing history.
+5. Test different user permissions, excluded sources, revocation and bounded readback in the actual receiving
+   system and approved client. A local test client or separate snapshot selection does not prove access enforcement.
+6. Export an accepted version through a declared projection, run one generator and an appropriate check, and
+   retain its receipt and draft differences. The responsible company reviewers authorize release. Confirm that
+   only declared dependencies drive proposed rebuilds and that the next owner can reconstruct the handoff.
+7. Measure human review effort and whether the intended users benefited. Keep unsuccessful attempts and require
+   actual participant observations through the [acceptance exercise](ACCEPTANCE.md).
+
+Keep these company observations marked not run until participants perform them. The repository has no live
+organizational snapshot exporter, concurrent-edit service, automatic document synchronization, managed-section
+update service or verified organizational-context round trip.
